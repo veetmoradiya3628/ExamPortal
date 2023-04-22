@@ -21,8 +21,13 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { authInterceptorProviders } from './services/auth.interceptor';
-import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
-import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import {MatListModule} from '@angular/material/list';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
+import { SidebarComponent } from './pages/admin/sidebar/sidebar.component';
+import { UserDashboardComponent } from './pages/user/user-dashboard/user-dashboard.component';
+import { WelcomeComponent } from './pages/admin/welcome/welcome.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -32,8 +37,11 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
     SignupComponent,
     LoginComponent,
     HomeComponent,
+    ProfileComponent,
     AdminDashboardComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    SidebarComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +57,9 @@ import { UserDashboardComponent } from './user/user-dashboard/user-dashboard.com
     MatCardModule,
     MatToolbarModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    MatListModule,
+    MatTableModule
   ],
   providers: [
     authInterceptorProviders

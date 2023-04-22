@@ -7,6 +7,6 @@
     <button *ngIf="!isLoggedIn" mat-button class="m-20" [routerLink]="['/']">Home</button>
     <button *ngIf="!isLoggedIn" mat-button class="m-20" [routerLink]="['/login']">Login</button>
     <button *ngIf="!isLoggedIn" mat-button class="m-20" [routerLink]="['/signup']">Register</button>
-    <button mat-button *ngIf="isLoggedIn && user != null" >{{ user.username }}</button>
+    <button mat-button *ngIf="isLoggedIn && user != null" routerLink="/admin/profile" >{{ user.username }}</button>
     <button *ngIf="isLoggedIn" mat-button class="m-20" (click)="logout()">Logout</button>
 </mat-toolbar>

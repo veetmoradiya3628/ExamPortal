@@ -4,6 +4,7 @@ import com.exam.examserver.config.JwtUtils;
 import com.exam.examserver.entity.JwtRequest;
 import com.exam.examserver.entity.JwtResponse;
 import com.exam.examserver.entity.User;
+import com.exam.examserver.helper.UserNotFoundException;
 import com.exam.examserver.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class AuthenticateController {
             authenticate(request.getUsername(), request.getPassword());
         }catch (UsernameNotFoundException e){
             e.printStackTrace();
-            throw new Exception("User not found");
+            throw new UserNotFoundException();
         }
 
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUsername());
