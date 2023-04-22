@@ -34,15 +34,10 @@ public class SecurityConfiguration{
     @Autowired
     private JwtAuthenticationEntryPoint unauthorizedHandler;
 
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder(){
-//            return new BCryptPasswordEncoder();
-//        }
-
     @Bean
-    public PasswordEncoder passwordEncoder(){
-            return NoOpPasswordEncoder.getInstance();
-        }
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
