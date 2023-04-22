@@ -5,10 +5,12 @@ import com.exam.examserver.entity.exam.Quiz;
 import com.exam.examserver.repo.QuestionRepository;
 import com.exam.examserver.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@Service
 public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
