@@ -11,6 +11,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
     justify-content: center;
 }
 
+.w100 {
+    width: 100%;
+}
+
 .ml-20{
     margin-left: 20px;
 }
@@ -21,6 +25,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-
 
 .m-20{
     margin: 10px;
+}
+
+.m-5{
+    margin: 5px;
+}
+
+.p10{
+    padding: 10px;
 }
 
 .p20{
