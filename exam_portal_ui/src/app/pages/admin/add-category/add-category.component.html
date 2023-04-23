@@ -1,16 +1,16 @@
-<mat-card>
+<mat-card class="mt-20">
     <h1 class="p10">Add New Category</h1>
     <mat-card-content>
         <div class="bootstrap-wrapper">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <form [formGroup]="addCategoryForm" (ngSubmit)="onSubmitAddCategoryForm()">
-                        <mat-form-field class="w100" appearance="outline">
+                        <mat-form-field class="w100">
                             <mat-label>Title</mat-label>
                             <input autofocus type="text" name="title" matInput placeholder="Enter title here" formControlName="title">
                         </mat-form-field>
 
-                        <mat-form-field class="w100" appearance="outline">
+                        <mat-form-field class="w100">
                             <mat-label>Description</mat-label>
                             <textarea name="description" matInput placeholder="Enter Description here" rows="13" formControlName="description"></textarea>
                         </mat-form-field>

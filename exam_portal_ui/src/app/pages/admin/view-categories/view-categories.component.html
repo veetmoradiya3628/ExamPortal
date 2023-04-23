@@ -1,7 +1,8 @@
-<mat-card>
+<mat-card class="mt-20">
     <mat-list>
         <!-- <div mat-subheader></div> -->
-        <h1 class="p10">All Categories</h1>
+        <div class="p20">
+        <h1>All Categories</h1>
         <mat-list-item *ngFor="let c of categories">
             <div class="row">
                 <div class="col-md-1">
@@ -20,9 +21,10 @@
                 <mat-divider></mat-divider>
             </div>
         </mat-list-item>
+    </div>
     </mat-list>
 
-    <div class="container text-center m-20">
+    <div class="container text-center m-10">
         <button mat-raised-button color="primary" routerLink="/admin/add-category">Add New Category</button>
     </div>
 </mat-card>
