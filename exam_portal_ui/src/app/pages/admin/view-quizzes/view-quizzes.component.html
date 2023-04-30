@@ -3,6 +3,9 @@
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{ q.title }}</mat-card-title>
         <mat-card-subtitle>{{ q.category.title }}</mat-card-subtitle>
+        <div *ngIf="(q && q.active )">
+            <button class="lbl-active">Active</button>
+        </div>
     </mat-card-header>
     <mat-card-content>
         <p>{{ q.description }}</p>
@@ -15,8 +18,9 @@
         <button mat-stroked-button color="primary" class="ml-20">
             Questions : {{ q.numberOfQuestions }}
         </button>
-        <button mat-flat-button color="primary" class="ml-20">Update</button>
+        <button mat-flat-button color="primary" class="ml-20" [routerLink]="'/admin/quiz/'+q.qid">Update</button>
         <button mat-flat-button color="primary" class="ml-20">Attampts</button>
+        <button mat-flat-button color="warn" class="ml-20" (click)="deleteQuiz(q.qid)">Delete</button>
     </mat-card-actions>
 </mat-card>
 <div class="container text-center mt-20">
