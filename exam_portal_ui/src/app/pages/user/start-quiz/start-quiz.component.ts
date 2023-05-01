@@ -17,6 +17,7 @@ export class StartQuizComponent implements OnInit {
   correctAnswers = 0;
   attempted = 0;
   isSubmit = false;
+  timer: any;
 
 
   constructor(private _route: ActivatedRoute, private _locationStrategy: LocationStrategy, private _questionService: QuestionService) { }
@@ -37,10 +38,11 @@ export class StartQuizComponent implements OnInit {
     this._questionService.getQuestionOfQuizForTest(this.qid).subscribe(
       (data: any) => {
         this.questions = data;
-
+        this.timer = this.questions.length * 2 * 60;
         this.questions.forEach((question: any) => {
           question['givenAnswer'] = '';
         });
+        this.startTimer();
         console.log(`Question data on quiz is : `);
         console.log(this.questions);
       },
@@ -60,21 +62,43 @@ export class StartQuizComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         // calculation
-        this.isSubmit = true;
-        this.questions.forEach((ques: any) => {
-          if (ques.givenAnswer == ques.answer) {
-            this.correctAnswers++;
-            let marksSingle = this.questions[0].quiz.maxMarks / this.questions.length;
-            this.marksGot += marksSingle;            
-          }
-          if(ques.givenAnswer.trim() != ''){
-            this.attempted++;
-          }
-        })
-        console.log('Correct answers : '+this.correctAnswers);
-        console.log('Marks got : '+this.marksGot);
-        console.log('Attampted : '+this.attempted);
+        this.evalQuiz();
       }
     })
+  }
+
+  evalQuiz() {
+    this.isSubmit = true;
+    this.questions.forEach((ques: any) => {
+      if (ques.givenAnswer == ques.answer) {
+        this.correctAnswers++;
+        let marksSingle = this.questions[0].quiz.maxMarks / this.questions.length;
+        this.marksGot += marksSingle;
+      }
+      if (ques.givenAnswer.trim() != '') {
+        this.attempted++;
+      }
+    })
+    console.log('Correct answers : ' + this.correctAnswers);
+    console.log('Marks got : ' + this.marksGot);
+    console.log('Attampted : ' + this.attempted);
+  }
+
+  startTimer() {
+    let t: any = window.setInterval(() => {
+      if (this.timer <= 0) {
+        this.evalQuiz();
+        clearInterval(t);
+      } else {
+        this.timer--;
+      }
+    }, 1000)
+  }
+
+
+  getFormattedTime() {
+    let mm = Math.floor(this.timer / 60);
+    let ss = this.timer - (mm * 60)
+    return `${mm} min : ${ss} sec`
   }
 }
