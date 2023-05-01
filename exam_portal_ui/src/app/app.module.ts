@@ -38,6 +38,9 @@ import { UpdateQuizComponent } from './pages/admin/update-quiz/update-quiz.compo
 import { MatBadgeModule} from '@angular/material/badge';
 import { ViewQuestionsComponent } from './pages/admin/view-questions/view-questions.component';
 import { AddQuestionComponent } from './pages/admin/add-question/add-question.component'; 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { UserSidebarComponent } from './pages/user/user-sidebar/user-sidebar.component';
+import { LoadQuizComponent } from './pages/user/load-quiz/load-quiz.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +61,9 @@ import { AddQuestionComponent } from './pages/admin/add-question/add-question.co
     AddQuizComponent,
     UpdateQuizComponent,
     ViewQuestionsComponent,
-    AddQuestionComponent
+    AddQuestionComponent,
+    UserSidebarComponent,
+    LoadQuizComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { AddQuestionComponent } from './pages/admin/add-question/add-question.co
     MatTableModule,
     MatSlideToggleModule,
     MatSelectModule,
-    MatBadgeModule
+    MatBadgeModule,
+    CKEditorModule
   ],
   providers: [
     authInterceptorProviders

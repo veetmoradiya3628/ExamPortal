@@ -22,7 +22,7 @@ public class Quiz {
     @ManyToOne(fetch = FetchType.EAGER)
     private Category category;
 
-    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Question> questions = new HashSet<>();
 

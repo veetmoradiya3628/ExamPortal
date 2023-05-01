@@ -18,4 +18,9 @@ export class QuestionService {
   {
     return this._http.post(`${baseUrl}/question/`, question);
   }
+
+  // delete question
+  public deleteQuestion(questionId: any){
+    return this._http.delete(`${baseUrl}/question/${questionId}`)
+  }
 }

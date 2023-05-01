@@ -33,11 +33,6 @@ public class QuestionController {
         return ResponseEntity.ok(this.questionService.updateQuestion(question));
     }
 
-    // get the questions
-    @GetMapping("/")
-    public ResponseEntity<?> getQuestions(){
-        return ResponseEntity.ok(this.questionService.getQuestions());
-    }
 
     // get the question by Id
     @GetMapping("/{qId}")
@@ -69,6 +64,12 @@ public class QuestionController {
         this.questionService.deleteQuestion(quesId);
     }
 
+    // get the questions
+
+    @GetMapping("/")
+    public ResponseEntity<?> getQuestions(){
+        return ResponseEntity.ok(this.questionService.getQuestions());
+    }
 
     // get all question of any quiz
     @GetMapping("/quiz/all/{quizId}")

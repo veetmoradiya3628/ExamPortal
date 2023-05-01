@@ -9,14 +9,21 @@
                 <mat-card-content>
                     <form (submit)="addQuizForm()">
                         <!-- content field -->
-                        <mat-form-field class="w100 mt-20">
+                        <!-- <mat-form-field class="w100 mt-20">
                             <mat-label>Write question content</mat-label>
                             <textarea required placeholder="Enter here ..." rows="8" [(ngModel)]="question.content"
-                                name="content" matInput></textarea>
-                        </mat-form-field>
+                                name="content" matInput></textarea>                            
+                        </mat-form-field> -->
 
+                        <ckeditor 
+                            [editor]="Editor" 
+                            data="<h1>Write your question here !</h1>"
+                            name="content"
+                            [(ngModel)]="question.content"
+                        ></ckeditor>
+                        
                         <!-- options -->
-                        <div class="row">
+                        <div class="row mt-20">
                             <div class="col-md-6">
                                 <!-- option 1 -->
                                 <mat-form-field class="w100">
@@ -72,5 +79,3 @@
         </div>
     </div>
 </div>
-
-{{ question | json}}

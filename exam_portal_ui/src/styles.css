@@ -31,6 +31,10 @@ body {
     margin-top: 20px !important;
 }
 
+.mb-20 {
+    margin-bottom: 20px !important;
+}
+
 .m-10 {
     margin: 10px;
 }
@@ -58,4 +62,12 @@ body {
     border: 0px solid black;
     border-radius: 30px;
     font-size: 25px;
+}
+
+.truncate{
+    display: block;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
