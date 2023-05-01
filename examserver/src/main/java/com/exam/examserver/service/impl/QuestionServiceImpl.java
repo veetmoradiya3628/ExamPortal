@@ -48,5 +48,10 @@ public class QuestionServiceImpl implements QuestionService {
         this.questionRepository.deleteById(questionId);
     }
 
+    @Override
+    public Question getQuestionId(Long questionId) {
+        return this.questionRepository.getOne(questionId);
+    }
+
 
 }

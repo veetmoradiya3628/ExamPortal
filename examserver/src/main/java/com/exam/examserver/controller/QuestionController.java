@@ -80,6 +80,31 @@ public class QuestionController {
         return ResponseEntity.ok(questionsOfQuiz);
     }
 
+    // eval Quiz
+    @PostMapping("/eval-quiz")
+    public ResponseEntity<?> evalQuiz(@RequestBody List<Question> questions){
+        System.out.println(questions);
+        double  marksGot = 0;
+        int correctAnswers = 0;
+        int attempted = 0;
+        for (Question q: questions) {
+            Question question = this.questionService.getQuestionId(q.getQuesId());
+
+            if(question.getAnswer().equals(q.getGivenAnswer())){
+                // correct answer
+                correctAnswers++;
+                double marksSingle = (double) Double.parseDouble(questions.get(0).getQuiz().getMaxMarks()) / questions.size();
+                marksGot += marksSingle;
+            }
+
+            if (q.getGivenAnswer() != null){
+                attempted++;
+            }
+        }
+        Map<String, Object> mpp = Map.of("marksGot", marksGot, "correctAnswers", correctAnswers, "attempted",attempted);
+        return ResponseEntity.ok(mpp);
+    }
+
     // delete the question by Id
 //    @DeleteMapping("/{qId}")
 //    public void deleteQuestion(@PathVariable("qId") Long questionId){

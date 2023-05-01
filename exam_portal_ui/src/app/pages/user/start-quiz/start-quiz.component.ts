@@ -21,6 +21,7 @@ export class StartQuizComponent implements OnInit {
 
 
   constructor(private _route: ActivatedRoute, private _locationStrategy: LocationStrategy, private _questionService: QuestionService) { }
+
   ngOnInit(): void {
     this.qid = this._route.snapshot.params['qid'];
     this.preventBackButton();
@@ -39,9 +40,9 @@ export class StartQuizComponent implements OnInit {
       (data: any) => {
         this.questions = data;
         this.timer = this.questions.length * 2 * 60;
-        this.questions.forEach((question: any) => {
-          question['givenAnswer'] = '';
-        });
+        // this.questions.forEach((question: any) => {
+        //   question['givenAnswer'] = '';
+        // });
         this.startTimer();
         console.log(`Question data on quiz is : `);
         console.log(this.questions);
@@ -68,20 +69,30 @@ export class StartQuizComponent implements OnInit {
   }
 
   evalQuiz() {
-    this.isSubmit = true;
-    this.questions.forEach((ques: any) => {
-      if (ques.givenAnswer == ques.answer) {
-        this.correctAnswers++;
-        let marksSingle = this.questions[0].quiz.maxMarks / this.questions.length;
-        this.marksGot += marksSingle;
+    // this.isSubmit = true;
+    // this.questions.forEach((ques: any) => {
+    //   if (ques.givenAnswer == ques.answer) {
+    //     this.correctAnswers++;
+    //     let marksSingle = this.questions[0].quiz.maxMarks / this.questions.length;
+    //     this.marksGot += marksSingle;
+    //   }
+    //   if (ques.givenAnswer.trim() != '') {
+    //     this.attempted++;
+    //   }
+    // })
+    // console.log('Correct answers : ' + this.correctAnswers);
+    // console.log('Marks got : ' + this.marksGot);
+    // console.log('Attampted : ' + this.attempted);
+
+    // server code for evaluation
+    this._questionService.evalQuiz(this.questions).subscribe(
+      (data: any) => {
+        console.log(data);
+      },
+      (error: any) => {
+        console.log('Error'+error);
       }
-      if (ques.givenAnswer.trim() != '') {
-        this.attempted++;
-      }
-    })
-    console.log('Correct answers : ' + this.correctAnswers);
-    console.log('Marks got : ' + this.marksGot);
-    console.log('Attampted : ' + this.attempted);
+    )
   }
 
   startTimer() {
