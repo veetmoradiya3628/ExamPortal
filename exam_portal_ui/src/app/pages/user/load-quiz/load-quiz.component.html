@@ -18,7 +18,7 @@
                     </mat-card-content>
                     <mat-card-actions>
                         <button mat-raised-button color="primary">View</button>
-                        <button mat-raised-button class="ml-20" color="accent">Start</button>
+                        <button mat-raised-button class="ml-20" color="accent" [routerLink]="'/user/instructions/'+q.qid">Start</button>
                         <button mat-button class="ml-20" color="accent">Questions : {{ q.numberOfQuestions }}</button>
                     </mat-card-actions>
                 </mat-card>
@@ -33,3 +33,5 @@
         </div>
     </div>
 </div>
+
+<!-- {{ quizzes | json }} -->
