@@ -2,8 +2,11 @@ package com.exam.examserver.service.impl;
 
 import com.exam.examserver.entity.exam.Category;
 import com.exam.examserver.entity.exam.Quiz;
+import com.exam.examserver.repo.CategoryRepository;
 import com.exam.examserver.repo.QuizRepository;
 import com.exam.examserver.service.QuizService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

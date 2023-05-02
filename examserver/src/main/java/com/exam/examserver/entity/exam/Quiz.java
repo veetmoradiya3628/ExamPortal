@@ -91,4 +91,18 @@ public class Quiz {
     public void setQuestions(Set<Question> questions) {
         this.questions = questions;
     }
+
+    @Override
+    public String toString() {
+        return "Quiz{" +
+                "qId=" + qId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", maxMarks='" + maxMarks + '\'' +
+                ", numberOfQuestions='" + numberOfQuestions + '\'' +
+                ", active=" + active +
+                ", category=" + category +
+                ", questions=" + questions +
+                '}';
+    }
 }

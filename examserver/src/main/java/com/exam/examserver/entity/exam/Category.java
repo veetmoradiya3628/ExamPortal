@@ -51,4 +51,14 @@ public class Category {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "cid=" + cid +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", quizzes=" + quizzes +
+                '}';
+    }
 }

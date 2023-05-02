@@ -61,7 +61,7 @@ public class SecurityConfiguration{
                 .disable()
                 .authorizeHttpRequests((request) -> {
                     try{
-                        request.requestMatchers("/generate-token", "/user/").permitAll()
+                        request.requestMatchers("/generate-token", "/user/", "/user/test").permitAll()
                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                 .anyRequest().authenticated()
                                 .and()

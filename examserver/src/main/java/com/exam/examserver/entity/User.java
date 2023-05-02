@@ -155,4 +155,20 @@ public class User implements UserDetails {
     public void setProfile(String profile) {
         this.profile = profile;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", enabled=" + enabled +
+                ", profile='" + profile + '\'' +
+                ", userRoles=" + userRoles +
+                '}';
+    }
 }

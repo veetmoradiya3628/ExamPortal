@@ -2,23 +2,42 @@ package com.exam.examserver.controller;
 
 import com.exam.examserver.entity.exam.Category;
 import com.exam.examserver.entity.exam.Quiz;
+import com.exam.examserver.repo.CategoryRepository;
 import com.exam.examserver.service.QuizService;
+import com.exam.examserver.service.impl.QuizServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/quiz")
 @CrossOrigin("*")
 public class QuizController {
+    Logger logger = LoggerFactory.getLogger(QuizServiceImpl.class);
+
     @Autowired
     private QuizService quizService;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     // add quiz
     @PostMapping("/")
-    public ResponseEntity<Quiz> addQuiz(@RequestBody Quiz quiz){
+    public ResponseEntity<?> addQuiz(@RequestBody Quiz quiz){
+        logger.info("data received at addQuiz is "+quiz.toString());
+        Long categoryId = quiz.getCategory().getCid();
+        if(!categoryRepository.existsByCid(categoryId)) {
+            logger.debug("category with cid "+categoryId+" not exists!!");
+            Map<String, String> mpp = Map.of("message", "category not exists with cid : " + categoryId);
+            return new ResponseEntity<>(mpp, HttpStatus.NOT_FOUND);
+        }
+        logger.info("category with cid "+categoryId+" exists");
         return ResponseEntity.ok(this.quizService.addQuiz(quiz));
     }
 
