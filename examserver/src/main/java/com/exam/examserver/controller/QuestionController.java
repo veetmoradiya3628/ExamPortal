@@ -36,13 +36,13 @@ public class QuestionController {
 
     // get the question by Id
     @GetMapping("/{qId}")
-    public ResponseEntity<Question> getQuestionById(@PathVariable("qId") Long questionId){
+    public ResponseEntity<Question> getQuestionById(@PathVariable("qId") String questionId){
         return ResponseEntity.ok(this.questionService.getQuestion(questionId));
     }
 
     // get all question of any quiz
     @GetMapping("/quiz/{quizId}")
-    public ResponseEntity<?> getQuestionOfQuiz(@PathVariable("quizId") Long quizId){
+    public ResponseEntity<?> getQuestionOfQuiz(@PathVariable("quizId") String quizId){
 //        Quiz quiz = new Quiz();
 //        quiz.setQid(quizId);
 //        Set<Question> questionsOfQuiz = this.questionService.getQuestionsOfQuiz(quiz);
@@ -63,7 +63,7 @@ public class QuestionController {
 
     // delete question
     @DeleteMapping("/{quesId}")
-    public void deleteSingleQuestion(@PathVariable("quesId") Long quesId){
+    public void deleteSingleQuestion(@PathVariable("quesId") String quesId){
         this.questionService.deleteQuestion(quesId);
     }
 
@@ -76,7 +76,7 @@ public class QuestionController {
 
     // get all question of any quiz
     @GetMapping("/quiz/all/{quizId}")
-    public ResponseEntity<?> getQuestionOfQuizAdmin(@PathVariable("quizId") Long quizId){
+    public ResponseEntity<?> getQuestionOfQuizAdmin(@PathVariable("quizId") String quizId){
         Quiz quiz = new Quiz();
         quiz.setQid(quizId);
         Set<Question> questionsOfQuiz = this.questionService.getQuestionsOfQuiz(quiz);

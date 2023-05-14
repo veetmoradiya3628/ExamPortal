@@ -31,7 +31,7 @@ public class QuizController {
     @PostMapping("/")
     public ResponseEntity<?> addQuiz(@RequestBody Quiz quiz){
         logger.info("data received at addQuiz is "+quiz.toString());
-        Long categoryId = quiz.getCategory().getCid();
+        String categoryId = quiz.getCategory().getCid();
         if(!categoryRepository.existsByCid(categoryId)) {
             logger.debug("category with cid "+categoryId+" not exists!!");
             Map<String, String> mpp = Map.of("message", "category not exists with cid : " + categoryId);
@@ -55,18 +55,18 @@ public class QuizController {
 
     // get quiz by id
     @GetMapping("/{qId}")
-    public ResponseEntity<Quiz> getQuiz(@PathVariable("qId") Long quizId){
+    public ResponseEntity<Quiz> getQuiz(@PathVariable("qId") String quizId){
         return ResponseEntity.ok(this.quizService.getQuiz(quizId));
     }
 
     // delete quiz
     @DeleteMapping("/{qId}")
-    public void deleteQuiz(@PathVariable("qId") Long quizId){
+    public void deleteQuiz(@PathVariable("qId") String quizId){
         this.quizService.deleteQuiz(quizId);
     }
 
     @GetMapping("/category/{cid}")
-    public List<Quiz> getQuizzesOfCategory(@PathVariable("cid") Long cid){
+    public List<Quiz> getQuizzesOfCategory(@PathVariable("cid") String cid){
         Category category = new Category();
         category.setCid(cid);
         return this.quizService.getQuizzesOfCategory(category);
@@ -80,7 +80,7 @@ public class QuizController {
 
     // get active quizzes of category
     @GetMapping("/category/active/{cid}")
-    public List<Quiz> getActiveQuizzesOfCategory(@PathVariable("cid") Long cid){
+    public List<Quiz> getActiveQuizzesOfCategory(@PathVariable("cid") String cid){
         Category category = new Category();
         category.setCid(cid);
         return this.quizService.getActiveQuizzesOfCategory(category);

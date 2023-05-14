@@ -8,8 +8,8 @@ import jakarta.persistence.*;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long quesId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String quesId;
 
     @Column(length = 2000)
     private String content;
@@ -49,11 +49,11 @@ public class Question {
         this.quiz = quiz;
     }
 
-    public Long getQuesId() {
+    public String getQuesId() {
         return quesId;
     }
 
-    public void setQuesId(Long quesId) {
+    public void setQuesId(String quesId) {
         this.quesId = quesId;
     }
 

@@ -10,8 +10,8 @@ import java.util.Set;
 @Table(name = "category")
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long cid;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String cid;
 
     private String title;
     private String description;
@@ -28,12 +28,20 @@ public class Category {
         this.description = description;
     }
 
-    public Long getCid() {
+    public String getCid() {
         return cid;
     }
 
-    public void setCid(Long cid) {
+    public void setCid(String cid) {
         this.cid = cid;
+    }
+
+    public Set<Quiz> getQuizzes() {
+        return quizzes;
+    }
+
+    public void setQuizzes(Set<Quiz> quizzes) {
+        this.quizzes = quizzes;
     }
 
     public String getTitle() {

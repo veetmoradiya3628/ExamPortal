@@ -13,8 +13,8 @@ import java.util.Set;
 @Table(name = "users")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String id;
     private String username;
     private String password;
     private String firstName;
@@ -32,7 +32,7 @@ public class User implements UserDetails {
 
     public User(){}
 
-    public User(Long id, String username, String password, String firstName, String lastName, String email, String phone, Boolean enabled, String profile) {
+    public User(String id, String username, String password, String firstName, String lastName, String email, String phone, Boolean enabled, String profile) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -52,11 +52,11 @@ public class User implements UserDetails {
         this.userRoles = userRoles;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
