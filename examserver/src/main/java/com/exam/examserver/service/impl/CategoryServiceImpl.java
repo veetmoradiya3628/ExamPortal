@@ -31,12 +31,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category getCategory(Long categoryId) {
+    public Category getCategory(String categoryId) {
         return this.categoryRepository.findById(categoryId).get();
     }
 
     @Override
-    public void deleteCategory(Long categoryId) {
+    public void deleteCategory(String categoryId) {
         Category category = new Category();
         category.setCid(categoryId);
         this.categoryRepository.delete(category);

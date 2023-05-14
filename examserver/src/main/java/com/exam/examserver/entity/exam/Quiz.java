@@ -10,8 +10,8 @@ import java.util.Set;
 public class Quiz {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long qId;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String qId;
 
     private String title;
     private String description;
@@ -28,12 +28,12 @@ public class Quiz {
 
     public Quiz(){}
 
-    public Long getQid() {
+    public String getQid() {
         return qId;
     }
 
-    public void setQid(Long qid) {
-        this.qId = qid;
+    public void setQid(String qId) {
+        this.qId = qId;
     }
 
     public String getTitle() {

@@ -36,12 +36,12 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public Quiz getQuiz(Long quizId) {
+    public Quiz getQuiz(String quizId) {
         return this.quizRepository.findById(quizId).get();
     }
 
     @Override
-    public void deleteQuiz(Long quizId) {
+    public void deleteQuiz(String quizId) {
         this.quizRepository.deleteById(quizId);
     }
 

@@ -31,7 +31,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestion(Long questionId) {
+    public Question getQuestion(String questionId) {
         return this.questionRepository.findById(questionId).get();
     }
 
@@ -41,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public void deleteQuestion(Long questionId) {
+    public void deleteQuestion(String questionId) {
 //        Question question = new Question();
 //        question.setQuesId(questionId);
 //        this.questionRepository.delete(question);
@@ -49,7 +49,7 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public Question getQuestionId(Long questionId) {
+    public Question getQuestionId(String questionId) {
         return this.questionRepository.getOne(questionId);
     }
 

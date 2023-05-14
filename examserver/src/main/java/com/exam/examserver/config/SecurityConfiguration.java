@@ -61,7 +61,7 @@ public class SecurityConfiguration{
                 .disable()
                 .authorizeHttpRequests((request) -> {
                     try{
-                        request.requestMatchers("/generate-token", "/user/", "/user/test").permitAll()
+                        request.requestMatchers("/generate-token", "/user/", "/user/test", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                 .anyRequest().authenticated()
                                 .and()
