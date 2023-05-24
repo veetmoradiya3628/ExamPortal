@@ -8,12 +8,9 @@ import com.exam.examserver.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -50,7 +47,7 @@ public class UserController {
             return ResponseEntity.badRequest().body(mpp);
         }
 
-        user.setProfile("default.png");
+        user.setProfileImage("default.png");
 
         // encoding password with BCrypt
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
@@ -58,7 +55,7 @@ public class UserController {
         Set<UserRole> roles = new HashSet<>();
         Role role = new Role();
         role.setRoleId(2L);
-        role.setRole("NORMAL");
+        role.setRoleName("NORMAL");
         UserRole userRole = new UserRole();
         userRole.setUser(user);
         userRole.setRole(role);

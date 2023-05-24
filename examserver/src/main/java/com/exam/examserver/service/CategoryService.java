@@ -1,6 +1,6 @@
 package com.exam.examserver.service;
 
-import com.exam.examserver.entity.exam.Category;
+import com.exam.examserver.entity.Category;
 
 import java.util.Set;
 

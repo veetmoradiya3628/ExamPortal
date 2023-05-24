@@ -1,8 +1,15 @@
 package com.exam.examserver.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "tbl_user_role")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -14,32 +21,6 @@ public class UserRole {
 
     @ManyToOne
     private Role role;
-
-    public UserRole(){}
-
-    public Long getUserRoleId() {
-        return userRoleId;
-    }
-
-    public void setUserRoleId(Long userRoleId) {
-        this.userRoleId = userRoleId;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {

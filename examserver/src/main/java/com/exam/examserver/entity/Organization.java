@@ -8,33 +8,32 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "tbl_role")
+@Table(name = "tbl_organization")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Role {
+public class Organization {
     @Id
-    private Long roleId;
-    private String roleName;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String orgId;
+    private String orgName;
+    private String orgDescription;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
-    private Set<UserRole> userRoles = new HashSet<>();
-
     @Override
     public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", roleName='" + roleName + '\'' +
-                ", userRoles=" + userRoles +
+        return "Organization{" +
+                "orgId='" + orgId + '\'' +
+                ", orgName='" + orgName + '\'' +
+                ", orgDescription='" + orgDescription + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

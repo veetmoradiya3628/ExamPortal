@@ -1,6 +1,6 @@
 package com.exam.examserver.service.impl;
 
-import com.exam.examserver.entity.exam.Category;
+import com.exam.examserver.entity.Category;
 import com.exam.examserver.repo.CategoryRepository;
 import com.exam.examserver.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void deleteCategory(String categoryId) {
         Category category = new Category();
-        category.setCid(categoryId);
+        category.setCategoryId(categoryId);
         this.categoryRepository.delete(category);
     }
 }

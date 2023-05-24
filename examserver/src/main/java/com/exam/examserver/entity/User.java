@@ -2,67 +2,60 @@ package com.exam.examserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tbl_user")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String userId;
     private String username;
     private String password;
+
+    private String email;
     private String firstName;
     private String lastName;
-    private String email;
+    @Column(name = "phone_no")
     private String phone;
 
+    @Column(name = "is_enabled")
     private Boolean enabled = true;
-    private String profile;
+    private String profileImage;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     // user many roles
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
-    public User(){}
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "org_id", referencedColumnName = "orgId")
+    private Organization organization;
 
-    public User(String id, String username, String password, String firstName, String lastName, String email, String phone, Boolean enabled, String profile) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.enabled = enabled;
-        this.profile = profile;
-    }
+    @OneToMany(mappedBy = "teacher")
+    Set<TeacherQuiz> teacherQuizSet;
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
+    @OneToMany(mappedBy = "student")
+    Set<StudentQuiz> studentQuizSet;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -95,80 +88,20 @@ public class User implements UserDetails {
         return set;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Boolean getEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-
-    public String getProfile() {
-        return profile;
-    }
-
-    public void setProfile(String profile) {
-        this.profile = profile;
-    }
-
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", enabled=" + enabled +
-                ", profile='" + profile + '\'' +
+                ", profileImage='" + profileImage + '\'' +
                 ", userRoles=" + userRoles +
+                ", organization=" + organization +
                 '}';
     }
 }
