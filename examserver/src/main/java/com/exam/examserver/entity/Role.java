@@ -18,6 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class Role {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long roleId;
     private String roleName;
 

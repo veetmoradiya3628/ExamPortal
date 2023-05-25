@@ -1,9 +1,7 @@
 package com.exam.examserver.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -14,10 +12,14 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String orgId;
+
+    @Column(unique = true)
     private String orgName;
     private String orgDescription;
 
