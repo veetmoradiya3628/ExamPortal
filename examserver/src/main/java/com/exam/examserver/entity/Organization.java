@@ -9,11 +9,11 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_organization")
+@Getter
+@Setter
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class Organization {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,6 +27,11 @@ public class Organization {
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    public Organization(String orgName, String orgDescription) {
+        this.orgName = orgName;
+        this.orgDescription = orgDescription;
+    }
 
     @Override
     public String toString() {
