@@ -1,9 +1,7 @@
 package com.exam.examserver.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -13,13 +11,16 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tbl_role")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long roleId;
+
+    @Column(unique = true)
     private String roleName;
 
     @CreationTimestamp

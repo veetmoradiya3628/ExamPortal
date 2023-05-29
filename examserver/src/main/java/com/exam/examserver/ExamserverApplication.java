@@ -41,7 +41,6 @@ public class ExamserverApplication implements CommandLineRunner {
 		}else{
 			logger.info("Organization does not exists with orgName -> "+organization.getOrgName());
 			logger.info((String) this.organizationService.addOrganization(organization).getBody());
-
 		}
 	}
 

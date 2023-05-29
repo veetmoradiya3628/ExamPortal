@@ -1,17 +1,19 @@
 package com.exam.examserver.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tbl_organization")
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Organization {
@@ -22,6 +24,9 @@ public class Organization {
     @Column(unique = true)
     private String orgName;
     private String orgDescription;
+
+    @OneToMany(mappedBy = "organization")
+    private Set<User> userSet = new LinkedHashSet<>();
 
     @CreationTimestamp
     private LocalDateTime createdAt;

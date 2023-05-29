@@ -2,9 +2,7 @@ package com.exam.examserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,9 +15,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tbl_user")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -47,8 +46,9 @@ public class User implements UserDetails {
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "org_id", referencedColumnName = "orgId")
+    @ManyToOne
+    @JoinColumn(name = "org_id", nullable = false)
+    @JsonIgnore
     private Organization organization;
 
     @OneToMany(mappedBy = "teacher")

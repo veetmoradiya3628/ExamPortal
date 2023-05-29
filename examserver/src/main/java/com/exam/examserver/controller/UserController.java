@@ -3,6 +3,7 @@ package com.exam.examserver.controller;
 import com.exam.examserver.entity.Role;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
+import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.UserService;
 import org.slf4j.Logger;
@@ -12,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 @RequestMapping("/user")
@@ -28,6 +26,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -53,14 +54,17 @@ public class UserController {
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 
         Set<UserRole> roles = new HashSet<>();
-        Role role = new Role();
-        role.setRoleId(2L);
-        role.setRoleName("NORMAL");
+        Role role = this.roleRepository.findByRoleName("NORMAL");
         UserRole userRole = new UserRole();
         userRole.setUser(user);
         userRole.setRole(role);
         roles.add(userRole);
         return ResponseEntity.ok(this.userService.createUser(user, roles));
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<User>> getUsers(){
+        return ResponseEntity.ok(this.userRepository.findAll());
     }
 
     @GetMapping("/{username}")

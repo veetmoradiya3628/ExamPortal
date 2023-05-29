@@ -1,15 +1,14 @@
 package com.exam.examserver.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "tbl_user_role")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class UserRole {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

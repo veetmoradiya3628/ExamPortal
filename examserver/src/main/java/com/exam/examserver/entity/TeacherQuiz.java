@@ -1,9 +1,7 @@
 package com.exam.examserver.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,9 +9,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbl_teacher_quiz")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class TeacherQuiz {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

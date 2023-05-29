@@ -64,6 +64,8 @@ public class SecurityConfiguration{
                                 .requestMatchers("/student/**").hasAuthority("STUDENT")
                                 .requestMatchers(HttpMethod.OPTIONS).permitAll()
                                 .requestMatchers("/organization/**").permitAll()
+                                .requestMatchers("/role/**").permitAll()
+                                .requestMatchers("/user/**").permitAll()
                                 .anyRequest().authenticated()
                                 .and()
                                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler)
