@@ -1,4 +1,4 @@
-package com.exam.examserver.entity;
+package com.exam.examserver.req_res_format;
 
 import lombok.*;
 

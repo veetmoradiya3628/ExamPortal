@@ -1,8 +1,8 @@
 package com.exam.examserver.controller;
 
 import com.exam.examserver.config.JwtUtils;
-import com.exam.examserver.entity.JwtRequest;
-import com.exam.examserver.entity.JwtResponse;
+import com.exam.examserver.req_res_format.JwtRequest;
+import com.exam.examserver.req_res_format.JwtResponse;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.UserNotFoundException;
 import com.exam.examserver.service.impl.UserDetailsServiceImpl;
