@@ -7,6 +7,9 @@ import { HeaderComponent } from './common/header/header.component';
 import { AdminHomePageComponent } from './admin/admin-home-page/admin-home-page.component';
 import { HomePageComponent } from './common/home-page/home-page.component';
 import { AdminSidePageComponent } from './admin/admin-side-page/admin-side-page.component';
+import { LoginComponent } from './common/login/login.component';
+import { RegistrationComponent } from './common/registration/registration.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -14,11 +17,14 @@ import { AdminSidePageComponent } from './admin/admin-side-page/admin-side-page.
     HeaderComponent,
     AdminHomePageComponent,
     HomePageComponent,
-    AdminSidePageComponent
+    AdminSidePageComponent,
+    LoginComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
