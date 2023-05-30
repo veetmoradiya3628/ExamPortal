@@ -5,6 +5,8 @@ import { AdminHomePageComponent } from './admin/admin-home-page/admin-home-page.
 import { HomePageComponent } from './common/home-page/home-page.component';
 import { LoginComponent } from './common/login/login.component';
 import { RegistrationComponent } from './common/registration/registration.component';
+import { OrganizationsComponent } from './admin/organizations/organizations.component';
+import { sysAdminRoutes } from './admin/sys-admin-routes';
 
 const routes: Routes = [
   {
@@ -24,7 +26,10 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminHomePageComponent
+    component: AdminHomePageComponent,
+    children: [
+      ...sysAdminRoutes
+    ]
   }
 ];
 

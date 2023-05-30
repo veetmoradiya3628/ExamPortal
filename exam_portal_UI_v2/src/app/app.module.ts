@@ -10,6 +10,10 @@ import { AdminSidePageComponent } from './admin/admin-side-page/admin-side-page.
 import { LoginComponent } from './common/login/login.component';
 import { RegistrationComponent } from './common/registration/registration.component';
 import { RouterModule } from '@angular/router';
+import { OrganizationsComponent } from './admin/organizations/organizations.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { SysAdminProfileComponent } from './admin/sys-admin-profile/sys-admin-profile.component';
+import { SysAdminDashboardComponent } from './admin/sys-admin-dashboard/sys-admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { RouterModule } from '@angular/router';
     HomePageComponent,
     AdminSidePageComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    OrganizationsComponent,
+    UserManagementComponent,
+    SysAdminProfileComponent,
+    SysAdminDashboardComponent
   ],
   imports: [
     BrowserModule,
