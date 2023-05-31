@@ -14,6 +14,7 @@ import { OrganizationsComponent } from './admin/organizations/organizations.comp
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { SysAdminProfileComponent } from './admin/sys-admin-profile/sys-admin-profile.component';
 import { SysAdminDashboardComponent } from './admin/sys-admin-dashboard/sys-admin-dashboard.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SysAdminDashboardComponent } from './admin/sys-admin-dashboard/sys-admi
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

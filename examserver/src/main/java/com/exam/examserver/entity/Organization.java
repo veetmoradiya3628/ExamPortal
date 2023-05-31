@@ -25,7 +25,8 @@ public class Organization {
     private String orgName;
     private String orgDescription;
 
-    @OneToMany(mappedBy = "organization")
+    @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
+    @JsonIgnore
     private Set<User> userSet = new LinkedHashSet<>();
 
     @CreationTimestamp

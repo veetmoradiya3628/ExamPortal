@@ -48,7 +48,6 @@ public class User implements UserDetails {
 
     @ManyToOne
     @JoinColumn(name = "org_id", nullable = false)
-    @JsonIgnore
     private Organization organization;
 
     @OneToMany(mappedBy = "teacher")
