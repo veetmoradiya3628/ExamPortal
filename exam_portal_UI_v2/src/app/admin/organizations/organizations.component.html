@@ -30,9 +30,9 @@
             </td>
             <td class="px-4 py-3 text-ms font-semibold border">{{ org.orgDescription }}</td>
             <td class="px-4 py-3 text-xs border">
-              <span class="px-4 py-3 text-sm"> {{ org.createdAt }} </span>
+              <span class="px-4 py-3 text-sm"> {{ org.createdAt | date }} </span>
             </td>
-            <td class="px-4 py-3 text-sm border">{{ org.updatedAt }}</td>
+            <td class="px-4 py-3 text-sm border">{{ org.updatedAt | date }}</td>
             <td class="px-4 py-3 text-sm border">
               <button class="inline-flex px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md">
                 Update

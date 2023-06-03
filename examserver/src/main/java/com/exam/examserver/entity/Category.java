@@ -24,10 +24,6 @@ public class Category {
     private String categoryTitle;
     private String categoryDescription;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "created_by", referencedColumnName = "userId")
-    private User user;
-
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -46,7 +42,7 @@ public class Category {
                 ", categoryDescription='" + categoryDescription + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", quizzes=" + quizzes +
                 '}';
     }
-
 }

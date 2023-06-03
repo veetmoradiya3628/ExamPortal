@@ -15,4 +15,10 @@ export class ApiServiceService {
     const url = this.BASE_URL + '/organization/';
     return this.http.get<any>(url);
   }
+
+  // get all users
+  public getUsers(): Observable<any> {
+    const url = this.BASE_URL + '/user/';
+    return this.http.get<any>(url);
+  }
 }

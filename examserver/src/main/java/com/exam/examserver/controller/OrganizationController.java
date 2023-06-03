@@ -17,7 +17,7 @@ import java.util.List;
 public class OrganizationController {
 
     final String LOG_TAG = "ORGANIZATION_CONTROLLER";
-    Logger logger = LoggerFactory.getLogger(CategoryController.class);
+    Logger logger = LoggerFactory.getLogger(OrganizationController.class);
 
     @Autowired
     private OrganizationService organizationService;
@@ -45,6 +45,7 @@ public class OrganizationController {
      */
     @GetMapping("/{orgId}")
     public ResponseEntity<Organization> getOrgById(@PathVariable("orgId") String orgId){
+        logger.info(LOG_TAG + " get Organization By ID");
         return this.organizationService.getOrganization(orgId);
     }
 
@@ -53,6 +54,7 @@ public class OrganizationController {
      */
     @PutMapping("/{orgId}")
     public ResponseEntity<Organization> updateOrganizationDetails(@PathVariable("orgId") String orgId,@RequestBody Organization organization){
+        logger.info(LOG_TAG + " update Organization Details By ID");
         return this.organizationService.updateOrganization(orgId, organization);
     }
 
@@ -61,6 +63,7 @@ public class OrganizationController {
      */
     @DeleteMapping("/{orgId}")
     public ResponseEntity<HttpStatus> deleteOrganization(@PathVariable("orgId") String orgId){
+        logger.info(LOG_TAG + " delete Organization By ID");
         return this.organizationService.deleteOrganization(orgId);
     }
 }

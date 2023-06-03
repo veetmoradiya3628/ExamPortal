@@ -31,6 +31,10 @@ public class Role {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
     private Set<UserRole> userRoles = new HashSet<>();
 
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
     @Override
     public String toString() {
         return "Role{" +

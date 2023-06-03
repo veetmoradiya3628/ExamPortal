@@ -7,50 +7,35 @@
         <table class="w-full">
           <thead>
             <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-              <th class="px-4 py-3">Name</th>
-              <th class="px-4 py-3">Age</th>
-              <th class="px-4 py-3">Status</th>
-              <th class="px-4 py-3">Date</th>
+              <th class="px-4 py-3">Username</th>
+              <th class="px-4 py-3">E-mail</th>
+              <th class="px-4 py-3">Role</th>
+              <th class="px-4 py-3">Is Enabled</th>
+              <th class="px-4 py-3">Action</th>
             </tr>
           </thead>
           <tbody class="bg-white">
-            <tr class="text-gray-700">
-              <td class="px-4 py-3 border">
-                <div class="flex items-center text-sm">
-                  <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                    <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-black">Sufyan</p>
-                    <p class="text-xs text-gray-600">Developer</p>
-                  </div>
-                </div>
-              </td>
-              <td class="px-4 py-3 text-ms font-semibold border">22</td>
+            <tr class="text-gray-700" *ngFor="let user of users">
+              <td class="px-4 py-3 text-sm border">{{ user.username  }}</td>
+              <td class="px-4 py-3 text-sm border">{{ user.email  }}</td>
+              <td class="px-4 py-3 text-sm border">{{ user.authorities[0].authority }}</td>
+              
               <td class="px-4 py-3 text-xs border">
-                <span class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Acceptable </span>
+                <span *ngIf="user.enabled" class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm"> Active </span>
+                <span *ngIf="!user.enabled" class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"> Disabled </span>
               </td>
-              <td class="px-4 py-3 text-sm border">6/4/2000</td>
-            </tr>
-            <tr class="text-gray-700">
-              <td class="px-4 py-3 border">
-                <div class="flex items-center text-sm">
-                  <div class="relative w-8 h-8 mr-3 rounded-full">
-                    <img class="object-cover w-full h-full rounded-full" src="https://images.pexels.com/photos/5212324/pexels-photo-5212324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260" alt="" loading="lazy" />
-                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
-                  </div>
-                  <div>
-                    <p class="font-semibold">Nora</p>
-                    <p class="text-xs text-gray-600">Designer</p>
-                  </div>
-                </div>
+
+              <td class="px-4 py-3 text-sm border">
+                <button class="inline-flex px-4 py-2 bg-blue-400 text-white text-sm font-medium rounded-md">
+                  Info
+                </button>
+                <button class="inline-flex px-4 py-2 ml-2 bg-gray-600 text-white text-sm font-medium rounded-md">
+                  Update
+                </button>
+                <button class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md">
+                  Delete
+                </button>
               </td>
-              <td class="px-4 py-3 text-md font-semibold border">17</td>
-              <td class="px-4 py-3 text-xs border">
-                <span class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm"> Nnacceptable </span>
-              </td>
-              <td class="px-4 py-3 text-sm border">6/10/2020</td>
             </tr>
           </tbody>
         </table>

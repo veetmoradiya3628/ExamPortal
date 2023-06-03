@@ -8,46 +8,60 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/category")
 @CrossOrigin("*")
 public class CategoryController {
-
+    final String LOG_TAG = "CATEGORY_CONTROLLER";
     Logger logger = LoggerFactory.getLogger(CategoryController.class);
 
     @Autowired
     private CategoryService categoryService;
 
-    // add category
+    /*
+    * API to add Category data..
+    * */
     @PostMapping("/")
-    public ResponseEntity<Category> addCategory(@RequestBody Category category){
-        logger.info("data received to add category is "+category.toString());
-        Category addedCategory = this.categoryService.addCategory(category);
-        return ResponseEntity.ok(addedCategory);
+    public ResponseEntity<?> addCategory(@RequestBody Category category){
+        logger.info(LOG_TAG + " data received to add category is "+category.toString());
+        return this.categoryService.addCategory(category);
     }
 
-    // get category by id
+    /*
+     * API to add Category data by CategoryID
+     * */
     @GetMapping("/{categoryId}")
-    public Category getCategory(@PathVariable("categoryId") String categoryId){
+    public ResponseEntity<Category> getCategory(@PathVariable("categoryId") String categoryId){
+        logger.info(LOG_TAG + " categoryId received to get category is "+categoryId);
         return this.categoryService.getCategory(categoryId);
     }
 
-    // get all categories
+    /*
+     * API to get All Category Data
+     * */
     @GetMapping("/")
-    public ResponseEntity<?> getCategories(){
-        return ResponseEntity.ok(this.categoryService.getCategories());
+    public ResponseEntity<List<Category>> getCategories(){
+        logger.info(LOG_TAG + " inside get all categories details method");
+        return this.categoryService.getCategories();
     }
 
-    // update categories
+    /*
+      * API to update Category by ID
+     */
     @PutMapping("/")
-    public Category updateCategory(@RequestBody Category category){
+    public ResponseEntity<Category> updateCategory(@RequestBody Category category){
         return this.categoryService.updateCategory(category);
     }
 
-    // delete category
+    /*
+       *
+     */
     @DeleteMapping("/{categoryId}")
-    public void deleteCategory(@PathVariable("categoryId") String categoryId){
-        this.categoryService.deleteCategory(categoryId);
+    public ResponseEntity<?> deleteCategory(@PathVariable("categoryId") String categoryId){
+        logger.info(LOG_TAG + " inside delete category method" + categoryId);
+        return this.categoryService.deleteCategory(categoryId);
     }
 
 }

@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String phone;
 
     @Column(name = "is_enabled")
-    private Boolean enabled = true;
+    private Boolean enabled;
     private String profileImage;
 
     @CreationTimestamp
