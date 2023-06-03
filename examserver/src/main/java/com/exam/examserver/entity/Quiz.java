@@ -30,7 +30,7 @@ public class Quiz {
 
     private Boolean isActive = false;
 
-    private LocalDateTime starsAt;
+    private LocalDateTime startsAt;
     private LocalDateTime endsAt;
     private Integer noOfQuestions;
     private String quizImage;
@@ -52,7 +52,7 @@ public class Quiz {
                 ", quizDescription='" + quizDescription + '\'' +
                 ", category=" + category +
                 ", isActive=" + isActive +
-                ", starsAt=" + starsAt +
+                ", starsAt=" + startsAt +
                 ", endsAt=" + endsAt +
                 ", noOfQuestions=" + noOfQuestions +
                 ", quizImage='" + quizImage + '\'' +
