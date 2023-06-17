@@ -99,8 +99,12 @@ public class User implements UserDetails {
                 ", phone='" + phone + '\'' +
                 ", enabled=" + enabled +
                 ", profileImage='" + profileImage + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 ", userRoles=" + userRoles +
                 ", organization=" + organization +
+                ", teacherQuizSet=" + teacherQuizSet +
+                ", studentQuizSet=" + studentQuizSet +
                 '}';
     }
 }

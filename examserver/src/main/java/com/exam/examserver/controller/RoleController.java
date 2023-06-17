@@ -6,10 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/role")
@@ -25,5 +24,12 @@ public class RoleController {
     public ResponseEntity<?> createRole(@RequestBody Role role){
         logger.info(LOG_TAG + " inside addOrganization, data to be added : "+role.toString());
         return this.roleService.addRole(role);
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Role>> getAllRole(){
+        ResponseEntity<List<Role>> response = this.roleService.getAllRoles();
+        logger.info(LOG_TAG + " inside getAllRole, data we will return is");
+        return response;
     }
 }

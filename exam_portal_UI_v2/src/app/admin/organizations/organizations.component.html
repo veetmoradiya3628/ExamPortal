@@ -1,49 +1,40 @@
-<section class="container w-[100%] max-w-[1660px] font-mono">
-  <button class="inline-flex px-4 py-2 bg-black text-white text-sm font-medium rounded-md">
-    Add Organization
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <button type="button" class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ml-4 mt-4">
+    <a [routerLink]="'/admin/add-organization'" >Add Organization</a>
   </button>
-  <div class="w-full mt-2 overflow-hidden rounded-lg shadow-lg">
-    <div class="w-full overflow-x-auto">
-      <table class="w-full">
-        <thead>
-          <tr
-            class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-            <th class="px-4 py-3">Name</th>
-            <th class="px-4 py-3">Description</th>
-            <th class="px-4 py-3">Created At</th>
-            <th class="px-4 py-3">Updated At</th>
-            <th class="px-4 py-3">Action</th>
-          </tr>
-        </thead>
-        <tbody class="bg-white">
-          <tr class="text-gray-700" *ngFor="let org of organizations">
-            <!-- {{ org | json}} -->
-            <td class="px-4 py-3 border">
-              <div class="flex items-center text-sm">
-                <div class="relative w-8 h-8 mr-3 rounded-full md:block">
-                  <img class="object-cover w-full h-full" src="../../../assets/org_icon.jpg" alt="" loading="lazy" />
-                </div>
-                <div>
-                  <p class="font-semibold text-black">{{ org.orgName }}</p>
-                </div>
-              </div>
-            </td>
-            <td class="px-4 py-3 text-ms font-semibold border">{{ org.orgDescription }}</td>
-            <td class="px-4 py-3 text-xs border">
-              <span class="px-4 py-3 text-sm"> {{ org.createdAt | date }} </span>
-            </td>
-            <td class="px-4 py-3 text-sm border">{{ org.updatedAt | date }}</td>
-            <td class="px-4 py-3 text-sm border">
-              <button class="inline-flex px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md">
-                Update
-              </button>
-              <button class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md">
-                Delete
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
+  <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-2">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <tr>
+      <th scope="col" class="px-6 py-3">Organization Name</th>
+      <th scope="col" class="px-6 py-3">Description</th>
+      <th scope="col" class="px-6 py-3">Created At</th>
+      <th scope="col" class="px-6 py-3">Updated At</th>
+      <th scope="col" class="px-6 py-3">Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700" *ngFor="let org of organizations">
+      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        {{ org.orgName }}
+      </th>
+      <td class="px-6 py-4">
+        {{ org.orgDescription }}
+      </td>
+      <td class="px-6 py-4">
+        {{ org.createdAt | date }}
+      </td>
+      <td class="px-6 py-4">
+        {{ org.updatedAt | date }}
+      </td>
+      <td class="px-6 py-4">
+        <button class="inline-flex px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md">
+          Update
+        </button>
+        <button class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md" (click)="deleteOrganization(org)">
+          Delete
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
