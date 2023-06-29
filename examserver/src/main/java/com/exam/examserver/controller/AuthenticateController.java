@@ -1,11 +1,14 @@
 package com.exam.examserver.controller;
 
 import com.exam.examserver.config.JwtUtils;
+import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.req_res_format.JwtRequest;
 import com.exam.examserver.req_res_format.JwtResponse;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.UserNotFoundException;
 import com.exam.examserver.service.impl.UserDetailsServiceImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,6 +25,8 @@ import java.security.Principal;
 @CrossOrigin("*")
 public class AuthenticateController {
 
+    Logger logger = LoggerFactory.getLogger(AuthenticateController.class);
+
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -30,6 +35,9 @@ public class AuthenticateController {
 
     @Autowired
     private JwtUtils jwtUtils;
+
+    @Autowired
+    private UserRepository userRepository;
 
     // generate token
     @PostMapping("/generate-token")
@@ -44,7 +52,7 @@ public class AuthenticateController {
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUsername());
         String token = this.jwtUtils.generateToken(userDetails);
 
-        return ResponseEntity.ok(new JwtResponse(token));
+        return ResponseEntity.ok(new JwtResponse(token, userDetails));
     }
 
     private void authenticate(String username, String password) throws Exception {

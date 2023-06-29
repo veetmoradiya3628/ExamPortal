@@ -74,10 +74,15 @@ public class UserController {
 
     // delete user by ID
     @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable("userId") Long userId){
+    public void deleteUser(@PathVariable("userId") String userId){
         this.userService.deleteUser(userId);
     }
 
     // update user by ID
 
+    // update user status
+    @PostMapping("/{userId}/{status}")
+    public ResponseEntity<?> updateUserStatue(@PathVariable("userId") String userId, @PathVariable Boolean status){
+        return this.userService.updateUserStatus(userId, status);
+    }
 }

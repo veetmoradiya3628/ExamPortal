@@ -17,6 +17,7 @@ import { SysAdminDashboardComponent } from './admin/sys-admin-dashboard/sys-admi
 import { HttpClientModule } from '@angular/common/http';
 import { AddOrganizationComponent } from './admin/add-organization/add-organization.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { AddUserComponent } from './admin/add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     UserManagementComponent,
     SysAdminProfileComponent,
     SysAdminDashboardComponent,
-    AddOrganizationComponent
+    AddOrganizationComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,

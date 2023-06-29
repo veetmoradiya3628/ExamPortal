@@ -13,6 +13,10 @@ export class UserManagementComponent implements OnInit{
   constructor(private apiService: ApiServiceService){}
 
   ngOnInit(): void {
+    this.loadUserData();
+  }
+
+  loadUserData(){
     this.apiService.getUsers().subscribe(
       (data: any) => {
         this.users = data;
@@ -20,6 +24,20 @@ export class UserManagementComponent implements OnInit{
       },
       (error: any) => {
         throw new Error("Error while loading users "+error)
+      }
+    )
+  }
+
+  onUserStatusUpdate(userId: string, status: boolean){
+    console.log(userId, status);
+    status = !status;
+    this.apiService.updateUserStatus(userId, status).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.loadUserData();
+      },
+      (error: any) => {
+        throw new Error("Error while updating user status ... ");
       }
     )
   }

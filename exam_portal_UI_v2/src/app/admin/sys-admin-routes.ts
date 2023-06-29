@@ -4,6 +4,7 @@ import { UserManagementComponent } from "./user-management/user-management.compo
 import { SysAdminProfileComponent } from "./sys-admin-profile/sys-admin-profile.component";
 import { SysAdminDashboardComponent } from "./sys-admin-dashboard/sys-admin-dashboard.component";
 import {AddOrganizationComponent} from "./add-organization/add-organization.component";
+import { AddUserComponent } from "./add-user/add-user.component";
 
 export const sysAdminRoutes: Routes = [
     {
@@ -30,5 +31,10 @@ export const sysAdminRoutes: Routes = [
         path: 'add-organization',
       component: AddOrganizationComponent,
       pathMatch: 'full'
+    },
+    {
+        path: 'add-user',
+        component: AddUserComponent,
+        pathMatch: 'full'
     }
 ]

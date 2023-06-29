@@ -6,8 +6,10 @@ import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -25,7 +27,6 @@ public class UserServiceImpl implements UserService {
     public User createUser(User user, Set<UserRole> userRoles) throws Exception {
         User localUser = this.userRepository.findByUsername(user.getUsername());
         if(localUser != null){
-            System.out.println("User is already there!!");
             throw new Exception("User already present!!");
         }else{
             // user create
@@ -45,7 +46,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long userId) {
+    public void deleteUser(String userId) {
         this.userRepository.deleteById(userId);
+    }
+
+    @Override
+    public ResponseEntity<?> updateUserStatus(String userId, Boolean status) {
+        Optional<User> userPresent = this.userRepository.findById(userId);
+        if(userPresent.isPresent()){
+            User user = userPresent.get();
+            user.setEnabled(status);
+            this.userRepository.save(user);
+            return ResponseEntity.ok(user);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 }

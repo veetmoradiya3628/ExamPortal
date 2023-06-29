@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from 'src/app/service/api-service.service';
 import {Organization} from "../../models/organization.model";
 import Swal from "sweetalert2";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-organizations',
   templateUrl: './organizations.component.html',
@@ -10,7 +11,7 @@ import Swal from "sweetalert2";
 export class OrganizationsComponent implements OnInit {
   public organizations: Organization[] | undefined;
 
-  constructor(private apiService: ApiServiceService) {
+  constructor(private apiService: ApiServiceService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -49,5 +50,11 @@ export class OrganizationsComponent implements OnInit {
         )
       }
     })
+  }
+
+  updateOrganization(org: Organization) {
+    this.router.navigate(['/admin/add-organization'], {
+      queryParams: {'orgId':org.orgId}
+    });
   }
 }

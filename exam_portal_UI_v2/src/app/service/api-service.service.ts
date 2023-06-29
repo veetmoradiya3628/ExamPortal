@@ -34,4 +34,23 @@ export class ApiServiceService {
     const url = this.BASE_URL + '/organization/' + id;
     return this.http.delete(url);
   }
+
+  // get organization by id
+  public getOrganizationById(id: string): Observable<any> {
+    const url = this.BASE_URL + '/organization/' + id;
+    return this.http.get(url);
+  }
+
+  // update organization by id
+  public updateOrganizationById(id: string | undefined, orgData: Organization): Observable<any> {
+    const url = this.BASE_URL + '/organization/' + id;
+    return this.http.put(url, orgData);
+  }
+
+  // update user status
+  public updateUserStatus(id: string, status: boolean) {
+    const url = this.BASE_URL + '/user/' + id +'/'+ status;
+    console.log(url);
+    return this.http.post(url, null);
+  }
 }

@@ -21,13 +21,4 @@ public class UserRole {
 
     @ManyToOne
     private Role role;
-
-    @Override
-    public String toString() {
-        return "UserRole{" +
-                "userRoleId=" + userRoleId +
-                ", user=" + user +
-                ", role=" + role +
-                '}';
-    }
 }

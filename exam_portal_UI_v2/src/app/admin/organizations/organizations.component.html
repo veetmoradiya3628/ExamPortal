@@ -27,7 +27,7 @@
         {{ org.updatedAt | date }}
       </td>
       <td class="px-6 py-4">
-        <button class="inline-flex px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md">
+        <button class="inline-flex px-4 py-2 bg-gray-600 text-white text-sm font-medium rounded-md" (click)="updateOrganization(org)">
           Update
         </button>
         <button class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md" (click)="deleteOrganization(org)">

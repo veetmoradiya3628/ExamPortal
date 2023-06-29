@@ -1,6 +1,5 @@
 package com.exam.examserver.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,16 +33,5 @@ public class Role {
 
     public Role(String roleName) {
         this.roleName = roleName;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", roleName='" + roleName + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                ", userRoles=" + userRoles +
-                '}';
     }
 }

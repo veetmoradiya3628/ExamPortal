@@ -5,7 +5,6 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -47,7 +46,7 @@ public class JwtUtils {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
+                .signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
