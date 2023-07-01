@@ -1,3 +1,5 @@
+import { Organization } from "./organization.model";
+
 export interface IUser {
     userId?: string,
     username?: string,
@@ -10,4 +12,5 @@ export interface IUser {
     profileImage?: string,
     createdAt?: Date,
     updatedAt?: Date,
+    organization?: Organization 
 }

@@ -12,7 +12,7 @@ public interface UserService {
     User createUser(User user, Set<UserRole> userRoles) throws Exception;
 
     // get User by username
-    User getUser(String username);
+    User getUserByUsername(String username);
 
     // delete User by id
     void deleteUser(String userId);
@@ -20,4 +20,8 @@ public interface UserService {
 
     // enable / disable user status
     ResponseEntity<?> updateUserStatus(String userId, Boolean status);
+
+    ResponseEntity<?> getUserById(String userId);
+
+    ResponseEntity<?> updateUserById(String userId, User user);
 }

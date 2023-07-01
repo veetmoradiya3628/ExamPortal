@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
 
     // get user by username
     @Override
-    public User getUser(String username) {
+    public User getUserByUsername(String username) {
         return this.userRepository.findByUsername(username);
     }
 
@@ -58,6 +58,33 @@ public class UserServiceImpl implements UserService {
             user.setEnabled(status);
             this.userRepository.save(user);
             return ResponseEntity.ok(user);
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getUserById(String userId) {
+        Optional<User> userPresent = this.userRepository.findById(userId);
+        if(userPresent.isPresent()){
+            return ResponseEntity.ok(userPresent.get());
+        }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> updateUserById(String userId, User user) {
+        Optional<User> userPresent = this.userRepository.findById(userId);
+        if(userPresent.isPresent()){
+            User userToUpdate = userPresent.get();
+            userToUpdate.setEmail(user.getEmail());
+            userToUpdate.setUsername(user.getUsername());
+            userToUpdate.setFirstName(user.getFirstName());
+            userToUpdate.setLastName(user.getLastName());
+            userToUpdate.setPhone(user.getPhone());
+            User savedUserInRepo = this.userRepository.save(userToUpdate);
+            return ResponseEntity.ok(savedUserInRepo);
         }else{
             return ResponseEntity.notFound().build();
         }

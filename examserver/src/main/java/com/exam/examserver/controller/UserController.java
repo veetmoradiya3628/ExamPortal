@@ -41,6 +41,7 @@ public class UserController {
     // creating user
     @PostMapping("/")
     public ResponseEntity<?> createUser(@RequestBody User user) throws Exception {
+        System.out.println(user.toString());
         if(userRepository.existsByUsername(user.getUsername())){
             Map<String, String> mpp = new HashMap<>();
             mpp.put("message", "User already exists with username "+user.getUsername());
@@ -49,12 +50,11 @@ public class UserController {
         }
 
         user.setProfileImage("default.png");
-
         // encoding password with BCrypt
         user.setPassword(this.bCryptPasswordEncoder.encode(user.getPassword()));
 
         Set<UserRole> roles = new HashSet<>();
-        Role role = this.roleRepository.findByRoleName("STUDENT");
+        Role role = this.roleRepository.findByRoleName(user.getRoleName());
         UserRole userRole = new UserRole();
         userRole.setUser(user);
         userRole.setRole(role);
@@ -67,9 +67,16 @@ public class UserController {
         return ResponseEntity.ok(this.userRepository.findAll());
     }
 
+    // get user by username
     @GetMapping("/{username}")
-    public User getUser(@PathVariable("username") String username){
-        return this.userService.getUser(username);
+    public User getUserByUsername(@PathVariable("username") String username){
+        return this.userService.getUserByUsername(username);
+    }
+
+    // get user by userId
+    @GetMapping("getUserById/{userId}")
+    public ResponseEntity<?> getUserById(@PathVariable("userId") String userId) {
+        return this.userService.getUserById(userId);
     }
 
     // delete user by ID
@@ -79,6 +86,10 @@ public class UserController {
     }
 
     // update user by ID
+    @PutMapping("/{userId}")
+    public ResponseEntity<?> updateUserById(@PathVariable("userId") String userId, @RequestBody User user) {
+        return this.userService.updateUserById(userId, user);
+    }
 
     // update user status
     @PostMapping("/{userId}/{status}")

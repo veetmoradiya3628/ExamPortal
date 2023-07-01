@@ -35,10 +35,10 @@
                 <button class="inline-flex px-4 py-2 bg-blue-400 text-white text-sm font-medium rounded-md">
                   Info
                 </button>
-                <button class="inline-flex px-4 py-2 ml-2 bg-gray-600 text-white text-sm font-medium rounded-md">
+                <button class="inline-flex px-4 py-2 ml-2 bg-gray-600 text-white text-sm font-medium rounded-md" (click)="updateUser(user.userId)">
                   Update
                 </button>
-                <button class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md">
+                <button (click)="deleteUserById(user.userId)" class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md">
                   Delete
                 </button>
               </td>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/service/api-service.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class UserManagementComponent implements OnInit{
 
   users: Array<any> = new Array<any>();
 
-  constructor(private apiService: ApiServiceService){}
+  constructor(private apiService: ApiServiceService, private router: Router){}
 
   ngOnInit(): void {
     this.loadUserData();
@@ -40,6 +41,23 @@ export class UserManagementComponent implements OnInit{
         throw new Error("Error while updating user status ... ");
       }
     )
+  }
+
+  deleteUserById(userId: string) {
+    this.apiService.deleteUserById(userId).subscribe(
+      (res : any) => {
+        this.loadUserData();
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    )
+  }
+
+  updateUser(userId: string) {
+    this.router.navigate(['/admin/add-user'], {
+      queryParams: {'userId': userId}
+    });
   }
 
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {Organization} from "../models/organization.model";
+import { IUser } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +51,30 @@ export class ApiServiceService {
   // update user status
   public updateUserStatus(id: string, status: boolean) {
     const url = this.BASE_URL + '/user/' + id +'/'+ status;
-    console.log(url);
     return this.http.post(url, null);
+  }
+
+  // delete user by userid
+  public deleteUserById(id: string) {
+    const url = this.BASE_URL + '/user/' + id;
+    return this.http.delete(url);
+  }
+
+  // get User by id
+  public getUserByuserId(id: string): Observable<any> {
+    const url = this.BASE_URL + '/user/getUserById/' + id;
+    return this.http.get(url);
+  }
+
+  // add User
+  public addUser(userData: IUser): Observable<any> {
+    const url = this.BASE_URL + '/user/';
+    return this.http.post(url, userData);
+  }
+
+  // update User
+  public updateUser(userData: any, userId: string): Observable<any> {
+    const url = this.BASE_URL + '/user/' + userId;
+    return this.http.put(url, userData);
   }
 }

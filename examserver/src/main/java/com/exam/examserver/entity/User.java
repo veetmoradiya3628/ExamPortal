@@ -20,7 +20,6 @@ public class User implements UserDetails {
     private String userId;
     private String username;
 
-    @JsonIgnore
     private String password;
 
     private String email;
@@ -52,6 +51,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "student")
     Set<StudentQuiz> studentQuizSet;
+
+    @Transient
+    private String roleName;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -225,5 +227,35 @@ public class User implements UserDetails {
         });
 
         return set;
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", enabled=" + enabled +
+                ", profileImage='" + profileImage + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                ", userRoles=" + userRoles +
+                ", organization=" + organization +
+                ", teacherQuizSet=" + teacherQuizSet +
+                ", studentQuizSet=" + studentQuizSet +
+                ", roleName='" + roleName + '\'' +
+                '}';
     }
 }
