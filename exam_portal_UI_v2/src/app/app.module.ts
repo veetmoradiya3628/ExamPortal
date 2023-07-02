@@ -18,6 +18,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { AddOrganizationComponent } from './admin/add-organization/add-organization.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { AddUserComponent } from './admin/add-user/add-user.component';
+import { HomeOrganizationAdminComponent } from './organization/home-organization-admin/home-organization-admin.component';
+import { UserManagementOrgComponent } from './organization/user-management-org/user-management-org.component';
+import { OrgAdminSidePageComponent } from './organization/org-admin-side-page/org-admin-side-page.component';
+import { OrgAdminDashboardComponent } from './organization/org-admin-dashboard/org-admin-dashboard.component';
+import { HomeTeacherComponent } from './teacher/home-teacher/home-teacher.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +38,12 @@ import { AddUserComponent } from './admin/add-user/add-user.component';
     SysAdminProfileComponent,
     SysAdminDashboardComponent,
     AddOrganizationComponent,
-    AddUserComponent
+    AddUserComponent,
+    HomeOrganizationAdminComponent,
+    UserManagementOrgComponent,
+    OrgAdminSidePageComponent,
+    OrgAdminDashboardComponent,
+    HomeTeacherComponent
   ],
   imports: [
     BrowserModule,

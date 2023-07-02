@@ -1,7 +1,9 @@
 package com.exam.examserver.service.impl;
 
+import com.exam.examserver.entity.Organization;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
+import com.exam.examserver.repo.OrganizationRepository;
 import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.UserService;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,6 +21,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private OrganizationRepository organizationRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -88,5 +94,20 @@ public class UserServiceImpl implements UserService {
         }else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Override
+    public ResponseEntity<?> getUserByOrgId(String orgId) {
+        Optional<Organization> orgPresent = this.organizationRepository.findById(orgId);
+        if (orgPresent.isPresent()){
+            Organization org = orgPresent.get();
+            List<User> users = this.userRepository.findByOrganization(org);
+            users.forEach(user -> {
+                user.setPassword(null);
+                System.out.println(user.toString());
+            });
+            return ResponseEntity.ok(users);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

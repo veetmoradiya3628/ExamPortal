@@ -2,6 +2,7 @@ package com.exam.examserver.controller;
 
 import com.exam.examserver.entity.Organization;
 import com.exam.examserver.service.OrganizationService;
+import com.exam.examserver.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ import java.util.List;
 @RequestMapping("/organization")
 @CrossOrigin("*")
 public class OrganizationController {
+
+    @Autowired
+    private UserService userService;
 
     final String LOG_TAG = "ORGANIZATION_CONTROLLER";
     Logger logger = LoggerFactory.getLogger(OrganizationController.class);
@@ -65,5 +69,13 @@ public class OrganizationController {
     public ResponseEntity<HttpStatus> deleteOrganization(@PathVariable("orgId") String orgId){
         logger.info(LOG_TAG + " delete Organization By ID");
         return this.organizationService.deleteOrganization(orgId);
+    }
+
+    /*
+     * Get User of Specific Organization
+     */
+    @GetMapping("/{orgId}/users")
+    public ResponseEntity<?> getUsersForOrganization(@PathVariable("orgId") String orgId){
+        return this.userService.getUserByOrgId(orgId);
     }
 }

@@ -7,6 +7,8 @@ import { LoginComponent } from './common/login/login.component';
 import { RegistrationComponent } from './common/registration/registration.component';
 import { OrganizationsComponent } from './admin/organizations/organizations.component';
 import { sysAdminRoutes } from './admin/sys-admin-routes';
+import { HomeOrganizationAdminComponent } from './organization/home-organization-admin/home-organization-admin.component';
+import { orgAdminRoutes } from './organization/org-admin-routes';
 
 const routes: Routes = [
   {
@@ -29,6 +31,13 @@ const routes: Routes = [
     component: AdminHomePageComponent,
     children: [
       ...sysAdminRoutes
+    ]
+  },
+  {
+    path: 'org-admin',
+    component: HomeOrganizationAdminComponent,
+    children: [
+      ...orgAdminRoutes
     ]
   }
 ];

@@ -44,11 +44,10 @@ public class AuthenticateController {
     public ResponseEntity<JwtResponse> generateToken(@RequestBody JwtRequest request) throws Exception {
         try{
             authenticate(request.getUsername(), request.getPassword());
-        }catch (UsernameNotFoundException e){
+        }catch (UsernameNotFoundException e) {
             e.printStackTrace();
             throw new UserNotFoundException();
         }
-
         UserDetails userDetails = this.userDetailsService.loadUserByUsername(request.getUsername());
         String token = this.jwtUtils.generateToken(userDetails);
 
@@ -66,7 +65,7 @@ public class AuthenticateController {
     }
 
     /*
-        Returns detail of Current logged In user
+        Returns detail of Current loggedIn user
     */
     @GetMapping("/current-user")
     public User getCurrentUser(Principal principal){

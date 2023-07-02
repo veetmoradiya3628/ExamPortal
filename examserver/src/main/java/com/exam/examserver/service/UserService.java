@@ -24,4 +24,6 @@ public interface UserService {
     ResponseEntity<?> getUserById(String userId);
 
     ResponseEntity<?> updateUserById(String userId, User user);
+
+    ResponseEntity<?> getUserByOrgId(String orgId);
 }
