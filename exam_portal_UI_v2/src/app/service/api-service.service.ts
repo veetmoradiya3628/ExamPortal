@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {Organization} from "../models/organization.model";
 import { IUser } from '../models/user.model';
+import { Classes } from '../models/classes.model';
 
 @Injectable({
   providedIn: 'root'
@@ -76,5 +77,23 @@ export class ApiServiceService {
   public updateUser(userData: any, userId: string): Observable<any> {
     const url = this.BASE_URL + '/user/' + userId;
     return this.http.put(url, userData);
+  }
+
+  // get all classes
+  public getAllClassesForOrganization(orgId: string): Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/' + orgId;
+    return this.http.get(url);
+  }
+
+  // create class
+  public createClass(newClass: Classes) : Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/';
+    return this.http.post(url, newClass);
+  }
+
+  // get classroom details by classId
+  public getClassroomDetailsById(classId: string) : Observable<any> {
+    const url = this.BASE_URL + "/api/classroom/classDetailsById/" + classId;
+    return this.http.get(url);
   }
 }

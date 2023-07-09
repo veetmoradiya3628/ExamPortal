@@ -58,7 +58,7 @@ public class SecurityConfiguration{
                 .disable()
                 .authorizeHttpRequests((request) -> {
                     try{
-                        request.requestMatchers("/generate-token", "/user/**", "/user/test", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        request.requestMatchers("/generate-token", "/user/**", "/user/test", "/swagger-ui/**", "/v3/api-docs/**", "/api/classroom/**").permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .requestMatchers("/teacher/**").hasAnyAuthority("ADMIN", "TEACHER")
                                 .requestMatchers("/student/**").hasAuthority("STUDENT")

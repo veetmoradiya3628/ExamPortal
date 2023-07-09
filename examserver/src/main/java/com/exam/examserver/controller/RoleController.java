@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,9 @@ public class RoleController {
     @Autowired
     private RoleService roleService;
 
+//    @PreAuthorize("hasAuthority('ROLE_STUDENT')")
+//    @PreAuthorize("hasRole('STUDENT')")
+//    @PreAuthorize("hasAnyRole('STUDENT', 'ORG_ADMIN')")
     @PostMapping("/")
     public ResponseEntity<?> createRole(@RequestBody Role role){
         logger.info(LOG_TAG + " inside addOrganization, data to be added : "+role.toString());

@@ -25,18 +25,23 @@ public class Organization {
     private String orgName;
     private String orgDescription;
 
-    @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<User> userSet = new LinkedHashSet<>();
-
     @CreationTimestamp
     private LocalDateTime createdAt;
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+
+    @OneToMany(mappedBy = "organization", fetch = FetchType.EAGER)
+    @JsonIgnore
+    private Set<User> userSet = new LinkedHashSet<>();
+
     public Organization(String orgName, String orgDescription) {
         this.orgName = orgName;
         this.orgDescription = orgDescription;
+    }
+
+    public Organization(String orgId) {
+        this.orgId = orgId;
     }
 
     @Override

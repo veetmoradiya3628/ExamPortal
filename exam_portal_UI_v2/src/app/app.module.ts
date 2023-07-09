@@ -23,6 +23,13 @@ import { UserManagementOrgComponent } from './organization/user-management-org/u
 import { OrgAdminSidePageComponent } from './organization/org-admin-side-page/org-admin-side-page.component';
 import { OrgAdminDashboardComponent } from './organization/org-admin-dashboard/org-admin-dashboard.component';
 import { HomeTeacherComponent } from './teacher/home-teacher/home-teacher.component';
+import { TeacherDashboardComponent } from './teacher/teacher-dashboard/teacher-dashboard.component';
+import { TeacherSidePageComponent } from './teacher/teacher-side-page/teacher-side-page.component';
+import { HomeStudentComponent } from './student/home-student/home-student.component';
+import { StudentDashboardComponent } from './student/student-dashboard/student-dashboard.component';
+import { StudentSideBarComponent } from './student/student-side-bar/student-side-bar.component';
+import { OrgClassesMngtComponent } from './organization/org-classes-mngt/org-classes-mngt.component';
+import { OrgClassDetailsComponent } from './organization/org-class-details/org-class-details.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +50,14 @@ import { HomeTeacherComponent } from './teacher/home-teacher/home-teacher.compon
     UserManagementOrgComponent,
     OrgAdminSidePageComponent,
     OrgAdminDashboardComponent,
-    HomeTeacherComponent
+    HomeTeacherComponent,
+    TeacherDashboardComponent,
+    TeacherSidePageComponent,
+    HomeStudentComponent,
+    StudentDashboardComponent,
+    StudentSideBarComponent,
+    OrgClassesMngtComponent,
+    OrgClassDetailsComponent,
   ],
   imports: [
     BrowserModule,
