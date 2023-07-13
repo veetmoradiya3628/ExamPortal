@@ -16,7 +16,7 @@ import { SysAdminProfileComponent } from './admin/sys-admin-profile/sys-admin-pr
 import { SysAdminDashboardComponent } from './admin/sys-admin-dashboard/sys-admin-dashboard.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AddOrganizationComponent } from './admin/add-organization/add-organization.component';
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AddUserComponent } from './admin/add-user/add-user.component';
 import { HomeOrganizationAdminComponent } from './organization/home-organization-admin/home-organization-admin.component';
 import { UserManagementOrgComponent } from './organization/user-management-org/user-management-org.component';
@@ -30,6 +30,7 @@ import { StudentDashboardComponent } from './student/student-dashboard/student-d
 import { StudentSideBarComponent } from './student/student-side-bar/student-side-bar.component';
 import { OrgClassesMngtComponent } from './organization/org-classes-mngt/org-classes-mngt.component';
 import { OrgClassDetailsComponent } from './organization/org-class-details/org-class-details.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,9 @@ import { OrgClassDetailsComponent } from './organization/org-class-details/org-c
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

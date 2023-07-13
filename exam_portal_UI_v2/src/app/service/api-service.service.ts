@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import {Organization} from "../models/organization.model";
 import { IUser } from '../models/user.model';
 import { Classes } from '../models/classes.model';
+import { Posts } from '../models/posts.model';
 
 @Injectable({
   providedIn: 'root'
@@ -94,6 +95,19 @@ export class ApiServiceService {
   // get classroom details by classId
   public getClassroomDetailsById(classId: string) : Observable<any> {
     const url = this.BASE_URL + "/api/classroom/classDetailsById/" + classId;
+    return this.http.get(url);
+  }
+
+  // add post in classroom
+  public addPost(postData: Posts) : Observable<any> {
+    const url = this.BASE_URL + '/api/posts/';
+    return this.http.post(url, postData);
+  }
+
+  // get posts for classroom
+  public getPostForClassroom(classId: string): Observable<any> {
+    // localhost:8080/api/posts/classroom/66c641aa-0234-4dbb-8ce3-4b63f4910ac0
+    const url = this.BASE_URL + '/api/posts/classroom/'+classId;
     return this.http.get(url);
   }
 }

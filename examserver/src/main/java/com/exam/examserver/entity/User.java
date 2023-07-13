@@ -78,6 +78,9 @@ public class User implements UserDetails {
     public User() {
     }
 
+    public User(String userId) {
+        this.userId = userId;
+    }
     public User(String userId, String username, String password, String email, String firstName, String lastName, String phone, Boolean enabled, String profileImage, LocalDateTime createdAt, LocalDateTime updatedAt, Set<UserRole> userRoles, Organization organization, Set<TeacherQuiz> teacherQuizSet, Set<StudentQuiz> studentQuizSet) {
         this.userId = userId;
         this.username = username;

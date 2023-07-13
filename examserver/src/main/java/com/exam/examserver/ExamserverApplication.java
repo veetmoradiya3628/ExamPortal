@@ -5,12 +5,14 @@ import com.exam.examserver.entity.Role;
 import com.exam.examserver.repo.OrganizationRepository;
 import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.service.OrganizationService;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 
 import java.util.ArrayList;
@@ -19,6 +21,11 @@ import java.util.List;
 
 @SpringBootApplication
 public class ExamserverApplication implements CommandLineRunner {
+
+	@Bean
+	public ModelMapper getModelMapper(){
+		return new ModelMapper();
+	}
 
 	final String GLOBAL_ORG_NAME = "Test University";
 	final List<String> roles = new ArrayList<>(Arrays.asList("MASTER_ADMIN","ORG_ADMIN","TEACHER","STUDENT"));

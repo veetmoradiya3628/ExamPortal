@@ -5,43 +5,46 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "tbl_classroom")
-public class Classroom {
+@Table(name = "tbl_posts")
+public class Posts {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    public String classroomId;
+    public String postId;
 
-    public String classroomTitle;
+    @Column(length = 5000)
+    public String postContent;
 
-    public String classroomSubTitle;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(
+            name = "classroom_id",
+            referencedColumnName = "classroomId"
+    )
+    public Classroom classroom;
 
-    public String classroomCode;
+    @ColumnDefault("1")
+    public Boolean commentAllowed;
 
     @ManyToOne(cascade =  CascadeType.MERGE)
     @JoinColumn(
-            name = "organization_id",
-            referencedColumnName = "orgId"
+            name = "user_id",
+            referencedColumnName = "userId"
     )
-    public Organization organization;
+    public User user;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-
-    public Classroom(String classroomId){
-        this.classroomId = classroomId;
-    }
 }
