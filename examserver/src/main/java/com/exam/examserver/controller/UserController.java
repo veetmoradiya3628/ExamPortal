@@ -3,12 +3,14 @@ package com.exam.examserver.controller;
 import com.exam.examserver.entity.Role;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
+import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -38,15 +40,14 @@ public class UserController {
         return "Welcome to backend API of ExamPortal!";
     }
 
-    // creating user
+    /*
+     * API to create new User with Roles
+     */
     @PostMapping("/")
     public ResponseEntity<?> createUser(@RequestBody User user) throws Exception {
-        System.out.println(user.toString());
         if(userRepository.existsByUsername(user.getUsername())){
-            Map<String, String> mpp = new HashMap<>();
-            mpp.put("message", "User already exists with username "+user.getUsername());
             logger.info("User already exists with username "+user.getUsername());
-            return ResponseEntity.badRequest().body(mpp);
+            return ResponseHandler.generateResponse("User already exists with username "+user.getUsername(), HttpStatus.CONFLICT, null);
         }
 
         user.setProfileImage("default.png");
@@ -59,7 +60,7 @@ public class UserController {
         userRole.setUser(user);
         userRole.setRole(role);
         roles.add(userRole);
-        return ResponseEntity.ok(this.userService.createUser(user, roles));
+        return this.userService.createUser(user, roles);
     }
 
     @GetMapping("/")

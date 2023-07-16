@@ -1,16 +1,21 @@
 package com.exam.examserver.service.impl;
 
+import com.exam.examserver.dto.UserDTO;
 import com.exam.examserver.entity.Organization;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
+import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.OrganizationRepository;
 import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.UserService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -28,12 +33,17 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RoleRepository roleRepository;
 
-    // Creating User
+    @Autowired
+    private ModelMapper modelMapper;
+
+    /*
+     * Method supports User Creation with Role
+     */
     @Override
-    public User createUser(User user, Set<UserRole> userRoles) throws Exception {
+    public ResponseEntity<?> createUser(User user, Set<UserRole> userRoles) throws Exception {
         User localUser = this.userRepository.findByUsername(user.getUsername());
         if(localUser != null){
-            throw new Exception("User already present!!");
+            return ResponseHandler.generateResponse("User with username "+user.getUsername()+" already exists!!", HttpStatus.FOUND, null);
         }else{
             // user create
             for(UserRole userRole: userRoles){
@@ -42,7 +52,7 @@ public class UserServiceImpl implements UserService {
             user.getUserRoles().addAll(userRoles);
             localUser = this.userRepository.save(user);
         }
-        return localUser;
+        return ResponseHandler.generateResponse("User created with ID : "+localUser.getUserId(), HttpStatus.OK, localUser);
     }
 
     // get user by username
@@ -97,17 +107,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<?> getUserByOrgId(String orgId) {
+    public ResponseEntity<?> getUserByOrgId(String orgId, String rolePara) {
         Optional<Organization> orgPresent = this.organizationRepository.findById(orgId);
-        if (orgPresent.isPresent()){
+        if (orgPresent.isPresent()) {
             Organization org = orgPresent.get();
             List<User> users = this.userRepository.findByOrganization(org);
+            List<UserDTO> responseUsers = new ArrayList<>();
             users.forEach(user -> {
-                user.setPassword(null);
-                System.out.println(user.toString());
+                UserDTO uD = this.modelMapper.map(user, UserDTO.class);
+                List<String> roleOfUser = new ArrayList<>();
+                user.getUserRoles().forEach(role -> {
+                    roleOfUser.add(role.getRole().getRoleName());
+                });
+                uD.setRoles(roleOfUser);
+                responseUsers.add(uD);
             });
-            return ResponseEntity.ok(users);
+
+            ArrayList<UserDTO> filtered = new ArrayList<>();
+
+            // filter based on role
+            if (!responseUsers.isEmpty()) {
+                responseUsers.forEach(user -> {
+                    if (rolePara != null && !rolePara.isEmpty() && user.getRoles().contains(rolePara.toUpperCase())) {
+                        filtered.add(user);
+                    }
+                });
+            }
+            if (!filtered.isEmpty()){
+                return ResponseHandler.generateResponse(null, HttpStatus.OK, filtered);
+            }
+            return ResponseHandler.generateResponse(null, HttpStatus.OK, responseUsers);
         }
-        return ResponseEntity.notFound().build();
+        return ResponseHandler.generateResponse("Organization with id : "+orgId+" does not exists", HttpStatus.NOT_FOUND, null);
     }
 }

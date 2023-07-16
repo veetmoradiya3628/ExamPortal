@@ -19,7 +19,6 @@ import { AddOrganizationComponent } from './admin/add-organization/add-organizat
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { AddUserComponent } from './admin/add-user/add-user.component';
 import { HomeOrganizationAdminComponent } from './organization/home-organization-admin/home-organization-admin.component';
-import { UserManagementOrgComponent } from './organization/user-management-org/user-management-org.component';
 import { OrgAdminSidePageComponent } from './organization/org-admin-side-page/org-admin-side-page.component';
 import { OrgAdminDashboardComponent } from './organization/org-admin-dashboard/org-admin-dashboard.component';
 import { HomeTeacherComponent } from './teacher/home-teacher/home-teacher.component';
@@ -31,6 +30,8 @@ import { StudentSideBarComponent } from './student/student-side-bar/student-side
 import { OrgClassesMngtComponent } from './organization/org-classes-mngt/org-classes-mngt.component';
 import { OrgClassDetailsComponent } from './organization/org-class-details/org-class-details.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { OrgTeacherMngtComponent } from './organization/org-teacher-mngt/org-teacher-mngt.component';
+import { OrgStudentMngtComponent } from './organization/org-student-mngt/org-student-mngt.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,6 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     AddOrganizationComponent,
     AddUserComponent,
     HomeOrganizationAdminComponent,
-    UserManagementOrgComponent,
     OrgAdminSidePageComponent,
     OrgAdminDashboardComponent,
     HomeTeacherComponent,
@@ -59,6 +59,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     StudentSideBarComponent,
     OrgClassesMngtComponent,
     OrgClassDetailsComponent,
+    OrgTeacherMngtComponent,
+    OrgStudentMngtComponent,
   ],
   imports: [
     BrowserModule,

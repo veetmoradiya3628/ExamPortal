@@ -75,7 +75,7 @@ public class OrganizationController {
      * Get User of Specific Organization
      */
     @GetMapping("/{orgId}/users")
-    public ResponseEntity<?> getUsersForOrganization(@PathVariable("orgId") String orgId){
-        return this.userService.getUserByOrgId(orgId);
+    public ResponseEntity<?> getUsersForOrganization(@PathVariable("orgId") String orgId, @RequestParam(required = false) String role){
+        return this.userService.getUserByOrgId(orgId, role);
     }
 }

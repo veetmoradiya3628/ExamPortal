@@ -110,4 +110,16 @@ export class ApiServiceService {
     const url = this.BASE_URL + '/api/posts/classroom/'+classId;
     return this.http.get(url);
   }
+
+  // delete post by postId
+  public deletePostById(postId: string): Observable<any> {
+    const url = this.BASE_URL + '/api/posts/' + postId;
+    return this.http.delete(url);
+  }
+
+  // get user for organization for specific role
+  public getUsersOfOrganizationByRolename(orgId: string, roleName: string): Observable<any>{
+    const url = this.BASE_URL +'/organization/'+orgId+'/users?role='+roleName;
+    return this.http.get(url);
+  }
 }

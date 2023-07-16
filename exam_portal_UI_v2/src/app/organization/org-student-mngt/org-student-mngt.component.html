@@ -1,0 +1,60 @@
+<section class="container w-[100%] max-w-[1660px]">
+    <button type="button"
+        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ml-4 mt-4">
+        <a [routerLink]="'/admin/add-user'">Add Student</a>
+    </button>
+    <div class="w-full mt-2 overflow-hidden rounded-lg shadow-lg">
+        <div class="w-full overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                    <tr
+                        class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                        <th class="px-4 py-3">Username</th>
+                        <th class="px-4 py-3">E-mail</th>
+                        <th class="px-4 py-3">Full Name</th>
+                        <th class="px-4 py-3">Role</th>
+                        <th class="px-4 py-3">Is Enabled</th>
+                        <th class="px-4 py-3">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-white">
+                    <tr class="text-gray-700" *ngFor="let user of users">
+                        <td class="px-4 py-3 text-sm border">{{ user.username | uppercase }}</td>
+                        <td class="px-4 py-3 text-sm border">{{ user.email }}</td>
+                        <td class="px-4 py-3 text-sm border">{{ user.firstName + " " + user.lastName }}</td>
+                        <td class="px-4 py-3 text-sm border">{{ user.roles[0] }}</td>
+
+                        <td class="px-4 py-3 text-xs border">
+                            <input
+                                class="mr-2 mt-[0.3rem] h-3.5 w-8 appearance-none rounded-[0.4375rem] bg-neutral-300 before:pointer-events-none before:absolute before:h-3.5 before:w-3.5 before:rounded-full before:bg-transparent before:content-[''] after:absolute after:z-[2] after:-mt-[0.1875rem] after:h-5 after:w-5 after:rounded-full after:border-none after:bg-neutral-100 after:shadow-[0_0px_3px_0_rgb(0_0_0_/_7%),_0_2px_2px_0_rgb(0_0_0_/_4%)] after:transition-[background-color_0.2s,transform_0.2s] after:content-[''] checked:bg-primary checked:after:absolute checked:after:z-[2] checked:after:-mt-[3px] checked:after:ml-[1.0625rem] checked:after:h-5 checked:after:w-5 checked:after:rounded-full checked:after:border-none checked:after:bg-primary checked:after:shadow-[0_3px_1px_-2px_rgba(0,0,0,0.2),_0_2px_2px_0_rgba(0,0,0,0.14),_0_1px_5px_0_rgba(0,0,0,0.12)] checked:after:transition-[background-color_0.2s,transform_0.2s] checked:after:content-[''] hover:cursor-pointer focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[3px_-1px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] focus:after:absolute focus:after:z-[1] focus:after:block focus:after:h-5 focus:after:w-5 focus:after:rounded-full focus:after:content-[''] checked:focus:border-primary checked:focus:bg-primary checked:focus:before:ml-[1.0625rem] checked:focus:before:scale-100 checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:bg-neutral-600 dark:after:bg-neutral-400 dark:checked:bg-primary dark:checked:after:bg-primary dark:focus:before:shadow-[3px_-1px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:before:shadow-[3px_-1px_0px_13px_#3b71ca]"
+                                type="checkbox" role="switch" [checked]="user.enabled"
+                                (click)="onUserStatusUpdate(user.userId, user.enabled)" />
+
+                            <span *ngIf="user.enabled"
+                                class="ml-2 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                                Active </span>
+                            <span *ngIf="!user.enabled"
+                                class="ml-2 px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                                Disabled </span>
+                        </td>
+
+                        <td class="px-4 py-3 text-sm border">
+                            <button class="inline-flex px-4 py-2 bg-blue-400 text-white text-sm font-medium rounded-md">
+                                Info
+                            </button>
+                            <button
+                                class="inline-flex px-4 py-2 ml-2 bg-gray-600 text-white text-sm font-medium rounded-md"
+                                (click)="updateUser(user.userId)">
+                                Update
+                            </button>
+                            <button (click)="deleteUserById(user.userId)"
+                                class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

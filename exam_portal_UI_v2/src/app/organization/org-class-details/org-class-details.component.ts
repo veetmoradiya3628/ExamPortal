@@ -4,6 +4,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Classes } from 'src/app/models/classes.model';
 import { Posts } from 'src/app/models/posts.model';
 import { ApiServiceService } from 'src/app/service/api-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-org-class-details',
@@ -40,7 +41,7 @@ export class OrgClassDetailsComponent implements OnInit {
         this.postsCnt = this.classPosts.length;
       },
       (error: any) => {
-        console.log('Error while loading post details for classroom '+error);
+        console.log('Error while loading post details for classroom ' + error);
       }
     )
   }
@@ -57,15 +58,15 @@ export class OrgClassDetailsComponent implements OnInit {
     )
   }
 
-  postFormSubmit(){
+  postFormSubmit() {
     console.log('post add clicked');
-    if(this.postContent != undefined && this.postContent != null){
+    if (this.postContent != undefined && this.postContent != null) {
       let postData: Posts = {} as Posts;
       postData.postContent = JSON.stringify(this.postContent);
       postData.classroomId = this.classDetails.classroomId as string;
       postData.commentAllowed = true;
       postData.userId = 'b5b44cbe-ce96-4518-b814-011e0d1b9678'; // after login need to use logged In userId from cookies data
-      console.log('post data before making request '+postData);
+      console.log('post data before making request ' + postData);
       this._apiService.addPost(postData).subscribe(
         (res: any) => {
           console.log(res);
@@ -73,12 +74,38 @@ export class OrgClassDetailsComponent implements OnInit {
           this.loadPostsForClass(this.classId);
         },
         (error: any) => {
-          console.log('Error while adding post : '+error)
+          console.log('Error while adding post : ' + error)
         }
       )
-    }else{
+    } else {
       return;
     }
   }
 
+
+  editPost() {
+    console.log('edit post clicked');
+  }
+
+  deletePost(postId: any) {
+    console.log('delete post clicked for id : ' + postId);
+    Swal.fire({
+      title: 'Are you sure want to delete this Post ?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.value) {
+        this._apiService.deletePostById(postId).subscribe(
+          (data: any) => {
+            console.log(data);
+            this.loadPostsForClass(this.classId);
+          },
+          (error: any) => {
+            console.log('error while deleting post...');
+          }
+        )
+      }
+    })
+  }
 }

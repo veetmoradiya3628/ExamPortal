@@ -9,7 +9,7 @@ import java.util.Set;
 public interface UserService {
 
     // creating User
-    User createUser(User user, Set<UserRole> userRoles) throws Exception;
+    ResponseEntity<?> createUser(User user, Set<UserRole> userRoles) throws Exception;
 
     // get User by username
     User getUserByUsername(String username);
@@ -25,5 +25,5 @@ public interface UserService {
 
     ResponseEntity<?> updateUserById(String userId, User user);
 
-    ResponseEntity<?> getUserByOrgId(String orgId);
+    ResponseEntity<?> getUserByOrgId(String orgId, String roleName);
 }
