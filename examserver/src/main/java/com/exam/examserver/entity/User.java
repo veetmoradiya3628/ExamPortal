@@ -2,6 +2,9 @@ package com.exam.examserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,6 +17,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tbl_user")
+@Getter
+@Setter
+@AllArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -46,11 +52,15 @@ public class User implements UserDetails {
     @JoinColumn(name = "org_id", nullable = false)
     private Organization organization;
 
+//    @ManyToMany(mappedBy = "users")
+//    private Set<Classroom> classrooms = new HashSet<>();
+
     @OneToMany(mappedBy = "teacher")
     Set<TeacherQuiz> teacherQuizSet;
 
     @OneToMany(mappedBy = "student")
     Set<StudentQuiz> studentQuizSet;
+
 
     @Transient
     private String roleName;

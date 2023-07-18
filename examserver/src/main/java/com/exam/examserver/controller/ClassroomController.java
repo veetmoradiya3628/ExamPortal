@@ -1,7 +1,10 @@
 package com.exam.examserver.controller;
 
 import com.exam.examserver.dto.ClassroomDTO;
+import com.exam.examserver.dto.ClassroomUserDTO;
+import com.exam.examserver.service.ClassroomUserService;
 import com.exam.examserver.service.impl.ClassroomServiceImpl;
+import com.exam.examserver.service.impl.ClassroomUserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,9 @@ public class ClassroomController {
 
     @Autowired
     private ClassroomServiceImpl classroomService;
+
+    @Autowired
+    private ClassroomUserServiceImpl classroomUserService;
 
     /*
      * Request to get all classroom details
@@ -62,5 +68,21 @@ public class ClassroomController {
     @DeleteMapping("/{classId}")
     public ResponseEntity<?> deleteClassroom(@PathVariable("classId") String classId){
         return ResponseEntity.ok(classroomService.deleteClassroom(classId));
+    }
+
+    /*
+     * url to get all the user mapping for all classroom
+     */
+    @GetMapping("/getAllUsers")
+    public ResponseEntity<?> getAllUsersOfClassroom(){
+        return this.classroomUserService.getAllClassroomUserEntry();
+    }
+
+    /*
+     * Map User to Classroom
+     */
+    @PostMapping("/addUserToClassroom")
+    public ResponseEntity<?> mapUserWithClassroom(@RequestBody ClassroomUserDTO classroomUserDTO){
+        return this.classroomUserService.addUserToClassroom(classroomUserDTO);
     }
 }

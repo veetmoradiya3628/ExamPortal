@@ -2,46 +2,42 @@ package com.exam.examserver.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Data
-@AllArgsConstructor
+@Setter
+@Getter
 @NoArgsConstructor
-@Builder
-@Table(name = "tbl_classroom")
-public class Classroom {
+@AllArgsConstructor
+@Table(name = "tbl_classroom_user")
+public class ClassroomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    public String classroomId;
-
-    public String classroomTitle;
-
-    public String classroomSubTitle;
-
-    public String classroomCode;
+    private String classroomUserId;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(
-            name = "organization_id",
-            referencedColumnName = "orgId"
+            name = "classroom_id",
+            referencedColumnName = "classroomId"
     )
-    public Organization organization;
+    public Classroom classroom;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(
+            name = "user_id",
+            referencedColumnName = "userId"
+    )
+    public User user;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-    public Classroom(String classroomId) {
-        this.classroomId = classroomId;
-    }
 }

@@ -32,6 +32,10 @@ import { OrgClassDetailsComponent } from './organization/org-class-details/org-c
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { OrgTeacherMngtComponent } from './organization/org-teacher-mngt/org-teacher-mngt.component';
 import { OrgStudentMngtComponent } from './organization/org-student-mngt/org-student-mngt.component';
+import { ClassQuizComponent } from './organization/org-class-details/class-quiz/class-quiz.component';
+import { ClassStudentComponent } from './organization/org-class-details/class-student/class-student.component';
+import { ClassTeacherComponent } from './organization/org-class-details/class-teacher/class-teacher.component';
+import { ClassPostSectionComponent } from './organization/org-class-details/class-post-section/class-post-section.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +65,10 @@ import { OrgStudentMngtComponent } from './organization/org-student-mngt/org-stu
     OrgClassDetailsComponent,
     OrgTeacherMngtComponent,
     OrgStudentMngtComponent,
+    ClassQuizComponent,
+    ClassStudentComponent,
+    ClassTeacherComponent,
+    ClassPostSectionComponent,
   ],
   imports: [
     BrowserModule,

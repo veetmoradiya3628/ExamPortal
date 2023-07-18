@@ -1,0 +1,8 @@
+package com.exam.examserver.service;
+
+import com.exam.examserver.dto.ClassroomUserDTO;
+import org.springframework.http.ResponseEntity;
+
+public interface ClassroomUserService {
+    public ResponseEntity<?> addUserToClassroom(ClassroomUserDTO classroomUserDTO);
+}
