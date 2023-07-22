@@ -5,4 +5,8 @@ import org.springframework.http.ResponseEntity;
 
 public interface ClassroomUserService {
     public ResponseEntity<?> addUserToClassroom(ClassroomUserDTO classroomUserDTO);
+
+    ResponseEntity<?> getUserOfClassroomByRole(String classroomId, String role);
+
+    ResponseEntity<?> deleteUserMappingFromClassroom(String classroomId, String userId);
 }

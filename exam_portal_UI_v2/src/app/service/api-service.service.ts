@@ -122,4 +122,22 @@ export class ApiServiceService {
     const url = this.BASE_URL +'/organization/'+orgId+'/users?role='+roleName;
     return this.http.get(url);
   }
+
+  // get user for classroom with specific role
+  public getUsersOfClassroomWithRole(orgId: string, roleName: string) : Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/'+orgId+'/users?role='+roleName;
+    return this.http.get(url);
+  }
+
+  // add user mapping to the classroom for organization
+  public mapUserToClassroom(reqObjet: any) : Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/addUserToClassroom';
+    return this.http.post(url, reqObjet);
+  }
+
+  // delete user mapping to the classroom for organization
+  public deleteUserToClassroom(classroomId: string, userId: string): Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/' + classroomId + '/user/'+ userId;
+    return this.http.delete(url);
+  }
 }

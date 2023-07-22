@@ -2,13 +2,13 @@ package com.exam.examserver.controller;
 
 import com.exam.examserver.dto.ClassroomDTO;
 import com.exam.examserver.dto.ClassroomUserDTO;
-import com.exam.examserver.service.ClassroomUserService;
 import com.exam.examserver.service.impl.ClassroomServiceImpl;
 import com.exam.examserver.service.impl.ClassroomUserServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -84,5 +84,23 @@ public class ClassroomController {
     @PostMapping("/addUserToClassroom")
     public ResponseEntity<?> mapUserWithClassroom(@RequestBody ClassroomUserDTO classroomUserDTO){
         return this.classroomUserService.addUserToClassroom(classroomUserDTO);
+    }
+
+    /*
+     * Get User Mapped to Classroom with Role
+     */
+    @GetMapping("{classroomId}/users")
+    public ResponseEntity<?> getUsersByRoles(@PathVariable("classroomId") String classroomId, @RequestParam(required = false) String role){
+        return this.classroomUserService.getUserOfClassroomByRole(classroomId, role);
+    }
+
+    /*
+     * Delete User mapping from classroom
+     */
+    @DeleteMapping("{classroomId}/user/{userId}")
+    public ResponseEntity<?> deleteUserMappingFromClassroom(@PathVariable("classroomId") String classroomId,
+                                                            @PathVariable("userId") String userId){
+        System.out.println("--> "+classroomId+" --> "+userId);
+        return this.classroomUserService.deleteUserMappingFromClassroom(classroomId, userId);
     }
 }
