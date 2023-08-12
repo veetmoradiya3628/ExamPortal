@@ -1,1 +1,95 @@
-<p>class-teacher works!</p>
+<ng-container *ngIf="!isMapTeacherMode">
+    <section>
+        <h1 class="font-sans text-xl">Teachers</h1>
+        <button type="button"
+            class=" text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ml-4 mt-4">
+            <a (click)="changeMapMode()">Assign Teachers</a>
+        </button>
+        <div class="flex flex-row w-full h-[calc(100vh-140px)] pb-2 flex-wrap overflow-y-scroll">
+            <div class="w-full mt-2 rounded-lg shadow-lg">
+                <table class="w-full">
+                    <thead>
+                        <tr
+                            class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                            <th class="px-4 py-3">Username</th>
+                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Is Enabled</th>
+                            <th class="px-4 py-3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="text-gray-700" *ngFor="let user of mappedTeachers">
+                            <td class="px-4 py-3 text-sm border">{{ user.username | uppercase }}</td>
+                            <td class="px-4 py-3 text-sm border">{{ user.email }}</td>
+
+                            <td class="px-4 py-3 text-xs border">
+                                <span *ngIf="user.enabled"
+                                    class="ml-2 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                                    Active
+                                </span>
+                                <span *ngIf="!user.enabled"
+                                    class="ml-2 px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                                    Disabled </span>
+                            </td>
+
+                            <td class="px-4 py-3 text-sm border">
+                                <button (click)="deleteUserMappingForClassById(user.userId)"
+                                    class="inline-flex px-4 py-2 ml-2 bg-red-600 text-white text-sm font-medium rounded-md">
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</ng-container>
+<ng-container *ngIf="isMapTeacherMode">
+    <section>
+        <button type="button"
+            class=" text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ml-4">
+            <a (click)="mapSelectedTeacherToClassroom()">Assign Teachers</a>
+        </button>
+        <button type="button"
+            class=" text-white bg-blue-600 hover:bg-blue-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-800 dark:hover:bg-blue-700 dark:focus:ring-blue-700 dark:border-blue-700 ml-2">
+            <a (click)="changeMapMode()">Cancel</a>
+        </button>
+        <div class="flex flex-row w-full h-[calc(100vh-250px)] pb-2 flex-wrap overflow-y-scroll">
+            <div class="w-full mt-2 rounded-lg shadow-lg">
+                <table class="w-full">
+                    <thead>
+                        <tr
+                            class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                            <th class="px-4 py-3">Select</th>
+                            <th class="px-4 py-3">Username</th>
+                            <th class="px-4 py-3">E-mail</th>
+                            <th class="px-4 py-3">Is Enabled</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr class="text-gray-700" *ngFor="let user of orgTeachers; let idx = index">
+                            <td class="px-4 py-3 text-sm border">
+                                <input
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+                                    type="checkbox" role="switch" (change)="changeisSelectState(idx)" />
+                            </td>
+                            <td class="px-4 py-3 text-sm border">{{ user.username | uppercase }}</td>
+                            <td class="px-4 py-3 text-sm border">{{ user.email }}</td>
+
+                            <td class="px-4 py-3 text-xs border">
+                                <span *ngIf="user.enabled"
+                                    class="ml-2 px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
+                                    Active
+                                </span>
+                                <span *ngIf="!user.enabled"
+                                    class="ml-2 px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-sm">
+                                    Disabled </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</ng-container>

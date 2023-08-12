@@ -140,4 +140,10 @@ export class ApiServiceService {
     const url = this.BASE_URL + '/api/classroom/' + classroomId + '/user/'+ userId;
     return this.http.delete(url);
   }
+
+  // get classroom for users with userid
+  public getClassroomMappedToUser(userId: string): Observable<any> {
+    const url = this.BASE_URL + '/user/' + userId + '/classrooms';
+    return this.http.get(url);
+  }
 }

@@ -1,0 +1,66 @@
+<div class="flex flex-col">
+
+    <div class="flex flex-row">
+        <button type="button"
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ml-4 mt-4">
+            Create New Quiz
+        </button>
+    </div>
+
+    <!-- Quizzes section below -->
+    <div class="flex flex-row  flex-wrap h-[calc(100vh-100px)] overflow-y-scroll">
+        <div class="block w-full" *ngFor="let c of cnt">
+            <div
+                class="rounded-lg m-2 bg-white p-2 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+                <!-- Thumbnail image of Quiz -->
+                <!-- <div class="relative overflow-hidden bg-cover bg-no-repeat">
+                    <img class="rounded-md w-full h-15"
+                        src="https://previews.123rf.com/images/maxborovkov/maxborovkov1808/maxborovkov180800337/111279996-quiz-time-banner-colorful-brush-design-vector-background.jpg"
+                        alt="" />
+                </div> -->
+                <div class="p-2">
+                    <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                        Sample Quiz 1
+                    </h5>
+                    <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">
+                        This is a sample quiz. 1
+                    </p>
+                    <h6 class="mb-2 text-lg font-semibold leading-tight text-neutral-700 dark:text-neutral-50">
+                        Classroom : Java Programming
+                    </h6>
+                    <div class="flex flex-row">
+                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">
+                            No. of Question : <b>10</b>
+                        </p>
+                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">
+                            Total Marks : <b>100</b>
+                        </p>
+                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">
+                            Start Time : <b>{{ startTime | date:
+                                'yyyy/MM/dd h:mm:ss a' }}</b>
+                        </p>
+                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">
+                            Duration : <b>20 Minutes</b>
+                        </p>
+                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">
+                            No. of Students : <b>123</b>
+                        </p>
+                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                            type="button">
+                            Status : <b class="text-blue-500">Active</b>
+                        </p>
+                        <a href="/" class="text-blueF-600 ml-2 dark:text-blue-400 hover:underline" data-te-ripple-init
+                            data-te-ripple-color="light">
+                            Details ⟶
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

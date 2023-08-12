@@ -73,4 +73,8 @@ public class CategoryServiceImpl implements CategoryService {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    public Boolean isCategoryPresentById(String categoryId){
+        return this.categoryRepository.findById(categoryId).isPresent();
+    }
 }

@@ -9,6 +9,7 @@ import { ClassStudentComponent } from "./org-class-details/class-student/class-s
 import { ClassTeacherComponent } from "./org-class-details/class-teacher/class-teacher.component";
 import { ClassQuizComponent } from "./org-class-details/class-quiz/class-quiz.component";
 import { ClassPostSectionComponent } from "./org-class-details/class-post-section/class-post-section.component";
+import { OrgAdminProfileComponent } from "./org-admin-profile/org-admin-profile.component";
 
 export const orgAdminRoutes: Routes = [
     {
@@ -52,5 +53,9 @@ export const orgAdminRoutes: Routes = [
                 component: ClassQuizComponent
             }
         ]
+    },
+    {
+        path: 'profile',
+        component: OrgAdminProfileComponent
     }
 ]

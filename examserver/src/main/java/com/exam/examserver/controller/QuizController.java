@@ -1,56 +1,51 @@
 package com.exam.examserver.controller;
 
-
-import com.exam.examserver.entity.Quiz;
+import com.exam.examserver.dto.QuizDTO;
+import com.exam.examserver.entity.Quizzes;
+import com.exam.examserver.helper.ResponseHandler;
+import com.exam.examserver.repo.QuestionsRepository;
+import com.exam.examserver.repo.QuizzesRepository;
 import com.exam.examserver.service.QuizService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/quiz")
-@CrossOrigin("*")
+@RequestMapping("/quizzes")
 public class QuizController {
-
-    final String LOG_TAG = "QUIZ_CONTROLLER";
-    Logger logger = LoggerFactory.getLogger(QuizController.class);
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private QuizService quizService;
 
     /*
-    * API to get all Quizzes
+     * Method to create a Quiz
      */
+    @PostMapping("/create")
+    public ResponseEntity<?> createQuiz(@RequestBody QuizDTO quiz){
+        logger.info("received request object --> " + quiz.toString());
+        return this.quizService.createQuiz(quiz);
+    }
+
+    /*
+     * Method to activate and deactivate quiz
+     */
+    @PostMapping("/{quizId}/changeStatus")
+    public ResponseEntity<?> changeQuizStatus(@PathVariable("quizId") String quizId, @RequestParam Boolean status){
+        return this.quizService.changeQuizStatus(quizId, status);
+    }
+
     @GetMapping("/")
-    public ResponseEntity<List<Quiz>>  getAllQuiz(){
-        return quizService.getAllQuiz();
-    }
-
-    /*
-    * API to create Quiz
-     */
-    @PostMapping("/")
-    public ResponseEntity<Quiz> createQuiz(@RequestBody Quiz quiz){
-        return quizService.createQuiz(quiz);
-    }
-
-    /*
-    * API to update Quiz
-     */
-    @PutMapping("/{quizId}")
-    public ResponseEntity<Quiz> updateQuiz(@PathVariable("quizId") String quizId, @RequestBody Quiz quiz){
-        return quizService.updateQuiz(quizId, quiz);
-    }
-
-    /*
-     * API to delete Quiz
-     */
-    @DeleteMapping("/{quizId}")
-    public ResponseEntity<?> deleteQuiz(@PathVariable("quizId") String quizId){
-        return quizService.deleteQuiz(quizId);
+    public ResponseEntity<?> getAllQuizzes(){
+//        List<Quizzes> listOfQuizzes = this.quizzesRepository.findAll();
+//        listOfQuizzes.forEach(quizzes -> {
+//            System.out.println(quizzes.toString());
+//        });
+        return ResponseHandler.generateResponse(null, HttpStatus.OK, null);
     }
 }

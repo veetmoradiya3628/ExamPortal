@@ -1,95 +1,131 @@
 package com.exam.examserver.service.impl;
 
-import com.exam.examserver.entity.Quiz;
-import com.exam.examserver.repo.QuizRepository;
+
+import com.exam.examserver.dto.QuizDTO;
+import com.exam.examserver.entity.Quizzes;
+import com.exam.examserver.helper.ResponseHandler;
+import com.exam.examserver.repo.QuestionsRepository;
+import com.exam.examserver.repo.QuizzesRepository;
 import com.exam.examserver.service.QuizService;
+import com.mongodb.client.result.UpdateResult;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @Service
 public class QuizServiceImpl implements QuizService {
 
-    Logger logger = LoggerFactory.getLogger(QuizServiceImpl.class);
+    private static final String LOG_TAG = "QuizServiceImpl";
+    Logger logger = LoggerFactory.getLogger(getClass());
+    private final MongoTemplate mongoTemplate;
 
     @Autowired
-    private QuizRepository quizRepository;
+    private QuizzesRepository quizzesRepository;
 
-    @Override
-    public ResponseEntity<List<Quiz>> getAllQuiz() {
-        try{
-            List<Quiz> _quizzes = new ArrayList<>(this.quizRepository.findAll());
-            if (_quizzes.isEmpty())
-            {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(_quizzes, HttpStatus.OK);
-        }catch (Exception e) {
-            logger.info("Exception occurred in getAllQuiz controller ->" + e.getMessage());
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @Autowired
+    private QuestionsRepository questionsRepository;
+
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Autowired
+    private ClassroomServiceImpl classroomService;
+
+    public QuizServiceImpl(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
     }
 
     @Override
-    public ResponseEntity<Quiz> createQuiz(Quiz quiz) {
-        try{
-            logger.info("data received in createQuiz service method is -> "+quiz.toString());
-            Quiz _quiz = new Quiz();
-            _quiz.setQuizTitle(quiz.getQuizTitle());
-            _quiz.setQuizDescription(quiz.getQuizDescription());
-            _quiz.setCategory(quiz.getCategory());
-            _quiz.setIsActive(quiz.getIsActive());
-            _quiz.setStartsAt(quiz.getStartsAt());
-            _quiz.setEndsAt(quiz.getEndsAt());
-            _quiz.setNoOfQuestions(quiz.getNoOfQuestions());
-            _quiz.setQuizImage(quiz.getQuizImage());
-            Quiz _createdImage = this.quizRepository.save(_quiz);
-            return new ResponseEntity<>(_createdImage, HttpStatus.CREATED);
-        }catch (Exception e){
-            logger.info("Exception occurred in createQuiz controller ->" + e.getMessage());
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @Override
-    public ResponseEntity<Quiz> updateQuiz(String quizId, Quiz quiz) {
-        try{
-            Optional<Quiz> _quiz = this.quizRepository.findById(quizId);
-            if(_quiz.isPresent()){
-                Quiz _q = this.quizRepository.save(quiz);
-                return new ResponseEntity<>(_q, HttpStatus.OK);
+    public ResponseEntity<?> createQuiz(QuizDTO quizDTO) {
+        logger.info(LOG_TAG + " inside createQuiz with data : " + quizDTO.toString());
+        if (quizDTO.getQuestionIds().size() == 0){
+            if (this.classroomService.isClassroomPresentById(quizDTO.getClassroomId())){
+                Quizzes quizzes = this.modelMapper.map(quizDTO, Quizzes.class);
+                logger.info(LOG_TAG + " mapped quizzes object : " + quizzes.toString());
+                quizzes = this.quizzesRepository.save(quizzes);
+                logger.info(LOG_TAG + " added quiz in quizzes data : " + quizzes);
+                return ResponseHandler.generateResponse("Quiz added successfully", HttpStatus.CREATED, quizzes);
             }else{
-                logger.info("quiz with quizId -> "+quizId+ " not found in database");
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+                return ResponseHandler.generateResponse("classroom with class id " + quizDTO.getClassroomId() + " not exists", HttpStatus.NOT_FOUND, null);
             }
-        }catch (Exception e){
-            logger.info("Exception occurred in createQuiz controller ->" + e.getMessage());
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        return ResponseHandler.generateResponse("can not create quiz with questionIds, first add question", HttpStatus.CONFLICT, null);
     }
 
     @Override
-    public ResponseEntity<?> deleteQuiz(String quizId) {
-        try{
-            Optional<Quiz> _quiz = this.quizRepository.findById(quizId);
-            if(_quiz.isPresent()){
-                this.quizRepository.deleteById(quizId);
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }else{
-                logger.info("quiz with quizId -> "+quizId+ " not found in database");
-                return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            logger.info("Exception occurred in deleteQuiz controller ->" + e.getMessage());
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    public ResponseEntity<?> changeQuizStatus(String quizId, Boolean status) {
+        if (this.quizzesRepository.findById(quizId).isPresent()){
+            Quizzes quiz = this.quizzesRepository.findById(quizId).get();
+            quiz.setIsActive(status);
+            this.quizzesRepository.save(quiz);
+            return ResponseHandler.generateResponse("Quiz status updated to "+status+" for quiz "+quizId, HttpStatus.OK, null);
+        }else{
+            return ResponseHandler.generateResponse("Quiz with quizId " + quizId + " not found.", HttpStatus.NOT_FOUND, null);
         }
+    }
+
+
+    public boolean isQuizExistsById(String quizId){
+        return this.quizzesRepository.findById(quizId).isPresent();
+    }
+
+    public boolean addQuestionId(String quizId, String newQuestionId){
+        Query query = new Query(Criteria.where("_id").is(quizId));
+        Update update = new Update().addToSet("questionIds", newQuestionId);
+        UpdateResult updateResult = mongoTemplate.updateFirst(query, update, Quizzes.class);
+        return updateResult.getModifiedCount() > 0;
+    }
+
+    public boolean updateQuestionCountAndTotalScore(String quizId, int score) {
+        Query query = new Query(Criteria.where("_id").is(quizId));
+        Quizzes existingQuizzes = mongoTemplate.findOne(query, Quizzes.class);
+        logger.info("existing quiz --> " + existingQuizzes.toString());
+        if (existingQuizzes != null) {
+            int newNumberOfQuestions = existingQuizzes.getNumberOfQuestions() + 1;
+            int newTotalMarks = existingQuizzes.getTotalMarks() + score;
+
+            Update update = new Update()
+                    .set("numberOfQuestions", newNumberOfQuestions)
+                    .set("totalMarks", newTotalMarks);
+            UpdateResult updateResult = mongoTemplate.updateFirst(query, update, Quizzes.class);
+            return updateResult.getModifiedCount() > 0;
+        }
+        return false;
+    }
+
+    public boolean deleteQuestionIdAndCountAndChangeTotalScore(String quizId, String questionId, int score) throws NullPointerException{
+        Query query = new Query(Criteria.where("_id").is(quizId));
+        Quizzes existingQuizzes = mongoTemplate.findOne(query, Quizzes.class);
+        logger.info("existing quiz --> " + existingQuizzes.toString());
+        if (existingQuizzes != null) {
+            // get
+            List<String> questionIds = existingQuizzes.getQuestionIds();
+            int totalScore = existingQuizzes.getTotalMarks();
+            int numberOfQuestions = existingQuizzes.getNumberOfQuestions();
+
+            // remove
+            questionIds.remove(questionId);
+            totalScore = totalScore - score;
+            numberOfQuestions = numberOfQuestions - 1;
+
+            Update update = new Update()
+                    .set("questionIds", questionIds)
+                    .set("totalMarks", totalScore)
+                    .set("numberOfQuestions", numberOfQuestions);
+
+            UpdateResult updateResult = mongoTemplate.updateFirst(query, update, Quizzes.class);
+            return updateResult.getModifiedCount() > 0;
+        }
+        return false;
     }
 }

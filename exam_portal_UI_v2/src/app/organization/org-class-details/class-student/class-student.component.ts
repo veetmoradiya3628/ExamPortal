@@ -9,7 +9,7 @@ import { ApiServiceService } from 'src/app/service/api-service.service';
   styleUrls: ['./class-student.component.css']
 })
 export class ClassStudentComponent implements OnInit {
-  orgId: string = "a77f5d7b-c50d-418d-8c66-3814049ca386";
+  orgId: string = "a77f5d7b-c50d-418d-8c66-3814049ca386"; // replace from cookie storage
   isMapStudentMode: boolean = false;
   classroomId: string = "";
   orgStudents: Array<IUser> = [];
@@ -34,6 +34,7 @@ export class ClassStudentComponent implements OnInit {
         this.mappedStudents.forEach((user) => {
           this.classUserIds.push(user.userId as string);
         })
+        this.getUsersForOrganization();
       },
       (error: any) => {
         console.log(error);
@@ -79,7 +80,6 @@ export class ClassStudentComponent implements OnInit {
       }
     }
     this.getMappedUsersForClassroom();
-    this.getUsersForOrganization();
     this.changeMapMode();
   }
 

@@ -15,6 +15,8 @@ public interface ClassroomUserRepository extends JpaRepository<ClassroomUser, St
 
     List<ClassroomUser> findByClassroom(Classroom c);
 
+    List<ClassroomUser> findByUser(User u);
+
     @Transactional
     Long deleteByClassroomAndUser(Classroom c, User u);
 }

@@ -1,5 +1,6 @@
 package com.exam.examserver.service.impl;
 
+import com.exam.examserver.dto.ClassroomDTO;
 import com.exam.examserver.dto.ClassroomUserDTO;
 import com.exam.examserver.dto.UserDTO;
 import com.exam.examserver.entity.Classroom;
@@ -110,6 +111,29 @@ public class ClassroomUserServiceImpl implements ClassroomUserService {
                 return ResponseHandler.generateResponse("User mapping with Classroom deleted successfully!!", HttpStatus.OK, null);
             }
             return ResponseHandler.generateResponse("User mapping with Classroom not exists!!", HttpStatus.NOT_FOUND, null);
+        } catch (Exception e) {
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            return ResponseHandler.generateResponse("Exception occurred" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getClassroomsByUserId(String userId) {
+        try {
+            if (this.userRepository.findById(userId).isPresent()){
+                List<ClassroomUser> listOfClassrooms = this.classroomUserRepository.findByUser(new User(userId));
+                if (listOfClassrooms.size() > 0){
+                    List<ClassroomDTO> classrooms = new ArrayList<>();
+                    listOfClassrooms.forEach(data -> {
+                        classrooms.add(this.modelMapper.map(data.getClassroom(), ClassroomDTO.class));
+                    });
+                    return ResponseHandler.generateResponse("Classrooms for User with userId -> "+userId, HttpStatus.OK, classrooms);
+                }else{
+                    return ResponseHandler.generateResponse("No classrooms for User with userId -> "+userId, HttpStatus.OK, null);
+                }
+            }else{
+                return ResponseHandler.generateResponse("User with userID" + userId + " not exists!", HttpStatus.NOT_FOUND, null);
+            }
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
             return ResponseHandler.generateResponse("Exception occurred" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);

@@ -14,4 +14,6 @@ public interface ClassroomService {
     ResponseEntity<?> deleteClassroom(String classId);
 
     ResponseEntity<?> getClassroomDetailsById(String classroomId);
+
+    boolean classroomExitsById(String classId);
 }

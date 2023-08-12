@@ -13,4 +13,5 @@ export interface IUser {
     createdAt?: Date,
     updatedAt?: Date,
     organization?: Organization 
+    roleName?: string
 }

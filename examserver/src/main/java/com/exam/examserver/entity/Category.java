@@ -30,9 +30,6 @@ public class Category {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Quiz> quizzes = new LinkedHashSet<>();
 
     @Override
     public String toString() {
@@ -42,7 +39,6 @@ public class Category {
                 ", categoryDescription='" + categoryDescription + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
-                ", quizzes=" + quizzes +
                 '}';
     }
 }

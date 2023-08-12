@@ -36,6 +36,15 @@ import { ClassQuizComponent } from './organization/org-class-details/class-quiz/
 import { ClassStudentComponent } from './organization/org-class-details/class-student/class-student.component';
 import { ClassTeacherComponent } from './organization/org-class-details/class-teacher/class-teacher.component';
 import { ClassPostSectionComponent } from './organization/org-class-details/class-post-section/class-post-section.component';
+import { OrgAdminProfileComponent } from './organization/org-admin-profile/org-admin-profile.component';
+import { TeacherQuizzesComponent } from './teacher/teacher-quizzes/teacher-quizzes.component';
+import { TeacherClassesComponent } from './teacher/teacher-classes/teacher-classes.component';
+import { TeacherStudentsComponent } from './teacher/teacher-students/teacher-students.component';
+import { TeacherProfileComponent } from './teacher/teacher-profile/teacher-profile.component';
+import { StudentQuizzesComponent } from './student/student-quizzes/student-quizzes.component';
+import { StudentQuizAttamptsComponent } from './student/student-quiz-attampts/student-quiz-attampts.component';
+import { StudentClassesComponent } from './student/student-classes/student-classes.component';
+import { StudentProfileComponent } from './student/student-profile/student-profile.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +78,15 @@ import { ClassPostSectionComponent } from './organization/org-class-details/clas
     ClassStudentComponent,
     ClassTeacherComponent,
     ClassPostSectionComponent,
+    OrgAdminProfileComponent,
+    TeacherQuizzesComponent,
+    TeacherClassesComponent,
+    TeacherStudentsComponent,
+    TeacherProfileComponent,
+    StudentQuizzesComponent,
+    StudentQuizAttamptsComponent,
+    StudentClassesComponent,
+    StudentProfileComponent,
   ],
   imports: [
     BrowserModule,

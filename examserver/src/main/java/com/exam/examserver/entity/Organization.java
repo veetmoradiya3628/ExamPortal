@@ -52,6 +52,7 @@ public class Organization {
                 ", orgDescription='" + orgDescription + '\'' +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
+                ", userSet=" + userSet +
                 '}';
     }
 }

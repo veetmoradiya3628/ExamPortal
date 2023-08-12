@@ -5,9 +5,11 @@ import com.exam.examserver.entity.Organization;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
 import com.exam.examserver.helper.ResponseHandler;
+import com.exam.examserver.repo.ClassroomUserRepository;
 import com.exam.examserver.repo.OrganizationRepository;
 import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
+import com.exam.examserver.service.ClassroomUserService;
 import com.exam.examserver.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,5 +141,11 @@ public class UserServiceImpl implements UserService {
             return ResponseHandler.generateResponse(null, HttpStatus.OK, responseUsers);
         }
         return ResponseHandler.generateResponse("Organization with id : "+orgId+" does not exists", HttpStatus.NOT_FOUND, null);
+    }
+
+
+
+    public boolean isUserPresentById(String userId){
+        return this.userRepository.findById(userId).isPresent();
     }
 }

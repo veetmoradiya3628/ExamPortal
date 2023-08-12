@@ -36,6 +36,7 @@ public class Classroom {
     )
     public Organization organization;
 
+
     @CreationTimestamp
     private LocalDateTime createdAt;
 
@@ -43,5 +44,18 @@ public class Classroom {
     private LocalDateTime updatedAt;
     public Classroom(String classroomId) {
         this.classroomId = classroomId;
+    }
+
+    @Override
+    public String toString() {
+        return "Classroom{" +
+                "classroomId='" + classroomId + '\'' +
+                ", classroomTitle='" + classroomTitle + '\'' +
+                ", classroomSubTitle='" + classroomSubTitle + '\'' +
+                ", classroomCode='" + classroomCode + '\'' +
+                ", organization=" + organization +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

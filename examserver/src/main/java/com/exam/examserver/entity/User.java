@@ -52,15 +52,6 @@ public class User implements UserDetails {
     @JoinColumn(name = "org_id", nullable = false)
     private Organization organization;
 
-//    @ManyToMany(mappedBy = "users")
-//    private Set<Classroom> classrooms = new HashSet<>();
-
-    @OneToMany(mappedBy = "teacher")
-    Set<TeacherQuiz> teacherQuizSet;
-
-    @OneToMany(mappedBy = "student")
-    Set<StudentQuiz> studentQuizSet;
-
 
     @Transient
     private String roleName;
@@ -91,7 +82,7 @@ public class User implements UserDetails {
     public User(String userId) {
         this.userId = userId;
     }
-    public User(String userId, String username, String password, String email, String firstName, String lastName, String phone, Boolean enabled, String profileImage, LocalDateTime createdAt, LocalDateTime updatedAt, Set<UserRole> userRoles, Organization organization, Set<TeacherQuiz> teacherQuizSet, Set<StudentQuiz> studentQuizSet) {
+    public User(String userId, String username, String password, String email, String firstName, String lastName, String phone, Boolean enabled, String profileImage, LocalDateTime createdAt, LocalDateTime updatedAt, Set<UserRole> userRoles, Organization organization) {
         this.userId = userId;
         this.username = username;
         this.password = password;
@@ -105,8 +96,6 @@ public class User implements UserDetails {
         this.updatedAt = updatedAt;
         this.userRoles = userRoles;
         this.organization = organization;
-        this.teacherQuizSet = teacherQuizSet;
-        this.studentQuizSet = studentQuizSet;
     }
 
     public String getUserId() {
@@ -215,21 +204,6 @@ public class User implements UserDetails {
         this.organization = organization;
     }
 
-    public Set<TeacherQuiz> getTeacherQuizSet() {
-        return teacherQuizSet;
-    }
-
-    public void setTeacherQuizSet(Set<TeacherQuiz> teacherQuizSet) {
-        this.teacherQuizSet = teacherQuizSet;
-    }
-
-    public Set<StudentQuiz> getStudentQuizSet() {
-        return studentQuizSet;
-    }
-
-    public void setStudentQuizSet(Set<StudentQuiz> studentQuizSet) {
-        this.studentQuizSet = studentQuizSet;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -265,9 +239,6 @@ public class User implements UserDetails {
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 ", userRoles=" + userRoles +
-                ", organization=" + organization +
-                ", teacherQuizSet=" + teacherQuizSet +
-                ", studentQuizSet=" + studentQuizSet +
                 ", roleName='" + roleName + '\'' +
                 '}';
     }

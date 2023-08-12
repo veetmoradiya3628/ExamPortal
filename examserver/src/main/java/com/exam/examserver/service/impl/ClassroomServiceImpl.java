@@ -106,4 +106,13 @@ public class ClassroomServiceImpl implements ClassroomService {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @Override
+    public boolean classroomExitsById(String classId) {
+        return this.classroomRepository.findById(classId).isPresent();
+    }
+
+    public Boolean isClassroomPresentById(String classroomId){
+        return this.classroomRepository.findById(classroomId).isPresent();
+    }
 }

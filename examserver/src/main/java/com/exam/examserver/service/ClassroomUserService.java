@@ -9,4 +9,6 @@ public interface ClassroomUserService {
     ResponseEntity<?> getUserOfClassroomByRole(String classroomId, String role);
 
     ResponseEntity<?> deleteUserMappingFromClassroom(String classroomId, String userId);
+
+    ResponseEntity<?> getClassroomsByUserId(String userId);
 }

@@ -6,6 +6,7 @@ import com.exam.examserver.entity.UserRole;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.RoleRepository;
 import com.exam.examserver.repo.UserRepository;
+import com.exam.examserver.service.ClassroomUserService;
 import com.exam.examserver.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,9 @@ public class UserController {
 
     @Autowired
     private RoleRepository roleRepository;
+
+    @Autowired
+    private ClassroomUserService classroomUserService;
 
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -96,5 +100,10 @@ public class UserController {
     @PostMapping("/{userId}/{status}")
     public ResponseEntity<?> updateUserStatue(@PathVariable("userId") String userId, @PathVariable Boolean status){
         return this.userService.updateUserStatus(userId, status);
+    }
+
+    @GetMapping("/{userId}/classrooms")
+    public ResponseEntity<?> getClassroomsOfUserByUserId(@PathVariable("userId") String userId){
+        return this.classroomUserService.getClassroomsByUserId(userId);
     }
 }
