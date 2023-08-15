@@ -48,4 +48,13 @@ public class QuizController {
 //        });
         return ResponseHandler.generateResponse(null, HttpStatus.OK, null);
     }
+
+    /*
+     * Method to get quiz for user with userId
+     */
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getQuizzesForUser(@PathVariable("userId") String userId){
+        logger.info("received userId for getQuizzesForUser is : "+userId);
+        return this.quizService.getQuizzesForUser(userId);
+    }
 }

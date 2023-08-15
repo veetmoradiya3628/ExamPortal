@@ -27,6 +27,7 @@ public class Quizzes {
     private Boolean isActive;
     private Instant startTime;
     private Instant endTime;
+    private Integer duration;
     private Integer numberOfQuestions;
     private Integer totalMarks;
     private String quizImage;

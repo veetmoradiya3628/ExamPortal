@@ -7,4 +7,6 @@ public interface QuizService {
     public ResponseEntity<?> createQuiz(QuizDTO quizDTO);
 
     public ResponseEntity<?> changeQuizStatus(String quizId, Boolean status);
+
+    public ResponseEntity<?> getQuizzesForUser(String userId);
 }

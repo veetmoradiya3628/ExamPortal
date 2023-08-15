@@ -2,8 +2,11 @@ package com.exam.examserver.service.impl;
 
 
 import com.exam.examserver.dto.QuizDTO;
+import com.exam.examserver.entity.ClassroomUser;
 import com.exam.examserver.entity.Quizzes;
+import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.ResponseHandler;
+import com.exam.examserver.repo.ClassroomUserRepository;
 import com.exam.examserver.repo.QuestionsRepository;
 import com.exam.examserver.repo.QuizzesRepository;
 import com.exam.examserver.service.QuizService;
@@ -20,6 +23,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -34,6 +38,9 @@ public class QuizServiceImpl implements QuizService {
 
     @Autowired
     private QuestionsRepository questionsRepository;
+
+    @Autowired
+    private ClassroomUserRepository classroomUserRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -71,6 +78,38 @@ public class QuizServiceImpl implements QuizService {
             return ResponseHandler.generateResponse("Quiz status updated to "+status+" for quiz "+quizId, HttpStatus.OK, null);
         }else{
             return ResponseHandler.generateResponse("Quiz with quizId " + quizId + " not found.", HttpStatus.NOT_FOUND, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getQuizzesForUser(String userId) {
+        try{
+            List<ClassroomUser> classrooms = this.classroomUserRepository.findByUser(new User(userId));
+            if (classrooms.size() > 0){
+                logger.info("inside if condition - ");
+                List<Quizzes> quizzes = new ArrayList<>();
+                classrooms.forEach(classroom -> {
+                    logger.info("classroom id : " + classroom.getClassroom().getClassroomId());
+                    List<Quizzes> quizzesForClassroom = this.quizzesRepository.findByClassroomId(classroom.getClassroom().getClassroomId());
+                    logger.info("quizzesForClassroom : " + quizzesForClassroom.size());
+                    quizzesForClassroom.forEach(q -> logger.info(q.toString()));
+                    quizzes.addAll(quizzesForClassroom);
+                });
+                if (quizzes.size() > 0){
+                    List<QuizDTO> responseObj = new ArrayList<>();
+                    quizzes.forEach(quiz -> {
+                        responseObj.add(this.modelMapper.map(quiz, QuizDTO.class));
+                    });
+                    return ResponseHandler.generateResponse("Ok", HttpStatus.OK, responseObj);
+                }else{
+                    return ResponseHandler.generateResponse("No Quiz found for the userId "+ userId, HttpStatus.NO_CONTENT, null);
+                }
+            }else{
+                return ResponseHandler.generateResponse("No classroom and quiz found for the userId "+ userId, HttpStatus.NO_CONTENT, null);
+            }
+        }catch (Exception e){
+            logger.info("Exception : "+e.getMessage());
+            return ResponseHandler.generateResponse("Exception occurred...", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
