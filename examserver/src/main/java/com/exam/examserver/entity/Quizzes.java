@@ -6,6 +6,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
@@ -25,8 +26,8 @@ public class Quizzes {
     private String quizDescription;
     private String classroomId;
     private Boolean isActive;
-    private Instant startTime;
-    private Instant endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private Integer duration;
     private Integer numberOfQuestions;
     private Integer totalMarks;
@@ -36,8 +37,10 @@ public class Quizzes {
     private List<String> questionIds;
 
     @CreatedDate
+    @Field(name = "createdAt")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
+    @Field(name = "updatedAt")
     private LocalDateTime updatedAt;
 }

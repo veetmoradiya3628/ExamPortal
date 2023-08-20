@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/question")
+@CrossOrigin("*")
 public class QuestionController {
 
     Logger logger = LoggerFactory.getLogger(getClass());
@@ -27,6 +28,12 @@ public class QuestionController {
     @GetMapping("/getAllQuestions")
     public ResponseEntity<?> getAllQuestions(){
         return this.questionsService.getAllQuestions();
+    }
+
+    @GetMapping("/quiz/{quizId}")
+    public ResponseEntity<?> getQuestionsForQuiz(@PathVariable("quizId") String quizId){
+        logger.info("received quiz id to get questions is -> "+quizId);
+        return this.questionsService.getQuestionsForQuiz(quizId);
     }
 
     @DeleteMapping("/{questionId}")

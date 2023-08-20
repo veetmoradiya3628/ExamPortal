@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quizzes")
+@CrossOrigin("*")
 public class QuizController {
     Logger logger = LoggerFactory.getLogger(getClass());
 

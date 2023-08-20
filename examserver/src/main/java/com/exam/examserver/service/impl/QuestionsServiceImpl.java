@@ -85,4 +85,30 @@ public class QuestionsServiceImpl implements QuestionsService {
         }
         return ResponseHandler.generateResponse("Question with questionID "+ questionId + " not exists!", HttpStatus.NOT_FOUND, null);
     }
+
+    @Override
+    public ResponseEntity<?> getQuestionsForQuiz(String quizId) {
+        try{
+            if(this.quizService.isQuizExistsById(quizId)){
+                List<Questions> questionsForQuiz = this.questionsRepository.findByQuizId(quizId);
+                if (questionsForQuiz.size() > 0){
+                    List<QuestionsDTO> responseObject = new ArrayList<>();
+                    questionsForQuiz.forEach(questions -> {
+                        logger.info("question object : "+questions.toString());
+                        QuestionsDTO questionsDTO = this.modelMapper.map(questions, QuestionsDTO.class);
+                        logger.info("questionDTO object : "+questionsDTO.toString());
+                        responseObject.add(questionsDTO);
+                    });
+                    return ResponseHandler.generateResponse("Questions for quiz with id : "+quizId, HttpStatus.OK, responseObject);
+                }
+                return ResponseHandler.generateResponse("Questiosn not present for quiz with quizId : "+quizId, HttpStatus.NOT_FOUND, null);
+            }else{
+                logger.info("Quiz with quizId : "+quizId+" not exists");
+                return ResponseHandler.generateResponse("Quiz with quizId : "+quizId+" not exists", HttpStatus.NOT_FOUND, null);
+            }
+        }catch (Exception e){
+            logger.info("Exception occurred in the function getQuestionsForQuiz : "+e.getMessage());
+            return ResponseHandler.generateResponse("Exception : "+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
 }

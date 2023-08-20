@@ -16,9 +16,10 @@ public class QuizDTO {
     private String quizTitle;
     private String quizDescription;
     private String classroomId;
+    private String classroomName;
     private Boolean isActive;
-    private Instant startTime;
-    private Instant endTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private Integer duration;
     private Integer numberOfQuestions;
     private Integer totalMarks;

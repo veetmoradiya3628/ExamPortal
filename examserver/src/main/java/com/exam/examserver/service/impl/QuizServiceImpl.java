@@ -98,7 +98,10 @@ public class QuizServiceImpl implements QuizService {
                 if (quizzes.size() > 0){
                     List<QuizDTO> responseObj = new ArrayList<>();
                     quizzes.forEach(quiz -> {
-                        responseObj.add(this.modelMapper.map(quiz, QuizDTO.class));
+                        QuizDTO q = this.modelMapper.map(quiz, QuizDTO.class);
+                        q.setId(quiz.getId().toString());
+                        q.setClassroomName(this.classroomService.getClassroomNameById(quiz.getClassroomId()));
+                        responseObj.add(q);
                     });
                     return ResponseHandler.generateResponse("Ok", HttpStatus.OK, responseObj);
                 }else{

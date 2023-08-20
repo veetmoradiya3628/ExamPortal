@@ -1,66 +1,131 @@
-<div class="flex flex-col">
+<ng-container *ngIf="!isAddQuizMode">
+  <div class="flex flex-col">
 
     <div class="flex flex-row">
-        <button type="button"
-            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ml-4 mt-4">
-            Create New Quiz
-        </button>
+      <button type="button" (click)="changeIsAddQuizMode()"
+              class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 ml-4 mt-4">
+        Create New Quiz
+      </button>
     </div>
 
     <!-- Quizzes section below -->
-    <div class="flex flex-row  flex-wrap h-[calc(100vh-100px)] overflow-y-scroll">
-        <div class="block w-full" *ngFor="let c of cnt">
-            <div
-                class="rounded-lg m-2 bg-white p-2 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-                <!-- Thumbnail image of Quiz -->
-                <!-- <div class="relative overflow-hidden bg-cover bg-no-repeat">
-                    <img class="rounded-md w-full h-15"
-                        src="https://previews.123rf.com/images/maxborovkov/maxborovkov1808/maxborovkov180800337/111279996-quiz-time-banner-colorful-brush-design-vector-background.jpg"
-                        alt="" />
-                </div> -->
-                <div class="p-2">
-                    <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-                        Sample Quiz 1
-                    </h5>
-                    <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">
-                        This is a sample quiz. 1
-                    </p>
-                    <h6 class="mb-2 text-lg font-semibold leading-tight text-neutral-700 dark:text-neutral-50">
-                        Classroom : Java Programming
-                    </h6>
-                    <div class="flex flex-row">
-                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button">
-                            No. of Question : <b>10</b>
-                        </p>
-                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button">
-                            Total Marks : <b>100</b>
-                        </p>
-                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button">
-                            Start Time : <b>{{ startTime | date:
-                                'yyyy/MM/dd h:mm:ss a' }}</b>
-                        </p>
-                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button">
-                            Duration : <b>20 Minutes</b>
-                        </p>
-                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button">
-                            No. of Students : <b>123</b>
-                        </p>
-                        <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                            type="button">
-                            Status : <b class="text-blue-500">Active</b>
-                        </p>
-                        <a href="/" class="text-blueF-600 ml-2 dark:text-blue-400 hover:underline" data-te-ripple-init
-                            data-te-ripple-color="light">
-                            Details ⟶
-                        </a>
-                    </div>
-                </div>
+    <div class="flex flex-row  flex-wrap h-[calc(100vh-150px)] overflow-y-scroll">
+      <div class="block w-full" *ngFor="let quiz of quizzes">
+        <div
+          class="rounded-lg m-2 bg-white p-2 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+          <!-- Thumbnail image of Quiz -->
+          <!-- <div class="relative overflow-hidden bg-cover bg-no-repeat">
+              <img class="rounded-md w-full h-15"
+                  src="https://previews.123rf.com/images/maxborovkov/maxborovkov1808/maxborovkov180800337/111279996-quiz-time-banner-colorful-brush-design-vector-background.jpg"
+                  alt="" />
+          </div> -->
+          <div class="p-2">
+            <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+              {{ quiz.quizTitle }}
+            </h5>
+            <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200">
+              {{ quiz.quizDescription }}
+            </p>
+            <h6 class="mb-2 text-lg font-semibold leading-tight text-neutral-700 dark:text-neutral-50">
+              Classroom : {{ quiz.classroomName }}
+            </h6>
+            <div class="flex flex-row">
+              <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                 type="button">
+                No. of Question : <b>{{ quiz.numberOfQuestions }}</b>
+              </p>
+              <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                 type="button">
+                Total Marks : <b>{{ quiz.totalMarks }}</b>
+              </p>
+              <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                 type="button">
+                Start Time : <b>{{ quiz.startTime | date:'yyyy/MM/dd h:mm:ss a' }}</b>
+              </p>
+              <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                 type="button">
+                Duration : <b>{{ quiz.duration }}</b>
+              </p>
+              <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                 type="button" (click)="changeQuizStatus(quiz.id,false)" *ngIf="quiz.isActive" title="click to deactivate quiz">
+                Status : <b class="text-blue-500">Active</b>
+              </p>
+              <p class="text-black-200 ml-2 border border-black-500 hover:bg-black-500 hover:text-black active:bg-black-200 text-sm px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                 type="button" (click)="changeQuizStatus(quiz.id, true)" *ngIf="!quiz.isActive" title="click to activate quiz">
+                Status : <b class="text-red-500" >InActive</b>
+              </p>
+              <a (click)="navigateToDetailPage(quiz.id)" class="text-blue-600 ml-2 dark:text-blue-400 hover:underline" data-te-ripple-init
+                 data-te-ripple-color="light">
+                Details ⟶
+              </a>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+</ng-container>
+<ng-container *ngIf="isAddQuizMode">
+<!--  {{ addQuizForm.value | json }}-->
+  <div class="flex">
+    <div class="flex-auto ml-20 mr-20">
+      <h1 class="font-bold text-2xl mt-1">Add Quiz</h1>
+      <form class="mt-6" [formGroup]="addQuizForm" (ngSubmit)="addQuizFormHandler()">
+        <div class="flex flex-col w-3/4 ">
+
+          <div class="mt-1">
+            <label class="block text-gray-700">Classroom</label>
+            <select name="classroom" formControlName="classroomId"
+                    class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none">
+              <option value="">Select Classroom</option>
+              <option *ngFor="let class of classrooms" [value]="class.classroomId">{{
+                class.classroomTitle }}</option>
+            </select>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-gray-700">Quiz Title</label>
+            <input type="text" placeholder="Enter Quiz Title" formControlName="quizTitle"
+                   class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                   autofocus autocomplete required>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-gray-700">Quiz Description</label>
+            <input type="text" placeholder="Enter Quiz Description" formControlName="quizDescription"
+                   class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                   autofocus autocomplete required>
+          </div>
+
+          <div class="flex flex-row mt-4">
+            <div class="w-1/2 mr-2">
+              <label class="block text-gray-700">Start Time</label>
+              <input formControlName="startTime" type="datetime-local" class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none">
+            </div>
+            <div class="w-1/2">
+              <label class="block text-gray-700">Duration</label>
+              <input type="number" placeholder="Enter Quiz Description" formControlName="duration"
+                     class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                     autofocus autocomplete required>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <label class="block text-gray-700">Max Attempts</label>
+            <input type="text" placeholder="Enter maximum Attempts" formControlName="maxAttempts"
+                   class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                   autofocus autocomplete required>
+          </div>
+
+          <div class="flex flex-row">
+            <button type="submit" class="w-1/2 block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
+                    px-4 py-3 mt-6">Add Quiz</button>
+            <button type="button" class="w-1/2 block bg-indigo-500 ml-2 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg
+                    px-4 py-3 mt-6" (click)="changeIsAddQuizMode()">Cancel</button>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-container>

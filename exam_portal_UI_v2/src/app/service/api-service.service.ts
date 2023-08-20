@@ -146,4 +146,27 @@ export class ApiServiceService {
     const url = this.BASE_URL + '/user/' + userId + '/classrooms';
     return this.http.get(url);
   }
+
+  // get quizzes for users with userId
+  public getQuizzesForUser(userId: string): Observable<any> {
+    const url = this.BASE_URL + '/quizzes/user/' + userId;
+    return this.http.get(url);
+  }
+
+  // add quiz
+  public addQuiz(reqObject: any) : Observable<any> {
+    const url = this.BASE_URL + '/quizzes/create';
+    return this.http.post(url, reqObject)
+  }
+
+  public changeQuizStatus(quizId:string | undefined, status: boolean): Observable<any> {
+    const url = this.BASE_URL + '/quizzes/' + quizId + '/changeStatus?status=' + status;
+    return this.http.post(url, null);
+  }
+
+  // get questions for quiz with quizId
+  public getQuestionsForQuizWithId(quizId: string): Observable<any> {
+    const url = this.BASE_URL + '/question/quiz/' + quizId;
+    return this.http.get(url);
+  }
 }

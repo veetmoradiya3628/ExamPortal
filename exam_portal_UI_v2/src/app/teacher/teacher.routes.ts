@@ -4,6 +4,7 @@ import { TeacherQuizzesComponent } from "./teacher-quizzes/teacher-quizzes.compo
 import { TeacherClassesComponent } from "./teacher-classes/teacher-classes.component";
 import { TeacherStudentsComponent } from "./teacher-students/teacher-students.component";
 import { TeacherProfileComponent } from "./teacher-profile/teacher-profile.component";
+import {TeacherQuizDetailsComponent} from "./teacher-quizzes/teacher-quiz-details/teacher-quiz-details.component";
 
 export const teacherRoutes: Routes = [
   {
@@ -13,7 +14,11 @@ export const teacherRoutes: Routes = [
   },
   {
     path: 'quizzes',
-    component: TeacherQuizzesComponent
+    component: TeacherQuizzesComponent,
+  },
+  {
+    path: 'quizzes/:id/details',
+    component: TeacherQuizDetailsComponent
   },
   {
     path: 'classes',

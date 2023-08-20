@@ -11,4 +11,6 @@ public interface QuestionsService {
     public ResponseEntity<?> getAllQuestions();
 
     public ResponseEntity<?> deleteQuestion(String questionId);
+
+    public ResponseEntity<?> getQuestionsForQuiz(String quizId);
 }

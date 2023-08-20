@@ -115,4 +115,8 @@ public class ClassroomServiceImpl implements ClassroomService {
     public Boolean isClassroomPresentById(String classroomId){
         return this.classroomRepository.findById(classroomId).isPresent();
     }
+
+    public String getClassroomNameById(String classroomId){
+        return this.classroomRepository.findById(classroomId).get().classroomTitle;
+    }
 }
