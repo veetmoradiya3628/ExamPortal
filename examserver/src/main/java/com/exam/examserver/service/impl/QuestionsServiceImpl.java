@@ -96,6 +96,7 @@ public class QuestionsServiceImpl implements QuestionsService {
                     questionsForQuiz.forEach(questions -> {
                         logger.info("question object : "+questions.toString());
                         QuestionsDTO questionsDTO = this.modelMapper.map(questions, QuestionsDTO.class);
+                        questionsDTO.setId(String.valueOf(questions.getId()));
                         logger.info("questionDTO object : "+questionsDTO.toString());
                         responseObject.add(questionsDTO);
                     });

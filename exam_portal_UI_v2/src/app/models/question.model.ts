@@ -7,6 +7,6 @@ export interface Question {
   score: number,
   quizId?: string,
   options: Array<Option>,
-  createdAt?: Date,
-  updatedAt?: Date
+  createdAt?: string,
+  updatedAt?: string
 }

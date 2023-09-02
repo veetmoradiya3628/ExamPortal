@@ -83,9 +83,6 @@ export class TeacherQuizzesComponent implements OnInit{
       reqObject.endTime = new Date(new Date(reqObject.startTime).getTime() + reqObject.duration * 60 * 1000)
       reqObject.endTime = reqObject.endTime.toISOString()
       console.log('endTime : ' + reqObject.endTime)
-
-
-
       console.log(reqObject);
 
       this._apiService.addQuiz(reqObject).subscribe(

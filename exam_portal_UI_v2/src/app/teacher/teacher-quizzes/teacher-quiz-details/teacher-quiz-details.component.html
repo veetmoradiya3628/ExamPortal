@@ -1,18 +1,24 @@
 <!-- Top Navbar Code -->
 <div class="m-2">
   <div class="flex overflow-x-auto overflow-y-hidden border-b border-gray-200 whitespace-nowrap dark:border-gray-700">
-    <button id="information" (click)="changeTabStatus($event,'information')" class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-blue-600 bg-transparent border-b-2 border-blue-500 sm:px-4 -px-1 dark:border-blue-400 dark:text-blue-300 whitespace-nowrap focus:outline-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+    <button id="information" (click)="changeTabStatus($event,'information')"
+      class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-blue-600 bg-transparent border-b-2 border-blue-500 sm:px-4 -px-1 dark:border-blue-400 dark:text-blue-300 whitespace-nowrap focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
       </svg>
       <span class="mx-1 text-sm sm:text-base">
-            Information
-        </span>
+        Information
+      </span>
     </button>
 
-    <button id="questions" (click)="changeTabStatus($event,'questions')" class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+    <button id="questions" (click)="changeTabStatus($event,'questions')"
+      class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
       </svg>
 
       <span class="mx-1 text-sm sm:text-base">
@@ -20,18 +26,24 @@
       </span>
     </button>
 
-    <button id="students" (click)="changeTabStatus($event,'students')" class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+    <button id="students" (click)="changeTabStatus($event,'students')"
+      class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
       </svg>
       <span class="mx-1 text-sm sm:text-base">
         Students
       </span>
     </button>
 
-    <button id="attempts" (click)="changeTabStatus($event,'attempts')" class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    <button id="attempts" (click)="changeTabStatus($event,'attempts')"
+      class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
       </svg>
 
       <span class="mx-1 text-sm sm:text-base">
@@ -39,9 +51,12 @@
       </span>
     </button>
 
-    <button id="notification" (click)="changeTabStatus($event,'notification')" class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
-      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+    <button id="notification" (click)="changeTabStatus($event,'notification')"
+      class="inline-flex items-center h-10 px-2 py-2 -mb-px text-center text-gray-700 bg-transparent border-b-2 border-transparent sm:px-4 -px-1 dark:text-white whitespace-nowrap cursor-base focus:outline-none hover:border-gray-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mx-1 sm:w-6 sm:h-6" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
       </svg>
 
       <span class="mx-1 text-sm sm:text-base">
@@ -60,23 +75,117 @@
 <!-- Questions -->
 <ng-container *ngIf="quizDetailTabs.get('questions')">
   <div class="flex flex-row justify-between">
-    <h3 class="text-2xl m-2">Questions</h3>
-    <button class="rounded-full text-white bg-black p-2 mr-5">Add Question</button>
+    <h3 class="text-2xl m-2" *ngIf="!isQuestionAddMode">Questions</h3>
+    <h3 class="text-2xl m-2" *ngIf="isQuestionAddMode">Create New Question</h3>
+    <button class="rounded-full text-white bg-black p-2 mr-5" (click)="changeQuestionAddMode()"
+      *ngIf="!isQuestionAddMode">Add Question</button>
+    <button class="rounded-full text-white bg-black p-2 mr-5" (click)="changeQuestionAddMode()"
+      *ngIf="isQuestionAddMode">Cancel</button>
   </div>
-  <div class="flex flex-col flex-wrap h-[calc(100vh-150px)] overflow-y-scroll">
-    <div class="block w-full" *ngFor="let question of questions">
-      <div
-        class="rounded-lg m-2 bg-white p-2 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
-        <div class="p-2">
-          <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
-            {{ question.questionText }}
-          </h5>
-          <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200" *ngFor="let option of question.options">
-            {{option.optionText}}
+  <!-- list of questions -->
+  <ng-container *ngIf="!isQuestionAddMode">
+    <div class="flex flex-row flex-wrap h-[calc(100vh-190px)] overflow-y-scroll">
+      <div class="block w-full" *ngFor="let question of questions; let i=index">
+        <!-- {{ question | json }} -->
+        <div
+          class="rounded-lg m-2 bg-white p-2 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+          <div class="p-2">
+            <div class="flex flex-row justify-between">
+              <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
+                {{i + 1}}. {{ question.questionText }}
+              </h5>
+              <div>
+                {{ question.questionType }}
+                <button
+                  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full ml-2">Edit</button>
+                <button
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full ml-2" (click)="deleteQuestion(question.id)">Delete</button>
+              </div>
+            </div>
+            <div *ngIf="question.questionType === 'SINGLE_CORRECT' || question.questionType === 'TRUE_FALSE'">
+              <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200" *ngFor="let option of question.options">
+                <input type="radio" class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300" disabled
+                  [checked]="option.isCorrect">
+                {{option.optionText}}
+              </p>
+            </div>
+            <div *ngIf="question.questionType === 'MULTIPLE_CORRECT'">
+              <p class="mb-2 text-base text-neutral-600 dark:text-neutral-200" *ngFor="let option of question.options">
+                <input type="checkbox" class="h-4 w-4 border-gray-300 focus:ring-2 focus:ring-blue-300" disabled
+                  [checked]="option.isCorrect">
+                {{option.optionText}}
+              </p>
+            </div>
           </div>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
+  <ng-container *ngIf="isQuestionAddMode">
+    <div class="flex flex-col flex-wrap h-[calc(100vh-190px)]">
+      <div class="block w-full">
+        <div
+          class="rounded-lg m-2 bg-white p-2 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+          <div class="p-2">
+            <!-- {{ questionForm.value | json }} -->
+            <form [formGroup]="questionForm" (ngSubmit)="questionFormSubmit()">
+              <div class="w-full flex flex-row">
+                <div class="w-1/4">
+                  <label class="block text-gray-700" for="roleName">Questions Type</label>
+                  <select id="roleName" formControlName="questionType"
+                    class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none">
+                    <option value="">Select Question Type</option>
+                    <option value="SINGLE_CORRECT">Single Correct MCQ</option>
+                    <option value="MULTIPLE_CORRECT">Multiple Correct MCQ</option>
+                    <option value="TRUE_FALSE">True / False</option>
+                  </select>
+                </div>
+                <div class="w-1/4 ml-2">
+                  <label class="block text-gray-700">Questions Score</label>
+                  <input type="number" placeholder="Enter Question Score" formControlName="score"
+                    class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                    autofocus autocomplete required>
+                </div>
+              </div>
+
+              <div class="w-full mt-2">
+                <label class="block text-gray-700">Questions Description</label>
+                <input type="text" placeholder="Enter Question Description ..." formControlName="questionText"
+                  class="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                  autofocus autocomplete required>
+              </div>
+              <div class="w-full mt-2">
+                <label class="block text-gray-700">Options</label>
+                <div formArrayName="options">
+                  <div class="flex flex-row" *ngFor="let option of options.controls; let i = index" [formGroupName]="i">
+                    <div
+                      *ngIf="questionForm.value.questionType != '' && (questionForm.value.questionType === 'SINGLE_CORRECT' || questionForm.value.questionType === 'TRUE_FALSE')">
+                      <input type="radio" formControlName="isCorrect"
+                        class="h-4 w-4 m-2 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                    </div>
+                    <div
+                      *ngIf="questionForm.value.questionType != '' && (questionForm.value.questionType === 'MULTIPLE_CORRECT')">
+                      <input type="checkbox" formControlName="isCorrect"
+                        class="h-4 w-4 m-2 border-gray-300 focus:ring-2 focus:ring-blue-300">
+                    </div>
+                    <input type="text" formControlName="optionText"
+                      class="w-3/4 px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none">
+                    <button type="button" class="w-1/4 rounded-none text-white bg-red-600 p-1 ml-2 mt-1 mb-1"
+                      (click)="removeOption(i)">Remove</button>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full mt-2">
+                <button type="submit" class="rounded-none text-white bg-blue-500 p-2">Add Question</button>
+                <button class="rounded-none text-white bg-black p-2 ml-2" (click)="addOptionForQuestion()">Add
+                  Option</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </ng-container>
 
 <!-- Students -->

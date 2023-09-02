@@ -5,6 +5,7 @@ import {Organization} from "../models/organization.model";
 import { IUser } from '../models/user.model';
 import { Classes } from '../models/classes.model';
 import { Posts } from '../models/posts.model';
+import { Question } from '../models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -168,5 +169,17 @@ export class ApiServiceService {
   public getQuestionsForQuizWithId(quizId: string): Observable<any> {
     const url = this.BASE_URL + '/question/quiz/' + quizId;
     return this.http.get(url);
+  }
+
+  // add Question
+  public addQuestion(questionData: Question): Observable<any> {
+    const url = this.BASE_URL + '/question/create';
+    return this.http.post(url, questionData);
+  }
+
+  // delete Question with questionId
+  public deleteQuestionwithId(questionId : string) : Observable<any> {
+    const url = this.BASE_URL + '/question/' + questionId;
+    return this.http.delete(url);
   }
 }
