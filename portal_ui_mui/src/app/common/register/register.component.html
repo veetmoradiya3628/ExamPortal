@@ -1,0 +1,73 @@
+<div fxLayout="column">
+    <div>
+        <app-header></app-header>
+    </div>
+    <div fxLayout="row">
+        <div fxLayout="column" fxFlex="40" fxFlexOffset="30%">
+            <div fxLayout="column">
+                <mat-card>
+                    <div class="m-10">
+                        <mat-card-header>
+                            <div fxLayout="row" fxFill fxLayoutAlign="center center">
+                                <mat-card-title>Register Your Account</mat-card-title>
+                            </div>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <h4>Role</h4>
+                            <div fxLayout="row" fxLayoutAlign="start start">
+                                <mat-form-field fxFill>
+                                    <mat-label>Choose an Role</mat-label>
+                                    <mat-select>
+                                        <mat-option value="teacher">Teacher</mat-option>
+                                        <mat-option value="student">Student</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <h4>Email</h4>
+                            <div fxLayout="row" fxLayoutAlign="start start">
+                                <mat-form-field fxFill>
+                                    <input matInput placeholder="user@example.com" required>
+                                </mat-form-field>
+                            </div>
+                            <h4>Username</h4>
+                            <div fxLayout="row" fxLayoutAlign="start start">
+                                <mat-form-field fxFill>
+                                    <input matInput placeholder="user@example.com" required>
+                                </mat-form-field>
+                            </div>
+                            <h4>Password</h4>
+                            <div fxLayout="row" fxLayoutAlign="start start">
+                                <mat-form-field fxFill>
+                                    <mat-label>Enter your password</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+                            <h4>Confirm Password</h4>
+                            <div fxLayout="row" fxLayoutAlign="start start">
+                                <mat-form-field fxFill>
+                                    <mat-label>Confirm your password</mat-label>
+                                    <input matInput [type]="hide ? 'password' : 'text'">
+                                    <button mat-icon-button matSuffix (click)="hide = !hide"
+                                        [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                                    </button>
+                                </mat-form-field>
+                            </div>
+                        </mat-card-content>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-raised-button color="primary">Register</button>
+                            <button mat-raised-button color="secondary" class="ml-5">Clear</button>
+                        </div>
+                    </div>
+                    <div fxLayout="row" fxLayoutAlign="center center">
+                        <p>Already having Account ? <a href="">Login here</a> </p>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
