@@ -28,6 +28,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { TreeComponenetComponent } from './test/tree-componenet/tree-componenet.component';
 import { MatTreeModule } from '@angular/material/tree';
+import {MatDividerModule} from '@angular/material/divider';
 import { DragDropComponentComponent } from './test/drag-drop-component/drag-drop-component.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HeaderComponent } from './common/header/header.component';
@@ -50,12 +51,14 @@ import { AdminAddOrganizationComponent } from './admin/admin-add-organization/ad
 import { HttpClientModule } from '@angular/common/http';
 import { AdminCreateUserComponent } from './admin/admin-create-user/admin-create-user.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTabsModule} from '@angular/material/tabs';
 import { OrgAdminSidebarComponent } from './org-admin/org-admin-sidebar/org-admin-sidebar.component';
 import { OrgAdminDashboardComponent } from './org-admin/org-admin-dashboard/org-admin-dashboard.component';
 import { OrgAdminClassesComponent } from './org-admin/org-admin-classes/org-admin-classes.component';
 import { OrgAdminTeacherComponent } from './org-admin/org-admin-teacher/org-admin-teacher.component';
 import { OrgAdminStudentComponent } from './org-admin/org-admin-student/org-admin-student.component';
 import { OrgAdminProfileComponent } from './org-admin/org-admin-profile/org-admin-profile.component';
+import { OrgAdminClassDetailsComponent } from './org-admin/org-admin-classes/org-admin-class-details/org-admin-class-details.component';
 
 @NgModule({
   declarations: [
@@ -88,6 +91,7 @@ import { OrgAdminProfileComponent } from './org-admin/org-admin-profile/org-admi
     OrgAdminTeacherComponent,
     OrgAdminStudentComponent,
     OrgAdminProfileComponent,
+    OrgAdminClassDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,6 +117,8 @@ import { OrgAdminProfileComponent } from './org-admin/org-admin-profile/org-admi
     MatTreeModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatTabsModule,
+    MatDividerModule,
     DragDropModule,
     FlexLayoutModule,
     FormsModule,

@@ -102,7 +102,7 @@ public class QuestionsServiceImpl implements QuestionsService {
                     });
                     return ResponseHandler.generateResponse("Questions for quiz with id : "+quizId, HttpStatus.OK, responseObject);
                 }
-                return ResponseHandler.generateResponse("Questiosn not present for quiz with quizId : "+quizId, HttpStatus.NOT_FOUND, null);
+                return ResponseHandler.generateResponse("Question not present for quiz with quizId : "+quizId, HttpStatus.NOT_FOUND, null);
             }else{
                 logger.info("Quiz with quizId : "+quizId+" not exists");
                 return ResponseHandler.generateResponse("Quiz with quizId : "+quizId+" not exists", HttpStatus.NOT_FOUND, null);

@@ -4,6 +4,7 @@ import { OrgAdminClassesComponent } from "./org-admin-classes/org-admin-classes.
 import { OrgAdminTeacherComponent } from "./org-admin-teacher/org-admin-teacher.component";
 import { OrgAdminStudentComponent } from "./org-admin-student/org-admin-student.component";
 import { OrgAdminProfileComponent } from "./org-admin-profile/org-admin-profile.component";
+import { OrgAdminClassDetailsComponent } from "./org-admin-classes/org-admin-class-details/org-admin-class-details.component";
 
 export const orgAdminRoutes: Routes = [
     {
@@ -29,6 +30,11 @@ export const orgAdminRoutes: Routes = [
     {
         path: 'profile',
         component: OrgAdminProfileComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'class-details/:id',
+        component: OrgAdminClassDetailsComponent,
         pathMatch: 'full'
     }
 ]
