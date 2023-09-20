@@ -19,6 +19,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatBadgeModule } from '@angular/material/badge';
 import { TableComponentComponent } from './test/table-component/table-component.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -28,7 +29,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { TreeComponenetComponent } from './test/tree-componenet/tree-componenet.component';
 import { MatTreeModule } from '@angular/material/tree';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
 import { DragDropComponentComponent } from './test/drag-drop-component/drag-drop-component.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HeaderComponent } from './common/header/header.component';
@@ -50,8 +51,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AdminAddOrganizationComponent } from './admin/admin-add-organization/admin-add-organization.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminCreateUserComponent } from './admin/admin-create-user/admin-create-user.component';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { OrgAdminSidebarComponent } from './org-admin/org-admin-sidebar/org-admin-sidebar.component';
 import { OrgAdminDashboardComponent } from './org-admin/org-admin-dashboard/org-admin-dashboard.component';
 import { OrgAdminClassesComponent } from './org-admin/org-admin-classes/org-admin-classes.component';
@@ -59,6 +60,8 @@ import { OrgAdminTeacherComponent } from './org-admin/org-admin-teacher/org-admi
 import { OrgAdminStudentComponent } from './org-admin/org-admin-student/org-admin-student.component';
 import { OrgAdminProfileComponent } from './org-admin/org-admin-profile/org-admin-profile.component';
 import { OrgAdminClassDetailsComponent } from './org-admin/org-admin-classes/org-admin-class-details/org-admin-class-details.component';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -115,10 +118,13 @@ import { OrgAdminClassDetailsComponent } from './org-admin/org-admin-classes/org
     MatGridListModule,
     MatMenuModule,
     MatTreeModule,
+    MatBadgeModule,
     MatFormFieldModule,
     MatSnackBarModule,
     MatTabsModule,
     MatDividerModule,
+    ScrollingModule,
+    CKEditorModule,
     DragDropModule,
     FlexLayoutModule,
     FormsModule,
