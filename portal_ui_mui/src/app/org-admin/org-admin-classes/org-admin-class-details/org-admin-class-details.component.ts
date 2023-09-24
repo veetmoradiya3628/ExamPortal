@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { SelectionModel } from '@angular/cdk/collections';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { Classes } from 'src/app/models/classes.model';
 import { Posts } from 'src/app/models/posts.model';
+import { IUser } from 'src/app/models/user.model';
 import { OrgAdminServiceService } from 'src/app/services/org-admin-service.service';
 
 @Component({
@@ -23,11 +28,12 @@ export class OrgAdminClassDetailsComponent implements OnInit {
     private router: Router,
     private _apiService: OrgAdminServiceService) {
     this._route.params.subscribe(params => this.classId = params['id']);
+
+    this.loadClassroomById();
+    this.loadPostsForClass(this.classId);
   }
 
   ngOnInit(): void {
-    this.loadClassroomById();
-    this.loadPostsForClass(this.classId);
   }
 
   loadPostsForClass(classId: string) {
@@ -57,5 +63,4 @@ export class OrgAdminClassDetailsComponent implements OnInit {
       }
     )
   }
-
 }

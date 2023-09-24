@@ -95,6 +95,14 @@ public class ClassroomController {
     }
 
     /*
+     * Get User not mapped to Classroom with Role
+     */
+    @GetMapping("{classroomId}/notMappedUsers")
+    public ResponseEntity<?> getUsersNotMappedToClassroom(@PathVariable("classroomId") String classroomId, @RequestParam(required = false) String role){
+        return this.classroomUserService.getUsersNotMappedToClassroomByRole(classroomId, role);
+    }
+
+    /*
      * Delete User mapping from classroom
      */
     @DeleteMapping("{classroomId}/user/{userId}")

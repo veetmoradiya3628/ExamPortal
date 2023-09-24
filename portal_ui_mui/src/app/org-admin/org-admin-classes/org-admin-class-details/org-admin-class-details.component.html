@@ -42,9 +42,11 @@
                         </div>
                     </mat-tab>
                     <mat-tab label="Teacher">
-                        
+                       <app-org-admin-class-teachers [classId]="classId"></app-org-admin-class-teachers>
                     </mat-tab>
-                    <mat-tab label="Students">lorem1000</mat-tab>
+                    <mat-tab label="Students">
+                        <app-org-admin-class-students [classId]="classId"></app-org-admin-class-students>
+                    </mat-tab>
                     <mat-tab label="Quiz">Quiz section yet to Implement from Backend</mat-tab>
                 </mat-tab-group>
             </mat-card-content>

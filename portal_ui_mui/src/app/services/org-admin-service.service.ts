@@ -36,4 +36,10 @@ export class OrgAdminServiceService {
     return this.http.get(url);
   }
 
+  // get user for classroom with specific role
+  public getUsersOfClassroomWithRole(orgId: string, roleName: string): Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/' + orgId + '/users?role=' + roleName;
+    return this.http.get(url);
+  }
+
 }

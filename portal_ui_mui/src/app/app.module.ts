@@ -18,6 +18,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatBadgeModule } from '@angular/material/badge';
 import { TableComponentComponent } from './test/table-component/table-component.component';
@@ -62,6 +63,8 @@ import { OrgAdminProfileComponent } from './org-admin/org-admin-profile/org-admi
 import { OrgAdminClassDetailsComponent } from './org-admin/org-admin-classes/org-admin-class-details/org-admin-class-details.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { OrgAdminClassStudentsComponent } from './org-admin/org-admin-classes/org-admin-class-students/org-admin-class-students.component';
+import { OrgAdminClassTeachersComponent } from './org-admin/org-admin-classes/org-admin-class-teachers/org-admin-class-teachers.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +98,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     OrgAdminStudentComponent,
     OrgAdminProfileComponent,
     OrgAdminClassDetailsComponent,
+    OrgAdminClassStudentsComponent,
+    OrgAdminClassTeachersComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,6 +122,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatSortModule,
     MatGridListModule,
     MatMenuModule,
+    MatCheckboxModule,
     MatTreeModule,
     MatBadgeModule,
     MatFormFieldModule,

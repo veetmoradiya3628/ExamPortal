@@ -9,9 +9,12 @@ import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.ClassroomRepository;
 import com.exam.examserver.repo.ClassroomUserRepository;
+import com.exam.examserver.repo.OrganizationRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.ClassroomUserService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +25,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class ClassroomUserServiceImpl implements ClassroomUserService {
 
+    Logger logger = LoggerFactory.getLogger(ClassroomUserServiceImpl.class);
+
     @Autowired
     private ClassroomUserRepository classroomUserRepository;
+
+    @Autowired
+    private OrganizationRepository organizationRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -97,6 +106,52 @@ public class ClassroomUserServiceImpl implements ClassroomUserService {
             }
         } catch (Exception e) {
             System.out.println(Arrays.toString(e.getStackTrace()));
+            return ResponseHandler.generateResponse("Exception occurred" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getUsersNotMappedToClassroomByRole(String classroomId, String role) {
+        try{
+            Optional<Classroom> isClassroomPresent = this.classroomRepository.findById(classroomId);
+            if (isClassroomPresent.isEmpty()) {
+                return ResponseHandler.generateResponse("Classroom with classroomID" + classroomId + " not exists!", HttpStatus.NOT_FOUND, null);
+            } else {
+                List<User> orgUsers = this.userRepository.findByOrganization(isClassroomPresent.get().getOrganization());
+                logger.info("organization user count : "+orgUsers.size());
+                List<String> orgUsersId = new ArrayList<>();
+                orgUsers.forEach(user -> {
+                    orgUsersId.add(user.getUserId());
+                });
+                List<ClassroomUser> classroomMappedUsers = this.classroomUserRepository.findByClassroom(new Classroom(classroomId));
+                logger.info("classroom MappedUser count : " + classroomMappedUsers.size());
+                List<String> orgMappedUserIds = new ArrayList<>();
+                classroomMappedUsers.forEach(user -> {
+                    orgMappedUserIds.add(user.getUser().getUserId());
+                });
+
+                orgMappedUserIds.forEach(orgUsersId::remove);
+                logger.info("classroom not Mapped User count : "+orgUsersId.size());
+                List<UserDTO> responseUsers = new ArrayList<>();
+                orgUsers.forEach(user -> {
+                    if (orgUsersId.contains(user.getUserId())){
+                        AtomicBoolean isValidRoleUser = new AtomicBoolean(false);
+                        user.getUserRoles().forEach(r->{
+                            if (r.getRole().getRoleName().equalsIgnoreCase(role)){
+                                isValidRoleUser.set(true);
+                            }
+                        });
+                        if (isValidRoleUser.get()){
+                            UserDTO resp = this.modelMapper.map(user, UserDTO.class);
+                            responseUsers.add(resp);
+                        }
+                    }
+                });
+                logger.info("filtered role user which are not mapped to classroom : " + responseUsers.size());
+                return ResponseHandler.generateResponse("", HttpStatus.OK, responseUsers);
+            }
+        }catch (Exception e){
+            System.out.println("Exception : " + Arrays.toString(e.getStackTrace()));
             return ResponseHandler.generateResponse("Exception occurred" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }

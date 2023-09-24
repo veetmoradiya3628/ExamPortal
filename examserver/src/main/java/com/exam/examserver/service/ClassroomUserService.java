@@ -11,4 +11,6 @@ public interface ClassroomUserService {
     ResponseEntity<?> deleteUserMappingFromClassroom(String classroomId, String userId);
 
     ResponseEntity<?> getClassroomsByUserId(String userId);
+
+    ResponseEntity<?> getUsersNotMappedToClassroomByRole(String classroomId, String role);
 }
