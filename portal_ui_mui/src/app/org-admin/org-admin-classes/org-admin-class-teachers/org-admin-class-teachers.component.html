@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
-        <button mat-raised-button class="bg-black">Assign Teacher</button>
+        <button (click)="openMapTeacherDialog()" mat-raised-button class="bg-black">Assign Teacher</button>
         <mat-form-field fxFlex="25">
             <mat-label>Search Teacher</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>

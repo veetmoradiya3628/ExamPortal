@@ -42,4 +42,10 @@ export class OrgAdminServiceService {
     return this.http.get(url);
   }
 
+  // get user not mapped to classroom with specific role
+  public getUsersOfClassroomNotMappedToClassroomWithRole(orgId: string, roleName: string) : Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/' + orgId + '/notMappedUsers?role=' + roleName;
+    return this.http.get(url);
+  }
+
 }

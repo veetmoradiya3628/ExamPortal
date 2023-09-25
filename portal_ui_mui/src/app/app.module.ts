@@ -20,6 +20,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatBadgeModule } from '@angular/material/badge';
 import { TableComponentComponent } from './test/table-component/table-component.component';
 import { MatTableModule } from '@angular/material/table';
@@ -116,6 +117,7 @@ import { OrgAdminClassTeachersComponent } from './org-admin/org-admin-classes/or
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
+    MatDialogModule,
     MatListModule,
     MatTableModule,
     MatPaginatorModule,
