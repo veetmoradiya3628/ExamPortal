@@ -66,6 +66,18 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { OrgAdminClassStudentsComponent } from './org-admin/org-admin-classes/org-admin-class-students/org-admin-class-students.component';
 import { OrgAdminClassTeachersComponent } from './org-admin/org-admin-classes/org-admin-class-teachers/org-admin-class-teachers.component';
+import { TeacherSidebarComponent } from './teacher/teacher-sidebar/teacher-sidebar.component';
+import { TeacherQuizzesComponent } from './teacher/teacher-quizzes/teacher-quizzes.component';
+import { TeacherClassesComponent } from './teacher/teacher-classes/teacher-classes.component';
+import { TeacherStudentsComponent } from './teacher/teacher-students/teacher-students.component';
+import { TeacherProfileComponent } from './teacher/teacher-profile/teacher-profile.component';
+import { TeacherDashboardComponent } from './teacher/teacher-dashboard/teacher-dashboard.component';
+import { StudentSidebarComponent } from './student/student-sidebar/student-sidebar.component';
+import { StudentDashboardComponent } from './student/student-dashboard/student-dashboard.component';
+import { StudentQuizzesComponent } from './student/student-quizzes/student-quizzes.component';
+import { StudentAttemptsComponent } from './student/student-attempts/student-attempts.component';
+import { StudentClassesComponent } from './student/student-classes/student-classes.component';
+import { StudentProfileComponent } from './student/student-profile/student-profile.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +113,18 @@ import { OrgAdminClassTeachersComponent } from './org-admin/org-admin-classes/or
     OrgAdminClassDetailsComponent,
     OrgAdminClassStudentsComponent,
     OrgAdminClassTeachersComponent,
+    TeacherSidebarComponent,
+    TeacherQuizzesComponent,
+    TeacherClassesComponent,
+    TeacherStudentsComponent,
+    TeacherProfileComponent,
+    TeacherDashboardComponent,
+    StudentSidebarComponent,
+    StudentDashboardComponent,
+    StudentQuizzesComponent,
+    StudentAttemptsComponent,
+    StudentClassesComponent,
+    StudentProfileComponent,
   ],
   imports: [
     BrowserModule,
