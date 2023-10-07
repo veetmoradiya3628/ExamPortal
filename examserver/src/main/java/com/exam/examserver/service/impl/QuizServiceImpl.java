@@ -3,6 +3,7 @@ package com.exam.examserver.service.impl;
 
 import com.exam.examserver.dto.QuizDTO;
 import com.exam.examserver.entity.ClassroomUser;
+import com.exam.examserver.entity.Questions;
 import com.exam.examserver.entity.Quizzes;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.ResponseHandler;
@@ -11,6 +12,7 @@ import com.exam.examserver.repo.QuestionsRepository;
 import com.exam.examserver.repo.QuizzesRepository;
 import com.exam.examserver.service.QuizService;
 import com.mongodb.client.result.UpdateResult;
+import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,6 +111,29 @@ public class QuizServiceImpl implements QuizService {
                 }
             }else{
                 return ResponseHandler.generateResponse("No classroom and quiz found for the userId "+ userId, HttpStatus.NO_CONTENT, null);
+            }
+        }catch (Exception e){
+            logger.info("Exception : "+e.getMessage());
+            return ResponseHandler.generateResponse("Exception occurred...", HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getQuizWithQuestionsAndDetails(String quizId) {
+        try{
+            logger.info("service method called getQuizWithQuestionsAndDetails with quizId "+ quizId);
+            if(isQuizExistsById(quizId)){
+                logger.info("quiz with QuizId "+ quizId + " exists!!");
+                Quizzes quiz = this.quizzesRepository.findById(quizId).get();
+                logger.info(quiz.toString());
+                List<Questions> questionsOfQuiz = this.questionsRepository.findByQuizId(quizId);
+                JSONObject respObj = new JSONObject();
+                respObj.put("quizDetails", quiz);
+                respObj.put("questionDetails", questionsOfQuiz);
+                return ResponseHandler.generateResponse("Quiz details for quiz with Id : "+quizId, HttpStatus.OK, respObj.toMap());
+            }else{
+                logger.info("quiz with QuizId "+ quizId + " not exists!!");
+                return ResponseHandler.generateResponse("Quiz with quizId "+ quizId + " not exists!!", HttpStatus.NOT_FOUND, null);
             }
         }catch (Exception e){
             logger.info("Exception : "+e.getMessage());

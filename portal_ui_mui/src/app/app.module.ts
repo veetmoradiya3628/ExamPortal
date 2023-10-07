@@ -78,6 +78,7 @@ import { StudentQuizzesComponent } from './student/student-quizzes/student-quizz
 import { StudentAttemptsComponent } from './student/student-attempts/student-attempts.component';
 import { StudentClassesComponent } from './student/student-classes/student-classes.component';
 import { StudentProfileComponent } from './student/student-profile/student-profile.component';
+import { TeacherQuizDetailsComponent } from './teacher/teacher-quiz-details/teacher-quiz-details.component';
 
 @NgModule({
   declarations: [
@@ -125,6 +126,7 @@ import { StudentProfileComponent } from './student/student-profile/student-profi
     StudentAttemptsComponent,
     StudentClassesComponent,
     StudentProfileComponent,
+    TeacherQuizDetailsComponent,
   ],
   imports: [
     BrowserModule,

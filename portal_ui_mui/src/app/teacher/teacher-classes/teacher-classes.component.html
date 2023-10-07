@@ -1,1 +1,79 @@
-<p>teacher-classes works!</p>
+<div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
+    <div fxLayout="row" fxLayoutAlign="start start" class="mt-10">
+        <h2>Classrooms</h2>
+    </div>
+    <div fxLayout="row">
+        <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
+            <div fxFlex="49" fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start start" *ngFor="let cls of classrooms; let i=index">
+                    <mat-card class="m-10" fxFill *ngIf="i % 2 == 0">
+                        <mat-card-header>
+                            <mat-card-title class="class-title">{{ cls.classroomTitle }}</mat-card-title>
+                            <mat-card-subtitle class="class-sub-title">{{ cls.classroomSubTitle
+                                }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="m-10">
+                            <div fxLayout="row" fxLayoutAlign="space-between center">
+
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <p class="class-detail-font"><b>Created At :</b>
+                                        {{ cls.createdAt | date:
+                                        'yyyy/MM/dd h:mm:ss a' }}
+                                    </p>
+                                    <p class="class-detail-font"><b>Class code</b> : {{ cls.classroomCode }} </p>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <p class="class-detail-font"><b>Teachers</b> : 3 </p>
+                                    <p class="class-detail-font"><b>Students</b> : 121 </p>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <p class="class-detail-font"><b>Quizzes</b> : 13 </p>
+                                    <p class="class-detail-font"><b>Attempts</b> : 121 </p>
+                                </div>
+                            </div>
+
+                        </mat-card-content>
+                        <mat-card-actions align="end">
+                            <button [routerLink]="'../../teacher/class-details/'+ cls.classroomId" mat-raised-button color="accent">View Details ⟶</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+            <div fxFlex="49" fxLayout="column">
+                <div fxLayout="row" fxLayoutAlign="start start" *ngFor="let cls of classrooms; let i = index">
+                    <mat-card class="m-10" fxFill *ngIf="i % 2 != 0">
+                        <mat-card-header>
+                            <mat-card-title class="class-title">{{ cls.classroomTitle }}</mat-card-title>
+                            <mat-card-subtitle class="class-sub-title">{{ cls.classroomSubTitle
+                                }}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="m-10">
+                            <div fxLayout="row" fxLayoutAlign="space-between center">
+
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <p class="class-detail-font"><b>Created At :</b>
+                                        {{ cls.createdAt | date:
+                                        'yyyy/MM/dd h:mm:ss a' }}
+                                    </p>
+                                    <p class="class-detail-font"><b>Class code</b> : {{ cls.classroomCode }} </p>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <p class="class-detail-font"><b>Teachers</b> : 3 </p>
+                                    <p class="class-detail-font"><b>Students</b> : 121 </p>
+                                </div>
+                                <div fxLayout="column" fxLayoutAlign="start start">
+                                    <p class="class-detail-font"><b>Quizzes</b> : 13 </p>
+                                    <p class="class-detail-font"><b>Attempts</b> : 121 </p>
+                                </div>
+                            </div>
+
+                        </mat-card-content>
+                        <mat-card-actions align="end">
+                            <button [routerLink]="'../../teacher/class-details/'+ cls.classroomId" mat-raised-button color="accent">View Details ⟶</button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

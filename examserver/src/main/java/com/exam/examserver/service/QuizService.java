@@ -9,4 +9,6 @@ public interface QuizService {
     public ResponseEntity<?> changeQuizStatus(String quizId, Boolean status);
 
     public ResponseEntity<?> getQuizzesForUser(String userId);
+
+    public ResponseEntity<?> getQuizWithQuestionsAndDetails(String quizId);
 }

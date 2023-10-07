@@ -1,10 +1,7 @@
 package com.exam.examserver.controller;
 
 import com.exam.examserver.dto.QuizDTO;
-import com.exam.examserver.entity.Quizzes;
 import com.exam.examserver.helper.ResponseHandler;
-import com.exam.examserver.repo.QuestionsRepository;
-import com.exam.examserver.repo.QuizzesRepository;
 import com.exam.examserver.service.QuizService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,5 +54,14 @@ public class QuizController {
     public ResponseEntity<?> getQuizzesForUser(@PathVariable("userId") String userId){
         logger.info("received userId for getQuizzesForUser is : "+userId);
         return this.quizService.getQuizzesForUser(userId);
+    }
+
+    /*
+     * Get Quiz with Questions by QuizId for Attempt purpose
+     */
+    @GetMapping("/{quizId}/questions")
+    public ResponseEntity<?> getQuizByQuizIdWithQuestionAndDetails(@PathVariable("quizId") String quizId){
+        logger.info("controller method called getQuizByQuizIdWithQuestionAndDetails with quizId "+quizId);
+        return this.quizService.getQuizWithQuestionsAndDetails(quizId);
     }
 }
