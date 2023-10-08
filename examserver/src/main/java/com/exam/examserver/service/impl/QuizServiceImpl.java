@@ -120,23 +120,23 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public ResponseEntity<?> getQuizWithQuestionsAndDetails(String quizId) {
-        try{
-            logger.info("service method called getQuizWithQuestionsAndDetails with quizId "+ quizId);
-            if(isQuizExistsById(quizId)){
-                logger.info("quiz with QuizId "+ quizId + " exists!!");
+        try {
+            logger.info("service method called getQuizWithQuestionsAndDetails with quizId " + quizId);
+            if (isQuizExistsById(quizId)) {
+                logger.info("quiz with QuizId " + quizId + " exists!!");
                 Quizzes quiz = this.quizzesRepository.findById(quizId).get();
                 logger.info(quiz.toString());
                 List<Questions> questionsOfQuiz = this.questionsRepository.findByQuizId(quizId);
                 JSONObject respObj = new JSONObject();
                 respObj.put("quizDetails", quiz);
                 respObj.put("questionDetails", questionsOfQuiz);
-                return ResponseHandler.generateResponse("Quiz details for quiz with Id : "+quizId, HttpStatus.OK, respObj.toMap());
-            }else{
-                logger.info("quiz with QuizId "+ quizId + " not exists!!");
-                return ResponseHandler.generateResponse("Quiz with quizId "+ quizId + " not exists!!", HttpStatus.NOT_FOUND, null);
+                return ResponseHandler.generateResponse("Quiz details for quiz with Id : " + quizId, HttpStatus.OK, respObj.toMap());
+            } else {
+                logger.info("quiz with QuizId " + quizId + " not exists!!");
+                return ResponseHandler.generateResponse("Quiz with quizId " + quizId + " not exists!!", HttpStatus.NOT_FOUND, null);
             }
-        }catch (Exception e){
-            logger.info("Exception : "+e.getMessage());
+        } catch (Exception e) {
+            logger.info("Exception : " + e.getMessage());
             return ResponseHandler.generateResponse("Exception occurred...", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }

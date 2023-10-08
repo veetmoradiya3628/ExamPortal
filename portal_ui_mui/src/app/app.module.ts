@@ -79,6 +79,9 @@ import { StudentAttemptsComponent } from './student/student-attempts/student-att
 import { StudentClassesComponent } from './student/student-classes/student-classes.component';
 import { StudentProfileComponent } from './student/student-profile/student-profile.component';
 import { TeacherQuizDetailsComponent } from './teacher/teacher-quiz-details/teacher-quiz-details.component';
+import { TeacherQuizQuestionsComponent } from './teacher/teacher-quiz-details/teacher-quiz-questions/teacher-quiz-questions.component';
+import { TeacherCreateQuestionComponent } from './teacher/teacher-quiz-details/teacher-create-question/teacher-create-question.component';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
   declarations: [
@@ -127,6 +130,8 @@ import { TeacherQuizDetailsComponent } from './teacher/teacher-quiz-details/teac
     StudentClassesComponent,
     StudentProfileComponent,
     TeacherQuizDetailsComponent,
+    TeacherQuizQuestionsComponent,
+    TeacherCreateQuestionComponent,
   ],
   imports: [
     BrowserModule,
@@ -157,6 +162,7 @@ import { TeacherQuizDetailsComponent } from './teacher/teacher-quiz-details/teac
     MatSnackBarModule,
     MatTabsModule,
     MatDividerModule,
+    MaterialFileInputModule,
     ScrollingModule,
     CKEditorModule,
     DragDropModule,

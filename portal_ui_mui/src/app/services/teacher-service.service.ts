@@ -22,4 +22,10 @@ export class TeacherServiceService {
     return this.http.get(url);
   }
 
+  // get questions for quiz with quizId
+  public getQuestionsForQuizWithId(quizId: string): Observable<any> {
+    const url = this.BASE_URL + '/question/quiz/' + quizId;
+    return this.http.get(url);
+  }
+
 }

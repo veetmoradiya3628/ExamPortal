@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public interface ClassroomService {
+public interface  ClassroomService {
     List<ClassroomDTO> getAllClassrooms();
     List<ClassroomDTO> getClassroomsForOrganization(String orgId);
 
