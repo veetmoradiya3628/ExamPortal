@@ -2,39 +2,41 @@
     <div fxLayout="row" fxLayoutAlign="start start">
         <h2>Add Question</h2>
     </div>
+    <!-- {{ questionForm.value | json }} -->
     <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
         <div fxLayout="column" fxFlex="80">
-            <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
-                <div fxFlex="50">
-                    <h4>Question Type</h4>
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-form-field fxFill>
-                            <mat-label>Choose an Question Type</mat-label>
-                            <mat-select>
-                                <mat-option value="SINGLE_CORRECT">Single Correct MCQ</mat-option>
-                                <mat-option value="MULTIPLE_CORRECT">Multiple Correct MCQ</mat-option>
-                                <mat-option value="TRUE_FALSE">True / False</mat-option>
-                            </mat-select>
-                        </mat-form-field>
+            <form [formGroup]="questionForm" (ngSubmit)="addQuestionHandler()">
+                <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
+                    <div fxFlex="50">
+                        <h4>Question Type</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <mat-label>Choose an Question Type</mat-label>
+                                <mat-select formControlName="questionType">
+                                    <mat-option value="SINGLE_CORRECT">Single Correct MCQ</mat-option>
+                                    <mat-option value="MULTIPLE_CORRECT">Multiple Correct MCQ</mat-option>
+                                    <mat-option value="TRUE_FALSE">True / False</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex="50">
+                        <h4>Question Score</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <input formControlName="score" matInput placeholder="Question score" required>
+                            </mat-form-field>
+                        </div>
                     </div>
                 </div>
-                <div fxFlex="50">
-                    <h4>Question Score</h4>
-                    <div fxLayout="row" fxLayoutAlign="start start">
-                        <mat-form-field fxFill>
-                            <input matInput placeholder="Question score" required>
-                        </mat-form-field>
-                    </div>
+                <h4>Question Description</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <textarea formControlName="questionText" rows="3" matInput placeholder="Question description" required></textarea>
+                    </mat-form-field>
                 </div>
-            </div>
-            <h4>Question Description</h4>
-            <div fxLayout="row" fxLayoutAlign="start start">
-                <mat-form-field fxFill>
-                    <input matInput placeholder="Question description" required>
-                </mat-form-field>
-            </div>
 
-            <!-- <h4>Question Image</h4>
+                <!-- <h4>Question Image</h4>
             <div fxLayout="row" fxLayoutAlign="start start">
                 <div fxFlex="50">
                     <mat-form-field fxFill>
@@ -44,27 +46,36 @@
                 </div>
             </div> -->
 
-            <h4>Question Options</h4>
-            <div fxLayout="row" fxLayoutAling="start start" *ngFor="let optCnt of [0,1,2,3,4]">
-                <div fxFlex="3">
-                    <mat-checkbox></mat-checkbox>
-                    
-                    <!-- Check box handler -->
-                    <!-- <mat-radio-group>
-                        <mat-radio-button></mat-radio-button>
-                    </mat-radio-group> -->
+                <h4>Question Options</h4>
+                <div formArrayName="options">
+                    <div fxLayout="row" fxLayoutAling="start start"
+                        *ngFor="let option of this.getQuestionOptions(); let i = index" [formGroupName]="i">
+                        <div fxFlex="3">
+                            <div
+                                *ngIf="questionForm.value.questionType != '' && (questionForm.value.questionType === 'SINGLE_CORRECT' || questionForm.value.questionType === 'TRUE_FALSE')">
+                                <mat-radio-group name="options" formControlName="isCorrect"> 
+                                    <mat-radio-button name="option" value="true"></mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                            <div
+                                *ngIf="questionForm.value.questionType != '' && (questionForm.value.questionType === 'MULTIPLE_CORRECT')">
+                                <mat-checkbox formControlName="isCorrect"></mat-checkbox>
+                            </div>
+                        </div>
+                        <div fxFlex="97">
+                            <mat-form-field fxFill>
+                                <input matInput formControlName="optionText" placeholder="Option text" required>
+                            </mat-form-field>
+                        </div>
+                    </div>
                 </div>
-                <div fxFlex="97">
-                    <mat-form-field fxFill>
-                        <input matInput placeholder="Option text" required>
-                    </mat-form-field>
-                </div>
-            </div>
 
-            <div fxLayout="row" fxLayoutAlign="center center">
-                <button mat-raised-button color="primary">Add Question</button>
-                <button mat-raised-button color="secondary" class="ml-5" [routerLink]="'/admin/users'">Cancel</button>
-            </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" type="submit">Add Question</button>
+                    <button mat-raised-button color="secondary" class="ml-5"
+                        (click)="cancelQuestionCreation()">Cancel</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

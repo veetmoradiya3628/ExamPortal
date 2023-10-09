@@ -21,7 +21,7 @@
                             <div fxLayout="row" fxLayoutAlign="start start">
                                 <p class="mr-10 font-15">{{ ques.questionType }}</p>
                                 <button class="mr-10" mat-raised-button color="primary">Edit</button>
-                                <button mat-raised-button color="warn">Delete</button>
+                                <button mat-raised-button (click)="openDeleteQuestionConfirmDialog(ques.id)" color="warn">Delete</button>
                             </div>
                         </div>
                     </div>

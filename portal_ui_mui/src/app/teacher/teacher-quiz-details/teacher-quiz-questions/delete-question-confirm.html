@@ -1,0 +1,8 @@
+<h1 mat-dialog-title><mat-icon>delete</mat-icon>Deleting Question</h1>
+<div mat-dialog-content>
+    Are you sure want to delete this Question ?
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="accent" mat-dialog-close>No</button>
+  <button mat-raised-button (click)="deleteQuestion()" color="warn" mat-dialog-close cdkFocusInitial>Yes</button>
+</div>

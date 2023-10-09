@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Question } from '../models/question.model';
 
 @Injectable({
   providedIn: 'root'
@@ -28,4 +29,15 @@ export class TeacherServiceService {
     return this.http.get(url);
   }
 
+  // add Question
+  public addQuestion(questionData: Question): Observable<any> {
+    const url = this.BASE_URL + '/question/create';
+    return this.http.post(url, questionData);
+  }
+
+  // delete Question with questionId
+  public deleteQuestionwithId(questionId : string) : Observable<any> {
+    const url = this.BASE_URL + '/question/' + questionId;
+    return this.http.delete(url);
+  }
 }
