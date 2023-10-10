@@ -82,6 +82,10 @@ import { TeacherQuizDetailsComponent } from './teacher/teacher-quiz-details/teac
 import { TeacherQuizQuestionsComponent } from './teacher/teacher-quiz-details/teacher-quiz-questions/teacher-quiz-questions.component';
 import { TeacherCreateQuestionComponent } from './teacher/teacher-quiz-details/teacher-create-question/teacher-create-question.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
+import { CreateQuizComponent } from './teacher/teacher-quizzes/create-quiz/create-quiz.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -132,6 +136,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     TeacherQuizDetailsComponent,
     TeacherQuizQuestionsComponent,
     TeacherCreateQuestionComponent,
+    CreateQuizComponent,
   ],
   imports: [
     BrowserModule,
@@ -163,13 +168,16 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MatTabsModule,
     MatDividerModule,
     MaterialFileInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     ScrollingModule,
     CKEditorModule,
     DragDropModule,
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

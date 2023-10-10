@@ -1,0 +1,78 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
+    <div fxLayout="row" fxLayoutAlign="start start">
+        <h2>Create Quiz</h2>
+    </div>
+    {{ addQuizForm.value | json }}
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
+        <div fxLayout="column" fxFlex="80">
+            <form [formGroup]="addQuizForm" (ngSubmit)="addQuestionHandler()">
+                <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
+                    <div fxFlex="50">
+                        <h4>Classroom</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <mat-label>Choose An Classroom</mat-label>
+                                <mat-select formControlName="classroomId">
+                                    <mat-option *ngFor="let classroom of classrooms" [value]="classroom.classroomId">
+                                        {{ classroom.classroomTitle }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex="50">
+                        <h4>Quiz Duration (In Minutes)</h4>
+                        <mat-form-field fxFill>
+                            <input matInput placeholder="Quiz Duration (In Minutes)" required formControlName="duration">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <h4>Quiz Title</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput placeholder="Quiz Title" required formControlName="quizTitle">
+                    </mat-form-field>
+                </div>
+                <h4>Quiz description</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <textarea matInput rows="5" placeholder="please add quiz description" formControlName="quizDescription" required></textarea>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
+                    <div fxFlex="50">
+                        <h4>Quiz Date</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <input matInput [matDatepicker]="datepicker" [min]="todayDate" formControlName="startTime">
+                                <mat-hint>MM/DD/YYYY</mat-hint>
+                                <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #datepicker>
+                                    <mat-datepicker-actions>
+                                        <button mat-button matDatepickerCancel>Cancel</button>
+                                        <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
+                                    </mat-datepicker-actions>
+                                </mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex="50">
+                        <h4>Start Time</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <input [ngxTimepicker]="picker" matInput formControlName="selectedTime">
+                                <ngx-material-timepicker #picker></ngx-material-timepicker>
+                                <mat-icon matSuffix>access_time</mat-icon>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" type="submit">Add Quiz</button>
+                    <button mat-raised-button color="secondary" class="ml-5"
+                        [routerLink]="'/admin/users'">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
