@@ -86,6 +86,7 @@ import { CreateQuizComponent } from './teacher/teacher-quizzes/create-quiz/creat
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import { TeacherClassDetailsComponent } from './teacher/teacher-classes/teacher-class-details/teacher-class-details.component';
 
 @NgModule({
   declarations: [
@@ -137,6 +138,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     TeacherQuizQuestionsComponent,
     TeacherCreateQuestionComponent,
     CreateQuizComponent,
+    TeacherClassDetailsComponent,
   ],
   imports: [
     BrowserModule,

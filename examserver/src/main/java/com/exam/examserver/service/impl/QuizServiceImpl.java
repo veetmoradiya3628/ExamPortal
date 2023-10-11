@@ -141,6 +141,32 @@ public class QuizServiceImpl implements QuizService {
         }
     }
 
+    @Override
+    public ResponseEntity<?> getQuizzesForClassroom(String classId) {
+        try {
+            logger.info("service method called getQuizzesForClassroom with quizId " + classId);
+            if(this.classroomService.isClassroomPresentById(classId)){
+                // classroom present
+                List<Quizzes> quizzesForClassroom = this.quizzesRepository.findByClassroomId(classId);
+                List<QuizDTO> respQuizList = new ArrayList<>();
+                quizzesForClassroom.forEach(quiz -> {
+                    QuizDTO q = this.modelMapper.map(quiz, QuizDTO.class);
+                    q.setId(quiz.getId().toString());
+                    respQuizList.add(q);
+                });
+                logger.info("quizzes for classroom response --> " + respQuizList);
+                return ResponseHandler.generateResponse("quizzes for classroom with classId : "+classId, HttpStatus.OK, respQuizList);
+            }else{
+                // classroom not present
+                logger.info("classroom with classId " + classId + " not exists!!");
+                return ResponseHandler.generateResponse("classroom with classId " + classId + " not exists!!", HttpStatus.NOT_FOUND, null);
+            }
+        } catch (Exception e) {
+            logger.info("Exception : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception occurred...", HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
 
     public boolean isQuizExistsById(String quizId){
         return this.quizzesRepository.findById(quizId).isPresent();

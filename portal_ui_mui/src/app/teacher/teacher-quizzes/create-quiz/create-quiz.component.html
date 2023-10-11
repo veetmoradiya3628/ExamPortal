@@ -2,10 +2,10 @@
     <div fxLayout="row" fxLayoutAlign="start start">
         <h2>Create Quiz</h2>
     </div>
-    {{ addQuizForm.value | json }}
+    <!-- {{ addQuizForm.value | json }} -->
     <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
         <div fxLayout="column" fxFlex="80">
-            <form [formGroup]="addQuizForm" (ngSubmit)="addQuestionHandler()">
+            <form [formGroup]="addQuizForm" (ngSubmit)="addQuizHandler()">
                 <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
                     <div fxFlex="50">
                         <h4>Classroom</h4>
@@ -23,7 +23,7 @@
                     <div fxFlex="50">
                         <h4>Quiz Duration (In Minutes)</h4>
                         <mat-form-field fxFill>
-                            <input matInput placeholder="Quiz Duration (In Minutes)" required formControlName="duration">
+                            <input type="number" matInput placeholder="Quiz Duration (In Minutes)" required formControlName="duration">
                         </mat-form-field>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                         <h4>Quiz Date</h4>
                         <div fxLayout="row" fxLayoutAlign="start start">
                             <mat-form-field fxFill>
-                                <input matInput [matDatepicker]="datepicker" [min]="todayDate" formControlName="startTime">
+                                <input matInput [matDatepicker]="datepicker" [min]="todayDate" formControlName="selectedDate">
                                 <mat-hint>MM/DD/YYYY</mat-hint>
                                 <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
                                 <mat-datepicker #datepicker>

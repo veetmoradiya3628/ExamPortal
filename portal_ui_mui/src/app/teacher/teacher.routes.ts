@@ -7,6 +7,7 @@ import { TeacherProfileComponent } from "./teacher-profile/teacher-profile.compo
 import { TeacherQuizDetailsComponent } from "./teacher-quiz-details/teacher-quiz-details.component";
 import { TeacherCreateQuestionComponent } from "./teacher-quiz-details/teacher-create-question/teacher-create-question.component";
 import { CreateQuizComponent } from "./teacher-quizzes/create-quiz/create-quiz.component";
+import { TeacherClassDetailsComponent } from "./teacher-classes/teacher-class-details/teacher-class-details.component";
 
 export const teacherRoutes: Routes = [
     {
@@ -45,6 +46,11 @@ export const teacherRoutes: Routes = [
     {
         path: 'profile',
         component: TeacherProfileComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'class-details/:id',
+        component: TeacherClassDetailsComponent,
         pathMatch: 'full'
     }
 ]

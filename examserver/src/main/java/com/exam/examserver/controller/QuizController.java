@@ -64,4 +64,13 @@ public class QuizController {
         logger.info("controller method called getQuizByQuizIdWithQuestionAndDetails with quizId "+quizId);
         return this.quizService.getQuizWithQuestionsAndDetails(quizId);
     }
+
+    /*
+     * Method to get quiz which is mapped to particular class
+     */
+    @GetMapping("/class/{classId}")
+    public ResponseEntity<?> getQuizzesForClassroom(@PathVariable("classId") String classId){
+        logger.info("controller method called getQuizzesForClassroom with classId " + classId);
+        return this.quizService.getQuizzesForClassroom(classId);
+    }
 }

@@ -40,4 +40,10 @@ export class TeacherServiceService {
     const url = this.BASE_URL + '/question/' + questionId;
     return this.http.delete(url);
   }
+
+  // add quiz
+  public addQuiz(reqObject: any) : Observable<any> {
+    const url = this.BASE_URL + '/quizzes/create';
+    return this.http.post(url, reqObject)
+  }
 }
