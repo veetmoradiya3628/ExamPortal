@@ -39,7 +39,6 @@ export class OrgAdminCreateClassComponent implements OnInit {
           console.log('error occured while creating classroom')
         }
       )
-
     }
   }
 

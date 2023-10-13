@@ -6,6 +6,8 @@ import { OrgAdminStudentComponent } from "./org-admin-student/org-admin-student.
 import { OrgAdminProfileComponent } from "./org-admin-profile/org-admin-profile.component";
 import { OrgAdminClassDetailsComponent } from "./org-admin-classes/org-admin-class-details/org-admin-class-details.component";
 import { OrgAdminCreateClassComponent } from "./org-admin-create-class/org-admin-create-class.component";
+import { OrgAdminCreateTeacherComponent } from "./org-admin-teacher/org-admin-create-teacher/org-admin-create-teacher.component";
+import { OrgAdminCreateStudentComponent } from "./org-admin-student/org-admin-create-student/org-admin-create-student.component";
 
 export const orgAdminRoutes: Routes = [
     {
@@ -24,8 +26,18 @@ export const orgAdminRoutes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'create-teacher',
+        component: OrgAdminCreateTeacherComponent,
+        pathMatch: 'full'
+    },
+    {
         path: 'student',
         component: OrgAdminStudentComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'create-student',
+        component: OrgAdminCreateStudentComponent,
         pathMatch: 'full'
     },
     {

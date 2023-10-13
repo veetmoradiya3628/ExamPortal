@@ -1,6 +1,6 @@
 <div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
     <div fxLayout="row" fxLayoutAlign="space-between stretch">
-        <button mat-raised-button class="bg-black" [routerLink]="'/admin/add-user'">Create Student</button>
+        <button mat-raised-button class="bg-black" [routerLink]="'/org-admin/create-student'">Create Student</button>
         <mat-form-field fxFlex="25">
             <mat-label>Search Student</mat-label>
             <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>

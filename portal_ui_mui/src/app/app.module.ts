@@ -88,6 +88,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { TeacherClassDetailsComponent } from './teacher/teacher-classes/teacher-class-details/teacher-class-details.component';
 import { OrgAdminCreateClassComponent } from './org-admin/org-admin-create-class/org-admin-create-class.component';
+import { OrgAdminCreateStudentComponent } from './org-admin/org-admin-student/org-admin-create-student/org-admin-create-student.component';
+import { OrgAdminCreateTeacherComponent } from './org-admin/org-admin-teacher/org-admin-create-teacher/org-admin-create-teacher.component';
 
 @NgModule({
   declarations: [
@@ -141,6 +143,8 @@ import { OrgAdminCreateClassComponent } from './org-admin/org-admin-create-class
     CreateQuizComponent,
     TeacherClassDetailsComponent,
     OrgAdminCreateClassComponent,
+    OrgAdminCreateStudentComponent,
+    OrgAdminCreateTeacherComponent,
   ],
   imports: [
     BrowserModule,
