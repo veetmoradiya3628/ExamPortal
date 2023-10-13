@@ -1,0 +1,32 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
+    <div fxLayout="row" fxLayoutAlign="start start">
+        <h2>Add Classroom</h2>
+    </div>
+    <!-- {{ createClassForm.value | json}} -->
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
+        <div fxLayout="column" fxFlex="60">
+            <form [formGroup]="createClassForm" (ngSubmit)="addClassroom()">
+
+                <h4>Classroom Title</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="classroomTitle" placeholder="test organization..." required>
+                    </mat-form-field>
+                </div>
+                <h4>Classroom Sub Title</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <textarea rows="5" cols="5" formControlName="classroomSubTitle" matInput
+                            placeholder="test description..." required></textarea>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" type="submit">Add Classroom</button>
+                    <button mat-raised-button color="secondary" class="ml-5"
+                        [routerLink]="'/org-admin/classes'">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

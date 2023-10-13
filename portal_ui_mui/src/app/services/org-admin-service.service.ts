@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Classes } from '../models/classes.model';
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,12 @@ export class OrgAdminServiceService {
   public getUsersOfClassroomNotMappedToClassroomWithRole(orgId: string, roleName: string) : Observable<any> {
     const url = this.BASE_URL + '/api/classroom/' + orgId + '/notMappedUsers?role=' + roleName;
     return this.http.get(url);
+  }
+
+  // create class
+  public createClass(newClass: Classes) : Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/';
+    return this.http.post(url, newClass);
   }
 
 }

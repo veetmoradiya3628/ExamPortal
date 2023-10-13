@@ -1,7 +1,9 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { NodeStyleEventEmitter } from 'rxjs/internal/observable/fromEvent';
 import { IUser } from 'src/app/models/user.model';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 
@@ -16,6 +18,7 @@ export class AdminUsersComponent implements OnInit {
 
   displayedColumns: string[] = ['username', 'email', 'role', 'is_enabled', 'action'];
   dataSource!: MatTableDataSource<IUser>;
+  // @Output() change: EventEmitter<MatSlideToggleChange>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -41,6 +44,19 @@ export class AdminUsersComponent implements OnInit {
     )
   }
 
+  changeUserStauts(event: MatSlideToggleChange, userId: string) {
+    console.log(`${event.checked}, ${userId}`)
+    this._adminService.updateUserStatus(userId, event.checked).subscribe(
+      (res: any) => {
+        console.log(res)
+        this.loadUserData();
+      },
+      (error: any) => {
+        console.log('error occured while updating user status')
+      }
+    )
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -51,3 +67,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
 }
+function Output(): (target: AdminUsersComponent, propertyKey: "change") => void {
+  throw new Error('Function not implemented.');
+}
+

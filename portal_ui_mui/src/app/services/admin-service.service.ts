@@ -29,4 +29,16 @@ export class AdminServiceService {
     const url = this.BASE_URL + '/user/';
     return this.http.get<IUser>(url);
   }
+
+  // add User
+  public addUser(userData: IUser): Observable<any> {
+    const url = this.BASE_URL + '/user/';
+    return this.http.post(url, userData);
+  }  
+
+  // update user status
+  public updateUserStatus(id: string, status: boolean) {
+    const url = this.BASE_URL + '/user/' + id +'/'+ status;
+    return this.http.post(url, null);
+  }
 }

@@ -87,6 +87,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { TeacherClassDetailsComponent } from './teacher/teacher-classes/teacher-class-details/teacher-class-details.component';
+import { OrgAdminCreateClassComponent } from './org-admin/org-admin-create-class/org-admin-create-class.component';
 
 @NgModule({
   declarations: [
@@ -139,6 +140,7 @@ import { TeacherClassDetailsComponent } from './teacher/teacher-classes/teacher-
     TeacherCreateQuestionComponent,
     CreateQuizComponent,
     TeacherClassDetailsComponent,
+    OrgAdminCreateClassComponent,
   ],
   imports: [
     BrowserModule,
