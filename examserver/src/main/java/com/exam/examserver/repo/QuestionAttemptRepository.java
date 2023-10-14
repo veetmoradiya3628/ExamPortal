@@ -9,4 +9,6 @@ import java.util.List;
 public interface QuestionAttemptRepository extends MongoRepository<QuestionAttempt, String> {
     @Query("{'$and': [{'userId': ?0},{'questionId': ?1},{'quizAttemptId':?2}]}")
     public List<QuestionAttempt> checkForAttemptExists(String userId, String questionId, String questionAttemptId);
+
+    public List<QuestionAttempt> findByQuizAttemptId(String quizAttemptId);
 }

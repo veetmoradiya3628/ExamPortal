@@ -1,5 +1,6 @@
 package com.exam.examserver.controller;
 
+import com.exam.examserver.req_res_format.QuizEndRequest;
 import com.exam.examserver.req_res_format.QuizStartRequest;
 import com.exam.examserver.service.QuizAttemptService;
 import org.json.JSONObject;
@@ -22,5 +23,11 @@ public class QuizAttemptController {
     public ResponseEntity<?> startQuizAttempt(@RequestBody QuizStartRequest request){
         logger.info("controller method called startQuizAttempt " + request.toString());
         return quizAttemptService.startQuizAttemptService(request);
+    }
+
+    @PostMapping("/endQuiz")
+    public ResponseEntity<?> endQuizAttempt(@RequestBody QuizEndRequest request){
+        logger.info("controller method called endQuizAttempt " + request.toString());
+        return quizAttemptService.endQuizAttemptService(request);
     }
 }

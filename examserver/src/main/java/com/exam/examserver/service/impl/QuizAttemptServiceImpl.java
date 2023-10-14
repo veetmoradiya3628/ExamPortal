@@ -2,10 +2,8 @@ package com.exam.examserver.service.impl;
 
 import com.exam.examserver.entity.*;
 import com.exam.examserver.helper.ResponseHandler;
-import com.exam.examserver.repo.ClassroomUserRepository;
-import com.exam.examserver.repo.QuizAttemptRepository;
-import com.exam.examserver.repo.QuizzesRepository;
-import com.exam.examserver.repo.UserRepository;
+import com.exam.examserver.repo.*;
+import com.exam.examserver.req_res_format.QuizEndRequest;
 import com.exam.examserver.req_res_format.QuizStartRequest;
 import com.exam.examserver.service.QuizAttemptService;
 import org.slf4j.Logger;
@@ -19,6 +17,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
 public class QuizAttemptServiceImpl implements QuizAttemptService {
@@ -36,6 +35,12 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
 
     @Autowired
     private ClassroomUserRepository classroomUserRepository;
+
+    @Autowired
+    private QuestionsRepository questionsRepository;
+
+    @Autowired
+    private QuestionAttemptRepository questionAttemptRepository;
 
     @Override
     public ResponseEntity<?> startQuizAttemptService(QuizStartRequest request) {
@@ -84,6 +89,77 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
                 // quiz not present with this id
                 logger.info("quiz with quizId : "+quizId+ " not present");
                 return ResponseHandler.generateResponse("Not a Valid quizId, pass valid quizId", HttpStatus.NOT_FOUND, null);
+            }
+        }catch (Exception e){
+            logger.info("Exception occurred in the function startQuizAttemptService : "+e.getMessage());
+            return ResponseHandler.generateResponse("Exception : "+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> endQuizAttemptService(QuizEndRequest request) {
+        logger.info("service method called endQuizAttemptService with request parameter : " + request);
+        try{
+            // Validate quizAttemptId is valid
+            Optional<QuizAttempt> quizAttemptCheck = this.quizAttemptRepository.findById(request.getQuizAttemptId());
+            if(quizAttemptCheck.isPresent()){
+                // Validate quiz already completed ...
+                if (quizAttemptCheck.get().getIsAttemptCompleted()){
+                    return ResponseHandler.generateResponse("Quiz already attempted and ended", HttpStatus.ALREADY_REPORTED, quizAttemptCheck.get());
+                }else{
+                    QuizAttempt quizAttempt = quizAttemptCheck.get();
+
+                    List<Questions> questionsOfQuiz = this.questionsRepository.findByQuizId(quizAttempt.getQuizId());
+                    logger.info("questionsOfQuiz" + questionsOfQuiz);
+
+                    List<QuestionAttempt> attemptedQuestions = this.questionAttemptRepository.findByQuizAttemptId(request.getQuizAttemptId());
+                    logger.info("attemptedQuestions" + attemptedQuestions);
+
+                    List<String> questionIds = new ArrayList<>();
+                    questionsOfQuiz.forEach(question -> questionIds.add(String.valueOf(question.getId())));
+
+                    AtomicInteger totalQuizScore = new AtomicInteger();
+
+                    List<String> attemptedQuestionIds = new ArrayList<>();
+                    List<String> attemptedCorrect = new ArrayList<>();
+                    List<String> attemptedWrong = new ArrayList<>();
+                    attemptedQuestions.forEach(attemptedQuestion -> {
+                        attemptedQuestionIds.add(attemptedQuestion.getQuestionId());
+                        if (attemptedQuestion.getIsAttemptedCorrect()){
+                            attemptedCorrect.add(String.valueOf(attemptedQuestion.getId())); // refers to attempted Id of the question
+                            totalQuizScore.addAndGet(attemptedQuestion.getQuestion().getScore());
+                        }else{
+                            attemptedWrong.add(String.valueOf(attemptedQuestion.getId())); // refers to attempted Id of the question
+                        }
+                    });
+
+                    List<String> notAttemptedQuestionIds = new ArrayList<>();
+                    questionIds.forEach(questionId -> {
+                        if (!attemptedQuestionIds.contains(questionId)){
+                            notAttemptedQuestionIds.add(questionId);
+                        }
+                    });
+
+                    logger.info("questions Ids : "+questionIds);
+                    logger.info("attempted questions Ids : "+attemptedQuestionIds);
+                    logger.info("not attempted questions Ids : "+notAttemptedQuestionIds);
+
+                    quizAttempt.setCorrectQuestionsId(attemptedCorrect);
+                    quizAttempt.setWrongQuestionsId(attemptedWrong);
+                    quizAttempt.setNotAttemptedQuestionId(notAttemptedQuestionIds);
+                    quizAttempt.setScore(totalQuizScore.get());
+                    quizAttempt.setIsAttemptCompleted(true);
+                    quizAttempt.setQuizStatus(QuizAttempt.QuizStatus.ENDED);
+                    quizAttempt.setAttemptEndedAt(LocalDateTime.now());
+
+                    logger.info("quizAttempt formatted object : " + quizAttempt.toString());
+                    this.quizAttemptRepository.save(quizAttempt);
+
+                    return ResponseHandler.generateResponse("Quiz ended successfully...", HttpStatus.OK, quizAttempt);
+                }
+            }else{
+                logger.info("quiz attempt you are trying to end is not valid quizAttemptId : "+request.getQuizAttemptId());
+                return ResponseHandler.generateResponse("quiz attempt id " + request.getQuizAttemptId() + " not a valid id.", HttpStatus.NOT_FOUND, null);
             }
         }catch (Exception e){
             logger.info("Exception occurred in the function startQuizAttemptService : "+e.getMessage());
