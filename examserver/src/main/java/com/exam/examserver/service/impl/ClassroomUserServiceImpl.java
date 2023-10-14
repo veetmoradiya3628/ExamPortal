@@ -194,4 +194,5 @@ public class ClassroomUserServiceImpl implements ClassroomUserService {
             return ResponseHandler.generateResponse("Exception occurred" + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
+
 }

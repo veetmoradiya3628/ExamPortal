@@ -19,6 +19,11 @@ import java.util.List;
 @Setter
 @Document(collection = "attempt_quiz")
 public class QuizAttempt {
+    public enum QuizStatus {
+        ON_GOING,
+        ENDED
+    }
+
     @Id
     private ObjectId id;
     private String userId;
@@ -29,6 +34,7 @@ public class QuizAttempt {
     private List<String> notAttemptedQuestionId;
     private Boolean isAttemptCompleted;
     private String reportUrl;
+    private QuizStatus quizStatus;
     @CreatedDate
     private LocalDateTime attemptStartedAt;
     @LastModifiedDate
