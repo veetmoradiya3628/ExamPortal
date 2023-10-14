@@ -96,4 +96,9 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
         List<ClassroomUser> listOfUsers = this.classroomUserRepository.findByClassroomAndUser(new Classroom(quiz.getClassroomId()), user);
         return listOfUsers.size() > 0;
     }
+
+    public Boolean isQuizAttemptPresentAndAttemptIsActive(String attemptId){
+        Optional<QuizAttempt> quizAttempt = this.quizAttemptRepository.findById(attemptId);
+        return quizAttempt.isPresent() && !quizAttempt.get().getIsAttemptCompleted();
+    }
 }

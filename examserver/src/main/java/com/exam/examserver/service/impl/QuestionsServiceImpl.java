@@ -112,4 +112,8 @@ public class QuestionsServiceImpl implements QuestionsService {
             return ResponseHandler.generateResponse("Exception : "+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
+
+    public Boolean isQuestionPresentById(String questionId){
+        return this.questionsRepository.findById(questionId).isPresent();
+    }
 }

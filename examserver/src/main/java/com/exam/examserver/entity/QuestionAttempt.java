@@ -17,12 +17,14 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
+@Builder
 @Document(collection = "attempt_question")
 public class QuestionAttempt {
     @Id
     private ObjectId id;
     private Questions question;
     private String userId;
+    private String questionId;
     private String quizAttemptId;
     private List<Options> selectedOptions;
     private Boolean isAttemptedCorrect;
