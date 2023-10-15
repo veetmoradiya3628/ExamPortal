@@ -3,9 +3,12 @@ package com.exam.examserver.service.impl;
 import com.exam.examserver.entity.*;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.*;
+import com.exam.examserver.req_res_format.QuizAttemptDetailRequest;
 import com.exam.examserver.req_res_format.QuizEndRequest;
 import com.exam.examserver.req_res_format.QuizStartRequest;
 import com.exam.examserver.service.QuizAttemptService;
+import org.json.HTTP;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -160,6 +163,47 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
             }else{
                 logger.info("quiz attempt you are trying to end is not valid quizAttemptId : "+request.getQuizAttemptId());
                 return ResponseHandler.generateResponse("quiz attempt id " + request.getQuizAttemptId() + " not a valid id.", HttpStatus.NOT_FOUND, null);
+            }
+        }catch (Exception e){
+            logger.info("Exception occurred in the function startQuizAttemptService : "+e.getMessage());
+            return ResponseHandler.generateResponse("Exception : "+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getQuizDetailsByQuizAttemptIdService(QuizAttemptDetailRequest request) {
+        try{
+            logger.info("service method called getQuizDetailsByQuizAttemptIdService with request parameter : " + request);
+            // Validate requestAttemptId
+            Optional<QuizAttempt> quizAttemptOptional = this.quizAttemptRepository.findById(request.getQuizAttemptId());
+            if (quizAttemptOptional.isPresent()){
+                QuizAttempt quizAttempt = quizAttemptOptional.get();
+
+                List<QuestionAttempt> correctAttemptedQuestions = new ArrayList<>();
+                quizAttempt.getCorrectQuestionsId().forEach(questionAttemptId -> {
+                    correctAttemptedQuestions.add(this.questionAttemptRepository.findById(questionAttemptId).get());
+                });
+
+                List<QuestionAttempt> wrongAttemptedQuestions = new ArrayList<>();
+                quizAttempt.getWrongQuestionsId().forEach(questionAttemptId -> {
+                    wrongAttemptedQuestions.add(this.questionAttemptRepository.findById(questionAttemptId).get());
+                });
+
+                List<Questions> notAttemptedQuestions = new ArrayList<>();
+                quizAttempt.getNotAttemptedQuestionId().forEach(questionId -> {
+                    notAttemptedQuestions.add(this.questionsRepository.findById(questionId).get());
+                });
+
+                JSONObject responseObject = new JSONObject();
+                responseObject.put("quizAttemptDetails", quizAttempt);
+                responseObject.put("correctQuestions", correctAttemptedQuestions);
+                responseObject.put("wrongQuestions", wrongAttemptedQuestions);
+                responseObject.put("notAttemptedQuestions", notAttemptedQuestions);
+
+                return ResponseHandler.generateResponse("Quiz Attempt details for quizAttemptId : " +request.getQuizAttemptId() , HttpStatus.OK, responseObject.toMap());
+            }else{
+                // attemptId not present
+                return ResponseHandler.generateResponse("Quiz Attempt with attemptId " + request.getQuizAttemptId() + " not exists!", HttpStatus.NOT_FOUND, null);
             }
         }catch (Exception e){
             logger.info("Exception occurred in the function startQuizAttemptService : "+e.getMessage());
