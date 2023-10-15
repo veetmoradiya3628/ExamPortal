@@ -29,6 +29,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { DashboardComponentComponent } from './test/dashboard-component/dashboard-component.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TreeComponenetComponent } from './test/tree-componenet/tree-componenet.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';
@@ -84,12 +85,13 @@ import { TeacherCreateQuestionComponent } from './teacher/teacher-quiz-details/t
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { CreateQuizComponent } from './teacher/teacher-quizzes/create-quiz/create-quiz.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { TeacherClassDetailsComponent } from './teacher/teacher-classes/teacher-class-details/teacher-class-details.component';
 import { OrgAdminCreateClassComponent } from './org-admin/org-admin-create-class/org-admin-create-class.component';
 import { OrgAdminCreateStudentComponent } from './org-admin/org-admin-student/org-admin-create-student/org-admin-create-student.component';
 import { OrgAdminCreateTeacherComponent } from './org-admin/org-admin-teacher/org-admin-create-teacher/org-admin-create-teacher.component';
+import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.component';
 
 @NgModule({
   declarations: [
@@ -145,6 +147,7 @@ import { OrgAdminCreateTeacherComponent } from './org-admin/org-admin-teacher/or
     OrgAdminCreateClassComponent,
     OrgAdminCreateStudentComponent,
     OrgAdminCreateTeacherComponent,
+    QuizAttemptComponent,
   ],
   imports: [
     BrowserModule,
@@ -178,6 +181,7 @@ import { OrgAdminCreateTeacherComponent } from './org-admin/org-admin-teacher/or
     MaterialFileInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatProgressSpinnerModule,
     ScrollingModule,
     CKEditorModule,
     DragDropModule,

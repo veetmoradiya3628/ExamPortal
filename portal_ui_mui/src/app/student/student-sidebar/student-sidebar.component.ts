@@ -9,14 +9,14 @@ import { Observable, map, shareReplay } from 'rxjs';
 })
 export class StudentSidebarComponent {
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-  .pipe(
-    map(result => result.matches),
-    shareReplay()
-  );
+    .pipe(
+      map(result => result.matches),
+      shareReplay()
+    );
 
-constructor(private breakpointObserver: BreakpointObserver) { }
+  constructor(private breakpointObserver: BreakpointObserver) { }
 
-logoutStudent(){
-  console.log('Student logout called!!!')
-}
+  logoutStudent() {
+    console.log('Student logout called!!!')
+  }
 }

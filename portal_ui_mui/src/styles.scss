@@ -1,7 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .mt-2 {
     margin-top: 2px;
@@ -11,7 +18,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-top: 5px;
 }
 
-.mt-10{
+.mt-10 {
     margin-top: 10px;
 }
 
@@ -39,7 +46,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-left: 5px;
 }
 
-.mt-10{
+.mt-10 {
     margin-top: 10px !important;
 }
 
@@ -51,11 +58,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin-left: 10px;
 }
 
-.m-2{
+.m-2 {
     margin: 2px;
 }
 
-.mlt-5{
+.mlt-5 {
     margin-left: 5px;
     margin-top: 5px;
 }
@@ -78,13 +85,39 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .header-font {
-	font-size: 25px !important
+    font-size: 25px !important
 }
 
 .sub-header-font {
-	font-size: 18px !important
+    font-size: 18px !important
 }
 
 .font-15 {
     font-size: 15px !important;
+}
+
+.question-logo {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    border: 2px solid #090909;
+    color: #050505;
+    text-align: center;
+    cursor: pointer;
+    font: 32px Arial, sans-serif;
+    margin: 6px !important;
+}
+
+.normal-question {
+    background: #fff;
+}
+
+.attempted-question-circle {
+    background: #06f355;
+}
+
+.visited-question-circle {
+    background: #7f9fef;
 }

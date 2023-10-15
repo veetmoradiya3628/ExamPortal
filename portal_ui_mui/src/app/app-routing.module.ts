@@ -11,6 +11,7 @@ import { TeacherHomePageComponent } from './teacher/teacher-home-page/teacher-ho
 import { teacherRoutes } from './teacher/teacher.routes';
 import { StudentHomePageComponent } from './student/student-home-page/student-home-page.component';
 import { studentRoutes } from './student/student.routes';
+import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.component';
 
 const routes: Routes = [
   {
@@ -55,6 +56,11 @@ const routes: Routes = [
     children: [
       ...studentRoutes
     ]
+  },
+  {
+    path: 'quiz-attempt/:quiz-id/question/:question-id',
+    component: QuizAttemptComponent,
+    pathMatch: 'full'
   }
 ];
 

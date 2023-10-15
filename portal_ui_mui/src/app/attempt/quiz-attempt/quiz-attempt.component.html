@@ -1,0 +1,67 @@
+<div fxLayout="column" fxLayoutAlign="space-around stretch">
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+        <div fxFlex="75">
+            <!-- Question screen -->
+        </div>
+        <div fxFlex="25" fxFill>
+            <!-- Quiz details, Meta data & Navigation of Question screen -->
+            <mat-card>
+                <mat-card-header>
+                    <div fxLayout="column">
+                        <h3>Username: Veet Moradiya</h3>
+
+                        <mat-divider></mat-divider>
+
+                        <mat-card-title>English Quiz</mat-card-title>
+                        <mat-card-subtitle>A quiz to test your language and grammar skills.</mat-card-subtitle>
+                        <p>
+                            Classroom: DS - 2 Design and Analysis of Algorithms
+                        </p>
+                    </div>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <div fxLayout="column">
+                    <mat-card-content>
+                        <div fxLayout="row">
+                            <h3>Quiz Progress</h3>
+                            <mat-progress-spinner [mode]="progressSpinnerMode" [value]="progressValue">
+                            </mat-progress-spinner>
+
+                            <h3>Time Left </h3>
+                            <p>12:00:00</p>
+                        </div>
+                        <mat-divider></mat-divider>
+
+                        <div fxLayout="row wrap">
+                            <div *ngFor="let item of [].constructor(30); let i = index">
+                                <p class="question-logo attempted-question-circle" (click)="questionSelectClick()">{{ i }}</p>
+                            </div>
+                        </div>
+
+                        <h3>Question Info</h3>
+                        <div fxLayout="row">
+                            <p class="question-logo normal-question">N</p>
+                            <p>Not Visited</p>
+                            <p class="question-logo attempted-question-circle">A</p>
+                            <p>Attempted</p>
+                            <p class="question-logo visited-question-circle">V</p>
+                            <p>Visited</p>
+                        </div>
+
+                        <mat-divider></mat-divider>
+                        <div>
+                            <p>Total Question : 0</p>
+                            <p>Visited Question : 0</p>
+                            <p>Not Visited Question : 0</p>
+                        </div>
+                    </mat-card-content>
+                </div>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <button mat-raised-button color="accent">Cancle Quiz</button>
+                    <button mat-raised-button color="primary">End Quiz</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
