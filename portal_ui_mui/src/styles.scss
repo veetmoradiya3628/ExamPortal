@@ -7,7 +7,7 @@ body {
 
 body {
     margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-family: sans-serif, Roboto, "Helvetica Neue", sans-serif;
 }
 
 .mt-2 {
@@ -38,8 +38,16 @@ body {
     margin-right: 10px !important;
 }
 
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
 .m-5 {
     margin: 5px;
+}
+
+.m-2 {
+    margin: 2px !important;
 }
 
 .ml-5 {
@@ -120,4 +128,31 @@ body {
 
 .visited-question-circle {
     background: #7f9fef;
+}
+
+.attempt-user-text{
+    font-size: 20px !important;
+}
+
+.quiz-title{
+    font-size: 30px;
+}
+.quiz-subtitle{
+    font-size: 15px;
+}
+
+.font-18 {
+    font-size: 18px !important;
+}
+
+.font-20 {
+    font-size: 20px !important;
+}
+
+.font-25 {
+    font-size: 25px !important;
+}
+
+.font-30 {
+    font-size: 30px !important;
 }

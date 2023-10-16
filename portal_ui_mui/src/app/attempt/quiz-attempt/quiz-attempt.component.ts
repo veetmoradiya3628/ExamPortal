@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 
@@ -8,24 +9,24 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./quiz-attempt.component.scss']
 })
 export class QuizAttemptComponent implements OnInit {
+  documentElement: any;
   quizId: string = "";
   questionId: string = "";
-  
+
   progressSpinnerMode: ProgressSpinnerMode = 'determinate';
   progressValue = 40;
 
   constructor(private _route: ActivatedRoute) { }
-  
-  
+
   ngOnInit(): void {
     this.quizId = this._route.snapshot.params['quiz-id'];
     this.questionId = this._route.snapshot.params['question-id'];
-  
+
     console.log(`quizId : ${this.quizId}`)
     console.log(`questionId : ${this.questionId}`)
   }
 
-  questionSelectClick(){
+  questionSelectClick() {
     console.log(`button click`)
   }
 
