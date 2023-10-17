@@ -28,7 +28,7 @@
                                     <button mat-button class="info-btn-style">Duration: <b>{{ q.duration }}</b></button>
                                     <button mat-button class="info-btn-style">Status: <b> {{ q.isActive ? 'Active' : 'Not Active' }}</b></button>
                                     <button mat-raised-button class="mr-10" color="accent" (click)="onClickViewQuizDetails(q.id)">View Details</button>
-                                    <button mat-raised-button color="primary">Attempt</button>
+                                    <button mat-raised-button color="primary" (click)="attemptQuiz(q)">Attempt</button>
                                 </mat-card-actions>
                             </div>
                         </div>

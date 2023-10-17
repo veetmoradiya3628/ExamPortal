@@ -9,6 +9,7 @@ import { TeacherServiceService } from 'src/app/services/teacher-service.service'
   styleUrls: ['./student-quizzes.component.scss']
 })
 export class StudentQuizzesComponent implements OnInit {
+
   // studentId from session storage once login implemented
   studentId: string = "a593ee93-d357-4d16-8fff-f09c4214e5c1";
   quizzes: Array<Quiz> = [];
@@ -32,7 +33,12 @@ export class StudentQuizzesComponent implements OnInit {
     )
   }
 
-  onClickViewQuizDetails(quizId: string | undefined){
+  onClickViewQuizDetails(quizId: string | undefined) {
     console.log(`View Quiz button clicked with ${quizId}`)
+  }
+
+  attemptQuiz(quiz: Quiz) {
+    console.log(`quiz trying to attempt : ${quiz}`)
+    this._router.navigateByUrl(`/quiz-attempt/${quiz.id}/question`)
   }
 }

@@ -2,6 +2,8 @@ import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
+import { Question } from 'src/app/models/question.model';
 
 @Component({
   selector: 'app-quiz-attempt',
@@ -9,25 +11,60 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./quiz-attempt.component.scss']
 })
 export class QuizAttemptComponent implements OnInit {
-  documentElement: any;
   quizId: string = "";
-  questionId: string = "";
+  quizDetails: any = {};
+  questions: Array<Question> = [];
+  totalQuestions = 0;
+  selectedQuestion: Question = {
+    questionText: 'default question text',
+    questionType: 'SINGLE_CORRECT',
+    score: 0,
+    options: []
+  };
+  selectedQuesitonIndex = 0;
 
   progressSpinnerMode: ProgressSpinnerMode = 'determinate';
   progressValue = 40;
 
-  constructor(private _route: ActivatedRoute) { }
+  constructor(private _route: ActivatedRoute, private _generalApiService: GeneralServiceService) { }
 
   ngOnInit(): void {
     this.quizId = this._route.snapshot.params['quiz-id'];
-    this.questionId = this._route.snapshot.params['question-id'];
-
     console.log(`quizId : ${this.quizId}`)
-    console.log(`questionId : ${this.questionId}`)
+    this.getQuizDetailsWithQuestions();
   }
 
-  questionSelectClick() {
-    console.log(`button click`)
+  getQuizDetailsWithQuestions(){
+    this._generalApiService.getQuizDetailsWithQuestions(this.quizId).subscribe(
+      (res : any) => {
+        this.quizDetails = res.data.quizDetails;
+        this.questions = res.data.questionDetails;
+        this.totalQuestions = this.questions.length;
+        this.selectedQuestion = this.questions[0];
+        console.log(this.quizDetails);
+        console.log(this.questions);
+        console.log(this.selectedQuestion);
+      },
+      (error : any) => {
+        console.log(`Error occured while loading quiz and question details : ${error}`)
+      }
+    )
+  }
+
+  questionSelectClick(_index: number) {
+    console.log(`question selected at ${_index}`)
+    this.selectedQuestion = this.questions[_index];
+    this.selectedQuesitonIndex = _index;
+  }
+
+  nextQuestionClick(){
+    this.selectedQuesitonIndex = this.selectedQuesitonIndex + 1;
+    this.selectedQuestion = this.questions[this.selectedQuesitonIndex];
+  }
+
+  prevQuestionClick(){
+    this.selectedQuesitonIndex = this.selectedQuesitonIndex - 1;
+    this.selectedQuestion = this.questions[this.selectedQuesitonIndex];
   }
 
 }

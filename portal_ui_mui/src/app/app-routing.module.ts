@@ -58,7 +58,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'quiz-attempt/:quiz-id/question/:question-id',
+    path: 'quiz-attempt/:quiz-id/question',
     component: QuizAttemptComponent,
     pathMatch: 'full'
   }

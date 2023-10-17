@@ -3,79 +3,11 @@
         <div fxFlex="75">
             <!-- Question screen -->
             <div fxLayout="column" fxLayoutAlign="space-between">
-                <div fxFill="80">
-                    <mat-card class="m-10">
-                        <mat-card-header class="mb-10">
-                            <mat-card-title class="font-30">Q. 1 Lorem ipsum dolor sit amet consectetur adipisicing
-                                elit.
-                                Necessitatibus,
-                                aliquid
-                                quibusdam ut praesentium, est in, eaque incidunt placeat numquam omnis minus rerum fugit
-                                excepturi expedita.</mat-card-title>
-                        </mat-card-header>
-                        <mat-divider></mat-divider>
-                        <mat-card-content class="m-10">
-                            <div fxLayout="column">
-                                <mat-checkbox>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-checkbox>
-                                <mat-checkbox>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-checkbox>
-                                <mat-checkbox>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-checkbox>
-                                <mat-checkbox>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-checkbox>
-                                <mat-checkbox>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-checkbox>
-                            </div>
-                            <mat-radio-group fxLayout="column">
-                                <mat-radio-button>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-radio-button>
-                                <mat-radio-button>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-radio-button>
-                                <mat-radio-button>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-radio-button>
-                                <mat-radio-button>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-radio-button>
-                                <mat-radio-button>
-                                    <div class="font-25">
-                                        Lorem ipsum dolor sit amet.
-                                    </div>
-                                </mat-radio-button>
-                            </mat-radio-group>
-                        </mat-card-content>
-                    </mat-card>
-                </div>
+                <app-question-attempt [question]="selectedQuestion"></app-question-attempt>
                 <div fxFill="20">
                     <div fxLayout="row" class="m-10" fxLayoutAlign="space-between start">
-                        <button mat-raised-button color="primary">Previous</button>
-                        <button mat-raised-button color="primary">Next</button>
+                        <button *ngIf="selectedQuesitonIndex != 0" mat-raised-button color="primary" (click)="prevQuestionClick()">Previous</button>
+                        <button *ngIf="selectedQuesitonIndex != totalQuestions - 1" mat-raised-button color="primary" (click)="nextQuestionClick()">Next</button>
                     </div>
                 </div>
             </div>
@@ -90,12 +22,12 @@
                         <mat-divider></mat-divider>
 
                         <div class="m-10">
-                            <mat-card-title class="quiz-title">English Quiz</mat-card-title>
-                            <mat-card-subtitle class="quiz-subtitle">A quiz to test your language and grammar
-                                skills.</mat-card-subtitle>
-                            <p class="quiz-subtitle">
+                            <mat-card-title class="quiz-title">{{ quizDetails.quizTitle }}</mat-card-title>
+                            <mat-card-subtitle class="quiz-subtitle">{{ quizDetails.quizDescription
+                                }}</mat-card-subtitle>
+                            <!-- <p class="quiz-subtitle">
                                 <b>Classroom:</b> DS - 2 Design and Analysis of Algorithms
-                            </p>
+                            </p> -->
                         </div>
                     </div>
                 </mat-card-header>
@@ -115,8 +47,8 @@
                         <mat-divider></mat-divider>
 
                         <div fxLayout="row wrap">
-                            <div *ngFor="let item of [].constructor(30); let i = index">
-                                <p class="question-logo normal-question" (click)="questionSelectClick()">{{ i
+                            <div *ngFor="let ques of questions; let i = index">
+                                <p class="question-logo normal-question" (click)="questionSelectClick(i)">{{ i + 1
                                     }}</p>
                             </div>
                         </div>
@@ -133,7 +65,7 @@
 
                         <mat-divider></mat-divider>
                         <div class="font-18 m-5">
-                            <p>Total Question : 0</p>
+                            <p>Total Question : {{ totalQuestions }}</p>
                             <p>Visited Question : 0</p>
                             <p>Not Visited Question : 0</p>
                         </div>

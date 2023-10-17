@@ -92,6 +92,7 @@ import { OrgAdminCreateClassComponent } from './org-admin/org-admin-create-class
 import { OrgAdminCreateStudentComponent } from './org-admin/org-admin-student/org-admin-create-student/org-admin-create-student.component';
 import { OrgAdminCreateTeacherComponent } from './org-admin/org-admin-teacher/org-admin-create-teacher/org-admin-create-teacher.component';
 import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.component';
+import { QuestionAttemptComponent } from './attempt/question-attempt/question-attempt.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +149,7 @@ import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.compon
     OrgAdminCreateStudentComponent,
     OrgAdminCreateTeacherComponent,
     QuizAttemptComponent,
+    QuestionAttemptComponent,
   ],
   imports: [
     BrowserModule,
