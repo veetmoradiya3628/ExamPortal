@@ -3,7 +3,7 @@
         <div fxFlex="75">
             <!-- Question screen -->
             <div fxLayout="column" fxLayoutAlign="space-between">
-                <app-question-attempt [question]="selectedQuestion"></app-question-attempt>
+                <app-question-attempt [question]="selectedQuestion" [questionIndex]="selectedQuesitonIndex"></app-question-attempt>
                 <div fxFill="20">
                     <div fxLayout="row" class="m-10" fxLayoutAlign="space-between start">
                         <button *ngIf="selectedQuesitonIndex != 0" mat-raised-button color="primary" (click)="prevQuestionClick()">Previous</button>

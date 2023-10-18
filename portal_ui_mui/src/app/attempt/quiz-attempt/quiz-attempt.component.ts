@@ -41,6 +41,9 @@ export class QuizAttemptComponent implements OnInit {
         this.questions = res.data.questionDetails;
         this.totalQuestions = this.questions.length;
         this.selectedQuestion = this.questions[0];
+        localStorage.setItem('questions', JSON.stringify(this.questions))
+        localStorage.setItem('quizDetails', JSON.stringify(this.quizDetails))
+        localStorage.setItem('selectedQuestionIndex', "0");
         console.log(this.quizDetails);
         console.log(this.questions);
         console.log(this.selectedQuestion);
@@ -55,16 +58,19 @@ export class QuizAttemptComponent implements OnInit {
     console.log(`question selected at ${_index}`)
     this.selectedQuestion = this.questions[_index];
     this.selectedQuesitonIndex = _index;
+    localStorage.setItem('selectedQuestionIndex', _index.toString());
   }
 
   nextQuestionClick(){
     this.selectedQuesitonIndex = this.selectedQuesitonIndex + 1;
     this.selectedQuestion = this.questions[this.selectedQuesitonIndex];
+    localStorage.setItem('selectedQuestionIndex', this.selectedQuesitonIndex.toString());
   }
 
   prevQuestionClick(){
     this.selectedQuesitonIndex = this.selectedQuesitonIndex - 1;
     this.selectedQuestion = this.questions[this.selectedQuesitonIndex];
+    localStorage.setItem('selectedQuestionIndex', this.selectedQuesitonIndex.toString());
   }
 
 }
