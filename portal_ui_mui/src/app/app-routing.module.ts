@@ -12,6 +12,10 @@ import { teacherRoutes } from './teacher/teacher.routes';
 import { StudentHomePageComponent } from './student/student-home-page/student-home-page.component';
 import { studentRoutes } from './student/student.routes';
 import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.component';
+import { AdminGuardGuard } from './common/guards/admin-guard.guard';
+import { OrgAdminGuardGuard } from './common/guards/org-admin-guard.guard';
+import { TeacherGuardGuard } from './common/guards/teacher-guard.guard';
+import { StudentGuardGuard } from './common/guards/student-guard.guard';
 
 const routes: Routes = [
   {
@@ -32,6 +36,7 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminHomePageComponent,
+    canActivate: [AdminGuardGuard],
     children: [
       ...sysAdminRoutes
     ]
@@ -39,6 +44,7 @@ const routes: Routes = [
   {
     path: 'org-admin',
     component: OrgAdminHomePageComponent,
+    canActivate: [OrgAdminGuardGuard],
     children: [
       ...orgAdminRoutes
     ]
@@ -46,6 +52,7 @@ const routes: Routes = [
   {
     path: 'teacher',
     component: TeacherHomePageComponent,
+    canActivate: [TeacherGuardGuard],
     children: [
       ...teacherRoutes
     ]
@@ -53,6 +60,7 @@ const routes: Routes = [
   {
     path: 'student',
     component: StudentHomePageComponent,
+    canActivate: [StudentGuardGuard],
     children: [
       ...studentRoutes
     ]

@@ -15,4 +15,9 @@ export class GeneralServiceService {
     const url = this.BASE_URL + '/quizzes/'+quizId+'/questions';
     return this.http.get(url);
   }
+
+  public login(requestObj: any) : Observable<any> {
+    const url = this.BASE_URL + '/generate-token'
+    return this.http.post(url, requestObj);
+  }
 }

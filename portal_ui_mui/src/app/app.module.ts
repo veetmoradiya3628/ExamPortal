@@ -93,6 +93,7 @@ import { OrgAdminCreateStudentComponent } from './org-admin/org-admin-student/or
 import { OrgAdminCreateTeacherComponent } from './org-admin/org-admin-teacher/org-admin-create-teacher/org-admin-create-teacher.component';
 import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.component';
 import { QuestionAttemptComponent } from './attempt/question-attempt/question-attempt.component';
+import { authInterceptorProviders } from './common/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -193,7 +194,9 @@ import { QuestionAttemptComponent } from './attempt/question-attempt/question-at
     HttpClientModule,
     NgxMaterialTimepickerModule
   ],
-  providers: [],
+  providers: [
+    authInterceptorProviders
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
