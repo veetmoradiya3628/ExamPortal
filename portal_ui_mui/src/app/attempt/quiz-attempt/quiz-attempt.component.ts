@@ -22,6 +22,9 @@ export class QuizAttemptComponent implements OnInit {
     options: []
   };
   selectedQuesitonIndex = 0;
+  listOfAttemptedQuestions: Array<number> = [];
+  questionClassroom: Array<string> = [];
+  attemptedQuestionCnt: number = 0;
 
   progressSpinnerMode: ProgressSpinnerMode = 'determinate';
   progressValue = 40;
@@ -32,11 +35,15 @@ export class QuizAttemptComponent implements OnInit {
     this.quizId = this._route.snapshot.params['quiz-id'];
     console.log(`quizId : ${this.quizId}`)
     this.getQuizDetailsWithQuestions();
+
+    setInterval(() => {
+      this.updateAttemptedQuestionStyle();
+    }, 2000)
   }
 
-  getQuizDetailsWithQuestions(){
+  getQuizDetailsWithQuestions() {
     this._generalApiService.getQuizDetailsWithQuestions(this.quizId).subscribe(
-      (res : any) => {
+      (res: any) => {
         this.quizDetails = res.data.quizDetails;
         this.questions = res.data.questionDetails;
         this.totalQuestions = this.questions.length;
@@ -50,7 +57,7 @@ export class QuizAttemptComponent implements OnInit {
         // visistedOptions = [];
         // attemptedOptions = [];
       },
-      (error : any) => {
+      (error: any) => {
         console.log(`Error occured while loading quiz and question details : ${error}`)
       }
     )
@@ -63,16 +70,35 @@ export class QuizAttemptComponent implements OnInit {
     localStorage.setItem('selectedQuestionIndex', _index.toString());
   }
 
-  nextQuestionClick(){
+  nextQuestionClick() {
     this.selectedQuesitonIndex = this.selectedQuesitonIndex + 1;
     this.selectedQuestion = this.questions[this.selectedQuesitonIndex];
     localStorage.setItem('selectedQuestionIndex', this.selectedQuesitonIndex.toString());
   }
 
-  prevQuestionClick(){
+  prevQuestionClick() {
     this.selectedQuesitonIndex = this.selectedQuesitonIndex - 1;
     this.selectedQuestion = this.questions[this.selectedQuesitonIndex];
     localStorage.setItem('selectedQuestionIndex', this.selectedQuesitonIndex.toString());
+  }
+
+  updateAttemptedQuestionStyle() {
+    console.log(`function update style called`)
+    if (this.questionClassroom.length === 0) {
+      for (let index = 0; index < this.questions.length; index++) {
+        this.questionClassroom.push("question-logo normal-question");
+      }
+    }
+    let cntOfAttemptedQues = 0;
+    for (let index = 0; index < this.questions.length; index++) {
+      if(localStorage.getItem(index.toString()) !== null){
+        cntOfAttemptedQues++;
+        if(!this.questionClassroom[index].includes("attempted-question-circle")){
+          this.questionClassroom[index] = this.questionClassroom[index] + ' attempted-question-circle';
+        }
+      }
+    }
+    this.attemptedQuestionCnt = cntOfAttemptedQues;
   }
 
 }

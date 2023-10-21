@@ -48,7 +48,7 @@
 
                         <div fxLayout="row wrap">
                             <div *ngFor="let ques of questions; let i = index">
-                                <p class="question-logo normal-question" (click)="questionSelectClick(i)">{{ i + 1
+                                <p [classList]="questionClassroom[i]" (click)="questionSelectClick(i)">{{ i + 1
                                     }}</p>
                             </div>
                         </div>
@@ -66,8 +66,8 @@
                         <mat-divider></mat-divider>
                         <div class="font-18 m-5">
                             <p>Total Question : {{ totalQuestions }}</p>
-                            <p>Attempted Question : 0</p>
-                            <p>Not Attempted Question : 0</p>
+                            <p>Attempted Question : {{ attemptedQuestionCnt }}</p>
+                            <p>Not Attempted Question : {{ totalQuestions - attemptedQuestionCnt }}</p>
                         </div>
                     </mat-card-content>
                 </div>

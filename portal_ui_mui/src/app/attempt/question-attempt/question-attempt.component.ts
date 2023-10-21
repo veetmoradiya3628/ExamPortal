@@ -59,9 +59,9 @@ export class QuestionAttemptComponent implements OnInit {
           }
         }
       }
-      console.log(`earlier found`)
+      console.log(`earlier attempted found`)
     } else {
-      console.log(`earlier not found`)
+      console.log(`earlier not attempted found`)
     }
   }
 
