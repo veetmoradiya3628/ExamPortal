@@ -68,6 +68,7 @@ const routes: Routes = [
   {
     path: 'quiz-attempt/:quiz-id/question',
     component: QuizAttemptComponent,
+    canActivate: [StudentGuardGuard],
     pathMatch: 'full'
   }
 ];

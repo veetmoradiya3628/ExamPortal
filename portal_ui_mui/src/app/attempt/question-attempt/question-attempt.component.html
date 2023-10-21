@@ -16,7 +16,7 @@
             <mat-radio-group fxLayout="column" [(ngModel)]="selectedOption"
                 *ngIf="ques.questionType === 'SINGLE_CORRECT' || ques.questionType === 'TRUE_FALSE'">
                 <!-- {{ selectedOption }} -->
-                <mat-radio-button *ngFor="let option of ques.options" [value]="option.optionText">
+                <mat-radio-button *ngFor="let option of ques.options" [checked]="selectedOption === option.optionText" [value]="option.optionText">
                     <div class="font-25">
                         {{ option.optionText }}
                     </div>

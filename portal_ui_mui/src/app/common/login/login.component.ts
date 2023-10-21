@@ -17,6 +17,21 @@ export class LoginComponent implements OnInit {
     private _userService: UserServiceService, private router: Router) { }
 
   ngOnInit(): void {
+    if(this._userService.isLoggedIn()){
+      if (this._userService.getUserRole() == 'MASTER_ADMIN') {
+        this.router.navigate(['admin']);
+        this._userService.loginStatusSubject.next(true);
+      } else if (this._userService.getUserRole() == 'ORG_ADMIN') {
+        this.router.navigate(['org-admin']);
+        this._userService.loginStatusSubject.next(true);
+      } else if (this._userService.getUserRole() == 'TEACHER') {
+        this.router.navigate(['teacher']);
+        this._userService.loginStatusSubject.next(true);
+      } else if (this._userService.getUserRole() == 'STUDENT') {
+        this.router.navigate(['student']);
+        this._userService.loginStatusSubject.next(true);
+      }
+    }
     this.loginForm = this.fb.group({
       username: ["", Validators.required],
       password: ["", Validators.required]

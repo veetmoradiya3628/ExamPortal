@@ -47,6 +47,8 @@ export class QuizAttemptComponent implements OnInit {
         console.log(this.quizDetails);
         console.log(this.questions);
         console.log(this.selectedQuestion);
+        // visistedOptions = [];
+        // attemptedOptions = [];
       },
       (error : any) => {
         console.log(`Error occured while loading quiz and question details : ${error}`)
