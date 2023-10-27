@@ -4,6 +4,9 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NodeStyleEventEmitter } from 'rxjs/internal/observable/fromEvent';
+import { DeleteModelServiceService } from 'src/app/common/delete-model-service.service';
+import { DeleteModelComponent } from 'src/app/common/delete-model/delete-model.component';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { IUser } from 'src/app/models/user.model';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 
@@ -23,7 +26,9 @@ export class AdminUsersComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _adminService: AdminServiceService) { }
+  constructor(private _adminService: AdminServiceService, 
+              private _generalService: GeneralServiceService,
+              private _deleteModel: DeleteModelServiceService) { }
 
   ngOnInit(): void {
     this.loadUserData();
@@ -49,10 +54,11 @@ export class AdminUsersComponent implements OnInit {
     this._adminService.updateUserStatus(userId, event.checked).subscribe(
       (res: any) => {
         console.log(res)
+        this._generalService.openSnackBar('User Status Changed Successfully', 'Ok')
         this.loadUserData();
       },
       (error: any) => {
-        console.log('error occured while updating user status')
+        this._generalService.openSnackBar('Error occured while changing user status', 'Ok')
       }
     )
   }
@@ -66,8 +72,23 @@ export class AdminUsersComponent implements OnInit {
     }
   }
 
-}
-function Output(): (target: AdminUsersComponent, propertyKey: "change") => void {
-  throw new Error('Function not implemented.');
+  deleteUserInfo(userId: string){
+    this._deleteModel.openConfirmationDialog('Are you sure want to delete this User ?').then((result) => {
+      if(result){
+        this._adminService.deleteUser(userId).subscribe(
+          (res: any) => {
+            this._generalService.openSnackBar('User deleted successfully!!', 'OK')
+            this.loadUserData();
+          },
+          (error : any) => {
+            this._generalService.openSnackBar('User deletion failed', 'OK')
+          }
+        )
+      }else{
+        // user cancel the action
+        return;
+      }
+    })
+  }
 }
 

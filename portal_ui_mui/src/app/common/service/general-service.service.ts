@@ -13,6 +13,7 @@ export class GeneralServiceService {
 
   openSnackBar(informationText: string, actionText: string){
     this._matSnackBar.open(informationText, actionText, {
+      duration: 2000,
       horizontalPosition: 'right',
       verticalPosition: 'bottom'
     })

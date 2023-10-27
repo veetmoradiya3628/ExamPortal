@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { Organization } from 'src/app/models/organization.model';
 import { IUser } from 'src/app/models/user.model';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
@@ -16,7 +17,7 @@ export class AdminCreateUserComponent implements OnInit {
 
   constructor(private _apiService: AdminServiceService,
               private formBuilder: FormBuilder,
-              private _route: ActivatedRoute,
+              private _generalService: GeneralServiceService,
               private _router: Router) {}
 
   ngOnInit(): void {
@@ -44,6 +45,7 @@ export class AdminCreateUserComponent implements OnInit {
       },
       (error: any) => {
         console.log('Error occured while loading organization data for add user ' + error);
+        this._generalService.openSnackBar('Error occured while loading organization data for add user', 'OK')
       }
     )
   }
@@ -54,13 +56,16 @@ export class AdminCreateUserComponent implements OnInit {
       this._apiService.addUser(this.addUserForm.value as IUser).subscribe(
         (res: any) => {
           console.log(res)
+          this._generalService.openSnackBar('User added successfully!!', 'OK')
           this._router.navigateByUrl('/admin/users')
         },
         (error : any) => {
           console.log(`Error occured while adding user ${error}`)
+          this._generalService.openSnackBar('Error occured while Adding User', 'OK')
         }
       ) 
     }else{
+      this._generalService.openSnackBar('Invalid User Form', 'OK')
       console.log(`Invalid add user form`)
     }
   }

@@ -47,4 +47,10 @@ export class AdminServiceService {
     const url = this.BASE_URL + '/user/' + id +'/'+ status;
     return this.http.post(url, null);
   }
+
+  // delete user
+  public deleteUser(userId: string): Observable<any> {
+    const url = this.BASE_URL + '/user/' + userId;
+    return this.http.delete(url);
+  }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Subject } from 'rxjs';
 export class UserServiceService {
   public loginStatusSubject = new Subject<boolean>();
 
-  constructor() { }
+  constructor(private _router: Router) { }
 
   public setLoginUserToken(token: string): boolean {
     localStorage.setItem('token', token);
