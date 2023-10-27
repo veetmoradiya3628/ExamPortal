@@ -24,6 +24,12 @@ export class AdminServiceService {
     return this.http.post<Organization>(url, data);
   }
 
+  // delete Organization
+  public deleteOrganization(orgId: string): Observable<any> {
+    const url = this.BASE_URL + '/organization/' + orgId;
+    return this.http.delete(url);
+  }
+
   // get all users
   public getUsers(): Observable<IUser> {
     const url = this.BASE_URL + '/user/';

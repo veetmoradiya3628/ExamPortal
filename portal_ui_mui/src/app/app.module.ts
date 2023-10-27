@@ -94,6 +94,7 @@ import { OrgAdminCreateTeacherComponent } from './org-admin/org-admin-teacher/or
 import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.component';
 import { QuestionAttemptComponent } from './attempt/question-attempt/question-attempt.component';
 import { authInterceptorProviders } from './common/auth.interceptor';
+import { DeleteModelComponent } from './common/delete-model/delete-model.component';
 
 @NgModule({
   declarations: [
@@ -151,6 +152,7 @@ import { authInterceptorProviders } from './common/auth.interceptor';
     OrgAdminCreateTeacherComponent,
     QuizAttemptComponent,
     QuestionAttemptComponent,
+    DeleteModelComponent,
   ],
   imports: [
     BrowserModule,

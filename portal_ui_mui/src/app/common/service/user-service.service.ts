@@ -51,4 +51,13 @@ export class UserServiceService {
     return user.authorities[0].authority;
   }
 
+  public getLoggedInUserId(){
+    if(localStorage.getItem('user') !== null){
+      let user = JSON.parse(localStorage.getItem('user') || '{}');
+      if(user !== '{}'){
+        return user.userId;
+      }
+    }
+    return null;
+  }
 }

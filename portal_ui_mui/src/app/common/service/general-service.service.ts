@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,14 @@ import { Observable } from 'rxjs';
 export class GeneralServiceService {
   private BASE_URL = "http://localhost:8080";
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _matSnackBar: MatSnackBar) { }
+
+  openSnackBar(informationText: string, actionText: string){
+    this._matSnackBar.open(informationText, actionText, {
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom'
+    })
+  }
 
   // get quiz details with questions
   public getQuizDetailsWithQuestions(quizId: string): Observable<any> {

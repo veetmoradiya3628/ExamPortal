@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { Organization } from 'src/app/models/organization.model';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 
@@ -13,7 +14,9 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
 export class AdminAddOrganizationComponent implements OnInit {
   public addOrganizationForm!: FormGroup;
 
-  constructor(private _apiService: AdminServiceService, private _snackBar: MatSnackBar, private _router: Router){}
+  constructor(private _apiService: AdminServiceService, 
+              private _router: Router,
+              private _generalService: GeneralServiceService){}
 
   ngOnInit(): void {
     this.addOrganizationForm = new FormGroup({
@@ -28,16 +31,16 @@ export class AdminAddOrganizationComponent implements OnInit {
       this._apiService.addOrganization(orgData).subscribe(
         (res: Organization) => {
           console.log(res);
-          this._snackBar.open('Organization added successfully', 'OK')
+          this._generalService.openSnackBar('Organization added successfully', 'OK')
           this._router.navigateByUrl('/admin/organization')
         },
         (error : any) => {
-          this._snackBar.open('Error occured while adding data', 'OK')
+          this._generalService.openSnackBar('Error occured while adding data', 'OK')
           return;
         }
       )
     }else{
-      this._snackBar.open('Form is not valid!!', 'OK')
+      this._generalService.openSnackBar('Form is not valid!!', 'OK')
       return;
     }
   }

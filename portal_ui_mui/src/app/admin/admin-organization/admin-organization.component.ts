@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { DeleteModelServiceService } from 'src/app/common/delete-model-service.service';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { Organization } from 'src/app/models/organization.model';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 
@@ -19,7 +21,9 @@ export class AdminOrganizationComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _adminService: AdminServiceService) {
+  constructor(private _adminService: AdminServiceService,
+              private _deleteModelService: DeleteModelServiceService,
+              private _generalService: GeneralServiceService) {
   }
 
   ngOnInit(): void {
@@ -47,5 +51,23 @@ export class AdminOrganizationComponent implements OnInit {
     }
   }
 
+  deleteOrganization(orgId: string){
+    this._deleteModelService.openConfirmationDialog('Are you sure want to delete this Organization ?').then((result) => {
+      if(result){
+        this._adminService.deleteOrganization(orgId).subscribe(
+          (res: any) => {
+            this._generalService.openSnackBar('Organization deleted successfully!!', 'OK')
+            this.loadOrganizationData();
+          },
+          (error : any) => {
+            this._generalService.openSnackBar('Organization deletion failed', 'OK')
+          }
+        )
+      }else{
+        // user cancel the action
+        return;
+      }
+    })
+  }
 }
 

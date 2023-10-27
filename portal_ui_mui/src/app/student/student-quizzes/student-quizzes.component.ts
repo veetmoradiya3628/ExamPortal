@@ -39,6 +39,18 @@ export class StudentQuizzesComponent implements OnInit {
 
   attemptQuiz(quiz: Quiz) {
     console.log(`quiz trying to attempt : ${quiz}`)
+    this.enterFullScreenOnInit();
     this._router.navigateByUrl(`/quiz-attempt/${quiz.id}/question`)
+  }
+
+  enterFullScreenOnInit(){
+    const element = document.documentElement;
+    if(element.requestFullscreen){
+      element.requestFullscreen().then(() => {
+        console.log('full screen mode!')
+      }, () => {
+        console.log('error in full screen mode')
+      })
+    }
   }
 }

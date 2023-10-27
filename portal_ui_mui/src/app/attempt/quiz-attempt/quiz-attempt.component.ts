@@ -35,7 +35,6 @@ export class QuizAttemptComponent implements OnInit {
     this.quizId = this._route.snapshot.params['quiz-id'];
     console.log(`quizId : ${this.quizId}`)
     this.getQuizDetailsWithQuestions();
-
     setInterval(() => {
       this.updateAttemptedQuestionStyle();
     }, 2000)
@@ -91,9 +90,9 @@ export class QuizAttemptComponent implements OnInit {
     }
     let cntOfAttemptedQues = 0;
     for (let index = 0; index < this.questions.length; index++) {
-      if(localStorage.getItem(index.toString()) !== null){
+      if (localStorage.getItem(index.toString()) !== null) {
         cntOfAttemptedQues++;
-        if(!this.questionClassroom[index].includes("attempted-question-circle")){
+        if (!this.questionClassroom[index].includes("attempted-question-circle")) {
           this.questionClassroom[index] = this.questionClassroom[index] + ' attempted-question-circle';
         }
       }
