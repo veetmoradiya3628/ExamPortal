@@ -55,4 +55,16 @@ export class OrgAdminServiceService {
     return this.http.post(url, newClass);
   }
 
+  // map user to classroom
+  public mapUserToClassroom(reqObj : any): Observable<any> {
+    const url = this.BASE_URL + '/api/classroom/addUserToClassroom';
+    return this.http.post(url, reqObj);
+  }
+
+  // unmap user to classroom
+  public unmapUserToClassroom(classroomId: string, userId: string): Observable<any>{ 
+    const url = this.BASE_URL + '/api/classroom/' + classroomId + '/user/' + userId;
+    return this.http.delete(url);
+  }
+
 }

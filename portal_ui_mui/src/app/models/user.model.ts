@@ -2,6 +2,7 @@ import { Organization } from "./organization.model";
 
 export interface IUser {
     position: number,
+    selected: false,
     userId?: string,
     username?: string,
     password?: string,

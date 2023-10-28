@@ -20,10 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -117,38 +114,13 @@ public class ClassroomUserServiceImpl implements ClassroomUserService {
             if (isClassroomPresent.isEmpty()) {
                 return ResponseHandler.generateResponse("Classroom with classroomID" + classroomId + " not exists!", HttpStatus.NOT_FOUND, null);
             } else {
-                List<User> orgUsers = this.userRepository.findByOrganization(isClassroomPresent.get().getOrganization());
-                logger.info("organization user count : "+orgUsers.size());
-                List<String> orgUsersId = new ArrayList<>();
-                orgUsers.forEach(user -> {
-                    orgUsersId.add(user.getUserId());
-                });
-                List<ClassroomUser> classroomMappedUsers = this.classroomUserRepository.findByClassroom(new Classroom(classroomId));
-                logger.info("classroom MappedUser count : " + classroomMappedUsers.size());
-                List<String> orgMappedUserIds = new ArrayList<>();
-                classroomMappedUsers.forEach(user -> {
-                    orgMappedUserIds.add(user.getUser().getUserId());
-                });
-
-                orgMappedUserIds.forEach(orgUsersId::remove);
-                logger.info("classroom not Mapped User count : "+orgUsersId.size());
-                List<UserDTO> responseUsers = new ArrayList<>();
-                orgUsers.forEach(user -> {
-                    if (orgUsersId.contains(user.getUserId())){
-                        AtomicBoolean isValidRoleUser = new AtomicBoolean(false);
-                        user.getUserRoles().forEach(r->{
-                            if (r.getRole().getRoleName().equalsIgnoreCase(role)){
-                                isValidRoleUser.set(true);
-                            }
-                        });
-                        if (isValidRoleUser.get()){
-                            UserDTO resp = this.modelMapper.map(user, UserDTO.class);
-                            responseUsers.add(resp);
-                        }
-                    }
-                });
-                logger.info("filtered role user which are not mapped to classroom : " + responseUsers.size());
-                return ResponseHandler.generateResponse("", HttpStatus.OK, responseUsers);
+                    List<User> listOfUsers = this.classroomUserRepository.findNotMappedUserToClassroomWithRole(classroomId, role);
+                    logger.info("listOfUsers : " + listOfUsers.size());
+                    List<UserDTO> responseUser = new ArrayList<>();
+                    listOfUsers.forEach(user -> {
+                        responseUser.add(this.modelMapper.map(this.userRepository.findById(user.getUserId()), UserDTO.class));
+                    });
+                    return ResponseHandler.generateResponse("ok", HttpStatus.OK, responseUser);
             }
         }catch (Exception e){
             System.out.println("Exception : " + Arrays.toString(e.getStackTrace()));

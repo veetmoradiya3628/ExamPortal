@@ -61,4 +61,14 @@ export class UserServiceService {
     }
     return null;
   }
+
+  public getLoginUserOrganizationId(){
+    if(localStorage.getItem('user') != null){
+      let user = JSON.parse(localStorage.getItem('user') || '{}')
+      if(user !== '{}'){
+        return user.organization.orgId;
+      }
+    }
+    return '';
+  }
 }

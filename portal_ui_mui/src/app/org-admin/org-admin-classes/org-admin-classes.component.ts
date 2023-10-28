@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { Classes } from 'src/app/models/classes.model';
 import { OrgAdminServiceService } from 'src/app/services/org-admin-service.service';
 
@@ -10,13 +11,16 @@ import { OrgAdminServiceService } from 'src/app/services/org-admin-service.servi
 })
 export class OrgAdminClassesComponent implements OnInit {
   // this will be dynamic once we make authentication flow & org admin login
-  orgId: string = 'a77f5d7b-c50d-418d-8c66-3814049ca386';
+  orgId: string = '';
   classes!: Array<Classes>;
 
   constructor(private _apiService: OrgAdminServiceService,
-              private _router: Router) { }
+              private _router: Router,
+              private _userService : UserServiceService) { }
 
   ngOnInit(): void {
+    this.orgId = this._userService.getLoginUserOrganizationId();
+    console.log(`LoggedIn user organizationId : ${this.orgId}`)
     this.loadClassesForOrganization();
   }
 
