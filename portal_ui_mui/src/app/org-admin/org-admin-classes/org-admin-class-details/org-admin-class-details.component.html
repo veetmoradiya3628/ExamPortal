@@ -47,7 +47,9 @@
                     <mat-tab label="Students">
                         <app-org-admin-class-students [classId]="classId"></app-org-admin-class-students>
                     </mat-tab>
-                    <mat-tab label="Quiz">Quiz section yet to Implement from Backend</mat-tab>
+                    <mat-tab label="Quiz">
+                        <app-org-admin-class-quizzes [classId]="classId"></app-org-admin-class-quizzes>
+                    </mat-tab>
                 </mat-tab-group>
             </mat-card-content>
         </mat-card>

@@ -95,6 +95,7 @@ import { QuizAttemptComponent } from './attempt/quiz-attempt/quiz-attempt.compon
 import { QuestionAttemptComponent } from './attempt/question-attempt/question-attempt.component';
 import { authInterceptorProviders } from './common/auth.interceptor';
 import { DeleteModelComponent } from './common/delete-model/delete-model.component';
+import { OrgAdminClassQuizzesComponent } from './org-admin/org-admin-classes/org-admin-class-quizzes/org-admin-class-quizzes.component';
 
 @NgModule({
   declarations: [
@@ -153,6 +154,7 @@ import { DeleteModelComponent } from './common/delete-model/delete-model.compone
     QuizAttemptComponent,
     QuestionAttemptComponent,
     DeleteModelComponent,
+    OrgAdminClassQuizzesComponent,
   ],
   imports: [
     BrowserModule,

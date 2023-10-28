@@ -67,4 +67,9 @@ export class OrgAdminServiceService {
     return this.http.delete(url);
   }
 
+  // get quizzes for classroom
+  public getQuizzesForClassroom(classroomId: string): Observable<any> {
+    const url = this.BASE_URL + '/quizzes/class/' + classroomId;
+    return this.http.get(url);
+  }
 }
