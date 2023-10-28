@@ -30,9 +30,7 @@ export class OrgAdminClassTeachersComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private _route: ActivatedRoute,
-    private router: Router,
-    private _apiService: OrgAdminServiceService,
+  constructor(private _apiService: OrgAdminServiceService,
     public dialog: MatDialog,
     public _generalService: GeneralServiceService,
     public _deleteModelService: DeleteModelServiceService) { }
@@ -145,7 +143,6 @@ export class OrgAdminClassMapTeacher implements OnInit {
   }
 
   mapTeacherToClass() {
-    let correctCnt = 0, errorCnt = 0;
     console.log(`mapTeacherToClass clicked`);
     console.log(this.dataSource);
     this.notMappedTeachers.forEach((user: any) => {
@@ -159,11 +156,9 @@ export class OrgAdminClassMapTeacher implements OnInit {
         this._orgAdminService.mapUserToClassroom(reqObj).subscribe(
           (res: any) => {
             console.log(res)
-            correctCnt++;
           },
           (error: any) => {
             console.log(error)
-            errorCnt++;
           }
         )
       }
