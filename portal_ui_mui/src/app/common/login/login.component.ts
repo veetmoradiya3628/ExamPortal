@@ -13,8 +13,10 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginForm !: FormGroup;
 
-  constructor(private fb: FormBuilder, private _generalService: GeneralServiceService,
-    private _userService: UserServiceService, private router: Router) { }
+  constructor(private fb: FormBuilder, 
+    private _generalService: GeneralServiceService,
+    private _userService: UserServiceService, 
+    private router: Router) { }
 
   ngOnInit(): void {
     if(this._userService.isLoggedIn()){
@@ -61,12 +63,15 @@ export class LoginComponent implements OnInit {
           } else {
             this._userService.logout();
           }
+          this._generalService.openSnackBar('LoggedIn Successfully!!', 'Ok')
         },
         (error: any) => {
+          this._generalService.openSnackBar('Error occured while trying loggedIn', 'Ok')
           console.log(`error occured while logging`)
         }
       )
     } else {
+      this._generalService.openSnackBar('Invalid login form', 'Ok')
       console.log(`invalid login form`)
       return
     }

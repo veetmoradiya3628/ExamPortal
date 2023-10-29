@@ -5,6 +5,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { DeleteModelServiceService } from 'src/app/common/delete-model-service.service';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
+import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { Classes } from 'src/app/models/classes.model';
 import { Posts } from 'src/app/models/posts.model';
 import { IUser } from 'src/app/models/user.model';
@@ -26,7 +29,10 @@ export class OrgAdminClassDetailsComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
     private router: Router,
-    private _apiService: OrgAdminServiceService) {
+    private _apiService: OrgAdminServiceService,
+    private _generalService: GeneralServiceService,
+    private _userService: UserServiceService,
+    private _modelService: DeleteModelServiceService) {
     this._route.params.subscribe(params => this.classId = params['id']);
 
     this.loadClassroomById();
@@ -62,5 +68,52 @@ export class OrgAdminClassDetailsComponent implements OnInit {
         console.log('error while loading classroom details');
       }
     )
+  }
+
+  postFormSubmot(){
+    if (this.postContent !== undefined && this.postContent !== null  && this.postContent !== ''){
+      console.log(this.postContent);
+      let postData: Posts = {} as Posts;
+      postData.postContent = JSON.stringify(this.postContent);
+      postData.classroomId = this.classDetails.classroomId as string;
+      postData.commentAllowed = true;
+      postData.userId = this._userService.getLoggedInUserId(); // after login need to use logged In userId from cookies data
+      console.log('post data before making request ' + postData);
+      this._apiService.addPost(postData).subscribe(
+        (res: any) => {
+          console.log(res);
+          this._generalService.openSnackBar('Posted a post successfully!!', 'ok')
+          this.postContent = null;
+          this.loadPostsForClass(this.classId);
+        },
+        (error: any) => {
+          this._generalService.openSnackBar('error occured while posting a post', 'ok')
+          console.log('Error while adding post : ' + error)
+        }
+      )
+    }else{
+      this._generalService.openSnackBar('please provide valid post detail to post!!', 'ok')
+      return;
+    }
+  }
+
+  deletePost(postId: string | undefined){
+    console.log(`delete post called for postId : ${postId}`)
+    this._modelService.openConfirmationDialog('Are you sure want to delete this Post ?').then((result) => {
+      if(result){
+        this._apiService.deletePost(postId).subscribe(
+          (res: any) => {
+            this._generalService.openSnackBar('Post deleted successfully!!', 'OK')
+            this.loadPostsForClass(this.classId)
+          },
+          (error : any) => {
+            this._generalService.openSnackBar('Post deletion failed', 'OK')
+          }
+        )
+      }else{
+        // user cancel the action
+        return;
+      }
+    })
   }
 }

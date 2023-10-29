@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
+import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { IUser } from 'src/app/models/user.model';
 import { AdminServiceService } from 'src/app/services/admin-service.service';
 
@@ -11,12 +13,15 @@ import { AdminServiceService } from 'src/app/services/admin-service.service';
 })
 export class OrgAdminCreateTeacherComponent implements OnInit {
   // this will be dynamic once we make authentication flow & org admin login
-  orgId: string = 'a77f5d7b-c50d-418d-8c66-3814049ca386';
+  orgId: string = '';
   public addTeacherForm!: FormGroup;
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute, private _apiService: AdminServiceService) { }
+    private route: ActivatedRoute, 
+    private _apiService: AdminServiceService,
+    private _userService: UserServiceService,
+    private _generalService: GeneralServiceService) { }
 
   ngOnInit(): void {
     this.addTeacherForm = this.formBuilder.group({
@@ -32,6 +37,7 @@ export class OrgAdminCreateTeacherComponent implements OnInit {
         orgId: ['', Validators.required]
       })
     })
+    this.orgId = this._userService.getLoginUserOrganizationId();
   }
 
   addTeacherSubmit() {
@@ -44,9 +50,11 @@ export class OrgAdminCreateTeacherComponent implements OnInit {
     this._apiService.addUser(userRequestObject).subscribe(
       (res: any) => {
         console.log(res)
+        this._generalService.openSnackBar('Teacher created successfully!!', 'Ok')        
         this.router.navigateByUrl('/org-admin/teacher')
       },
       (error : any) => {
+        this._generalService.openSnackBar('Error occured while adding Teacher!!', 'Ok')
         console.log(`error orrcured while adding teacher`)
       }
     )

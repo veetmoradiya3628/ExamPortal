@@ -56,7 +56,7 @@
                             aria-label="Example icon button with a heart icon">
                             <mat-icon>update</mat-icon>
                         </button>
-                        <button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+                        <button (click)="deleteTeacher(row.userId)" mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </td>

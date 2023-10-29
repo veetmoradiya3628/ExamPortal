@@ -10,8 +10,8 @@
                 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
                     <mat-tab label="Posts">
                         <div class="m-10">
-                            <ckeditor [editor]="Editor" name="postContent"></ckeditor>
-                            <button class="mt-10" color="primary" mat-raised-button>Create Post</button>
+                            <ckeditor [editor]="Editor" name="postContent" [(ngModel)]="postContent"></ckeditor>
+                            <button class="mt-10" color="primary" mat-raised-button (click)="postFormSubmot()">Create Post</button>
                             <div>
                                 <mat-card class="mt-10" *ngFor="let post of classPosts">
                                     <mat-card-title>
@@ -27,7 +27,7 @@
                                             </div>
                                             <div fxFlex="10">
                                                 <button mat-raised-button color="accent">Edit</button>
-                                                <button mat-raised-button class="ml-5" color="warn">Delete</button>
+                                                <button mat-raised-button class="ml-5" color="warn" (click)="deletePost(post.postId)">Delete</button>
                                             </div>
                                         </div>
                                     </mat-card-title>

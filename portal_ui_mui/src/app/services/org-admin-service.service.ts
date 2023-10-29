@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Classes } from '../models/classes.model';
+import { Posts } from '../models/posts.model';
 
 @Injectable({
   providedIn: 'root'
@@ -72,4 +73,22 @@ export class OrgAdminServiceService {
     const url = this.BASE_URL + '/quizzes/class/' + classroomId;
     return this.http.get(url);
   }
+
+  // add post in classroom
+  public addPost(postData: Posts) : Observable<any> {
+    const url = this.BASE_URL + '/api/posts/';
+    return this.http.post(url, postData);
+  }
+
+  // delete post in classroom
+  public deletePost(postId : string | undefined) : Observable<any> {
+    const url = this.BASE_URL + '/api/posts/' + postId;
+    return this.http.delete(url);
+  }
+
+  // delete user with userId
+  public deleteUser(userId: string | undefined) : Observable<any> {
+    const url = this.BASE_URL + '/user/' + userId;
+    return this.http.delete(url);
+  } 
 }
