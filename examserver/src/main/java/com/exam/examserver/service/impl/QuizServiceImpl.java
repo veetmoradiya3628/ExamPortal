@@ -2,10 +2,8 @@ package com.exam.examserver.service.impl;
 
 
 import com.exam.examserver.dto.QuizDTO;
-import com.exam.examserver.entity.ClassroomUser;
-import com.exam.examserver.entity.Questions;
-import com.exam.examserver.entity.Quizzes;
-import com.exam.examserver.entity.User;
+import com.exam.examserver.dto.UserDTO;
+import com.exam.examserver.entity.*;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.ClassroomUserRepository;
 import com.exam.examserver.repo.QuestionsRepository;
@@ -27,6 +25,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class QuizServiceImpl implements QuizService {
@@ -162,6 +161,35 @@ public class QuizServiceImpl implements QuizService {
                 return ResponseHandler.generateResponse("classroom with classId " + classId + " not exists!!", HttpStatus.NOT_FOUND, null);
             }
         } catch (Exception e) {
+            logger.info("Exception : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception occurred...", HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getStudentsOfQuiz(String quizId) {
+        try{
+            logger.info("service method called getStudentsOfQuiz with quizId " + quizId);
+            Optional<Quizzes> q = this.quizzesRepository.findById(quizId);
+            if(q.isPresent()){
+                Quizzes quiz = q.get();
+                logger.info("classroom associated with quiz with id : " + quizId + " is : " + quiz.getClassroomId());
+                List<ClassroomUser> listOfClassroomUser = this.classroomUserRepository.findByClassroom(new Classroom(quiz.getClassroomId()));
+                List<UserDTO> listOfUsers = new ArrayList<>();
+                logger.info("total mapped user count : " + listOfClassroomUser.size());
+                listOfClassroomUser.forEach(classroomUser -> {
+                    if(classroomUser.getUser().getUserRoles().iterator().next().getRole().getRoleName().equalsIgnoreCase("STUDENT")){
+                        listOfUsers.add(this.modelMapper.map(classroomUser.getUser(), UserDTO.class));
+                    }else{
+                        logger.info("skipping user with id : " + classroomUser.getUser().getUserId() + " as user is not student");
+                    }
+                });
+                logger.info("user matched the role student cnt : " + listOfUsers.size());
+                return ResponseHandler.generateResponse("Students of Quiz!!", HttpStatus.OK, listOfUsers);
+            }else{
+                return ResponseHandler.generateResponse("Quiz with provided quizId not found!!", HttpStatus.NOT_FOUND, null);
+            }
+        }catch (Exception e){
             logger.info("Exception : " + e.getMessage());
             return ResponseHandler.generateResponse("Exception occurred...", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

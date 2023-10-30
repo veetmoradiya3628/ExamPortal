@@ -73,4 +73,13 @@ public class QuizController {
         logger.info("controller method called getQuizzesForClassroom with classId " + classId);
         return this.quizService.getQuizzesForClassroom(classId);
     }
+
+    /*
+     * API to get Students of Quiz with quizId
+     */
+    @GetMapping("/{quizId}/students")
+    public ResponseEntity<?> getStudentsOfQuiz(@PathVariable("quizId") String quizId){
+        logger.info("controller method called getStudentsOfQuiz with quizId : " + quizId);
+        return this.quizService.getStudentsOfQuiz(quizId);
+    }
 }

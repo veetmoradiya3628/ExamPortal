@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
+import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { Classes } from 'src/app/models/classes.model';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 
@@ -10,14 +13,18 @@ import { TeacherServiceService } from 'src/app/services/teacher-service.service'
 })
 export class CreateQuizComponent implements OnInit {
   // teacherId from session storage once login implemented
-  teacherId: string = "08545b03-f586-4d89-8d7d-a78f0a8ed38b";
+  teacherId: string = '';
   classrooms!: Array<Classes>;
   todayDate!: Date;
   public addQuizForm!: FormGroup;
 
-  constructor(private _apiService: TeacherServiceService) { }
+  constructor(private _apiService: TeacherServiceService,
+              private _userService: UserServiceService,
+              private _generalService: GeneralServiceService,
+              private _router: Router) { }
 
   ngOnInit(): void {
+    this.teacherId = this._userService.getLoggedInUserId();
     this.todayDate = new Date();
     this.addQuizForm = new FormGroup({
       quizTitle: new FormControl('', Validators.required),
@@ -74,9 +81,12 @@ export class CreateQuizComponent implements OnInit {
     this._apiService.addQuiz(reqObject).subscribe(
       (res: any) => {
         console.log(res)
+        this._router.navigateByUrl('/teacher/quizzes')
+        this._generalService.openSnackBar('Quiz created successfully!!', 'Ok')
       },
       (error : any) => {
         console.log(error)
+        this._generalService.openSnackBar('Error occured while adding Quiz!!', 'Ok')
       }
     )
   }

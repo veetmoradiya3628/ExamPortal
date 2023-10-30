@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { Question } from 'src/app/models/question.model';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 
@@ -15,7 +16,7 @@ export class TeacherCreateQuestionComponent implements OnInit {
   questionForm!: FormGroup;
   selectedOptionIndex!: number;
 
-  constructor(private _router: Router, private _formbuilder: FormBuilder, private _route: ActivatedRoute, private _apiService: TeacherServiceService) {
+  constructor(private _router: Router, private _formbuilder: FormBuilder, private _route: ActivatedRoute, private _apiService: TeacherServiceService, private _generalService: GeneralServiceService) {
     this.quizId = this._route.snapshot.paramMap.get('id') as string;
     console.log('passed quiz id  : ' + this.quizId);
 
@@ -104,9 +105,11 @@ export class TeacherCreateQuestionComponent implements OnInit {
       this._apiService.addQuestion(requestObject).subscribe(
         (res: any) => {
           console.log(res);
+          this._generalService.openSnackBar('Question created successfully!!', 'Ok')
           this._router.navigate([`../../${this.quizId}/details`], { relativeTo: this._route });
         },
         (error: any) => {
+          this._generalService.openSnackBar('Error occured while creating a question!!', 'Ok')
           console.log(`Error while adding question ${error}`)
         }
       )

@@ -38,4 +38,10 @@ public class QuizAttemptController {
 //        return ResponseEntity.ok(null);
                 return quizAttemptService.getQuizDetailsByQuizAttemptIdService(request);
     }
+
+    @GetMapping("/{quizId}/attempts")
+    public ResponseEntity<?> getAttemptedDataByQuizId(@PathVariable("quizId") String quizId){
+        logger.info("controller method called getAttemptedDataByQuizId with quizId : "+ quizId);
+        return quizAttemptService.getQuizAttemptDetailByQuizId(quizId);
+    }
 }

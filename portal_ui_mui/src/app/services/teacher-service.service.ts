@@ -36,14 +36,26 @@ export class TeacherServiceService {
   }
 
   // delete Question with questionId
-  public deleteQuestionwithId(questionId : string) : Observable<any> {
+  public deleteQuestionwithId(questionId: string): Observable<any> {
     const url = this.BASE_URL + '/question/' + questionId;
     return this.http.delete(url);
   }
 
   // add quiz
-  public addQuiz(reqObject: any) : Observable<any> {
+  public addQuiz(reqObject: any): Observable<any> {
     const url = this.BASE_URL + '/quizzes/create';
     return this.http.post(url, reqObject)
+  }
+
+  // get students of quiz by quizId
+  public getStudentByQuizId(quizId: string | undefined): Observable<any> {
+    const url = this.BASE_URL + '/quizzes/' + quizId + '/students'
+    return this.http.get(url);
+  }
+
+  // get attempts of quiz by quizId
+  public getQuizAttemptByQuizId(quizId: string | undefined): Observable<any> {
+    const url = this.BASE_URL + '/quiz_attempt/' + quizId + '/attempts'
+    return this.http.get(url);
   }
 }

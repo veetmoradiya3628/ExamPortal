@@ -1,5 +1,6 @@
 package com.exam.examserver.service.impl;
 
+import com.exam.examserver.dto.QuizAttemptDTO;
 import com.exam.examserver.entity.*;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.*;
@@ -7,7 +8,6 @@ import com.exam.examserver.req_res_format.QuizAttemptDetailRequest;
 import com.exam.examserver.req_res_format.QuizEndRequest;
 import com.exam.examserver.req_res_format.QuizStartRequest;
 import com.exam.examserver.service.QuizAttemptService;
-import org.json.HTTP;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Service
@@ -35,6 +33,9 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @Autowired
     private ClassroomUserRepository classroomUserRepository;
@@ -208,6 +209,27 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
         }catch (Exception e){
             logger.info("Exception occurred in the function startQuizAttemptService : "+e.getMessage());
             return ResponseHandler.generateResponse("Exception : "+e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getQuizAttemptDetailByQuizId(String quizId) {
+        try {
+            Optional<Quizzes> q = this.quizzesRepository.findById(quizId);
+            if (q.isPresent()) {
+                List<QuizAttempt> attempts = this.quizAttemptRepository.findQuizAttemptWithQuizId(quizId);
+                List<QuizAttemptDTO> response = new ArrayList<>();
+                attempts.forEach(quizAttempt -> {
+                    QuizAttemptDTO attempt = new QuizAttemptDTO(quizAttempt, this.userService.getUsername(quizAttempt.getUserId()));
+                    response.add(attempt);
+                });
+                return ResponseHandler.generateResponse("Quiz attempts for provided quizId", HttpStatus.OK, response);
+            } else {
+                return ResponseHandler.generateResponse("Quiz with provided quizId not found!!", HttpStatus.NOT_FOUND, null);
+            }
+        } catch (Exception e) {
+            logger.info("Exception occurred in the function getQuizAttemptDetailByQuizId : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 

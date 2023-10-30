@@ -9,4 +9,7 @@ import java.util.List;
 public interface QuizAttemptRepository extends MongoRepository<QuizAttempt, String> {
     @Query("{'userId': ?0,'quizId': ?1}")
     public List<QuizAttempt> findQuizAttemptParams(String userId, String quizId);
+
+    @Query("{'quizId': ?0}")
+    public List<QuizAttempt> findQuizAttemptWithQuizId(String quizId);
 }

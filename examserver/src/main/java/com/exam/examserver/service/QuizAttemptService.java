@@ -11,4 +11,6 @@ public interface QuizAttemptService {
     public ResponseEntity<?> endQuizAttemptService(QuizEndRequest request);
 
     public ResponseEntity<?> getQuizDetailsByQuizAttemptIdService(QuizAttemptDetailRequest request);
+
+    public ResponseEntity<?> getQuizAttemptDetailByQuizId(String quizId);
 }

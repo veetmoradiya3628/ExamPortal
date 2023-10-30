@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { Quiz } from 'src/app/models/quiz.model';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 
@@ -11,12 +12,14 @@ import { TeacherServiceService } from 'src/app/services/teacher-service.service'
 export class TeacherQuizzesComponent implements OnInit {
 
   // teacherId from session storage once login implemented
-  teacherId: string = "08545b03-f586-4d89-8d7d-a78f0a8ed38b";
+  teacherId: string = '';
   quizzes: Array<Quiz> = [];
 
-  constructor(private _apiService: TeacherServiceService, private _router: Router, private _route: ActivatedRoute) { }
+  constructor(private _apiService: TeacherServiceService, private _router: Router, private _route: ActivatedRoute,
+    private _userService: UserServiceService) { }
 
   ngOnInit(): void {
+    this.teacherId = this._userService.getLoggedInUserId();
     this.loadQuizzesForUser();
   }
 

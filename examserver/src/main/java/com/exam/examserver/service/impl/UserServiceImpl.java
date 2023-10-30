@@ -148,4 +148,8 @@ public class UserServiceImpl implements UserService {
     public boolean isUserPresentById(String userId){
         return this.userRepository.findById(userId).isPresent();
     }
+
+    public String getUsername(String userId){
+        return this.userRepository.findById(userId).get().getUsername();
+    }
 }

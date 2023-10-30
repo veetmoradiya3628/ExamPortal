@@ -13,4 +13,6 @@ public interface QuizService {
     public ResponseEntity<?> getQuizWithQuestionsAndDetails(String quizId);
 
     public ResponseEntity<?> getQuizzesForClassroom(String classId);
+
+    public ResponseEntity<?> getStudentsOfQuiz(String quizId);
 }
