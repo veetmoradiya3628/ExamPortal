@@ -1,0 +1,38 @@
+Exam Portal Dev Task:
+
+student :
+Done (Can Imprv.)	- Quiz Attempt end to end API call & flow Impl, security can be compromised
+	- Classrooms data and classroom details page Impl
+	- Quiz View Details Model data
+	- Quiz Attempt details in Tabular format
+		- View Question view attempt detail on Model
+		- pdf report generation and download for attempts
+Done	- Student Classroom page Impl
+			- Student Classroom Tabs & Impl all flow & data
+	- Profile page design & data show
+
+login & registration page design & end to end flow
+
+teacher : 
+	- Quiz Details
+		- Information tab design
+		- Edit Question -> future
+		- Attempts tab 
+			- View Attempt detail
+			- pdf report for student attempt
+	- Classroom
+		- Post - Comments - Future
+		- Students - section Impl
+		- Quiz - section Impl
+		- Attempts - section Impl (Backend Impl pending)
+	- Students 
+		- Create Students Impl (UI + Backend Integration)
+		- Student Info icon action
+	- Profile page design & data show
+
+org_admin:
+	- Profile page Impl
+
+admin:
+	- TBD
+

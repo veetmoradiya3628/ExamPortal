@@ -28,4 +28,10 @@ export class StudentServiceService {
     const url = this.BASE_URL + '/quiz_attempt/endQuiz';
     return this.http.post(url, reqObj);
   }
+
+  // get attempted quiz details by student
+  public getQuizAttemptsForStudent(quizId: string): Observable<any> {
+    const url = this.BASE_URL + '/quiz_attempt/' + quizId + '/student_attempts';
+    return this.http.get(url);
+  }
 }

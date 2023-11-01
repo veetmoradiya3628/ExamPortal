@@ -1,5 +1,6 @@
 package com.exam.examserver.service.impl;
 
+import com.exam.examserver.dto.OptionsDTO;
 import com.exam.examserver.dto.QuestionsDTO;
 import com.exam.examserver.entity.Questions;
 import com.exam.examserver.helper.ResponseHandler;
@@ -95,9 +96,24 @@ public class QuestionsServiceImpl implements QuestionsService {
                     List<QuestionsDTO> responseObject = new ArrayList<>();
                     questionsForQuiz.forEach(questions -> {
                         logger.info("question object : "+questions.toString());
-                        QuestionsDTO questionsDTO = this.modelMapper.map(questions, QuestionsDTO.class);
-                        questionsDTO.setId(String.valueOf(questions.getId()));
-                        logger.info("questionDTO object : "+questionsDTO.toString());
+                        List<OptionsDTO> optionsDTOS = new ArrayList<>();
+                        questions.getOptions().forEach(option -> {
+                            optionsDTOS.add(this.modelMapper.map(option, OptionsDTO.class));
+                        });
+                        QuestionsDTO questionsDTO = new QuestionsDTO(
+                              questions.getId().toHexString(),
+                                questions.getQuestionId(),
+                                questions.getQuestionText(),
+                                questions.getQuestionType(),
+                                questions.getScore(),
+                                questions.getQuizId(),
+                                optionsDTOS,
+                                questions.getCreatedAt(),
+                                questions.getUpdatedAt());
+
+//                        QuestionsDTO questionsDTO = this.modelMapper.map(questions, QuestionsDTO.class);
+//                        questionsDTO.setId(String.valueOf(questions.getId()));
+//                        logger.info("questionDTO object : "+questionsDTO.toString());
                         responseObject.add(questionsDTO);
                     });
                     return ResponseHandler.generateResponse("Questions for quiz with id : "+quizId, HttpStatus.OK, responseObject);

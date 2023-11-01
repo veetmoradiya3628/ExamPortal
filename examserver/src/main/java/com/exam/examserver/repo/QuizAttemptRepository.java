@@ -12,4 +12,7 @@ public interface QuizAttemptRepository extends MongoRepository<QuizAttempt, Stri
 
     @Query("{'quizId': ?0}")
     public List<QuizAttempt> findQuizAttemptWithQuizId(String quizId);
+
+    @Query("{'userId': ?0}")
+    public List<QuizAttempt> findQuizAttemptWithUserId(String userId);
 }

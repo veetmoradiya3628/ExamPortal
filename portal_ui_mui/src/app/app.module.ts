@@ -98,6 +98,7 @@ import { DeleteModelComponent } from './common/delete-model/delete-model.compone
 import { OrgAdminClassQuizzesComponent } from './org-admin/org-admin-classes/org-admin-class-quizzes/org-admin-class-quizzes.component';
 import { TeacherQuizStudentsComponent } from './teacher/teacher-quiz-details/teacher-quiz-students/teacher-quiz-students.component';
 import { TeacherQuizAttemptsComponent } from './teacher/teacher-quiz-details/teacher-quiz-attempts/teacher-quiz-attempts.component';
+import { StudentClassDetailComponent } from './student/student-classes/student-class-detail/student-class-detail.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { TeacherQuizAttemptsComponent } from './teacher/teacher-quiz-details/tea
     OrgAdminClassQuizzesComponent,
     TeacherQuizStudentsComponent,
     TeacherQuizAttemptsComponent,
+    StudentClassDetailComponent,
   ],
   imports: [
     BrowserModule,

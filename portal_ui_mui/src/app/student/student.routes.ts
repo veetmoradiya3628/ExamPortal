@@ -4,6 +4,7 @@ import { StudentQuizzesComponent } from "./student-quizzes/student-quizzes.compo
 import { StudentAttemptsComponent } from "./student-attempts/student-attempts.component";
 import { StudentClassesComponent } from "./student-classes/student-classes.component";
 import { StudentProfileComponent } from "./student-profile/student-profile.component";
+import { StudentClassDetailComponent } from "./student-classes/student-class-detail/student-class-detail.component";
 
 export const studentRoutes: Routes = [
     {
@@ -29,6 +30,11 @@ export const studentRoutes: Routes = [
     {
         path: 'profile',
         component: StudentProfileComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'class-details/:id',
+        component: StudentClassDetailComponent,
         pathMatch: 'full'
     }
 ]

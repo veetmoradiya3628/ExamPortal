@@ -44,4 +44,10 @@ public class QuizAttemptController {
         logger.info("controller method called getAttemptedDataByQuizId with quizId : "+ quizId);
         return quizAttemptService.getQuizAttemptDetailByQuizId(quizId);
     }
+
+    @GetMapping("/{studentId}/student_attempts")
+    public ResponseEntity<?> getAttemptedDataByUserId(@PathVariable("studentId") String studentId){
+        logger.info("controller method called getAttemptedDataByUserId with studentId : " + studentId);
+        return quizAttemptService.getQuizDetailsByStudentId(studentId);
+    }
 }

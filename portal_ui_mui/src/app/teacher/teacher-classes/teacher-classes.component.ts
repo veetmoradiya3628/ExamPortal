@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { Classes } from 'src/app/models/classes.model';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 
@@ -9,12 +10,13 @@ import { TeacherServiceService } from 'src/app/services/teacher-service.service'
 })
 export class TeacherClassesComponent implements OnInit {
   // teacherId from session storage once login implemented
-  teacherId: string = "08545b03-f586-4d89-8d7d-a78f0a8ed38b";
+  teacherId: string = "";
   classrooms!: Array<Classes>;
 
-  constructor(private _apiService: TeacherServiceService){}
+  constructor(private _apiService: TeacherServiceService, private _userService: UserServiceService){}
 
   ngOnInit(): void {
+    this.teacherId = this._userService.getLoggedInUserId();
     this.loadClassroomWithUserId();
   }
 

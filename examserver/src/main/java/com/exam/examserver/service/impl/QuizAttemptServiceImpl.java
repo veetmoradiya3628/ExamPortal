@@ -43,6 +43,7 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
     @Autowired
     private QuestionsRepository questionsRepository;
 
+
     @Autowired
     private QuestionAttemptRepository questionAttemptRepository;
 
@@ -224,7 +225,9 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
                 List<QuizAttempt> attempts = this.quizAttemptRepository.findQuizAttemptWithQuizId(quizId);
                 List<QuizAttemptDTO> response = new ArrayList<>();
                 attempts.forEach(quizAttempt -> {
-                    QuizAttemptDTO attempt = new QuizAttemptDTO(quizAttempt, this.userService.getUsername(quizAttempt.getUserId()));
+                    QuizAttemptDTO attempt = new QuizAttemptDTO(quizAttempt,
+                            this.userService.getUsername(quizAttempt.getUserId()),
+                            this.quizzesRepository.findById(quizAttempt.getQuizId()).get());
                     response.add(attempt);
                 });
                 return ResponseHandler.generateResponse("Quiz attempts for provided quizId", HttpStatus.OK, response);
@@ -232,6 +235,31 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
                 return ResponseHandler.generateResponse("Quiz with provided quizId not found!!", HttpStatus.NOT_FOUND, null);
             }
         } catch (Exception e) {
+            logger.info("Exception occurred in the function getQuizAttemptDetailByQuizId : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getQuizDetailsByStudentId(String studentId) {
+        try{
+            Optional<User> userRef = this.userRepository.findById(studentId);
+            if (userRef.isPresent()){
+                User u = userRef.get();
+                List<QuizAttempt> attempts = this.quizAttemptRepository.findQuizAttemptWithUserId(studentId);
+                List<QuizAttemptDTO> response = new ArrayList<>();
+                attempts.forEach(quizAttempt -> {
+                    QuizAttemptDTO attempt = new QuizAttemptDTO(quizAttempt,
+                            this.userService.getUsername(quizAttempt.getUserId()),
+                            this.quizzesRepository.findById(quizAttempt.getQuizId()).get());
+                    response.add(attempt);
+                });
+                return ResponseHandler.generateResponse("Quiz attempts for provided userId", HttpStatus.OK, response);
+            }else{
+                logger.info("student with student Id " + studentId + " not found");
+                return ResponseHandler.generateResponse("student with student Id " + studentId + " not found", HttpStatus.NOT_FOUND, null);
+            }
+        }catch (Exception e){
             logger.info("Exception occurred in the function getQuizAttemptDetailByQuizId : " + e.getMessage());
             return ResponseHandler.generateResponse("Exception : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
