@@ -3,11 +3,11 @@
         <div fxFlex="75">
             <!-- Question screen -->
             <div fxLayout="column" fxLayoutAlign="space-between">
-                <app-question-attempt [question]="selectedQuestion" [questionIndex]="selectedQuesitonIndex"></app-question-attempt>
+                <app-question-attempt [question]="selectedQuestion" [questionIndex]="selectedQuestionIndex"></app-question-attempt>
                 <div fxFill="20">
                     <div fxLayout="row" class="m-10" fxLayoutAlign="space-between start">
-                        <button *ngIf="selectedQuesitonIndex != 0" mat-raised-button color="primary" (click)="prevQuestionClick()">Previous</button>
-                        <button *ngIf="selectedQuesitonIndex != totalQuestions - 1" mat-raised-button color="primary" (click)="nextQuestionClick()">Next</button>
+                        <button *ngIf="selectedQuestionIndex != 0" mat-raised-button color="primary" (click)="prevQuestionClick()">Previous</button>
+                        <button *ngIf="selectedQuestionIndex != totalQuestions - 1" mat-raised-button color="primary" (click)="nextQuestionClick()">Next</button>
                     </div>
                 </div>
             </div>
@@ -35,14 +35,14 @@
                 <div fxLayout="column">
                     <mat-card-content>
                         <div class="font-18 m-5" fxLayout="row" fxLayoutAlign="space-between center">
-                            <div fxFlex="10">
+                            <div fxFlex="20">
                                 <h2>Quiz Progress</h2>
                             </div>
                             <mat-progress-spinner [mode]="progressSpinnerMode" [value]="progressValue">
                             </mat-progress-spinner>
 
                             <h2>Time Left </h2>
-                            <p class="font-25">12:00:00</p>
+                            <p class="font-25">{{ timeDiffInFormat }}</p>
                         </div>
                         <mat-divider></mat-divider>
 
@@ -74,7 +74,7 @@
                 <mat-divider></mat-divider>
                 <mat-card-actions>
                     <button mat-raised-button color="accent" class="mr-10">Cancle Quiz</button>
-                    <button mat-raised-button color="primary">End Quiz</button>
+                    <button mat-raised-button color="primary" (click)="endQuiz()">End Quiz</button>
                 </mat-card-actions>
             </mat-card>
         </div>

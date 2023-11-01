@@ -26,6 +26,7 @@ public class Questions {
 
     @Id
     private ObjectId id;
+    private String questionId;
     private String questionText;
     private QuestionType questionType;
     private Integer score;

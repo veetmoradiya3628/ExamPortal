@@ -126,6 +126,9 @@ public class QuizServiceImpl implements QuizService {
                 Quizzes quiz = this.quizzesRepository.findById(quizId).get();
                 logger.info(quiz.toString());
                 List<Questions> questionsOfQuiz = this.questionsRepository.findByQuizId(quizId);
+                questionsOfQuiz.forEach(question -> {
+                    question.setQuestionId(question.getId().toHexString());
+                });
                 JSONObject respObj = new JSONObject();
                 respObj.put("quizDetails", quiz);
                 respObj.put("questionDetails", questionsOfQuiz);

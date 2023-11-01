@@ -1,5 +1,6 @@
 export interface QuizAttempt {
     id?: string,
+    quizAttemptId?: string,
     quizId: string,
     userId: string,
     score: number,

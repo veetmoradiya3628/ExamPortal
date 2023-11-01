@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionsDTO {
     private String id;
+    private String questionId;
     private String questionText;
     private QuestionType questionType;
     private Integer score;

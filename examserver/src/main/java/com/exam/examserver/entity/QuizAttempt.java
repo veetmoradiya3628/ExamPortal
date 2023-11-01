@@ -34,6 +34,7 @@ public class QuizAttempt {
     private Boolean isAttemptCompleted;
     private String reportUrl;
     private QuizStatus quizStatus;
+    private String QuizAttemptId;
     @CreatedDate
     private LocalDateTime attemptStartedAt;
     @LastModifiedDate

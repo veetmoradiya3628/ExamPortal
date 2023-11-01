@@ -58,9 +58,12 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
             if (quizzes.isPresent()){
                 if (user.isPresent()){
                     // Validate already attempt exists or not
-                    if (this.quizAttemptRepository.findQuizAttemptParams(userId, quizId).size() > 0){
+                    List<QuizAttempt> isQuizAttemptExists = this.quizAttemptRepository.findQuizAttemptParams(userId, quizId);
+                    if (isQuizAttemptExists.size() > 0){
                         logger.info("quizAttempt already started ...");
-                        return ResponseHandler.generateResponse("quiz already attempted or started with quizId "+ quizId + " and userId "+userId, HttpStatus.ALREADY_REPORTED, null);
+                        QuizAttempt q = isQuizAttemptExists.get(0);
+                        q.setQuizAttemptId(q.getId().toHexString());
+                        return ResponseHandler.generateResponse("quiz already attempted or started with quizId "+ quizId + " and userId "+userId, HttpStatus.ALREADY_REPORTED, q);
                     }
                     // Validate quiz belong to user or not
                     if (this.isQuizMappedToUser(quizzes.get(), user.get())){
@@ -78,6 +81,7 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
 
                         logger.info("final quiz_attempt object for starting the quiz " + quizAttempt.toString());
                         quizAttempt = this.quizAttemptRepository.save(quizAttempt);
+                        quizAttempt.setQuizAttemptId(quizAttempt.getId().toHexString());
                         return ResponseHandler.generateResponse("quiz started with quizId "+ quizId + " for userId "+userId, HttpStatus.OK, quizAttempt);
                     }else{
                         // user not mapped to quiz

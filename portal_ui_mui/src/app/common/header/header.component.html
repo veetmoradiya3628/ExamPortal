@@ -2,7 +2,7 @@
     <mat-icon class="mr-10">quiz</mat-icon>
     <span>Exam Portal</span>
     <div class="spacer"></div>
-    <a mat-raised-button>Home</a>
-    <a mat-raised-button class="ml-5">Register</a>
-    <a mat-raised-button class="ml-5">Login</a>
+    <a mat-raised-button [routerLink]="'/'">Home</a>
+    <a mat-raised-button class="ml-5" [routerLink]="'/registration'" >Register</a>
+    <a mat-raised-button class="ml-5" [routerLink]="'/login'">Login</a>
 </mat-toolbar>
