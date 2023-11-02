@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -49,5 +50,12 @@ public class QuizAttemptController {
     public ResponseEntity<?> getAttemptedDataByUserId(@PathVariable("studentId") String studentId){
         logger.info("controller method called getAttemptedDataByUserId with studentId : " + studentId);
         return quizAttemptService.getQuizDetailsByStudentId(studentId);
+    }
+
+    @GetMapping("/{quizId}/student/{studentId}")
+    public ResponseEntity<?> getQuizAttemptDetailsByQuizIdAndUserId(@PathVariable("quizId") String quizId,
+                                                                    @PathVariable("studentId") String studentId){
+        logger.info("controller method called getQuizAttemptDetailsByQuizIdAndUserId with quizId : "+ quizId + " studentId : " + studentId);
+        return quizAttemptService.getQuizAttemptDetailsByQuizAndStudentId(quizId, studentId);
     }
 }

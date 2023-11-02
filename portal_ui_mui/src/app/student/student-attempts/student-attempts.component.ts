@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { QuizAttemptDto } from 'src/app/models/quiz_attempt_dto.model';
+import { QuizAttemptReportService } from 'src/app/services/quiz-attempt-report.service';
 import { StudentServiceService } from 'src/app/services/student-service.service';
 
 @Component({
@@ -24,7 +25,8 @@ export class StudentAttemptsComponent implements OnInit {
 
   constructor(private _userService: UserServiceService,
               private _studentApiService: StudentServiceService,
-              private _generalService: GeneralServiceService) { }
+              private _generalService: GeneralServiceService,
+              private _quizAttemptReportGenerator: QuizAttemptReportService) { }
 
   ngOnInit(): void {
     this.studentId = this._userService.getLoggedInUserId();
@@ -42,6 +44,18 @@ export class StudentAttemptsComponent implements OnInit {
       },
       (error : any) => {
         this._generalService.openSnackBar('Error loading Quiz Attempts!!', 'Ok')
+      }
+    )
+  }
+
+  openAttemptReportPdf(quizId: string, studentId: string){
+    this._generalService.getQuizAttemptDetailsByQuizIdAndStudentId(quizId, studentId).subscribe(
+      (res: any) => {
+        console.log(res)
+        this._quizAttemptReportGenerator.generatePdf(res.data);
+      },
+      (error : any) => {
+        this._generalService.openSnackBar('Error loading quiz attempt data!!!', 'Ok')
       }
     )
   }

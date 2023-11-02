@@ -41,7 +41,9 @@
                             </div>
                         </div>
                     </mat-tab>
-                    <mat-tab label="Quiz">Quiz section yet to Implement from Backend</mat-tab>
+                    <mat-tab label="Quiz">
+                        <app-student-class-quizzes [classId]="classId"></app-student-class-quizzes>
+                    </mat-tab>
                     <mat-tab label="Attempts">
                         Student Quiz Attempts needs to be implemented
                     </mat-tab>

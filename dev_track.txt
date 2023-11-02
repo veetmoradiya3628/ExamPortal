@@ -8,7 +8,11 @@ Done (Can Imprv.)	- Quiz Attempt end to end API call & flow Impl, security can b
 		- View Question view attempt detail on Model
 		- pdf report generation and download for attempts
 Done	- Student Classroom page Impl
-			- Student Classroom Tabs & Impl all flow & data
+			- Student Classroom Tabs (
+				Posts - Done,
+				Quizzes - Done,
+				Attempts - 
+			) & Impl all flow & data
 	- Profile page design & data show
 
 login & registration page design & end to end flow
@@ -36,3 +40,7 @@ org_admin:
 admin:
 	- TBD
 
+
+
+Pdf playground: http://pdfmake.org/playground.html
+Docs: https://pdfmake.github.io/docs/0.1/document-definition-object/columns/

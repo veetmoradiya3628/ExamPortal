@@ -11,7 +11,7 @@ export class GeneralServiceService {
 
   constructor(private http: HttpClient, private _matSnackBar: MatSnackBar) { }
 
-  openSnackBar(informationText: string, actionText: string){
+  openSnackBar(informationText: string, actionText: string) {
     this._matSnackBar.open(informationText, actionText, {
       duration: 2000,
       horizontalPosition: 'right',
@@ -21,12 +21,18 @@ export class GeneralServiceService {
 
   // get quiz details with questions
   public getQuizDetailsWithQuestions(quizId: string): Observable<any> {
-    const url = this.BASE_URL + '/quizzes/'+quizId+'/questions';
+    const url = this.BASE_URL + '/quizzes/' + quizId + '/questions';
     return this.http.get(url);
   }
 
-  public login(requestObj: any) : Observable<any> {
+  public login(requestObj: any): Observable<any> {
     const url = this.BASE_URL + '/generate-token'
     return this.http.post(url, requestObj);
+  }
+
+  // get quiz attempt full detail
+  public getQuizAttemptDetailsByQuizIdAndStudentId(quizId: string, userId: string) {
+    const url = this.BASE_URL + '/quiz_attempt/' + quizId + '/student/' + userId;
+    return this.http.get(url);
   }
 }

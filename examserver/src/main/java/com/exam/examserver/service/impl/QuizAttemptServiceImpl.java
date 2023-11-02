@@ -265,6 +265,52 @@ public class QuizAttemptServiceImpl implements QuizAttemptService {
         }
     }
 
+    @Override
+    public ResponseEntity<?> getQuizAttemptDetailsByQuizAndStudentId(String quizId, String studentId) {
+        try{
+            List<QuizAttempt> quizAttempts = this.quizAttemptRepository.findQuizAttemptParams(studentId, quizId);
+            if (quizAttempts.size() > 0){
+                QuizAttempt quizAttempt = quizAttempts.get(0);
+                logger.info(quizAttempt.toString());
+
+                JSONObject responseObject = new JSONObject();
+
+                Quizzes q = this.quizzesRepository.findById(quizAttempt.getQuizId()).get();
+                responseObject.put("quiz", q);
+
+                List<Questions> notAttemptedQuestions = new ArrayList<>();
+                quizAttempt.getNotAttemptedQuestionId().forEach(questionId -> {
+                    notAttemptedQuestions.add(this.questionsRepository.findById(questionId).get());
+                });
+                responseObject.put("notAttemptedQuestions", notAttemptedQuestions);
+
+                List<QuestionAttempt> correctAttemptedQuestions = new ArrayList<>();
+                quizAttempt.getCorrectQuestionsId().forEach(attemptedId -> {
+                    correctAttemptedQuestions.add(this.questionAttemptRepository.findById(attemptedId).get());
+                });
+                responseObject.put("correctAttemptedQuestions", correctAttemptedQuestions);
+
+                List<QuestionAttempt> wrongAttemptedQuestions = new ArrayList<>();
+                quizAttempt.getWrongQuestionsId().forEach(attemptId -> {
+                    wrongAttemptedQuestions.add(this.questionAttemptRepository.findById(attemptId).get());
+                });
+                responseObject.put("wrongAttemptedQuestions", wrongAttemptedQuestions);
+
+                responseObject.put("quizAttempt", quizAttempt);
+                responseObject.put("attemptedUsername", this.userService.getUsername(quizAttempt.getUserId()));
+
+                return ResponseHandler.generateResponse("ok", HttpStatus.OK, responseObject.toMap());
+            }else{
+                logger.info("Quiz attempt for quizId : " + quizId + " by student with studentId : " + studentId + " not found!!!");
+                return ResponseHandler.generateResponse("Quiz attempt for quizId : " + quizId + " by student with studentId : " + studentId + " not found!!!",
+                        HttpStatus.NOT_FOUND, null);
+            }
+        }catch (Exception e){
+            logger.info("Exception occurred in the function getQuizAttemptDetailsByQuizAndStudentId : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
     public boolean isQuizMappedToUser(Quizzes quiz, User user){
         logger.info("method called isQuizMappedToUser");
         List<ClassroomUser> listOfUsers = this.classroomUserRepository.findByClassroomAndUser(new Classroom(quiz.getClassroomId()), user);

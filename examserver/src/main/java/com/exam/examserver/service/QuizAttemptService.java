@@ -15,4 +15,6 @@ public interface QuizAttemptService {
     public ResponseEntity<?> getQuizAttemptDetailByQuizId(String quizId);
 
     public ResponseEntity<?> getQuizDetailsByStudentId(String studentId);
+
+    public ResponseEntity<?> getQuizAttemptDetailsByQuizAndStudentId(String quizId, String studentId);
 }

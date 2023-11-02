@@ -72,7 +72,7 @@
                         <button mat-icon-button class="mr-10" aria-label="Example icon button with a heart icon">
                             <mat-icon>info</mat-icon>
                         </button>
-                        <button mat-icon-button class="mr-10" aria-label="Example icon button with a heart icon">
+                        <button (click)="openAttemptReportPdf(row.quizAttempt.quizId, row.quizAttempt.userId)" mat-icon-button class="mr-10" aria-label="Example icon button with a heart icon">
                             <mat-icon>file_copy</mat-icon>
                         </button>
                     </td>
