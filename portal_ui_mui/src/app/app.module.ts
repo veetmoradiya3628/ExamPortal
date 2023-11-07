@@ -6,14 +6,12 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { AddressComponentComponent } from './test/address-component/address-component.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NavigationComponentComponent } from './test/navigation-component/navigation-component.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -22,18 +20,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatBadgeModule } from '@angular/material/badge';
-import { TableComponentComponent } from './test/table-component/table-component.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { DashboardComponentComponent } from './test/dashboard-component/dashboard-component.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TreeComponenetComponent } from './test/tree-componenet/tree-componenet.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { MatDividerModule } from '@angular/material/divider';
-import { DragDropComponentComponent } from './test/drag-drop-component/drag-drop-component.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HeaderComponent } from './common/header/header.component';
 import { RegisterComponent } from './common/register/register.component';
@@ -49,7 +43,6 @@ import { AdminOrganizationComponent } from './admin/admin-organization/admin-org
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AdminProfileComponent } from './admin/admin-profile/admin-profile.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { TestComponentComponent } from './test/test-component/test-component.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AdminAddOrganizationComponent } from './admin/admin-add-organization/admin-add-organization.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -104,12 +97,6 @@ import { StudentClassQuizzesComponent } from './student/student-classes/student-
 @NgModule({
   declarations: [
     AppComponent,
-    AddressComponentComponent,
-    NavigationComponentComponent,
-    TableComponentComponent,
-    DashboardComponentComponent,
-    TreeComponenetComponent,
-    DragDropComponentComponent,
     HeaderComponent,
     RegisterComponent,
     LoginComponent,
@@ -123,7 +110,6 @@ import { StudentClassQuizzesComponent } from './student/student-classes/student-
     AdminOrganizationComponent,
     AdminUsersComponent,
     AdminProfileComponent,
-    TestComponentComponent,
     AdminAddOrganizationComponent,
     AdminCreateUserComponent,
     OrgAdminSidebarComponent,

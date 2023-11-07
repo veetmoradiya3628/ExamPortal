@@ -14,39 +14,24 @@ import java.time.LocalDateTime;
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@Table(name = "tbl_posts")
-public class Posts {
-
-    public Posts(){}
-
-    public Posts(String postId) {
-        this.postId = postId;
-    }
-
+@Table(name = "tbl_comments")
+public class Comments {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    public String postId;
+    public String commentId;
 
     @Column(length = 5000)
-    public String postContent;
+    public String commentMessage;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(
-            name = "classroom_id",
-            referencedColumnName = "classroomId"
-    )
-    public Classroom classroom;
+    @JoinColumn(name = "post_id", referencedColumnName = "postId")
+    private Posts post;
 
-    @ColumnDefault("1")
-    public Boolean commentAllowed;
-
-    @ManyToOne(cascade =  CascadeType.MERGE)
-    @JoinColumn(
-            name = "user_id",
-            referencedColumnName = "userId"
-    )
-    public User user;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "user_id", referencedColumnName = "userId")
+    private User user;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

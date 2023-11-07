@@ -59,7 +59,7 @@ public class SecurityConfiguration{
                 .authorizeHttpRequests((request) -> {
                     try{
                         request.requestMatchers("/generate-token", "/user/**", "/user/test", "/swagger-ui/**", "/v3/api-docs/**", "/api/classroom/**",
-                                        "/api/posts/**", "/quizzes/**", "/question/**", "/quiz_attempt/**", "/question_attempt/**").permitAll()
+                                        "/api/posts/**", "/quizzes/**", "/question/**", "/quiz_attempt/**", "/question_attempt/**", "/api/comments/**").permitAll()
                                 .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .requestMatchers("/teacher/**").hasAnyAuthority("ADMIN", "TEACHER")
                                 .requestMatchers("/student/**").hasAuthority("STUDENT")
