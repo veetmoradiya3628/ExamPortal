@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class GeneralServiceService {
+  
   private BASE_URL = "http://localhost:8080";
 
   constructor(private http: HttpClient, private _matSnackBar: MatSnackBar) { }
@@ -31,8 +32,20 @@ export class GeneralServiceService {
   }
 
   // get quiz attempt full detail
-  public getQuizAttemptDetailsByQuizIdAndStudentId(quizId: string, userId: string) {
+  public getQuizAttemptDetailsByQuizIdAndStudentId(quizId: string, userId: string): Observable<any> {
     const url = this.BASE_URL + '/quiz_attempt/' + quizId + '/student/' + userId;
     return this.http.get(url);
+  }
+
+  // get comment details for post
+  public getCommentsForPostByPostId(porstId: string | undefined): Observable<any> {
+    const url = this.BASE_URL + '/api/comments/' + porstId;
+    return this.http.get(url);
+  }
+
+  // add comment for post
+  createComment(reqObj: any): Observable<any> {
+    const url = this.BASE_URL + '/api/comments/';
+    return this.http.post(url, reqObj);
   }
 }

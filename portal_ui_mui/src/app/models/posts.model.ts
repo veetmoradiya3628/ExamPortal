@@ -3,6 +3,7 @@ export interface Posts {
     postContent: string,
     classroomId: string,
     commentAllowed: boolean,
+    commentCount: number,
     postCreatorName?: string,
     userId: string,
     createdAt?: Date,

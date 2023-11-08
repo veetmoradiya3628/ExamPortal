@@ -8,4 +8,6 @@ public interface CommentsService {
     public  ResponseEntity<?> getAllComments();
 
     public ResponseEntity<?> addComment(CommentsDTO comment);
+
+    public ResponseEntity<?> getCommentsForPost(String postId);
 }

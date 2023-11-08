@@ -1,11 +1,13 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DeleteModelServiceService } from 'src/app/common/delete-model-service.service';
+import { PostCommentsComponent } from 'src/app/common/dialogs/post-comments/post-comments.component';
 import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { Classes } from 'src/app/models/classes.model';
@@ -32,7 +34,8 @@ export class OrgAdminClassDetailsComponent implements OnInit {
     private _apiService: OrgAdminServiceService,
     private _generalService: GeneralServiceService,
     private _userService: UserServiceService,
-    private _modelService: DeleteModelServiceService) {
+    private _modelService: DeleteModelServiceService,
+    public dialog: MatDialog) {
     this._route.params.subscribe(params => this.classId = params['id']);
 
     this.loadClassroomById();
@@ -115,5 +118,18 @@ export class OrgAdminClassDetailsComponent implements OnInit {
         return;
       }
     })
+  }
+
+  openPostComments(postId: string | undefined){
+    console.log(`post comments model open received for postId ${postId}`)
+    const dialogRef = this.dialog.open(PostCommentsComponent, {
+      data: {postId: postId},
+      height: '700px',
+      width: '1000px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

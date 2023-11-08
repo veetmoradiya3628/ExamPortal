@@ -6,6 +6,7 @@ import com.exam.examserver.entity.Posts;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.ClassroomRepository;
+import com.exam.examserver.repo.CommentsRepository;
 import com.exam.examserver.repo.PostsRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.PostsService;
@@ -32,6 +33,10 @@ public class PostsServiceImpl implements PostsService {
 
     @Autowired
     private ClassroomRepository classroomRepository;
+
+    @Autowired
+    private CommentsRepository commentsRepository;
+
     @Override
     public ResponseEntity<?> getAllPosts() {
         List<Posts> availablePosts = this.postsRepository.findAll();
@@ -78,6 +83,7 @@ public class PostsServiceImpl implements PostsService {
             this.postsRepository.findByClassroomOrderByCreatedAtDesc(new Classroom(classId)).forEach(post -> {
                 PostsDTO p = this.modelMapper.map(post, PostsDTO.class);
                 p.setPostCreatorName(post.getUser().getFirstName()+" "+post.getUser().getLastName());
+                p.setCommentCount(this.commentsRepository.findByPost(new Posts(post.getPostId())).size());
                 responsePosts.add(p);
             });
         }else{

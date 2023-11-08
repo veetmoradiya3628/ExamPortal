@@ -6,6 +6,7 @@ import com.exam.examserver.entity.Posts;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.CommentsRepository;
+import com.exam.examserver.repo.PostsRepository;
 import com.exam.examserver.service.CommentsService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -29,6 +30,9 @@ public class CommentsServiceImpl implements CommentsService {
     private CommentsRepository commentsRepository;
 
     @Autowired
+    private PostsRepository postsRepository;
+
+    @Autowired
     private ModelMapper modelMapper;
 
 
@@ -46,7 +50,7 @@ public class CommentsServiceImpl implements CommentsService {
             }
             return ResponseHandler.generateResponse("", HttpStatus.OK, comments);
         }catch (Exception e){
-            logger.info(LOG_TAG + " exception in the method getAllComments : " + e.getMessage());
+            logger.info(LOG_TAG + " Exception in the method getAllComments : " + e.getMessage());
             return ResponseHandler.generateResponse("Exception in get all comments", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
@@ -64,7 +68,26 @@ public class CommentsServiceImpl implements CommentsService {
             return ResponseHandler.generateResponse("Successfully added comment for the post", HttpStatus.OK, c);
         }catch (Exception e){
             logger.info(LOG_TAG + " exception in the method addComment : " + e.getMessage());
-            return ResponseHandler.generateResponse("Exception in get all comments", HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return ResponseHandler.generateResponse("Exception in addComment", HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> getCommentsForPost(String postId) {
+        try{
+            if(this.postsRepository.findById(postId).isPresent()){
+                List<Comments> comments = this.commentsRepository.findByPost(new Posts(postId));
+                List<CommentsDTO> response = new ArrayList<>();
+                comments.forEach(comment -> {
+                    CommentsDTO d = this.modelMapper.map(comment, CommentsDTO.class);
+                    response.add(d);
+                });
+                return ResponseHandler.generateResponse("", HttpStatus.OK, response);
+            }
+            return ResponseHandler.generateResponse("post with postId : " + postId + " not found!!", HttpStatus.NOT_FOUND, null);
+        }catch (Exception e){
+            logger.info(LOG_TAG + " exception in the method getCommentsForPost : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception in get getCommentsForPost", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 }

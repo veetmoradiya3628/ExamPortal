@@ -15,6 +15,7 @@ public class PostsDTO {
     private String classroomId;
     private Boolean commentAllowed;
     private String userId;
+    private Integer commentCount;
     private String postCreatorName;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { PostCommentsComponent } from 'src/app/common/dialogs/post-comments/post-comments.component';
 import { Classes } from 'src/app/models/classes.model';
 import { Posts } from 'src/app/models/posts.model';
 import { OrgAdminServiceService } from 'src/app/services/org-admin-service.service';
@@ -20,7 +22,8 @@ export class TeacherClassDetailsComponent implements OnInit {
 
   constructor(private _route: ActivatedRoute,
     private router: Router,
-    private _apiService: OrgAdminServiceService) {
+    private _apiService: OrgAdminServiceService,
+    public dialog: MatDialog) {
     this._route.params.subscribe(params => this.classId = params['id']);
 
     this.loadClassroomById();
@@ -56,5 +59,18 @@ export class TeacherClassDetailsComponent implements OnInit {
         console.log('error while loading classroom details');
       }
     )
+  }
+
+  openPostComments(postId: string | undefined){
+    console.log(`post comments model open received for postId ${postId}`)
+    const dialogRef = this.dialog.open(PostCommentsComponent, {
+      data: {postId: postId},
+      height: '700px',
+      width: '1000px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }

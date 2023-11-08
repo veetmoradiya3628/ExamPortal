@@ -35,7 +35,7 @@
                                         <div [innerHTML]="post.postContent"></div>
                                     </mat-card-content>
                                     <mat-card-actions class="m-5">
-                                        <button mat-button> <mat-icon>comment</mat-icon> Comments (0)</button>
+                                        <button mat-button (click)="openPostComments(post.postId)"> <mat-icon>comment</mat-icon> Comments ({{ post.commentCount }})</button>
                                     </mat-card-actions>
                                 </mat-card>
                             </div>
