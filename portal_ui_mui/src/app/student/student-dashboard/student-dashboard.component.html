@@ -1,1 +1,47 @@
-<p>student-dashboard works!</p>
+<div fxLayout="column" fxLayoutAlign="start start">
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxFill>
+        <div fxLayout="column" fxFlex="25">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style org-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total Classes</div>
+                        <div class="cnt-number-style">20</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex="25">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style active-teacher-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total Quizzes</div>
+                        <div class="cnt-number-style">20</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex="25">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style in-active-student-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total Quiz Attempts</div>
+                        <div class="cnt-number-style">20</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex="25">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style active-student-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total Pending Attempts</div>
+                        <div class="cnt-number-style">20</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxFill>
+        <canvas id="classChart"></canvas>
+    </div>
+</div>
