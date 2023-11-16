@@ -24,3 +24,9 @@ def get_user_role_cnt_for_organization(rolename, org_id):
     args = (rolename, org_id)
     print('args', args)
     return execute_query(query, args)
+
+def get_classroom_cnt_for_organization(org_id):
+    query = '''SELECT COUNT(*) FROM tbl_classroom WHERE organization_id =%s;'''
+    args = (org_id,)
+    print('args', args)
+    return execute_query(query, args)

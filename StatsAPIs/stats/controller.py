@@ -1,10 +1,13 @@
 from flask import jsonify
 from stats.models import *
+from venv import logger
 
 
 def get_admin_stats_controller(request):
     res = {}
-    res['organization_cnt'] = get_organization_cnt()[0][0]
+    org_cnt = get_organization_cnt()[0][0]
+    logger.info("organization count : {}".format(org_cnt))
+    res['organization_cnt'] = org_cnt
     res['active_teacher_cnt'] = get_users_cnt_with_role_and_status('teacher', 1)[0][0]
     res['in_active_teacher_cnt'] = get_users_cnt_with_role_and_status('teacher', 0)[0][0]
     res['active_student_cnt'] = get_users_cnt_with_role_and_status('student', 1)[0][0]
@@ -23,3 +26,27 @@ def get_admin_stats_controller(request):
         org_list.append(org)
     res['organization_data'] = org_list
     return jsonify(res), 200
+
+def get_org_admin_stats_controller(request):
+    req_data = request.get_json()
+    logger.info("data received for org admin stats controller with data : {}".format(req_data))
+    if req_data.get('organization_id') != None:
+        org_id = req_data['organization_id']
+        res = {}
+        # classroom cnt process
+        class_cnt = get_classroom_cnt_for_organization(org_id)[0][0]
+        logger.info("classroom cnt : {} for organization with org_id : {}".format(class_cnt, org_id))
+        res['classroom_cnt'] = class_cnt
+        # teacher cnt process
+        org_teacher_cnt = get_user_role_cnt_for_organization('teacher', org_id)[0][0]
+        logger.info("teacher cnt : {} for organization with org_id : {}".format(org_teacher_cnt, org_id))
+        res['teacher_cnt'] = org_teacher_cnt
+        # student cnt process
+        org_student_cnt = get_user_role_cnt_for_organization('student', org_id)[0][0]
+        logger.info("student cnt : {} for organization with org_id : {}".format(org_student_cnt, org_id))
+        res['student_cnt'] = org_student_cnt
+        return jsonify(res), 200
+    else:
+        error = {}
+        error['message'] = 'please pass valid organization_id'
+        return jsonify(error), 400
