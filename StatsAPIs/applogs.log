@@ -1,0 +1,29 @@
+2023-11-17 23:54:38,979 INFO venv Thread-2 (process_request_thread) : request called for /get_org_admin_stats endpoint
+2023-11-17 23:54:38,979 INFO venv Thread-2 (process_request_thread) : data received for org admin stats controller with data : {'organization_id': 'a77f5d7b-c50d-418d-8c66-3814049ca386'}
+2023-11-17 23:54:38,984 INFO venv Thread-2 (process_request_thread) : classroom cnt : 10 for organization with org_id : a77f5d7b-c50d-418d-8c66-3814049ca386
+2023-11-17 23:54:38,988 INFO venv Thread-2 (process_request_thread) : teacher cnt : 18 for organization with org_id : a77f5d7b-c50d-418d-8c66-3814049ca386
+2023-11-17 23:54:38,992 INFO venv Thread-2 (process_request_thread) : student cnt : 17 for organization with org_id : a77f5d7b-c50d-418d-8c66-3814049ca386
+2023-11-17 23:54:38,996 INFO venv Thread-2 (process_request_thread) : classroom ids : [('2d6598d6-7b5f-404f-b60f-4f9dbdbdef49',), ('2fb3717f-4609-4539-bcea-97b23889c796',), ('3b31454e-b6cd-4fe8-a89f-e1af7699ecff',), ('51c8c85c-4c99-4799-b0c5-6602e778b268',), ('66c641aa-0234-4dbb-8ce3-4b63f4910ac0',), ('8388a37f-5954-459d-808c-abc178d5a202',), ('8ada8087-68a8-4279-81cb-43d608d7b426',), ('aa2d5491-f3c9-43c1-a35c-8a9f16fd5982',), ('b7d7dc51-9ac5-40ee-bd19-ec71994687a5',), ('c395c833-b02a-4104-a7ef-59b503d87e95',)]
+2023-11-17 23:54:39,003 INFO venv Thread-2 (process_request_thread) : class_id : 2d6598d6-7b5f-404f-b60f-4f9dbdbdef49, quizzes cnt : 4
+2023-11-17 23:54:39,006 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dbc0840f386c421746d45f, attempt cnt : 1
+2023-11-17 23:54:39,008 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dbc0a10f386c421746d460, attempt cnt : 0
+2023-11-17 23:54:39,010 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dbc1110f386c421746d461, attempt cnt : 0
+2023-11-17 23:54:39,012 INFO venv Thread-2 (process_request_thread) : quiz_id : 6542012666f47d1f30c382b9, attempt cnt : 0
+2023-11-17 23:54:39,014 INFO venv Thread-2 (process_request_thread) : class_id : 2fb3717f-4609-4539-bcea-97b23889c796, quizzes cnt : 2
+2023-11-17 23:54:39,018 INFO venv Thread-2 (process_request_thread) : quiz_id : 653fd14d73f9fe6766d1694b, attempt cnt : 1
+2023-11-17 23:54:39,021 INFO venv Thread-2 (process_request_thread) : quiz_id : 653fd1af73f9fe6766d1694c, attempt cnt : 0
+2023-11-17 23:54:39,022 INFO venv Thread-2 (process_request_thread) : class_id : 3b31454e-b6cd-4fe8-a89f-e1af7699ecff, quizzes cnt : 0
+2023-11-17 23:54:39,024 INFO venv Thread-2 (process_request_thread) : class_id : 51c8c85c-4c99-4799-b0c5-6602e778b268, quizzes cnt : 0
+2023-11-17 23:54:39,026 INFO venv Thread-2 (process_request_thread) : class_id : 66c641aa-0234-4dbb-8ce3-4b63f4910ac0, quizzes cnt : 0
+2023-11-17 23:54:39,027 INFO venv Thread-2 (process_request_thread) : class_id : 8388a37f-5954-459d-808c-abc178d5a202, quizzes cnt : 0
+2023-11-17 23:54:39,028 INFO venv Thread-2 (process_request_thread) : class_id : 8ada8087-68a8-4279-81cb-43d608d7b426, quizzes cnt : 0
+2023-11-17 23:54:39,029 INFO venv Thread-2 (process_request_thread) : class_id : aa2d5491-f3c9-43c1-a35c-8a9f16fd5982, quizzes cnt : 0
+2023-11-17 23:54:39,031 INFO venv Thread-2 (process_request_thread) : class_id : b7d7dc51-9ac5-40ee-bd19-ec71994687a5, quizzes cnt : 4
+2023-11-17 23:54:39,035 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dbb8266134bd1df333e8f8, attempt cnt : 0
+2023-11-17 23:54:39,037 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dbbe450f386c421746d45d, attempt cnt : 0
+2023-11-17 23:54:39,039 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dbbe610f386c421746d45e, attempt cnt : 0
+2023-11-17 23:54:39,040 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dfa96d8d851c3816d56aee, attempt cnt : 0
+2023-11-17 23:54:39,043 INFO venv Thread-2 (process_request_thread) : class_id : c395c833-b02a-4104-a7ef-59b503d87e95, quizzes cnt : 2
+2023-11-17 23:54:39,044 INFO venv Thread-2 (process_request_thread) : quiz_id : 64dfaf3a8d851c3816d56aef, attempt cnt : 0
+2023-11-17 23:54:39,046 INFO venv Thread-2 (process_request_thread) : quiz_id : 6526d220ba7ddf02cc2a0243, attempt cnt : 0
+2023-11-17 23:54:39,046 INFO werkzeug Thread-2 (process_request_thread) : 127.0.0.1 - - [17/Nov/2023 23:54:39] "POST /get_org_admin_stats HTTP/1.1" 200 -

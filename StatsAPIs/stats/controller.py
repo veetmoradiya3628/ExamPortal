@@ -1,7 +1,7 @@
 from flask import jsonify
 from stats.models import *
+from stats.mongo_model import *
 from venv import logger
-
 
 def get_admin_stats_controller(request):
     res = {}
@@ -45,6 +45,21 @@ def get_org_admin_stats_controller(request):
         org_student_cnt = get_user_role_cnt_for_organization('student', org_id)[0][0]
         logger.info("student cnt : {} for organization with org_id : {}".format(org_student_cnt, org_id))
         res['student_cnt'] = org_student_cnt
+        # get quiz of organization & quiz attempt based on classes logic
+        total_quiz_cnt = 0
+        total_quiz_attempt_cnt = 0
+        classroom_ids = get_list_of_class_ids_for_organization(org_id)
+        logger.info("classroom ids : {}".format(classroom_ids))
+        for class_id in classroom_ids:
+            quizzes = get_quizzes_from_class_id("quizzes", class_id[0])
+            logger.info("class_id : {}, quizzes cnt : {}".format(class_id[0], len(quizzes)))
+            total_quiz_cnt = total_quiz_cnt + len(quizzes)
+            for quiz in quizzes:
+                quiz_attempts = get_quiz_attempts_from_quiz_id("attempt_quiz", str(quiz['_id']))
+                logger.info("quiz_id : {}, attempt cnt : {}".format(quiz['_id'], len(quiz_attempts)))
+                total_quiz_attempt_cnt = total_quiz_attempt_cnt + len(quiz_attempts)
+        res['quiz_cnt'] = total_quiz_cnt
+        res['quiz_attempt_cnt'] = total_quiz_attempt_cnt
         return jsonify(res), 200
     else:
         error = {}

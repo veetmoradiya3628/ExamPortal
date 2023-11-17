@@ -30,3 +30,9 @@ def get_classroom_cnt_for_organization(org_id):
     args = (org_id,)
     print('args', args)
     return execute_query(query, args)
+
+def get_list_of_class_ids_for_organization(org_id):
+    query = '''SELECT classroom_id FROM tbl_classroom where organization_id =%s;'''
+    args = (org_id,)
+    print('args', args)
+    return execute_query(query, args)
