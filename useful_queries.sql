@@ -54,3 +54,13 @@ SELECT COUNT(*) FROM ((tbl_user INNER JOIN tbl_user_role ON tbl_user.user_id = t
 
 -- get classroom_ids based on organization_id
 SELECT classroom_id FROM tbl_classroom where organization_id = 'a77f5d7b-c50d-418d-8c66-3814049ca386';
+
+-- get user_id with role_name
+SELECT tbl_user.user_id FROM ((tbl_user INNER JOIN tbl_user_role ON tbl_user.user_id = tbl_user_role.user_user_id) INNER JOIN tbl_role ON tbl_user_role.role_role_id = tbl_role.role_id) WHERE lower(role_name) = 'teacher';
+
+-- get user_cnt with role for given classid with user_role
+SELECT * FROM tbl_classroom_user where classroom_id = '2d6598d6-7b5f-404f-b60f-4f9dbdbdef49' AND user_id in (SELECT tbl_user.user_id FROM ((tbl_user INNER JOIN tbl_user_role ON tbl_user.user_id = tbl_user_role.user_user_id) INNER JOIN tbl_role ON tbl_user_role.role_role_id = tbl_role.role_id) WHERE lower(role_name) = 'student');
+
+
+-- get classroom_name with classroom_id 
+SELECT classroom_title FROM tbl_classroom where classroom_id = '2d6598d6-7b5f-404f-b60f-4f9dbdbdef49';

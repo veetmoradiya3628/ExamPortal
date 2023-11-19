@@ -45,7 +45,8 @@ def get_org_admin_stats_controller(request):
         org_student_cnt = get_user_role_cnt_for_organization('student', org_id)[0][0]
         logger.info("student cnt : {} for organization with org_id : {}".format(org_student_cnt, org_id))
         res['student_cnt'] = org_student_cnt
-        # get quiz of organization & quiz attempt based on classes logic
+        # get quiz of organization & quiz attempt based on classes logic & quiz_stats data
+        quiz_stats = list()
         total_quiz_cnt = 0
         total_quiz_attempt_cnt = 0
         classroom_ids = get_list_of_class_ids_for_organization(org_id)
@@ -55,11 +56,33 @@ def get_org_admin_stats_controller(request):
             logger.info("class_id : {}, quizzes cnt : {}".format(class_id[0], len(quizzes)))
             total_quiz_cnt = total_quiz_cnt + len(quizzes)
             for quiz in quizzes:
+                quiz_stat = dict()
+                quiz_stat['quiz_name'] = str(quiz['quizTitle'])
                 quiz_attempts = get_quiz_attempts_from_quiz_id("attempt_quiz", str(quiz['_id']))
                 logger.info("quiz_id : {}, attempt cnt : {}".format(quiz['_id'], len(quiz_attempts)))
+                quiz_stat['attempt_cnt'] = len(quiz_attempts)
+                quiz_stats.append(quiz_stat)
                 total_quiz_attempt_cnt = total_quiz_attempt_cnt + len(quiz_attempts)
         res['quiz_cnt'] = total_quiz_cnt
         res['quiz_attempt_cnt'] = total_quiz_attempt_cnt
+        res['quiz_stats'] = quiz_stats
+        # class student & teacher graph stats
+        classroom_stats = list()
+        for class_id in classroom_ids:
+            class_stat = dict()
+            class_stat['classroom_name'] = get_classroom_name_with_class_id(class_id[0])[0][0]
+            logger.info("class_id : {}, class_name : {}".format(class_id[0], class_stat['classroom_name']))
+            student_data = get_user_data_for_classroom_with_role_and_class_id(class_id[0], 'student')
+            logger.info("student data : {}".format(student_data))
+            class_stat['student_cnt'] = len(student_data)
+            teacher_data = get_user_data_for_classroom_with_role_and_class_id(class_id[0], 'teacher')
+            logger.info("teacher data : {}".format(teacher_data))
+            class_stat['teacher_cnt'] = len(teacher_data)
+            quizzes = get_quizzes_from_class_id("quizzes", class_id[0])
+            logger.info("class_id : {}, quizzes cnt : {}".format(class_id[0], len(quizzes)))
+            class_stat['quizzes_cnt'] = len(quizzes)
+            classroom_stats.append(class_stat)
+        res['classroom_stats'] = classroom_stats
         return jsonify(res), 200
     else:
         error = {}

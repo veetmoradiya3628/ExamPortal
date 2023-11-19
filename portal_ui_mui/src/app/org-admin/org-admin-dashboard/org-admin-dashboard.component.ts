@@ -20,7 +20,7 @@ export class OrgAdminDashboardComponent implements OnInit {
     const orgChart = new Chart("orgchart", {
       type: 'bar',
       data: {
-        labels: ['class1', 'class2', 'class3', 'class4', 'class5', 'class6'],
+        labels: ['class1class1class1class1', 'class2', 'class3', 'class4', 'class5', 'class6'],
         datasets: [{
           label: '# of Teachers',
           data: [12, 19, 3, 5, 2, 3],
@@ -53,18 +53,12 @@ export class OrgAdminDashboardComponent implements OnInit {
     const orgChart = new Chart("attemptChart", {
       type: 'bar',
       data: {
-        labels: ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6'],
+        labels: ['quiz1quiz1quiz1quiz1quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6'],
         datasets: [{
           label: '# of Attempts',
           data: [12, 19, 3, 5, 2, 3],
           borderWidth: 1,
           backgroundColor: '#4bc0c0'
-        },
-        {
-          label: '# of Not Attempts',
-          data: [8, 10, 5, 2, 9, 10],
-          borderWidth: 1,
-          backgroundColor: '#ff6384'
         }]
       },
       options: {

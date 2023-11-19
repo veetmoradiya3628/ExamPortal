@@ -36,3 +36,16 @@ def get_list_of_class_ids_for_organization(org_id):
     args = (org_id,)
     print('args', args)
     return execute_query(query, args)
+
+def get_user_data_for_classroom_with_role_and_class_id(class_id, role_name):
+    query = '''SELECT * FROM tbl_classroom_user where classroom_id=%s AND user_id in (SELECT tbl_user.user_id FROM ((tbl_user INNER JOIN tbl_user_role ON tbl_user.user_id = tbl_user_role.user_user_id) INNER JOIN tbl_role ON tbl_user_role.role_role_id = tbl_role.role_id) WHERE lower(role_name)=%s);'''
+    args = (class_id, role_name)
+    print('args', args)
+    return execute_query(query, args)
+
+def get_classroom_name_with_class_id(class_id):
+    query = '''SELECT classroom_title FROM tbl_classroom where classroom_id =%s'''
+    args = (class_id,)
+    print('args', args)
+    return execute_query(query, args)
+    
