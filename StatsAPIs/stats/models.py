@@ -48,4 +48,24 @@ def get_classroom_name_with_class_id(class_id):
     args = (class_id,)
     print('args', args)
     return execute_query(query, args)
-    
+
+def get_posts_cnt_with_class_id(class_id):
+    query = '''select * from tbl_posts where classroom_id =%s''';
+    args = (class_id,)
+    print('args', args)
+    return execute_query(query, args)
+
+def get_classroom_cnt_for_organization_mapped_to_teacher(org_id, user_id):
+    query = '''SELECT COUNT(classroom_id) FROM tbl_classroom_user where classroom_id in (SELECT classroom_id FROM 
+                tbl_classroom where organization_id =%s) AND user_id =%s;'''
+    args=(org_id, user_id,)
+    print('args', args)
+    return execute_query(query, args)
+
+def get_list_of_classids_for_teacher(org_id, user_id):
+    query = '''SELECT classroom_id FROM tbl_classroom_user where classroom_id in (SELECT classroom_id FROM 
+                tbl_classroom where organization_id =%s) AND user_id =%s;'''
+    args=(org_id, user_id,)
+    print('args', args)
+    return execute_query(query, args)
+

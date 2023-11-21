@@ -12,10 +12,19 @@ def get_admin_stats_route():
     except Exception as e:
         return jsonify(e), 409
     
-@stats.route('/get_org_admin_stats', methods=['POST'])
+@stats.route('/get_org_stats', methods=['POST'])
 def get_org_admin_stats_route():
     try:
         logger.info('request called for /get_org_admin_stats endpoint')
         return get_org_admin_stats_controller(request)
+    except Exception as e:
+        return jsonify(e), 409
+    
+
+@stats.route('/get_user_stats', methods=['POST'])
+def get_teacher_admin_stats():
+    try:
+        logger.info('request called for /get_teacher_stats endpoint')
+        return get_teacher_admin_stats_controller(request)
     except Exception as e:
         return jsonify(e), 409

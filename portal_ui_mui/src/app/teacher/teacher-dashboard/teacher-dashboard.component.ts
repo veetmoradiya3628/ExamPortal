@@ -56,12 +56,6 @@ export class TeacherDashboardComponent implements OnInit {
         labels: ['quiz1', 'quiz2', 'quiz3', 'quiz4', 'quiz5', 'quiz6'],
         datasets: [{
           label: '# of Attempts',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1,
-          backgroundColor: '#4bc0c0'
-        },
-        {
-          label: '# of Not Attempts',
           data: [8, 10, 5, 2, 9, 10],
           borderWidth: 1,
           backgroundColor: '#ff6384'
