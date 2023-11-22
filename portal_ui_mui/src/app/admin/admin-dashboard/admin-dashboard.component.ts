@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { StatsApiService } from 'src/app/common/service/stats-api.service';
 Chart.register(...registerables);
 
 @Component({
@@ -9,25 +10,56 @@ Chart.register(...registerables);
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  public response_data: any = {
+    active_student_cnt: 0,
+    active_teacher_cnt: 0,
+    in_active_student_cnt: 0,
+    in_active_teacher_cnt: 0,
+    organization_cnt: 0
+  };
+  public org_names: Array<string> = [];
+  public teacher_cnts: Array<number> = [];
+  public student_cnts: Array<number> = [];
+
+  constructor(private _stats_api_service: StatsApiService) { }
 
   ngOnInit(): void {
-    this.renderStatsChart();
+    this.loadAdminStats();
+  }
+
+  loadAdminStats() {
+    this._stats_api_service.getAdminStats().subscribe(
+      (res: any) => {
+        this.response_data = res;
+        console.log(this.response_data);
+
+        this.response_data.organization_data.forEach((obj: any) => {
+          this.org_names.push(obj.name);
+          this.teacher_cnts.push(obj.teacher_cnt);
+          this.student_cnts.push(obj.student_cnt);
+        });
+
+        this.renderStatsChart();
+      },
+      (error: any) => {
+        console.log(error)
+      }
+    )
   }
 
   renderStatsChart() {
     const orgChart = new Chart("orgchart", {
       type: 'bar',
       data: {
-        labels: ['Org1', 'Org2', 'Org3', 'Org4234536755543425367565432', 'Purple', 'Orange', 'Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        labels: this.org_names,
         datasets: [{
           label: '# of Teachers',
-          data: [12, 19, 3, 5, 2, 3, 12, 19, 3, 5, 2, 3],
+          data: this.teacher_cnts,
           borderWidth: 1
         },
         {
           label: '# of Students',
-          data: [8, 10, 5, 2, 9, 10, 12, 11, 0, 12, 1, 9],
+          data: this.student_cnts,
           borderWidth: 1
         }]
       },
