@@ -1,5 +1,6 @@
 package com.exam.examserver.service.impl;
 
+import com.exam.examserver.dto.ResetPasswordDTO;
 import com.exam.examserver.dto.UserDTO;
 import com.exam.examserver.entity.Organization;
 import com.exam.examserver.entity.User;
@@ -12,9 +13,12 @@ import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.ClassroomUserService;
 import com.exam.examserver.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -25,6 +29,7 @@ import java.util.Set;
 @Service
 public class UserServiceImpl implements UserService {
 
+    Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -37,6 +42,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private ModelMapper modelMapper;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /*
      * Method supports User Creation with Role
@@ -143,7 +151,40 @@ public class UserServiceImpl implements UserService {
         return ResponseHandler.generateResponse("Organization with id : "+orgId+" does not exists", HttpStatus.NOT_FOUND, null);
     }
 
-
+    @Override
+    public ResponseEntity<?> resetUserPassword(String userId, ResetPasswordDTO resetPasswordDTO) {
+        try {
+            logger.info("resetUserPassword called...");
+            // userId validation
+            if (this.isUserPresentById(userId)) {
+                logger.info("new password : " + resetPasswordDTO.getNewPassword() + ", confirm password : " + resetPasswordDTO.getConfirmPassword());
+                // newPasswordValidation
+                if (resetPasswordDTO.getNewPassword().equals(resetPasswordDTO.getConfirmPassword())) {
+                    // current password check
+                    User user = this.userRepository.findById(userId).get();
+                    String dbPassword = user.getPassword();
+                    String requestPassword = this.bCryptPasswordEncoder.encode(resetPasswordDTO.getNewPassword());
+                    logger.info("db stored password : " + dbPassword + " requestPassword : " + requestPassword);
+                    if (this.bCryptPasswordEncoder.matches(resetPasswordDTO.getCurrentPassword(), user.getPassword())) {
+                        int updatedRecordCount = this.userRepository.updatePasswordForUserWithUserId(requestPassword, userId);
+                        if (updatedRecordCount > 0) {
+                            return ResponseHandler.generateResponse("Password updated successfully!!", HttpStatus.OK, null);
+                        } else {
+                            return ResponseHandler.generateResponse("password update failed!!", HttpStatus.INTERNAL_SERVER_ERROR, null);
+                        }
+                    } else {
+                        return ResponseHandler.generateResponse("please provide valid old password!!", HttpStatus.NOT_ACCEPTABLE, null);
+                    }
+                } else {
+                    return ResponseHandler.generateResponse("newPassword and Confirm Password not matching!!", HttpStatus.NOT_ACCEPTABLE, null);
+                }
+            }
+            return ResponseHandler.generateResponse("user with userId : " + userId + " not found!!", HttpStatus.NOT_FOUND, null);
+        } catch (Exception e) {
+            logger.info("Exception occurred in the function resetUserPassword : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception : " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
 
     public boolean isUserPresentById(String userId){
         return this.userRepository.findById(userId).isPresent();

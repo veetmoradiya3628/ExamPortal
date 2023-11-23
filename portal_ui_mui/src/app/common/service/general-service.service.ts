@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
+import { ResetPassword } from 'src/app/models/reset_password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +48,11 @@ export class GeneralServiceService {
   createComment(reqObj: any): Observable<any> {
     const url = this.BASE_URL + '/api/comments/';
     return this.http.post(url, reqObj);
+  }
+
+  // reset user password 
+  public resetUserPassword(userId: string, requestObj: ResetPassword) : Observable<any> {
+    const url = this.BASE_URL + '/user/' + userId + '/resetPassword';
+    return this.http.post(url, requestObj);
   }
 }

@@ -1,5 +1,6 @@
 package com.exam.examserver.controller;
 
+import com.exam.examserver.dto.ResetPasswordDTO;
 import com.exam.examserver.entity.Role;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
@@ -105,5 +106,12 @@ public class UserController {
     @GetMapping("/{userId}/classrooms")
     public ResponseEntity<?> getClassroomsOfUserByUserId(@PathVariable("userId") String userId){
         return this.classroomUserService.getClassroomsByUserId(userId);
+    }
+
+    // reset password API
+    @PostMapping("/{userId}/resetPassword")
+    public ResponseEntity<?> resetPasswordForUser(@PathVariable("userId") String userId, @RequestBody ResetPasswordDTO resetPasswordDTO){
+        logger.info("resetPasswordForUser called with " + resetPasswordDTO.toString());
+        return this.userService.resetUserPassword(userId, resetPasswordDTO);
     }
 }

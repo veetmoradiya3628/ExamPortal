@@ -1,5 +1,6 @@
 package com.exam.examserver.service;
 
+import com.exam.examserver.dto.ResetPasswordDTO;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.entity.UserRole;
 import org.springframework.http.ResponseEntity;
@@ -26,4 +27,6 @@ public interface UserService {
     ResponseEntity<?> updateUserById(String userId, User user);
 
     ResponseEntity<?> getUserByOrgId(String orgId, String roleName);
+
+    ResponseEntity<?> resetUserPassword(String userId, ResetPasswordDTO resetPasswordDTO);
 }

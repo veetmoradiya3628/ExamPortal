@@ -53,4 +53,10 @@ export class AdminServiceService {
     const url = this.BASE_URL + '/user/' + userId;
     return this.http.delete(url);
   }
+
+  // get user details
+  public getUserDetails(userId: string): Observable<any> {
+    const url = this.BASE_URL + '/user/getUserById/' + userId;
+    return this.http.get(url);
+  }
 }

@@ -70,3 +70,5 @@ select * from tbl_posts where classroom_id = '2d6598d6-7b5f-404f-b60f-4f9dbdbdef
 
 -- get classroom_ids for teacher stats
 SELECT COUNT(classroom_id) FROM tbl_classroom_user where classroom_id in (SELECT classroom_id FROM tbl_classroom where organization_id = 'a77f5d7b-c50d-418d-8c66-3814049ca386') AND user_id = 'b982b7cd-21ca-495e-ab7d-2d7c1d6f5043';
+
+-- reset password
