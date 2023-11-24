@@ -24,11 +24,11 @@ export class AdminCreateUserComponent implements OnInit {
     this.loadOrganizationData();
     this.addUserForm = this.formBuilder.group({
       username: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      phone: ['', Validators.required],
-      password: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]],
+      password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]],
       enabled: [0],
       roleName: ['', Validators.required],
       organization: this.formBuilder.group({
