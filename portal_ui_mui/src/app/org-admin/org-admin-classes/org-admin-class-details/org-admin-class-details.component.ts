@@ -73,7 +73,7 @@ export class OrgAdminClassDetailsComponent implements OnInit {
     )
   }
 
-  postFormSubmot(){
+  postFormSubmit(){
     if (this.postContent !== undefined && this.postContent !== null  && this.postContent !== ''){
       console.log(this.postContent);
       let postData: Posts = {} as Posts;

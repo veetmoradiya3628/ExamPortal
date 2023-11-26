@@ -38,9 +38,9 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     public ResponseEntity<?> getAllComments() {
-        try{
+        try {
             List<Comments> comments = this.commentsRepository.findAll();
-            if (comments.size() > 0){
+            if (comments.size() > 0) {
                 List<CommentsDTO> response = new ArrayList<>();
                 comments.forEach(comment -> {
                     CommentsDTO d = this.modelMapper.map(comment, CommentsDTO.class);
@@ -49,7 +49,7 @@ public class CommentsServiceImpl implements CommentsService {
                 return ResponseHandler.generateResponse("", HttpStatus.OK, response);
             }
             return ResponseHandler.generateResponse("", HttpStatus.OK, comments);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(LOG_TAG + " Exception in the method getAllComments : " + e.getMessage());
             return ResponseHandler.generateResponse("Exception in get all comments", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
@@ -57,7 +57,7 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     public ResponseEntity<?> addComment(CommentsDTO comment) {
-        try{
+        try {
             Comments c = new Comments();
             c.setCommentMessage(comment.getCommentMessage());
             c.setUser(new User(comment.getUserId()));
@@ -66,7 +66,7 @@ public class CommentsServiceImpl implements CommentsService {
             c.setUpdatedAt(LocalDateTime.now());
             c = this.commentsRepository.save(c);
             return ResponseHandler.generateResponse("Successfully added comment for the post", HttpStatus.OK, c);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(LOG_TAG + " exception in the method addComment : " + e.getMessage());
             return ResponseHandler.generateResponse("Exception in addComment", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
@@ -74,8 +74,8 @@ public class CommentsServiceImpl implements CommentsService {
 
     @Override
     public ResponseEntity<?> getCommentsForPost(String postId) {
-        try{
-            if(this.postsRepository.findById(postId).isPresent()){
+        try {
+            if (this.postsRepository.findById(postId).isPresent()) {
                 List<Comments> comments = this.commentsRepository.findByPost(new Posts(postId));
                 List<CommentsDTO> response = new ArrayList<>();
                 comments.forEach(comment -> {
@@ -85,9 +85,26 @@ public class CommentsServiceImpl implements CommentsService {
                 return ResponseHandler.generateResponse("", HttpStatus.OK, response);
             }
             return ResponseHandler.generateResponse("post with postId : " + postId + " not found!!", HttpStatus.NOT_FOUND, null);
-        }catch (Exception e){
+        } catch (Exception e) {
             logger.info(LOG_TAG + " exception in the method getCommentsForPost : " + e.getMessage());
             return ResponseHandler.generateResponse("Exception in get getCommentsForPost", HttpStatus.INTERNAL_SERVER_ERROR, null);
+        }
+    }
+
+    @Override
+    public ResponseEntity<?> deleteCommentWithCommentId(String commentId) {
+        try {
+            if (this.commentsRepository.findById(commentId).isPresent()) {
+                this.commentsRepository.deleteById(commentId);
+                logger.info("comment deleted with commentId : " + commentId);
+                return ResponseHandler.generateResponse("comment deleted with commentId : " + commentId, HttpStatus.OK, null);
+            } else {
+                logger.info(LOG_TAG + " comment not found with commentId : " + commentId);
+                return ResponseHandler.generateResponse("comment not found with commentId : " + commentId, HttpStatus.NOT_FOUND, null);
+            }
+        } catch (Exception e) {
+            logger.info(LOG_TAG + " exception in the method deleteCommentWithCommentId : " + e.getMessage());
+            return ResponseHandler.generateResponse("Exception in get deleteCommentWithCommentId", HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 }

@@ -10,4 +10,6 @@ public interface CommentsService {
     public ResponseEntity<?> addComment(CommentsDTO comment);
 
     public ResponseEntity<?> getCommentsForPost(String postId);
+
+    public ResponseEntity<?> deleteCommentWithCommentId(String commentId);
 }

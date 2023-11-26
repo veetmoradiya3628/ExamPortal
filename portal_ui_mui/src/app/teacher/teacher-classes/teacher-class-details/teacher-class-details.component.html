@@ -10,8 +10,9 @@
                 <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="start">
                     <mat-tab label="Posts">
                         <div class="m-10">
-                            <ckeditor [editor]="Editor" name="postContent"></ckeditor>
-                            <button class="mt-10" color="primary" mat-raised-button>Create Post</button>
+                            <ckeditor [editor]="Editor" name="postContent" [(ngModel)]="postContent"></ckeditor>
+                            <button class="mt-10" color="primary" mat-raised-button (click)="postFormSubmit()">Create
+                                Post</button>
                             <div>
                                 <mat-card class="mt-10" *ngFor="let post of classPosts">
                                     <mat-card-title>
@@ -27,7 +28,8 @@
                                             </div>
                                             <div fxFlex="10">
                                                 <button mat-raised-button color="accent">Edit</button>
-                                                <button mat-raised-button class="ml-5" color="warn">Delete</button>
+                                                <button mat-raised-button class="ml-5" color="warn"
+                                                    (click)="deletePost(post.postId)">Delete</button>
                                             </div>
                                         </div>
                                     </mat-card-title>
@@ -35,16 +37,19 @@
                                         <div [innerHTML]="post.postContent"></div>
                                     </mat-card-content>
                                     <mat-card-actions class="m-5">
-                                        <button mat-button (click)="openPostComments(post.postId)"> <mat-icon>comment</mat-icon> Comments ({{ post.commentCount }})</button>
+                                        <button mat-button (click)="openPostComments(post.postId)">
+                                            <mat-icon>comment</mat-icon> Comments ({{ post.commentCount }})</button>
                                     </mat-card-actions>
                                 </mat-card>
                             </div>
                         </div>
                     </mat-tab>
                     <mat-tab label="Students">
-                        Need to show data of students of classroom
+                        <app-teacher-class-students [classId]="classId"></app-teacher-class-students>
                     </mat-tab>
-                    <mat-tab label="Quiz">Quiz section yet to Implement from Backend</mat-tab>
+                    <mat-tab label="Quiz">
+                        <app-teacher-class-quizzes [classId]="classId"></app-teacher-class-quizzes>
+                    </mat-tab>
                     <mat-tab label="Attempts">
                         Student Quiz Attempts needs to be implemented
                     </mat-tab>

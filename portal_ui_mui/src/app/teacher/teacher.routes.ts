@@ -8,6 +8,7 @@ import { TeacherQuizDetailsComponent } from "./teacher-quiz-details/teacher-quiz
 import { TeacherCreateQuestionComponent } from "./teacher-quiz-details/teacher-create-question/teacher-create-question.component";
 import { CreateQuizComponent } from "./teacher-quizzes/create-quiz/create-quiz.component";
 import { TeacherClassDetailsComponent } from "./teacher-classes/teacher-class-details/teacher-class-details.component";
+import { TeacherCreateStudentComponent } from "./teacher-students/teacher-create-student/teacher-create-student.component";
 
 export const teacherRoutes: Routes = [
     {
@@ -41,6 +42,11 @@ export const teacherRoutes: Routes = [
     {
         path: 'students',
         component: TeacherStudentsComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'create-student',
+        component: TeacherCreateStudentComponent,
         pathMatch: 'full'
     },
     {

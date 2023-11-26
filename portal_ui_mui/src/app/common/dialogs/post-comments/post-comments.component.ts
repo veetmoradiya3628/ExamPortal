@@ -13,6 +13,7 @@ export class PostCommentsComponent implements OnInit {
   public postId: string = '';
   public comments: Array<Comments> = [];
   public commentText: string = '';
+  public userId: string = '';
 
   constructor(public dialogRef: MatDialogRef<PostCommentsComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any, private _generalService: GeneralServiceService,
@@ -22,6 +23,7 @@ export class PostCommentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userId = this._userService.getLoggedInUserId();
     this.loadPostCommentsForPost();
   }
 
@@ -38,9 +40,9 @@ export class PostCommentsComponent implements OnInit {
     )
   }
 
-  postCommentButtonClick(){
-    if(this.commentText && this.commentText !== ''){
-      let reqObj : any = {};
+  postCommentButtonClick() {
+    if (this.commentText && this.commentText !== '') {
+      let reqObj: any = {};
       reqObj['userId'] = this._userService.getLoggedInUserId();
       reqObj['postId'] = this.postId;
       reqObj['commentMessage'] = this.commentText;
@@ -61,4 +63,17 @@ export class PostCommentsComponent implements OnInit {
     return
   }
 
+  deleteComment(commentId: string) {
+    this._generalService.deleteComment(commentId).subscribe(
+      (res: any) => {
+        console.log(res);
+        this._generalService.openSnackBar('Comment deleted successfully!!', 'Ok')
+        this.loadPostCommentsForPost();
+      },
+      (error: any) => {
+        console.log(`error occred while deleting comment ${error}`)
+        this._generalService.openSnackBar('Error occred while deleting comment', 'Ok')
+      }
+    )
+  }
 }

@@ -38,4 +38,10 @@ public class CommentsController {
         logger.info(LOG_TAG + " method call getCommentsForPostByPostId with postId : " + postId);
         return this.commentsService.getCommentsForPost(postId);
     }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<?> deleteCommentsForPost(@PathVariable("commentId") String commentId){
+        logger.info(LOG_TAG + " method call deleteCommentsForPost with commentId : " + commentId);
+        return this.commentsService.deleteCommentWithCommentId(commentId);
+    }
 }

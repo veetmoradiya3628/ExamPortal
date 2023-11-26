@@ -50,6 +50,12 @@ export class GeneralServiceService {
     return this.http.post(url, reqObj);
   }
 
+  // delete comment for post
+  deleteComment(commentId: string): Observable<any> {
+    const url = this.BASE_URL + '/api/comments/' + commentId;
+    return this.http.delete(url);
+  }
+
   // reset user password 
   public resetUserPassword(userId: string, requestObj: ResetPassword) : Observable<any> {
     const url = this.BASE_URL + '/user/' + userId + '/resetPassword';

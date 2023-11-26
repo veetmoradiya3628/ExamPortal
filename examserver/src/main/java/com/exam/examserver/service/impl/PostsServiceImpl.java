@@ -2,6 +2,7 @@ package com.exam.examserver.service.impl;
 
 import com.exam.examserver.dto.PostsDTO;
 import com.exam.examserver.entity.Classroom;
+import com.exam.examserver.entity.Comments;
 import com.exam.examserver.entity.Posts;
 import com.exam.examserver.entity.User;
 import com.exam.examserver.helper.ResponseHandler;
@@ -97,6 +98,10 @@ public class PostsServiceImpl implements PostsService {
         Optional<Posts> isPost = this.postsRepository.findById(postId);
         System.out.println("isPost -> "+isPost);
         if (isPost.isPresent()){
+            List<Comments> comments = this.commentsRepository.findByPost(new Posts(postId));
+            if(comments.size() > 0){
+                return ResponseHandler.generateResponse("delete comments for posts first!!", HttpStatus.NOT_ACCEPTABLE, null);
+            }
             System.out.println(isPost.get().getPostId());
             this.postsRepository.deleteById(postId);
             return ResponseHandler.generateResponse("Successfully deleted post with id : "+postId, HttpStatus.OK, null);
