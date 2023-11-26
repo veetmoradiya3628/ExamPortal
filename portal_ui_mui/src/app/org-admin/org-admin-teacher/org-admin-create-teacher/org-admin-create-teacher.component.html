@@ -10,6 +10,9 @@
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
                         <input matInput placeholder="e-mail" formControlName="email" required>
+                        <mat-error *ngIf="addTeacherForm.controls['email'].hasError('required')">
+                            E-mail is required!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
@@ -18,6 +21,9 @@
                         <div fxLayout="row" fxLayoutAlign="start start">
                             <mat-form-field fxFill>
                                 <input matInput formControlName="firstName" placeholder="First name" required>
+                                <mat-error *ngIf="addTeacherForm.controls['firstName'].hasError('required')">
+                                    first name is required!!
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -26,6 +32,9 @@
                         <div fxLayout="row" fxLayoutAlign="start start">
                             <mat-form-field fxFill>
                                 <input matInput formControlName="lastName" placeholder="Last name" required>
+                                <mat-error *ngIf="addTeacherForm.controls['lastName'].hasError('required')">
+                                    last name is required!!
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -34,18 +43,27 @@
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
                         <input matInput formControlName="username" placeholder="Username" required>
+                        <mat-error *ngIf="addTeacherForm.controls['username'].hasError('required')">
+                            username is required!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <h4>Password</h4>
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
                         <input matInput formControlName="password" placeholder="Password" required>
+                        <mat-error *ngIf="addTeacherForm.controls['password'].hasError('required')">
+                            password is required!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <h4>Phone No.</h4>
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
                         <input matInput formControlName="phone" placeholder="Phone no." required>
+                        <mat-error *ngIf="addTeacherForm.controls['phone'].hasError('required')">
+                            phone no. is required!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="center center">

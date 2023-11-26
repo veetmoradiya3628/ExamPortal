@@ -27,23 +27,23 @@ export class TeacherCreateQuestionComponent implements OnInit {
       quizId: [this.quizId, Validators.required],
       options: this._formbuilder.array([
         this._formbuilder.group({
-          optionText: [''],
+          optionText: ['', Validators.required],
           isCorrect: [false],
         }),
         this._formbuilder.group({
-          optionText: [''],
+          optionText: ['', Validators.required],
           isCorrect: [false],
         }),
         this._formbuilder.group({
-          optionText: [''],
+          optionText: ['', Validators.required],
           isCorrect: [false],
         }),
         this._formbuilder.group({
-          optionText: [''],
+          optionText: ['', Validators.required],
           isCorrect: [false],
         }),
         this._formbuilder.group({
-          optionText: [''],
+          optionText: ['', Validators.required],
           isCorrect: [false],
         })
       ]),

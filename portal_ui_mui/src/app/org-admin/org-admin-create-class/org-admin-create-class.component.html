@@ -11,6 +11,9 @@
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
                         <input matInput formControlName="classroomTitle" placeholder="test organization..." required>
+                        <mat-error *ngIf="createClassForm.controls['classroomTitle'].hasError('required')">
+                            classroom title is required field!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <h4>Classroom Sub Title</h4>
@@ -18,10 +21,14 @@
                     <mat-form-field fxFill>
                         <textarea rows="5" cols="5" formControlName="classroomSubTitle" matInput
                             placeholder="test description..." required></textarea>
+                        <mat-error *ngIf="createClassForm.controls['classroomSubTitle'].hasError('required')">
+                            classroom sub-title is required field!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <button mat-raised-button color="primary" type="submit">Add Classroom</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!createClassForm.valid">Add
+                        Classroom</button>
                     <button mat-raised-button color="secondary" class="ml-5"
                         [routerLink]="'/org-admin/classes'">Cancel</button>
                 </div>

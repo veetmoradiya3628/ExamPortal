@@ -25,6 +25,9 @@
                         <div fxLayout="row" fxLayoutAlign="start start">
                             <mat-form-field fxFill>
                                 <input formControlName="score" matInput placeholder="Question score" required>
+                                <mat-error *ngIf="questionForm.controls['score'].hasError('required')">
+                                    please provide score for question!!
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -32,7 +35,11 @@
                 <h4>Question Description</h4>
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
-                        <textarea formControlName="questionText" rows="3" matInput placeholder="Question description" required></textarea>
+                        <textarea formControlName="questionText" rows="3" matInput placeholder="Question description"
+                            required></textarea>
+                        <mat-error *ngIf="questionForm.controls['questionText'].hasError('required')">
+                            Question title text is required field!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
 
@@ -53,7 +60,7 @@
                         <div fxFlex="3">
                             <div
                                 *ngIf="questionForm.value.questionType != '' && (questionForm.value.questionType === 'SINGLE_CORRECT' || questionForm.value.questionType === 'TRUE_FALSE')">
-                                <mat-radio-group name="options" formControlName="isCorrect"> 
+                                <mat-radio-group name="options" formControlName="isCorrect">
                                     <mat-radio-button name="option" value="true"></mat-radio-button>
                                 </mat-radio-group>
                             </div>
@@ -71,7 +78,8 @@
                 </div>
 
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <button mat-raised-button color="primary" type="submit">Add Question</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!questionForm.valid">Add
+                        Question</button>
                     <button mat-raised-button color="secondary" class="ml-5"
                         (click)="cancelQuestionCreation()">Cancel</button>
                 </div>

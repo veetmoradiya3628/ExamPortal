@@ -17,13 +17,20 @@
                                         {{ classroom.classroomTitle }}
                                     </mat-option>
                                 </mat-select>
+                                <mat-error *ngIf="addQuizForm.controls['classroomId'].hasError('required')">
+                                    please select a valid classroom!!
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
                     <div fxFlex="50">
                         <h4>Quiz Duration (In Minutes)</h4>
                         <mat-form-field fxFill>
-                            <input type="number" matInput placeholder="Quiz Duration (In Minutes)" required formControlName="duration">
+                            <input type="number" matInput placeholder="Quiz Duration (In Minutes)" required
+                                formControlName="duration">
+                            <mat-error *ngIf="addQuizForm.controls['duration'].hasError('required')">
+                                quiz duration is a required field!!
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -31,12 +38,19 @@
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
                         <input matInput placeholder="Quiz Title" required formControlName="quizTitle">
+                        <mat-error *ngIf="addQuizForm.controls['quizTitle'].hasError('required')">
+                            quiz title is a required field!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <h4>Quiz description</h4>
                 <div fxLayout="row" fxLayoutAlign="start start">
                     <mat-form-field fxFill>
-                        <textarea matInput rows="5" placeholder="please add quiz description" formControlName="quizDescription" required></textarea>
+                        <textarea matInput rows="5" placeholder="please add quiz description"
+                            formControlName="quizDescription" required></textarea>
+                        <mat-error *ngIf="addQuizForm.controls['quizDescription'].hasError('required')">
+                            quiz description is a required field!!
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
@@ -44,7 +58,8 @@
                         <h4>Quiz Date</h4>
                         <div fxLayout="row" fxLayoutAlign="start start">
                             <mat-form-field fxFill>
-                                <input matInput [matDatepicker]="datepicker" [min]="todayDate" formControlName="selectedDate">
+                                <input matInput [matDatepicker]="datepicker" [min]="todayDate"
+                                    formControlName="selectedDate">
                                 <mat-hint>MM/DD/YYYY</mat-hint>
                                 <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
                                 <mat-datepicker #datepicker>
@@ -53,6 +68,9 @@
                                         <button mat-raised-button color="primary" matDatepickerApply>Apply</button>
                                     </mat-datepicker-actions>
                                 </mat-datepicker>
+                                <mat-error *ngIf="addQuizForm.controls['selectedDate'].hasError('required')">
+                                    quiz date is a required field!!
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -63,12 +81,16 @@
                                 <input [ngxTimepicker]="picker" matInput formControlName="selectedTime">
                                 <ngx-material-timepicker #picker></ngx-material-timepicker>
                                 <mat-icon matSuffix>access_time</mat-icon>
+                                <mat-error *ngIf="addQuizForm.controls['selectedTime'].hasError('required')">
+                                    quiz time is a required field!!
+                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="center center">
-                    <button mat-raised-button color="primary" type="submit">Add Quiz</button>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!addQuizForm.valid">Add
+                        Quiz</button>
                     <button mat-raised-button color="secondary" class="ml-5"
                         [routerLink]="'/teacher/quizzes'">Cancel</button>
                 </div>
