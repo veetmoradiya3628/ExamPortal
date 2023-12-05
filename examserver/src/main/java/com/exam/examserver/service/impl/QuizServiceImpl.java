@@ -7,6 +7,7 @@ import com.exam.examserver.entity.*;
 import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.repo.ClassroomUserRepository;
 import com.exam.examserver.repo.QuestionsRepository;
+import com.exam.examserver.repo.QuizAttemptRepository;
 import com.exam.examserver.repo.QuizzesRepository;
 import com.exam.examserver.service.QuizService;
 import com.mongodb.client.result.UpdateResult;
@@ -36,6 +37,9 @@ public class QuizServiceImpl implements QuizService {
 
     @Autowired
     private QuizzesRepository quizzesRepository;
+
+    @Autowired
+    private QuizAttemptRepository quizAttemptRepository;
 
     @Autowired
     private QuestionsRepository questionsRepository;
@@ -129,9 +133,11 @@ public class QuizServiceImpl implements QuizService {
                 questionsOfQuiz.forEach(question -> {
                     question.setQuestionId(question.getId().toHexString());
                 });
+                List<QuizAttempt> quizAttempts = this.quizAttemptRepository.findQuizAttemptWithQuizId(quizId);
                 JSONObject respObj = new JSONObject();
                 respObj.put("quizDetails", quiz);
                 respObj.put("questionDetails", questionsOfQuiz);
+                respObj.put("quizAttemptCnt", quizAttempts.size());
                 return ResponseHandler.generateResponse("Quiz details for quiz with Id : " + quizId, HttpStatus.OK, respObj.toMap());
             } else {
                 logger.info("quiz with QuizId " + quizId + " not exists!!");

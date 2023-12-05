@@ -3,7 +3,9 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
+import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { QuizAttemptDto } from 'src/app/models/quiz_attempt_dto.model';
+import { QuizAttemptReportService } from 'src/app/services/quiz-attempt-report.service';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 
 @Component({
@@ -20,7 +22,9 @@ export class TeacherQuizAttemptsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private _route: ActivatedRoute, private _apiService: TeacherServiceService) {
+  constructor(private _route: ActivatedRoute, private _apiService: TeacherServiceService,
+    private _generalService: GeneralServiceService,
+    private _quizAttemptReportGenerator: QuizAttemptReportService) {
     this.quizId = this._route.snapshot.paramMap.get('id') as string;
     console.log('received quiz id  : ' + this.quizId);
   }
@@ -40,6 +44,18 @@ export class TeacherQuizAttemptsComponent implements OnInit {
       },
       (error : any) => {
         console.log(`error occured while trying to load quiz attempt data`);
+      }
+    )
+  }
+
+  openAttemptReportPdf(quizId: string, studentId: string){
+    this._generalService.getQuizAttemptDetailsByQuizIdAndStudentId(quizId, studentId).subscribe(
+      (res: any) => {
+        console.log(res)
+        this._quizAttemptReportGenerator.generatePdf(res.data);
+      },
+      (error : any) => {
+        this._generalService.openSnackBar('Error loading quiz attempt data!!!', 'Ok')
       }
     )
   }
