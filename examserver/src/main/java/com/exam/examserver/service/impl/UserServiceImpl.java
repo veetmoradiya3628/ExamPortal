@@ -193,4 +193,8 @@ public class UserServiceImpl implements UserService {
     public String getUsername(String userId){
         return this.userRepository.findById(userId).get().getUsername();
     }
+
+    public Integer getUserCntByRoleAndClassroomId(String classroomId, String roleName){
+        return this.userRepository.findUserCntForClassroomWithRole(classroomId, roleName.toLowerCase());
+    }
 }

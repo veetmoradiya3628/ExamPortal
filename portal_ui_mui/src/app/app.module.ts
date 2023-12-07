@@ -98,6 +98,7 @@ import { TeacherClassStudentsComponent } from './teacher/teacher-classes/teacher
 import { TeacherClassQuizzesComponent } from './teacher/teacher-classes/teacher-class-quizzes/teacher-class-quizzes.component';
 import { TeacherCreateStudentComponent } from './teacher/teacher-students/teacher-create-student/teacher-create-student.component';
 import { TeacherQuizInfoComponent } from './teacher/teacher-quiz-details/teacher-quiz-info/teacher-quiz-info.component';
+import { StudentQuizInfoComponent } from './student/student-quizzes/student-quiz-info/student-quiz-info.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ import { TeacherQuizInfoComponent } from './teacher/teacher-quiz-details/teacher
     TeacherClassQuizzesComponent,
     TeacherCreateStudentComponent,
     TeacherQuizInfoComponent,
+    StudentQuizInfoComponent,
   ],
   imports: [
     BrowserModule,

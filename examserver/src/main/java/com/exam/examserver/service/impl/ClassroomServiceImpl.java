@@ -3,7 +3,10 @@ package com.exam.examserver.service.impl;
 import com.exam.examserver.dto.ClassroomDTO;
 import com.exam.examserver.entity.Classroom;
 import com.exam.examserver.entity.Organization;
+import com.exam.examserver.entity.Quizzes;
 import com.exam.examserver.repo.ClassroomRepository;
+import com.exam.examserver.repo.QuizzesRepository;
+import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.ClassroomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -18,6 +22,21 @@ public class ClassroomServiceImpl implements ClassroomService {
 
     @Autowired
     private ClassroomRepository classroomRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private QuizzesRepository quizzesRepository;
+
+    private Integer quizCntForClassroom(String classroomId){
+        List<Quizzes> quizzes = this.quizzesRepository.findByClassroomId(classroomId);
+        return quizzes.size();
+    }
+
+    public Integer getUserCntByRoleAndClassroomId(String classroomId, String roleName){
+        return this.userRepository.findUserCntForClassroomWithRole(classroomId, roleName.toLowerCase());
+    }
 
     /*
      * Method to get all classrooms
@@ -33,6 +52,9 @@ public class ClassroomServiceImpl implements ClassroomService {
                     classroom.getClassroomSubTitle(),
                     classroom.getClassroomCode(),
                     classroom.getOrganization().getOrgId(),
+                    this.quizCntForClassroom(classroom.getClassroomId()),
+                    this.getUserCntByRoleAndClassroomId(classroom.getClassroomId(), "student"),
+                    this.getUserCntByRoleAndClassroomId(classroom.getClassroomId(), "teacher"),
                     classroom.getCreatedAt()
             );
             classroomDTOs.add(classroomDTO);
@@ -54,6 +76,9 @@ public class ClassroomServiceImpl implements ClassroomService {
                     classroom.getClassroomSubTitle(),
                     classroom.getClassroomCode(),
                     classroom.getOrganization().getOrgId(),
+                    this.quizCntForClassroom(classroom.getClassroomId()),
+                    this.getUserCntByRoleAndClassroomId(classroom.getClassroomId(), "student"),
+                    this.getUserCntByRoleAndClassroomId(classroom.getClassroomId(), "teacher"),
                     classroom.getCreatedAt()
             );
             classroomDTOs.add(classroomDTO);
@@ -100,6 +125,9 @@ public class ClassroomServiceImpl implements ClassroomService {
                     classroom.getClassroomSubTitle(),
                     classroom.getClassroomCode(),
                     classroom.getOrganization().getOrgId(),
+                    this.quizCntForClassroom(classroom.getClassroomId()),
+                    this.getUserCntByRoleAndClassroomId(classroom.getClassroomId(), "student"),
+                    this.getUserCntByRoleAndClassroomId(classroom.getClassroomId(), "teacher"),
                     classroom.getCreatedAt()
             );
             return ResponseEntity.ok().body(response);

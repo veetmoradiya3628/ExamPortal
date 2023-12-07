@@ -15,5 +15,8 @@ public class ClassroomDTO {
     private String classroomSubTitle;
     private String classroomCode;
     private String organizationId;
+    private Integer quizCnt;
+    private Integer studentCnt;
+    private Integer teacherCnt;
     private LocalDateTime createdAt;
 }

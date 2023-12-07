@@ -12,6 +12,7 @@ import com.exam.examserver.repo.ClassroomUserRepository;
 import com.exam.examserver.repo.OrganizationRepository;
 import com.exam.examserver.repo.UserRepository;
 import com.exam.examserver.service.ClassroomUserService;
+import com.exam.examserver.service.QuizService;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,10 +40,16 @@ public class ClassroomUserServiceImpl implements ClassroomUserService {
     private ModelMapper modelMapper;
 
     @Autowired
+    private QuizServiceImpl quizService;
+
+    @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private ClassroomRepository classroomRepository;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     public ResponseEntity<?> getAllClassroomUserEntry(){
         List<ClassroomUser> usersOfClassroom = this.classroomUserRepository.findAll();
@@ -152,7 +159,15 @@ public class ClassroomUserServiceImpl implements ClassroomUserService {
                 if (listOfClassrooms.size() > 0){
                     List<ClassroomDTO> classrooms = new ArrayList<>();
                     listOfClassrooms.forEach(data -> {
-                        classrooms.add(this.modelMapper.map(data.getClassroom(), ClassroomDTO.class));
+                        Integer quizCnt = this.quizService.getQuizCntForClassroom(data.getClassroom().getClassroomId());
+                        Integer teacherCnt = this.userService.getUserCntByRoleAndClassroomId(data.getClassroom().getClassroomId(), "teacher");
+                        Integer studentCnt = this.userService.getUserCntByRoleAndClassroomId(data.getClassroom().getClassroomId(), "student");
+                        logger.info("quizCnt : " + quizCnt + "teacherCnt : " + teacherCnt + " studentCnt : " + studentCnt);
+                        ClassroomDTO c = this.modelMapper.map(data.getClassroom(), ClassroomDTO.class);
+                        c.setQuizCnt(quizCnt);
+                        c.setTeacherCnt(teacherCnt);
+                        c.setStudentCnt(studentCnt);
+                        classrooms.add(c);
                     });
                     return ResponseHandler.generateResponse("Classrooms for User with userId -> "+userId, HttpStatus.OK, classrooms);
                 }else{

@@ -258,4 +258,9 @@ public class QuizServiceImpl implements QuizService {
         }
         return false;
     }
+
+    public Integer getQuizCntForClassroom(String classroomId){
+        List<Quizzes> quizzes = this.quizzesRepository.findByClassroomId(classroomId);
+        return quizzes.size();
+    }
 }

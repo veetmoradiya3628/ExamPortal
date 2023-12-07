@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralServiceService } from 'src/app/common/service/general-service.service';
 import { UserServiceService } from 'src/app/common/service/user-service.service';
 import { Quiz } from 'src/app/models/quiz.model';
 import { StudentServiceService } from 'src/app/services/student-service.service';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
+import { StudentQuizInfoComponent } from './student-quiz-info/student-quiz-info.component';
+import { DeleteModelServiceService } from 'src/app/common/delete-model-service.service';
 
 @Component({
   selector: 'app-student-quizzes',
@@ -22,7 +25,9 @@ export class StudentQuizzesComponent implements OnInit {
     private _route: ActivatedRoute,
     private _userService: UserServiceService,
     private _studentApiService: StudentServiceService,
-    private _generalService: GeneralServiceService
+    private _generalService: GeneralServiceService,
+    private dialog: MatDialog,
+    private _confirmDialog: DeleteModelServiceService
   ) { }
 
   ngOnInit(): void {
@@ -45,9 +50,25 @@ export class StudentQuizzesComponent implements OnInit {
 
   onClickViewQuizDetails(quizId: string | undefined) {
     console.log(`View Quiz button clicked with ${quizId}`)
+    const dialogRef = this.dialog.open(StudentQuizInfoComponent, {
+      data: {quizId}
+    });
+
+    return dialogRef.afterClosed().toPromise().then((result) => result === true)
   }
 
   attemptQuiz(quiz: Quiz) {
+    this._confirmDialog.openConfirmationDialog('Are you sure want to start quiz attempt ?').then((result) => {
+      if(result){
+        this.startQuizAttempt(quiz);
+      }else{
+        // user cancel the action
+        return;
+      }
+    })
+  }
+
+  startQuizAttempt(quiz: Quiz){
     console.log(`quiz trying to attempt : ${quiz}`)
     let reqObj: any = {}
     reqObj['quizId'] = quiz.id;
@@ -58,7 +79,7 @@ export class StudentQuizzesComponent implements OnInit {
         console.log(res);
         let quizAttemptId = res.data.quizAttemptId;
         console.log(quizAttemptId);
-        localStorage.setItem('quizAttempt', JSON.stringify(res.data)); 
+        localStorage.setItem('quizAttempt', JSON.stringify(res.data));
         localStorage.setItem('quizAttemptId', quizAttemptId);
         this.enterFullScreenOnInit();
         this._router.navigateByUrl(`/quiz-attempt/${quiz.id}/question`)

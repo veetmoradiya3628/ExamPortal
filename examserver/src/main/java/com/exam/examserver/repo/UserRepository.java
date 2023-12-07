@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,10 @@ public interface UserRepository extends JpaRepository<User, String> {
     @Query(nativeQuery = true,
             value = "SELECT COUNT(*) FROM ((tbl_user INNER JOIN tbl_user_role ON tbl_user.user_id = tbl_user_role.user_user_id) INNER JOIN tbl_role ON tbl_user_role.role_role_id = tbl_role.role_id) WHERE lower(role_name) = :role_name AND is_enabled = :status")
     int findAllUsersByRoleNameAndStatus(@Param("role_name") String roleName, @Param("status") boolean status);
+
+    @Query(nativeQuery = true,
+    value = "SELECT COUNT(*) FROM tbl_classroom_user where classroom_id = :classroomId AND user_id in (SELECT tbl_user.user_id FROM ((tbl_user INNER JOIN tbl_user_role ON tbl_user.user_id = tbl_user_role.user_user_id) INNER JOIN tbl_role ON tbl_user_role.role_role_id = tbl_role.role_id) WHERE lower(role_name) = :roleName);")
+    int findUserCntForClassroomWithRole(@Param("classroomId") String classroomId, @Param("roleName") String roleName);
 
     @Modifying
     @Transactional
