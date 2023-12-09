@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, map, shareReplay } from 'rxjs';
 import { DeleteModelServiceService } from 'src/app/common/delete-model-service.service';
 import { UserServiceService } from 'src/app/common/service/user-service.service';
+import { IUser } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-student-sidebar',
@@ -11,6 +12,8 @@ import { UserServiceService } from 'src/app/common/service/user-service.service'
   styleUrls: ['./student-sidebar.component.scss']
 })
 export class StudentSidebarComponent {
+  userDetail!: IUser;
+  orgName: string = '';
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -20,7 +23,12 @@ export class StudentSidebarComponent {
   constructor(private breakpointObserver: BreakpointObserver,
     private _userService: UserServiceService,
     private _confirmDialog: DeleteModelServiceService,
-    private _router: Router) { }
+    private _router: Router) {
+    this.userDetail = this._userService.getUser();
+    if (this.userDetail && this.userDetail !== null) {
+      this.orgName = this.userDetail.organization?.orgName || '{}';
+    }
+  }
 
   logoutStudent() {
     console.log('Student logout called!!!')

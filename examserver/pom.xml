@@ -11,8 +11,8 @@
 	<groupId>com.exam</groupId>
 	<artifactId>examserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
 	<name>examserver</name>
-	<categoryDescription>Backend code for Exam Portal</categoryDescription>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -68,7 +68,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.18</version>
+			<version>1.18.28</version>
 		</dependency>
 		<dependency>
 			<groupId>org.modelmapper</groupId>
@@ -98,6 +98,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<executable>true</executable>
+					<skip>true</skip>
 				</configuration>
 			</plugin>
 		</plugins>

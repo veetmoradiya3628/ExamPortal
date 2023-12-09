@@ -20,8 +20,8 @@ export class AdminAddOrganizationComponent implements OnInit {
 
   ngOnInit(): void {
     this.addOrganizationForm = new FormGroup({
-      orgName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(15)]),
-      orgDescription: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(45)])
+      orgName: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)]),
+      orgDescription: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(255)])
     });
   }
 

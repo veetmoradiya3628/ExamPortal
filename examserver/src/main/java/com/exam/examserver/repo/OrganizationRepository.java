@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface OrganizationRepository extends JpaRepository<Organization, String> {
     boolean existsByOrgName(String orgName);
 
+    Organization findByOrgName(String organizationName);
+
     @Query("SELECT COUNT(*) FROM Organization o")
     public Integer getOrganizationCount();
 }

@@ -58,7 +58,7 @@ export class QuizAttemptComponent implements OnInit {
     }, 2000)
     this.submitQuestionInteval = setInterval(() => {
       this.submitAttemptedQuestions()
-    }, 10000)
+    }, 1000)
   }
 
   getQuizDetailsWithQuestions() {

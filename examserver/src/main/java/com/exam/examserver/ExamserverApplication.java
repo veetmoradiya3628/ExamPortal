@@ -56,12 +56,47 @@ public class ExamserverApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("Starting code....");
+		logger.info("Starting server startup code execution....");
 		addOrganization();
 		addRoles();
+        addInitialMasterAdmin();
+		logger.info("Completed server startup code execution....");
 	}
 
-	private void addOrganization(){
+    private void addInitialMasterAdmin() {
+		if(this.userRepository.existsByUsername("masteradmin")){
+			logger.info("master admin already exists, no need to add again :)!!");
+		}else {
+			logger.info("started adding master admin...");
+			User user = new User();
+			Organization org = this.organizationRepository.findByOrgName(this.GLOBAL_ORG_NAME);
+
+			user.setOrganization(org);
+			user.setEmail("masteradmin@gmail.com");
+			user.setUsername("masteradmin");
+			user.setEnabled(true);
+			user.setFirstName("master admin fn");
+			user.setLastName("master admin ln");
+			user.setPhone("9824339295");
+			user.setProfileImage("default.png");
+
+			// encoding password with BCrypt
+			user.setPassword(this.bCryptPasswordEncoder.encode("masteradmin@1234"));
+
+			Set<UserRole> roles = new HashSet<>();
+			Role role = this.roleRepository.findByRoleName("MASTER_ADMIN");
+			UserRole userRole = new UserRole();
+			userRole.setUser(user);
+			userRole.setRole(role);
+			roles.add(userRole);
+			user.setUserRoles(roles);
+
+			User u = this.userRepository.save(user);
+			logger.info("completed adding master admin...");
+		}
+    }
+
+    private void addOrganization(){
 		logger.info("Add Organization Started...");
 		Organization organization = new Organization();
 		organization.setOrgName(GLOBAL_ORG_NAME);
@@ -70,7 +105,8 @@ public class ExamserverApplication implements CommandLineRunner {
 			logger.info("Organization exists with orgName -> "+organization.getOrgName());
 		}else{
 			logger.info("Organization does not exists with orgName -> "+organization.getOrgName());
-			logger.info((String) this.organizationService.addOrganization(organization).getBody());
+			this.organizationService.addOrganization(organization);
+			logger.info("Organization addition completed...");
 		}
 		logger.info("Add Organization ended...");
 	}
@@ -88,38 +124,4 @@ public class ExamserverApplication implements CommandLineRunner {
 		}
 		logger.info("roles addition ended ...");
 	}
-
-	/*
-	private void addUserDummyData(){
-		System.out.println("Adding dummy data into tbl_user");
-		String orgId = "a77f5d7b-c50d-418d-8c66-3814049ca386";
-		String firstName = "Veet" + orgId.substring(0, 8);
-		String lastName = "Moradiya" + orgId.substring(0, 8);
-		String mobileNo = "9824339295";
-		String profileName = "default.png";
-
-		for (int cnt = 11; cnt <= 20; cnt++) {
-			User user = new User();
-			user.setEnabled(true);
-			user.setPassword(this.bCryptPasswordEncoder.encode("Veet@1234"));
-			user.setPhone(mobileNo);
-			user.setUsername(firstName + "_" + cnt + "_" + lastName);
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			user.setEmail(firstName + lastName + cnt + "@gmail.com");
-			user.setProfileImage(profileName);
-			user.setOrganization(this.organizationRepository.findById(orgId).get());
-			// role
-			Set<UserRole> roles = new HashSet<>();
-			Role role = this.roleRepository.findByRoleName("STUDENT");
-			UserRole userRole = new UserRole();
-			userRole.setUser(user);
-			userRole.setRole(role);
-			roles.add(userRole);
-
-			user.getUserRoles().addAll(roles);
-			System.out.println("Adding user --> "+user.toString());
-			this.userRepository.save(user);
-		}
-	} */
 }

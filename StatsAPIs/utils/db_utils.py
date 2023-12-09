@@ -4,7 +4,7 @@ conn = mysql.connector.connect(
   host="localhost",
   user="root",
   password="root",
-  database="exam_server"
+  database="examportalproddb" # Dev: exam_server, Dev Prod: examportalproddb
 )
 
 def is_db_connection():

@@ -19,7 +19,7 @@ export class AdminUsersComponent implements OnInit {
 
   public users: IUser[] | undefined;
 
-  displayedColumns: string[] = ['username', 'email', 'role', 'is_enabled', 'action'];
+  displayedColumns: string[] = ['username', 'email', 'role', 'is_enabled', 'orgname', 'action'];
   dataSource!: MatTableDataSource<IUser>;
   // @Output() change: EventEmitter<MatSlideToggleChange>;
 

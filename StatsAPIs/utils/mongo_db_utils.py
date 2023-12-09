@@ -1,7 +1,7 @@
 import pymongo
 
 myclient = pymongo.MongoClient("mongodb://localhost:27017/")
-mydb = myclient["ExamPortal"]
+mydb = myclient["ExamPortalProdDB"] # Dev: ExamPortal, Dev Prod: ExamPortalProdDB
 
 def is_db_connection():
     if myclient:
