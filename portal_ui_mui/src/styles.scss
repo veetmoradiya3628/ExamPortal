@@ -1,0 +1,195 @@
+/* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif, Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mt-2 {
+    margin-top: 2px;
+}
+
+.mt-5 {
+    margin-top: 5px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.ml-5 {
+    margin-left: 5px;
+}
+
+.mr-2 {
+    margin-right: 2px;
+}
+
+.mr-5 {
+    margin-right: 5px;
+}
+
+.mr-10 {
+    margin-right: 10px !important;
+}
+
+.mb-10 {
+    margin-bottom: 10px !important;
+}
+
+.m-5 {
+    margin: 5px;
+}
+
+.m-2 {
+    margin: 2px !important;
+}
+
+.ml-5 {
+    margin-left: 5px;
+}
+
+.mt-10 {
+    margin-top: 10px !important;
+}
+
+.m-10 {
+    margin: 10px;
+}
+
+.ml-10 {
+    margin-left: 10px !important;
+}
+
+.m-2 {
+    margin: 2px;
+}
+
+.mlt-5 {
+    margin-left: 5px;
+    margin-top: 5px;
+}
+
+.p-16 {
+    padding: 16px !important;
+}
+
+.p-10 {
+    padding: 10px;
+}
+
+.p-5 {
+    padding: 5px;
+}
+
+.p-8 {
+    padding: 8px;
+}
+
+.bg-black {
+    background-color: black !important;
+    color: white !important;
+}
+
+.header-font {
+    font-size: 25px !important
+}
+
+.sub-header-font {
+    font-size: 18px !important
+}
+
+.font-15 {
+    font-size: 15px !important;
+}
+
+.question-logo {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    border: 2px solid #090909;
+    color: #050505;
+    text-align: center;
+    cursor: pointer;
+    font: 32px Arial, sans-serif;
+    margin: 6px !important;
+}
+
+.normal-question {
+    background: #fff;
+}
+
+.attempted-question-circle {
+    background: #06f355;
+}
+
+// .visited-question-circle {
+//     background: #7f9fef;
+// }
+
+.attempt-user-text {
+    font-size: 20px !important;
+}
+
+.quiz-title {
+    font-size: 30px;
+}
+
+.quiz-subtitle {
+    font-size: 15px;
+}
+
+.font-18 {
+    font-size: 18px !important;
+}
+
+.font-20 {
+    font-size: 20px !important;
+}
+
+.font-25 {
+    font-size: 25px !important;
+}
+
+.font-30 {
+    font-size: 30px !important;
+}
+
+.bold {
+    font-weight: bolder;
+}
+
+.org-cnt-style {
+    padding: 5px;
+    margin: 8px;
+    font-size: 20px;
+}
+
+.cnt-number-style {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.cnt-header-style {
+    font-size: 25px;
+}
+
+.profile-page-title-font {
+    font-size: larger;
+    font-weight: 400;
+}
+
+.quiz-info-title-font {
+    font-weight: 900;
+}
+
+.quiz-info-text {
+    font-size: large;
+}

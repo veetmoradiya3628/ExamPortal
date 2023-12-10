@@ -1,0 +1,27 @@
+<div fxFill="80">
+    <mat-card class="m-10">
+        <mat-card-header class="mb-10">
+            <mat-card-title class="font-30">Q {{ questionInd + 1 }}. {{ ques.questionText }}</mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content class="m-10">
+            <div fxLayout="column" *ngIf="ques.questionType === 'MULTIPLE_CORRECT'" [formGroup]="selectedOptionsForm">
+                <!-- {{ selectedOptionsForm.value | json }} -->
+                <mat-checkbox *ngFor="let option of ques.options; let i = index" formControlName="option_{{i + 1}}">
+                    <div class="font-25">
+                       {{ option.optionText }}
+                    </div>
+                </mat-checkbox>
+            </div>
+            <mat-radio-group fxLayout="column" [(ngModel)]="selectedOption"
+                *ngIf="ques.questionType === 'SINGLE_CORRECT' || ques.questionType === 'TRUE_FALSE'">
+                <!-- {{ selectedOption }} -->
+                <mat-radio-button *ngFor="let option of ques.options" [checked]="selectedOption === option.optionText" [value]="option.optionText">
+                    <div class="font-25">
+                        {{ option.optionText }}
+                    </div>
+                </mat-radio-button>
+            </mat-radio-group>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -1,0 +1,77 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
+    <div fxLayout="row" fxLayoutAlign="start start">
+        <h2>Add Student</h2>
+    </div>
+    <!-- {{ addStudentForm.value | json}} -->
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
+        <div fxLayout="column" fxFlex="80">
+            <form [formGroup]="addStudentForm" (ngSubmit)="addStudentSubmit()">
+                <h4>Email</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput placeholder="e-mail" formControlName="email" required>
+                        <mat-error *ngIf="addStudentForm.controls['email'].hasError('required')">
+                            E-mail address is required!!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
+                    <div fxFlex="50">
+                        <h4>Firs tName</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <input matInput formControlName="firstName" placeholder="First name" required>
+                                <mat-error *ngIf="addStudentForm.controls['firstName'].hasError('required')">
+                                    First Name is required!!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex="50">
+                        <h4>Last Name</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <input matInput formControlName="lastName" placeholder="Last name" required>
+                                <mat-error *ngIf="addStudentForm.controls['lastName'].hasError('required')">
+                                    Last Name is required!!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <h4>Username</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="username" placeholder="Username" required>
+                        <mat-error *ngIf="addStudentForm.controls['username'].hasError('required')">
+                            Username is required!!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <h4>Password</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="password" placeholder="Password" required>
+                        <mat-error *ngIf="addStudentForm.controls['password'].hasError('required')">
+                            Password is required!!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <h4>Phone No.</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="phone" placeholder="Phone no." required>
+                        <mat-error *ngIf="addStudentForm.controls['phone'].hasError('required')">
+                            Phone no. is required!!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" type="submit">Add Student</button>
+                    <button mat-raised-button color="secondary" class="ml-5"
+                        [routerLink]="'/teacher/students'">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

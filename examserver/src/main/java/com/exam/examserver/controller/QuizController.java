@@ -1,10 +1,8 @@
 package com.exam.examserver.controller;
 
-import com.exam.examserver.entity.exam.Category;
-import com.exam.examserver.entity.exam.Quiz;
-import com.exam.examserver.repo.CategoryRepository;
+import com.exam.examserver.dto.QuizDTO;
+import com.exam.examserver.helper.ResponseHandler;
 import com.exam.examserver.service.QuizService;
-import com.exam.examserver.service.impl.QuizServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,77 +11,75 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
-@RequestMapping("/quiz")
+@RequestMapping("/quizzes")
 @CrossOrigin("*")
 public class QuizController {
-    Logger logger = LoggerFactory.getLogger(QuizServiceImpl.class);
+    Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private QuizService quizService;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
-
-    // add quiz
-    @PostMapping("/")
-    public ResponseEntity<?> addQuiz(@RequestBody Quiz quiz){
-        logger.info("data received at addQuiz is "+quiz.toString());
-        String categoryId = quiz.getCategory().getCid();
-        if(!categoryRepository.existsByCid(categoryId)) {
-            logger.debug("category with cid "+categoryId+" not exists!!");
-            Map<String, String> mpp = Map.of("message", "category not exists with cid : " + categoryId);
-            return new ResponseEntity<>(mpp, HttpStatus.NOT_FOUND);
-        }
-        logger.info("category with cid "+categoryId+" exists");
-        return ResponseEntity.ok(this.quizService.addQuiz(quiz));
+    /*
+     * Method to create a Quiz
+     */
+    @PostMapping("/create")
+    public ResponseEntity<?> createQuiz(@RequestBody QuizDTO quiz){
+        logger.info("received request object --> " + quiz.toString());
+        return this.quizService.createQuiz(quiz);
     }
 
-    // update quiz
-    @PutMapping("/")
-    public ResponseEntity<Quiz> updateQuiz(@RequestBody Quiz quiz){
-        return ResponseEntity.ok(this.quizService.updateQuiz(quiz));
+    /*
+     * Method to activate and deactivate quiz
+     */
+    @PostMapping("/{quizId}/changeStatus")
+    public ResponseEntity<?> changeQuizStatus(@PathVariable("quizId") String quizId, @RequestParam Boolean status){
+        return this.quizService.changeQuizStatus(quizId, status);
     }
 
-    // get quiz
     @GetMapping("/")
-    public ResponseEntity<?> getQuizzes(){
-        return ResponseEntity.ok(this.quizService.getAllQuiz());
+    public ResponseEntity<?> getAllQuizzes(){
+//        List<Quizzes> listOfQuizzes = this.quizzesRepository.findAll();
+//        listOfQuizzes.forEach(quizzes -> {
+//            System.out.println(quizzes.toString());
+//        });
+        return ResponseHandler.generateResponse(null, HttpStatus.OK, null);
     }
 
-    // get quiz by id
-    @GetMapping("/{qId}")
-    public ResponseEntity<Quiz> getQuiz(@PathVariable("qId") String quizId){
-        return ResponseEntity.ok(this.quizService.getQuiz(quizId));
+    /*
+     * Method to get quiz for user with userId
+     */
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<?> getQuizzesForUser(@PathVariable("userId") String userId){
+        logger.info("received userId for getQuizzesForUser is : "+userId);
+        return this.quizService.getQuizzesForUser(userId);
     }
 
-    // delete quiz
-    @DeleteMapping("/{qId}")
-    public void deleteQuiz(@PathVariable("qId") String quizId){
-        this.quizService.deleteQuiz(quizId);
+    /*
+     * Get Quiz with Questions by QuizId for Attempt purpose
+     */
+    @GetMapping("/{quizId}/questions")
+    public ResponseEntity<?> getQuizByQuizIdWithQuestionAndDetails(@PathVariable("quizId") String quizId){
+        logger.info("controller method called getQuizByQuizIdWithQuestionAndDetails with quizId "+quizId);
+        return this.quizService.getQuizWithQuestionsAndDetails(quizId);
     }
 
-    @GetMapping("/category/{cid}")
-    public List<Quiz> getQuizzesOfCategory(@PathVariable("cid") String cid){
-        Category category = new Category();
-        category.setCid(cid);
-        return this.quizService.getQuizzesOfCategory(category);
+    /*
+     * Method to get quiz which is mapped to particular class
+     */
+    @GetMapping("/class/{classId}")
+    public ResponseEntity<?> getQuizzesForClassroom(@PathVariable("classId") String classId){
+        logger.info("controller method called getQuizzesForClassroom with classId " + classId);
+        return this.quizService.getQuizzesForClassroom(classId);
     }
 
-    // get active quizzes
-    @GetMapping("/active")
-    public List<Quiz> getActiveQuizzes(){
-        return this.quizService.getActiveQuizzes();
+    /*
+     * API to get Students of Quiz with quizId
+     */
+    @GetMapping("/{quizId}/students")
+    public ResponseEntity<?> getStudentsOfQuiz(@PathVariable("quizId") String quizId){
+        logger.info("controller method called getStudentsOfQuiz with quizId : " + quizId);
+        return this.quizService.getStudentsOfQuiz(quizId);
     }
-
-    // get active quizzes of category
-    @GetMapping("/category/active/{cid}")
-    public List<Quiz> getActiveQuizzesOfCategory(@PathVariable("cid") String cid){
-        Category category = new Category();
-        category.setCid(cid);
-        return this.quizService.getActiveQuizzesOfCategory(category);
-    }
-
 }

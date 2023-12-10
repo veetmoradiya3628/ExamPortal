@@ -1,0 +1,82 @@
+<div fxLayout="column" fxLayoutAlign="space-around stretch">
+    <div fxLayout="row" fxLayoutAlign="start stretch">
+        <div fxFlex="75">
+            <!-- Question screen -->
+            <div fxLayout="column" fxLayoutAlign="space-between">
+                <app-question-attempt [question]="selectedQuestion" [questionIndex]="selectedQuestionIndex"></app-question-attempt>
+                <div fxFill="20">
+                    <div fxLayout="row" class="m-10" fxLayoutAlign="space-between start">
+                        <button *ngIf="selectedQuestionIndex != 0" mat-raised-button color="primary" (click)="prevQuestionClick()">Previous</button>
+                        <button *ngIf="selectedQuestionIndex != totalQuestions - 1" mat-raised-button color="primary" (click)="nextQuestionClick()">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="25" fxFill>
+            <!-- Quiz details, Meta data & Navigation of Question screen -->
+            <mat-card>
+                <mat-card-header>
+                    <div fxLayout="column">
+                        <h3 class="attempt-user-text"><b> Username: </b> Veet Moradiya</h3>
+
+                        <mat-divider></mat-divider>
+
+                        <div class="m-10">
+                            <mat-card-title class="quiz-title">{{ quizDetails.quizTitle }}</mat-card-title>
+                            <mat-card-subtitle class="quiz-subtitle">{{ quizDetails.quizDescription
+                                }}</mat-card-subtitle>
+                            <!-- <p class="quiz-subtitle">
+                                <b>Classroom:</b> DS - 2 Design and Analysis of Algorithms
+                            </p> -->
+                        </div>
+                    </div>
+                </mat-card-header>
+                <mat-divider></mat-divider>
+                <div fxLayout="column">
+                    <mat-card-content>
+                        <div class="font-18 m-5" fxLayout="row" fxLayoutAlign="space-between center">
+                            <div fxFlex="20">
+                                <h2>Quiz Progress</h2>
+                            </div>
+                            <mat-progress-spinner [mode]="progressSpinnerMode" [value]="progressValue">
+                            </mat-progress-spinner>
+
+                            <h2>Time Left </h2>
+                            <p class="font-25">{{ timeDiffInFormat }}</p>
+                        </div>
+                        <mat-divider></mat-divider>
+
+                        <div fxLayout="row wrap">
+                            <div *ngFor="let ques of questions; let i = index">
+                                <p [classList]="questionClassroom[i]" (click)="questionSelectClick(i)">{{ i + 1
+                                    }}</p>
+                            </div>
+                        </div>
+
+                        <h3 class="font-20">Question Info</h3>
+                        <div fxLayout="row" fxLayoutAlign="space-around center">
+                            <p class="question-logo normal-question">N</p>
+                            <p>Not Attempted
+                            <p class="question-logo attempted-question-circle">A</p>
+                            <p>Attempted</p>
+                            <!-- <p class="question-logo visited-question-circle">V</p>
+                            <p>Visited</p> -->
+                        </div>
+
+                        <mat-divider></mat-divider>
+                        <div class="font-18 m-5">
+                            <p>Total Question : {{ totalQuestions }}</p>
+                            <p>Attempted Question : {{ attemptedQuestionCnt }}</p>
+                            <p>Not Attempted Question : {{ totalQuestions - attemptedQuestionCnt }}</p>
+                        </div>
+                    </mat-card-content>
+                </div>
+                <mat-divider></mat-divider>
+                <mat-card-actions>
+                    <button mat-raised-button color="accent" class="mr-10">Cancle Quiz</button>
+                    <button mat-raised-button color="primary" (click)="endQuiz()">End Quiz</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

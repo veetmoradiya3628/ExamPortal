@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Comments</h1>
+<div mat-dialog-content>
+    <div fxLayout="column" fxLayoutAlign="start start">
+        <p class="bold">Make New Comment</p>
+        <mat-form-field fxFill>
+            <input type="text" matInput placeholder="please provide comment content" [(ngModel)]="commentText" />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="postCommentButtonClick()">Comment</button>
+
+        <mat-card class="mt-10" *ngFor="let comment of comments" fxFill>
+            <mat-card-header>
+                <div fxLayout="row" fxLayoutAlign="space-between start">
+                    <mat-card-title *ngIf="comment.user.userId === this.userId">You</mat-card-title>
+                    <mat-card-title *ngIf="comment.user.userId !== this.userId">{{ comment.user.firstName }} {{
+                        comment.user.lastName }}</mat-card-title>
+                    <p class="ml-10">{{ comment.createdAt | date: 'yyyy/MM/dd h:mm:ss a' }}</p>
+                    <!-- <mat-icon class="ml-10" color="primary">edit</mat-icon> -->
+                    <mat-icon *ngIf="comment.user.userId === this.userId" class="ml-10" color="warn"
+                        (click)="deleteComment(comment.commentId)">delete</mat-icon>
+                </div>
+            </mat-card-header>
+            <mat-card-content>
+                {{ comment.commentMessage }}
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div fxLayout="column" fxLayoutAlign="space-around stretch">
+    <mat-tab-group mat-align-tabs="start" mat-stretch-tabs="false">
+        <!-- Information Section -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-5">info</mat-icon>
+                Information
+            </ng-template>
+
+            <!-- content -->
+            <app-teacher-quiz-info [quizId]="quizId"></app-teacher-quiz-info>
+        </mat-tab>
+
+        <!-- Questions -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-5">question_answer</mat-icon>
+                Questions
+            </ng-template>
+
+            <!-- content -->
+            <app-teacher-quiz-questions [quizId]="quizId"></app-teacher-quiz-questions>
+        </mat-tab>
+
+        <!-- Students -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-5">group</mat-icon>
+                Students
+            </ng-template>
+
+            <!-- content -->
+            <app-teacher-quiz-students></app-teacher-quiz-students>
+        </mat-tab>
+
+        <!-- Attempts -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-5">assessment</mat-icon>
+                Attempts
+            </ng-template>
+
+            <!-- content -->
+            <app-teacher-quiz-attempts></app-teacher-quiz-attempts>
+        </mat-tab>
+
+        <!-- Notifications -->
+        <mat-tab>
+            <ng-template mat-tab-label>
+                <mat-icon class="mr-5">notification_important</mat-icon>
+                Notification
+            </ng-template>
+
+            <!-- content -->
+            Coming Soon :)....
+        </mat-tab>
+    </mat-tab-group>
+</div>

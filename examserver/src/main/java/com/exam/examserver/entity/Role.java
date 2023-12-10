@@ -1,58 +1,37 @@
 package com.exam.examserver.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "roles")
+@Table(name = "tbl_role")
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
 public class Role {
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long roleId;
+
+    @Column(unique = true)
     private String roleName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "role")
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
     private Set<UserRole> userRoles = new HashSet<>();
 
-
-    public Role(){}
-
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
-
-    public Role(Long roleId, String role) {
-        this.roleId = roleId;
-        this.roleName = role;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRole(String role) {
-        this.roleName = role;
-    }
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "roleId=" + roleId +
-                ", roleName='" + roleName + '\'' +
-                ", userRoles=" + userRoles +
-                '}';
+    public Role(String roleName) {
+        this.roleName = roleName;
     }
 }

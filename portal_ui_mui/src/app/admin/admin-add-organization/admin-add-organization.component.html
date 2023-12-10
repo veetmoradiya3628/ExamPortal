@@ -1,0 +1,45 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
+    <div fxLayout="row" fxLayoutAlign="start start">
+        <h2>Add Organization</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
+        <div fxLayout="column" fxFlex="60">
+            <form [formGroup]="addOrganizationForm" (ngSubmit)="addOrganization()">
+
+                <h4>Organization Name</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="orgName" placeholder="test organization..." required>
+                        <mat-error *ngIf="addOrganizationForm.controls['orgName'].hasError('required')">
+                            Organization name is required!!
+                        </mat-error>
+                        <mat-error *ngIf="addOrganizationForm.controls['orgName'].hasError('minlength') 
+                                    || addOrganizationForm.controls['orgName'].hasError('maxlength')">
+                            organization name can be between length of 5 to 15
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <h4>Organization Description</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <textarea rows="5" cols="5" formControlName="orgDescription" matInput
+                            placeholder="test description..." required></textarea>
+                        <mat-error *ngIf="addOrganizationForm.controls['orgDescription'].hasError('required')">
+                            Organization description is required!!
+                        </mat-error>
+                        <mat-error *ngIf="addOrganizationForm.controls['orgDescription'].hasError('minlength') 
+                                        || addOrganizationForm.controls['orgDescription'].hasError('maxlength')">
+                            organization description can be between length of 5 to 45
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!addOrganizationForm.valid">Add</button>
+                    <button mat-raised-button color="secondary" class="ml-5"
+                        [routerLink]="'/admin/organization'">Cancel</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,121 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="p-8">
+    <div fxLayout="row" fxLayoutAlign="start start">
+        <h2>Add User</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
+        <div fxLayout="column" fxFlex="80">
+            <form [formGroup]="addUserForm" (ngSubmit)="createUser()">
+                <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
+                    <div fxFlex="50">
+                        <h4>Organization</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill formGroupName="organization">
+                                <mat-label>Choose An organization</mat-label>
+                                <mat-select formControlName="orgId">
+                                    <mat-option *ngFor="let organization of Organizations" [value]="organization.orgId">
+                                        {{ organization.orgName }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="addUserForm.controls['organization'].get('orgId')?.hasError('required')">
+                                    please select organization
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex="50">
+                        <h4>Role</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <mat-label>Choose an role</mat-label>
+                                <mat-select formControlName="roleName">
+                                    <mat-option value="org_admin">Organization Admin</mat-option>
+                                    <mat-option value="teacher">Teacher</mat-option>
+                                    <mat-option value="student">Student</mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="addUserForm.controls['roleName'].hasError('required')">
+                                    please select user role
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <h4>Email</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput placeholder="e-mail" formControlName="email" required>
+                        <mat-error *ngIf="addUserForm.controls['email'].hasError('required')">
+                            email is required field!!
+                        </mat-error>
+                        <mat-error *ngIf="addUserForm.controls['email'].hasError('email')">
+                            please provide valid email!!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutGap="10" fxFill fxLayoutAlign="start start">
+                    <div fxFlex="50">
+                        <h4>First Name</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <input matInput formControlName="firstName" placeholder="First name" required>
+                                <mat-error *ngIf="addUserForm.controls['firstName'].hasError('required')">
+                                    firstname is required field!!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div fxFlex="50">
+                        <h4>Last Name</h4>
+                        <div fxLayout="row" fxLayoutAlign="start start">
+                            <mat-form-field fxFill>
+                                <input matInput formControlName="lastName" placeholder="Last name" required>
+                                <mat-error *ngIf="addUserForm.controls['lastName'].hasError('required')">
+                                    lastname is required field!!
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <h4>Username</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="username" placeholder="Username" required>
+                        <mat-error *ngIf="addUserForm.controls['username'].hasError('required')">
+                            Username is required field!!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <h4>Password</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="password" placeholder="Password" required>
+                        <mat-error *ngIf="addUserForm.controls['password'].hasError('required')">
+                            password is required field!!
+                        </mat-error>
+                        <mat-error *ngIf="addUserForm.controls['password'].hasError('minlength')
+                         || addUserForm.controls['password'].hasError('maxlength')">
+                            password should be minimum 8 to maximum 16 character length!
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <h4>Phone No.</h4>
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <mat-form-field fxFill>
+                        <input matInput formControlName="phone" placeholder="Phone no." required>
+                        <mat-error *ngIf="addUserForm.controls['phone'].hasError('required')">
+                            Phone no. is required field!!
+                        </mat-error>
+                        <mat-error *ngIf="addUserForm.controls['phone'].hasError('minlength')
+                         || addUserForm.controls['phone'].hasError('maxlength')">
+                            please provide valid phone no.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center center">
+                    <button mat-raised-button color="primary" type="submit" [disabled]="!addUserForm.valid">Add User</button>
+                    <button mat-raised-button color="secondary" class="ml-5"
+                        [routerLink]="'/admin/users'">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

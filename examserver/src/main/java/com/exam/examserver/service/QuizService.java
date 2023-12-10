@@ -1,22 +1,18 @@
 package com.exam.examserver.service;
 
-import com.exam.examserver.entity.exam.Category;
-import com.exam.examserver.entity.exam.Quiz;
+import com.exam.examserver.dto.QuizDTO;
 import org.springframework.http.ResponseEntity;
 
-import java.util.List;
-import java.util.Set;
-
 public interface QuizService {
-    public Quiz addQuiz(Quiz quiz);
-    public Quiz updateQuiz(Quiz quiz);
-    public Set<Quiz> getAllQuiz();
-    public Quiz getQuiz(String quizId);
-    public void deleteQuiz(String quizId);
+    public ResponseEntity<?> createQuiz(QuizDTO quizDTO);
 
-    public List<Quiz> getQuizzesOfCategory(Category category);
+    public ResponseEntity<?> changeQuizStatus(String quizId, Boolean status);
 
-    public List<Quiz> getActiveQuizzes();
+    public ResponseEntity<?> getQuizzesForUser(String userId);
 
-    public List<Quiz> getActiveQuizzesOfCategory(Category c);
+    public ResponseEntity<?> getQuizWithQuestionsAndDetails(String quizId);
+
+    public ResponseEntity<?> getQuizzesForClassroom(String classId);
+
+    public ResponseEntity<?> getStudentsOfQuiz(String quizId);
 }

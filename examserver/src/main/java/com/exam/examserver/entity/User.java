@@ -2,67 +2,59 @@ package com.exam.examserver.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
+@Table(name = "tbl_user")
+@Getter
+@Setter
+@AllArgsConstructor
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private String userId;
     private String username;
+
     private String password;
+
+    private String email;
     private String firstName;
     private String lastName;
-    private String email;
+    @Column(name = "phone_no")
     private String phone;
 
-    private Boolean enabled = true;
-    private String profile;
+    @Column(name = "is_enabled")
+    private Boolean enabled;
+    private String profileImage;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     // user many roles
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
     @JsonIgnore
     private Set<UserRole> userRoles = new HashSet<>();
 
-    public User(){}
+    @ManyToOne
+    @JoinColumn(name = "org_id", nullable = false)
+    private Organization organization;
 
-    public User(String id, String username, String password, String firstName, String lastName, String email, String phone, Boolean enabled, String profile) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.enabled = enabled;
-        this.profile = profile;
-    }
 
-    public Set<UserRole> getUserRoles() {
-        return userRoles;
-    }
-
-    public void setUserRoles(Set<UserRole> userRoles) {
-        this.userRoles = userRoles;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
+    @Transient
+    private String roleName;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -84,27 +76,60 @@ public class User implements UserDetails {
         return enabled;
     }
 
+    public User() {
+    }
+
+    public User(String userId) {
+        this.userId = userId;
+    }
+    public User(String userId, String username, String password, String email, String firstName, String lastName, String phone, Boolean enabled, String profileImage, LocalDateTime createdAt, LocalDateTime updatedAt, Set<UserRole> userRoles, Organization organization) {
+        this.userId = userId;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.enabled = enabled;
+        this.profileImage = profileImage;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.userRoles = userRoles;
+        this.organization = organization;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Set<Authority> set = new HashSet<>();
-
-        this.userRoles.forEach(userRole -> {
-            set.add(new Authority(userRole.getRole().getRoleName()));
-        });
-
-        return set;
+    public String getUsername() {
+        return username;
     }
 
     public void setUsername(String username) {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -123,12 +148,12 @@ public class User implements UserDetails {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Boolean getEnabled() {
@@ -139,36 +164,82 @@ public class User implements UserDetails {
         this.enabled = enabled;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getProfileImage() {
+        return profileImage;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
     }
 
 
-    public String getProfile() {
-        return profile;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<Authority> set = new HashSet<>();
+
+        this.userRoles.forEach(userRole -> {
+            set.add(new Authority(userRole.getRole().getRoleName()));
+        });
+
+        return set;
     }
 
-    public void setProfile(String profile) {
-        this.profile = profile;
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId='" + userId + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", enabled=" + enabled +
-                ", profile='" + profile + '\'' +
+                ", profileImage='" + profileImage + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 ", userRoles=" + userRoles +
+                ", roleName='" + roleName + '\'' +
                 '}';
     }
 }

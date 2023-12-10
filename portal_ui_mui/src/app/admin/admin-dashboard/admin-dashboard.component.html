@@ -1,0 +1,57 @@
+<div fxLayout="column" fxLayoutAlign="start start">
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxFill>
+        <div fxLayout="column" fxFlex="20">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style org-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total Organization</div>
+                        <div class="cnt-number-style">{{ response_data.organization_cnt }}</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex="20">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style active-teacher-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total Active Teachers</div>
+                        <div class="cnt-number-style">{{ response_data.active_teacher_cnt }}</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex="20">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style in-active-teacher-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total In-active Teachers</div>
+                        <div class="cnt-number-style">{{ response_data.in_active_teacher_cnt }}</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex="20">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style active-student-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total Active Students</div>
+                        <div class="cnt-number-style">{{ response_data.active_student_cnt }}</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div fxLayout="column" fxFlex="20">
+            <mat-card fxFill>
+                <mat-card-content class="org-cnt-style in-active-student-cnt-bg">
+                    <div fxLayout="column" fxLayoutAlign="start center">
+                        <div class="cnt-header-style">Total In-active Students</div>
+                        <div class="cnt-number-style">{{ response_data.in_active_student_cnt }}</div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between start" fxFill>
+        <canvas id="orgchart"></canvas>
+    </div>
+</div>

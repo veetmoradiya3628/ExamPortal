@@ -12,21 +12,19 @@ import { UtilsService } from 'src/app/services/utils.service';
 export class LoginComponent implements OnInit {
 
   loginForm !: FormGroup;
-
-  constructor(private fb: FormBuilder,  private utilsService: UtilsService, private loginService: LoginService, private router: Router){
-   
-  }
+  constructor(private fb: FormBuilder, private utilsService: UtilsService, private loginService: LoginService, private router: Router) {}
 
   ngOnInit(): void {
+    localStorage.clear();
     this.loginForm = this.fb.group({
       username: ["", Validators.required],
       password: ["", Validators.required]
     })
   }
 
-  onSubmitLoginForm(){
+  onSubmitLoginForm() {
     console.log(this.loginForm);
-    if(this.loginForm.controls['username'].invalid || this.loginForm.controls['password'].invalid){
+    if (this.loginForm.controls['username'].invalid || this.loginForm.controls['password'].invalid) {
       this.utilsService.showSnackBar('Invalid Input for username or password', 'ok');
       return;
     }
@@ -43,15 +41,15 @@ export class LoginComponent implements OnInit {
             this.loginService.setUser(user);
             console.log(user);
             // redirect ... ADMIN: admin-dashboard, NORMAL: user-dashboard
-            if(this.loginService.getUserRole() == 'ADMIN'){
+            if (this.loginService.getUserRole() == 'ADMIN') {
               // window.location.href='admin';
               this.router.navigate(['admin']);
               this.loginService.loginStatusSubject.next(true);
-            }else if(this.loginService.getUserRole() == 'NORMAL'){
+            } else if (this.loginService.getUserRole() == 'NORMAL') {
               // window.location.href='user';
               this.router.navigate(['user/0']);
               this.loginService.loginStatusSubject.next(true);
-            }else{
+            } else {
               this.loginService.logout();
             }
           },
@@ -62,10 +60,10 @@ export class LoginComponent implements OnInit {
 
       },
       (error: any) => {
-        console.log("error"+error);
+        console.log("error" + error);
         this.utilsService.showSnackBar('Invalid Cred!!, try again', 'Ok');
       }
     )
-  } 
-  
+  }
+
 }

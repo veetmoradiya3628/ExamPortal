@@ -1,0 +1,62 @@
+<div fxLayout="column" fxLayoutAlign="start stretch" class="p-8" style="width: 1000px;">
+    <div fxLayout="row" fxLayoutAlign="start start" class="p-8">
+        <mat-card fxFill>
+            <mat-card-title class="quiz-info-title">
+                Quiz Information
+            </mat-card-title>
+            <mat-card-content>
+                <div fxLayout="column" fxFlex="100">
+                    <div fxLayout="column" class="quiz-info-text" fxFlex="100">
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Quiz Title</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.quizTitle }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Quiz Description</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.quizDescription }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Quiz Active</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.isActive ? 'True' : 'False' }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Total Questions</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.numberOfQuestions }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Total Single Correct Question</div>
+                            <div fxFlex="50">{{ singleCorrectQuesCnt }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Total Multiple Correct Question</div>
+                            <div fxFlex="50">{{ multipleCorrectQuesCnt }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Total True/False Question</div>
+                            <div fxFlex="50">{{ trueFalseQuesCnt }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Total Marks</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.totalMarks }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Quiz Start Time</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.startTime | date:'yyyy/MM/dd h:mm:ss' }}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Quiz End Time</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.endTime | date:'yyyy/MM/dd h:mm:ss'}}</div>
+                        </div>
+                        <div class="p-16 mt-5" fxLayout="row" fxLayoutAlign="start start">
+                            <div fxFlex="50" class="quiz-info-title-font">Quiz Duration</div>
+                            <div fxFlex="50">{{ quizDetails.quizDetails.duration }} Minutes</div>
+                        </div>
+                    </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="confirm()">Okay</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
