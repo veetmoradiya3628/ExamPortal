@@ -119,5 +119,6 @@ Overall, Exam Portal is an excellent tool for professors to create and evaluate 
 * * Teachers are granted access to assigned students and quizzes.
 * * Students can access assigned classrooms and attempt quizzes allocated to them.
 * Many more features relevant to University and school
-* Please refer Video Demo: https://drive.google.com/file/d/1LeoggzdqiSBwj4XiGoSa2olODE0JgnKM/view?usp=drive_link
+* Please refer Video Demo: 
+<a href="https://drive.google.com/file/d/1LeoggzdqiSBwj4XiGoSa2olODE0JgnKM/view?usp=sharing" target="_blank"> Demo Video </a>
 <p align="right">(<a href="#top">back to top</a>)</p>
