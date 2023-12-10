@@ -31,7 +31,6 @@
     </li>
     <li><a href="#problem">Problem statement</a></li>
     <li><a href="#features">Features</a></li>
-    <li><a href="#screenshots">Screenshots</a></li>
   </ol>
 </details>
 
