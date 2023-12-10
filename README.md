@@ -6,7 +6,7 @@
   <h3 align="center">ExamPortal</h3>
 
   <p align="center">
-    An Quiz Exam application for Charotar University of Science and Technology
+    An Quiz Exam application for Charotar University of Science and Technology.
     <br />
   </p>
 </div>
@@ -57,9 +57,10 @@ In conclusion, the Exam Portal is a reliable, scalable, and secure platform for 
 The following technologies and tools have been equipped to develop this project -
 
 * [Spring Boot]
+* [Flask]
 * [Angular]
 * [MySQL]
-* [AWS S3]
+* [MongoDB]
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -72,12 +73,12 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-* java - jdk 15 and above
+* java - jdk 17 and above
 * npm 
   ```sh
   npm install npm@latest -g
   ```
-* node.js
+* python3.10 and above with pip
 * MySQL
 * Run Angular Application with 
     ```
@@ -112,69 +113,11 @@ Overall, Exam Portal is an excellent tool for professors to create and evaluate 
 ## Features
 
 * User friendly UI with easy navigations.
-* Courses are divided into categories and sub-categories.
-* An embedded video player to watch lectures in the browser itself.
-* Allows faculties to attach quizzes and lecture materials for each video lecture.
-* Each course goes through a thorough review process before it is available on the portal.
-* Admin allocates a reviewer to each course and only after approval from the reviewer, course is available for students.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Screenshots
-<p>
-    <p>
-        <img src="images/ActiveQuizPage.png">
-    </p>
-    <p>
-        <img src="images/AddCategoryPage.png">
-    </p>
-    <p>
-        <img src="images/AddQuestionPage.png">
-    </p>
-    <p>
-        <img src="images/AdminHomepage.png">
-    </p>
-    <p>
-        <img src="images/CategoriesPage.png">
-    </p>
-    <p>
-        <img src="images/LoginPage.png">
-    </p>
-    <p>
-        <img src="images/ProfilePage.png">
-    </p>
-    <p>
-        <img src="images/QuestionAddToastMessage.png">
-    </p>
-    <p>
-        <img src="images/QuestionsOfQuizPage.png">
-    </p>
-    <p>
-        <img src="images/QuizPage.png">
-    </p>
-    <p>
-        <img src="images/QuizResult.png">
-    </p>
-    <p>
-        <img src="images/RegistrationPage.png">
-    </p>
-    <p>
-        <img src="images/StartQuizConfirmation.png">
-    </p>
-    <p>
-        <img src="images/StartQuizPage.png">
-    </p>
-    <p>
-        <img src="images/SubmitQuizConfirmation.png">
-    </p>
-    <p>
-        <img src="images/UserFriendlyLoader.png">
-    </p>
-    <p>
-        <img src="images/UserHomePage.png">
-    </p>
-</p>
+* Functionality access is structured based on roles:
+* * The Master Admin possesses comprehensive access privileges.
+* * Organization Admins can access data pertinent to their respective organizations.
+* * Teachers are granted access to assigned students and quizzes.
+* * Students can access assigned classrooms and attempt quizzes allocated to them.
+* Many more features relevant to University and school
+* Please refer Video Demo: https://drive.google.com/file/d/1LeoggzdqiSBwj4XiGoSa2olODE0JgnKM/view?usp=drive_link
 <p align="right">(<a href="#top">back to top</a>)</p>
